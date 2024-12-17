@@ -11,6 +11,7 @@
         <div>
             <asp:FileUpload ID="FileUpload1" runat="server" />
         </div>
+        <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
     </form>
 </body>
 </html>
