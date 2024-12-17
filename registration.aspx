@@ -67,16 +67,6 @@
                     </td>
                 </tr>
                 <tr>
-                    <td style="text-align: right; padding-right: 15px;">which Social Media do you use?</td>
-                    <td style="text-align: left">
-                        <asp:CheckBoxList ID="cblSocial" runat="server" RepeatDirection="Horizontal" TextAlign="Left">
-                            <asp:ListItem>Insta</asp:ListItem>
-                            <asp:ListItem>Facebook</asp:ListItem>
-                            <asp:ListItem>Linked in</asp:ListItem>
-                        </asp:CheckBoxList>
-                    </td>
-                </tr>
-                <tr>
                     <td style="text-align: right; padding-right: 15px;">City:</td>
                     <td>
                         <asp:DropDownList ID="ddlCity" runat="server">

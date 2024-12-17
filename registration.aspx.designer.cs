@@ -78,15 +78,6 @@ namespace WorkNest
         protected global::System.Web.UI.WebControls.RadioButtonList rblGender;
 
         /// <summary>
-        /// cblSocial control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBoxList cblSocial;
-
-        /// <summary>
         /// ddlCity control.
         /// </summary>
         /// <remarks>
