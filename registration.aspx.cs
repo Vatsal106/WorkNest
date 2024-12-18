@@ -40,6 +40,7 @@ namespace WorkNest
                     SqlCommand cmd = new SqlCommand(query, conn);
                     cmd.ExecuteNonQuery();
                     Response.Write("Registration Successful");
+                    Response.Redirect("login.aspx");
                 }
                 catch (Exception ex)
                 {
@@ -49,6 +50,7 @@ namespace WorkNest
                 finally
                 {
                     conn.Close();
+                    
                 }
             }
 

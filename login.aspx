@@ -49,6 +49,10 @@
             </table>
 
         </div>
+        <p>
+            don&#39;t have an account?
+            <asp:HyperLink ID="hplSignup" runat="server" NavigateUrl="~/registration.aspx">Sgin up.</asp:HyperLink>
+        </p>
     </form>
 </body>
 </html>
