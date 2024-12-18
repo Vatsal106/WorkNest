@@ -19,18 +19,10 @@ namespace WorkNest
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-            //string connectionString = "Data Source=VATSAL\\SQLEXPRESS;Initial Catalog=WORKNEST;Integrated Security=True";
-            //SqlConnection conn = new SqlConnection(connectionString);
-            //conn.Open();
-            //string username = txtName.Text;
-            //string query = ("INSERT INTO RGISTER(NAME) VALUES('"+username+"');");
-            //SqlCommand cmd = new SqlCommand(query, conn);
-            //cmd.ExecuteNonQuery();
-            //conn.Close();
 
             //string connectionString = "Data Source=LAPTOP-C6B669RO\\SQLEXPRESS;Initial Catalog=WORKNEST;Integrated Security=True";
             string connectionString = "Data Source=VATSAL\\SQLEXPRESS;Initial Catalog=WORKNEST;Integrated Security=True";
-            // Get the selected city from the DropDownList
+           
             string selectedCity = ddlCity.SelectedItem.Text;
 
             // Construct the query
