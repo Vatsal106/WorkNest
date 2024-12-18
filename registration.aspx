@@ -46,6 +46,12 @@
                     </td>
                 </tr>
                 <tr>
+                    <td class="auto-style2" style="text-align: right; padding-right: 15px;">User Name:</td>
+                    <td class="auto-style2">
+                        <asp:TextBox ID="txtUsername" runat="server"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
                     <td style="text-align: right; padding-right: 15px;">Password:</td>
                     <td>
                         <asp:TextBox ID="txtPassword" runat="server" TextMode="Password"></asp:TextBox>
