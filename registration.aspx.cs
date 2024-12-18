@@ -21,8 +21,8 @@ namespace WorkNest
         {
 
             //string connectionString = "Data Source=LAPTOP-C6B669RO\\SQLEXPRESS;Initial Catalog=WORKNEST;Integrated Security=True";
-            string connectionString = "Data Source=VATSAL\\SQLEXPRESS;Initial Catalog=WORKNEST;Integrated Security=True";
-           
+            //string connectionString = "Data Source=VATSAL\\SQLEXPRESS;Initial Catalog=WORKNEST;Integrated Security=True";
+            string connectionString ="Data Source =DESKTOP-4D8U42O\\SQLEXPRESS; Initial Catalog = WORKNEST; Integrated Security = True";
             string selectedCity = ddlCity.SelectedItem.Text;
 
             // Construct the query
