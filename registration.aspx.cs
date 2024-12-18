@@ -36,11 +36,20 @@ namespace WorkNest
             {
                 try
                 {
-                    conn.Open();
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.ExecuteNonQuery();
+                    if (txtPassword.Text == txtRepassword.Text)
+                    {
+                        conn.Open();
+                        SqlCommand cmd = new SqlCommand(query, conn);
+                    
+                        cmd.ExecuteNonQuery();
+                   
                     Response.Write("Registration Successful");
                     Response.Redirect("login.aspx");
+                    }
+                    else
+                    {
+                        lblPasserror.Text = "Password does not match!!";
+                    }
                 }
                 catch (Exception ex)
                 {

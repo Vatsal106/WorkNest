@@ -52,8 +52,8 @@
                     </td>
                 </tr>
                 <tr>
-                    <td style="text-align: right; padding-right: 15px;">Password:</td>
-                    <td>
+                    <td style="text-align: right; padding-right: 15px;" class="auto-style3">Password:</td>
+                    <td class="auto-style3">
                         <asp:TextBox ID="txtPassword" runat="server" TextMode="Password"></asp:TextBox>
                     </td>
                 </tr>
@@ -61,6 +61,7 @@
                     <td style="text-align: right; padding-right: 15px;">Rewrite Parssword:</td>
                     <td>
                         <asp:TextBox ID="txtRepassword" runat="server" TextMode="Password"></asp:TextBox>
+                        <asp:Label ID="lblPasserror" runat="server"></asp:Label>
                     </td>
                 </tr>
                 <tr>
