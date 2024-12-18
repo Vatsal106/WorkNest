@@ -101,19 +101,7 @@
                         <asp:Button ID="btnReset" runat="server" Text="Reset"  />
                     </td>
                 </tr>
-                <tr>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                </tr>
-                <tr>
-                    <td class="auto-style2" colspan="2" style="text-align: center">
-                        <asp:Label ID="lblDetails" runat="server" Text="Details" EnableViewState="true" ForeColor="Blue"></asp:Label>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2">&nbsp;</td>
-                </tr>
-            </table>
+                </table>
            
         </div>
     </form>
