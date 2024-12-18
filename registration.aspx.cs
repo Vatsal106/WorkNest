@@ -21,9 +21,9 @@ namespace WorkNest
         {
 
             //string connectionString = "Data Source=LAPTOP-C6B669RO\\SQLEXPRESS;Initial Catalog=WORKNEST;Integrated Security=True";
-            string connectionString = "Data Source=VATSAL\\SQLEXPRESS;Initial Catalog=WORKNEST;Integrated Security=True";
-           
-            string selectedCity = ddlCity.SelectedItem.Text;
+            //string connectionString = "Data Source=VATSAL\\SQLEXPRESS;Initial Catalog=WORKNEST;Integrated Security=True";
+            string connectionString = "Data Source=DESKTOP-4D8U420;Initial Catalog=WORKNEST;Integrated Security=True";
+                string selectedCity = ddlCity.SelectedItem.Text;
 
             // Construct the query
             string query = "INSERT INTO REGISTER(NAME, PHONE, EMAIL, USERNAME, PASSWORD, GENDER, CITY, ADDRESS) " +

@@ -19,9 +19,9 @@ namespace WorkNest
         {
             string username = txtUsername.Text;
             string password = txtPassword.Text;
-            string connectionString = "Data Source=VATSAL\\SQLEXPRESS;Initial Catalog=WORKNEST;Integrated Security=True";
+            //string connectionString = "Data Source=VATSAL\\SQLEXPRESS;Initial Catalog=WORKNEST;Integrated Security=True";
             //string connectionString = "Data Source=LAPTOP-C6B669RO\\SQLEXPRESS;Initial Catalog=WORKNEST;Integrated Security=True";
-           
+            string connectionString = "Data Source=DESKTOP-4D8U420;Initial Catalog=WORKNEST;Integrated Security=True";
             string query = "SELECT COUNT(1) FROM REGISTER WHERE USERNAME = @Username AND PASSWORD = @Password";
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
