@@ -27,13 +27,16 @@
             width: 279px;
             height: 29px;
         }
+        .auto-style6 {
+            height: 26px;
+        }
     </style>
 </head>
 <body>
     <form id="form1" runat="server">
         <div>
 
-            <table class="auto-style1" style="width: 50%">
+            <table class="auto-style1" style="width: 40%">
                 <tr>
                     <td class="auto-style2" style="padding-right: 15px; text-align: right">USERNAME</td>
                     <td class="auto-style4">
@@ -47,18 +50,22 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="auto-style3" style="padding-right: 15px; text-align: right">
+                    <td class="auto-style3" style="text-align: center; padding-center: 15px;" colspan="2">
                         <asp:Button ID="btnSubmit" runat="server" OnClick="btnSubmit_Click" Text="SUBMIT" />
                     </td>
-                    <td class="auto-style5">&nbsp;</td>
                 </tr>
             </table>
 
         </div>
-        <p>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; don&#39;t have an account?
+        <p class="auto-style6" style="text-align: center">
+&nbsp;don&#39;t have an account?
             <asp:HyperLink ID="hplSignup" runat="server" NavigateUrl="~/registration.aspx">Sign up.</asp:HyperLink>
         </p>
+        <p class="auto-style6" style="font-size: x-large; font-family: 'Comic Sans MS'; text-align: center">
+            <asp:Label ID="lblMessage" runat="server"></asp:Label>
+        </p>
+        <p>
+            &nbsp;</p>
     </form>
 </body>
 </html>

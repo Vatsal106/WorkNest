@@ -18,10 +18,10 @@ namespace WorkNest
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-            string username = txtUsername.Text;
-            string password = txtPassword.Text;
-            //string connectionString = "Data Source=VATSAL\\SQLEXPRESS;Initial Catalog=WORKNEST;Integrated Security=True";
-            string connectionString = "Data Source=LAPTOP-C6B669RO\\SQLEXPRESS;Initial Catalog=WORKNEST;Integrated Security=True";
+            string username = txtUsername.Text.Trim();
+            string password = txtPassword.Text.Trim();
+            string connectionString = "Data Source=VATSAL\\SQLEXPRESS;Initial Catalog=WORKNEST;Integrated Security=True";
+            //string connectionString = "Data Source=LAPTOP-C6B669RO\\SQLEXPRESS;Initial Catalog=WORKNEST;Integrated Security=True";
             //string connectionString = "Data Source=DESKTOP-4D8U420\\SQLEXPRESS;Initial Catalog=WORKNEST;Integrated Security=True";
             string query = "SELECT COUNT(1) FROM REGISTER WHERE USERNAME = @Username AND PASSWORD = @Password";
             using (SqlConnection conn = new SqlConnection(connectionString))
@@ -37,11 +37,13 @@ namespace WorkNest
 
                     if (count == 1)
                     {
-                        Response.Write("Login Successful");
+                        lblMessage.Text = "Login succussful!";
+                        lblMessage.ForeColor= System.Drawing.Color.Green;
                     }
                     else
                     {
-                        Response.Write("Invalid Username or Password");
+                        lblMessage.Text = "Invalid Username or Password!";
+                        lblMessage.ForeColor = System.Drawing.Color.Red;
                     }
                     
                 }

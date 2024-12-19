@@ -61,8 +61,16 @@
                     <td style="text-align: right; padding-right: 15px;">Rewrite Parssword:</td>
                     <td>
                         <asp:TextBox ID="txtRepassword" runat="server" TextMode="Password"></asp:TextBox>
-                        <asp:Label ID="lblPasserror" runat="server"></asp:Label>
                     </td>
+                </tr>
+                <tr>
+                    <td style="text-align: right; padding-right: 15px;">&nbsp;</td>
+                    <td>
+                        &nbsp;-<span style="color: rgb(0, 0, 0); font-family: &quot;Times New Roman&quot;; font-size: medium; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(192, 192, 192); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">Password length must be between 8 and 20 characters.<br />
+                        -Password must contain at least one uppercase letter<br />
+                        -Password must contain at least one lowercase letter.<br />
+                        -Password must contain at least one numeric digit.<br />
+                        -Password must contain at least one special character like(@$#).</span></td>
                 </tr>
                 <tr>
                     <td style="text-align: right; padding-right: 15px;">Gender:</td>
@@ -104,6 +112,8 @@
                 </tr>
                 <tr>
                     <td colspan="2" style="text-align: center; padding-right: 10px;">
+                        <asp:Label ID="lblError" runat="server"></asp:Label>
+                        <br />
                         <asp:Button ID="btnSubmit" runat="server"  Text="Submit" Width="69px" OnClick="btnSubmit_Click" />
                         <asp:Button ID="btnReset" runat="server" Text="Reset"  />
                     </td>
