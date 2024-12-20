@@ -25,7 +25,7 @@
            
              <table align="center" class="auto-style1" style="width: 50%">
                 <tr>
-                    <td colspan="2" rowspan="1" style="text-align: center; font-size: xx-large;">Rgestration Form&nbsp;</td>
+                    <td colspan="2" rowspan="1" style="text-align: center; font-size: xx-large;">Registration Form&nbsp;</td>
                 </tr>
                 <tr>
                     <td class="auto-style3" style="text-align: right; padding-right: 15px;">Name:</td>

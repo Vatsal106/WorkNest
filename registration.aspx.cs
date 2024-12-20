@@ -25,22 +25,22 @@ namespace WorkNest
 
             if (password.Length < MinLength || password.Length > MaxLength)
             {
-                lblError.Text = "Invalide Password, Please Rewrite!!"; return false;
+                lblError.Text = "Invalid Password, Please Rewrite!!"; return false;
             }
 
             if (!System.Text.RegularExpressions.Regex.IsMatch(password, "[A-Z]"))
             {
-                lblError.Text = "Invalide Password, Please Rewrite!!"; return false;
+                lblError.Text = "Invalid Password, Please Rewrite!!"; return false;
             }
 
             if (!System.Text.RegularExpressions.Regex.IsMatch(password, "[a-z]"))
             {
-                lblError.Text = "Invalide Password, Please Rewrite!!"; return false;
+                lblError.Text = "Invalid Password, Please Rewrite!!"; return false;
             }
 
             if (!System.Text.RegularExpressions.Regex.IsMatch(password, "\\d"))
             {
-                lblError.Text = "Invalide Password, Please Rewrite!!"; return false;
+                lblError.Text = "Invalid Password, Please Rewrite!!"; return false;
             }
 
             if (!System.Text.RegularExpressions.Regex.IsMatch(password, "[!@#$%^&*(),.?\"{}|<>]"))
