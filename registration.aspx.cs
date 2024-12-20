@@ -101,10 +101,10 @@ namespace WorkNest
                     else
                     {
                         conn.Open();
-                        string query = "INSERT INTO REGISTER(NAME, PHONE, EMAIL, USERNAME, PASSWORD, GENDER, CITY, ADDRESS) " +
+                        string query = "INSERT INTO REGISTER(NAME, PHONE, EMAIL, USERNAME, PASSWORD, GENDER, CITY, ADDRESS,DOB) " +
                           "VALUES ('" + txtName.Text + "', '" + txtPhone.Text + "', '" + txtEmail.Text + "', '" +
                           txtUsername.Text + "', '" + txtPassword.Text + "', '" + rblGender.SelectedItem.Text + "', '" +
-                          selectedCity + "', '" + txtAddress.Text + "')";
+                          selectedCity + "', '" + txtAddress.Text + "','" + txtDate.Text + "')";
                         SqlCommand cmd = new SqlCommand(query, conn);
 
                         cmd.ExecuteNonQuery();

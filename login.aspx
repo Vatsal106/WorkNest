@@ -6,52 +6,39 @@
 <head runat="server">
     <title></title>
     <style type="text/css">
-        .auto-style1 {
-            width: 50%;
-            border: 1px solid #000000;
-            background-color: #FFFFCC;
-            height: 118px;
-            margin-left: 326px;
-        }
-        .auto-style2 {
-            width: 261px;
-        }
-        .auto-style3 {
-            width: 261px;
-            height: 29px;
-        }
-        .auto-style4 {
-            width: 279px;
-        }
-        .auto-style5 {
-            width: 279px;
-            height: 29px;
-        }
         .auto-style6 {
             height: 26px;
+        }
+        .auto-style7 {
+            width: 100%;
+            border: 1px solid #000000;
+            background-color: #FFFFCC;
         }
     </style>
 </head>
 <body>
     <form id="form1" runat="server">
-        <div>
+        <div style="display:flex; justify-content:center;">
 
-            <table class="auto-style1" style="width: 40%">
+            <table cellpadding="2" class="auto-style7" style="width: 35%; text-align: center;">
                 <tr>
-                    <td class="auto-style2" style="padding-right: 15px; text-align: right">USERNAME</td>
-                    <td class="auto-style4">
+                    <td colspan="2" style="font-size: xx-large">LogIn</td>
+                </tr>
+                <tr>
+                    <td style=" text-align:right;">USERNAME: </td>
+                    <td>
                         <asp:TextBox ID="txtUsername" runat="server"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>
-                    <td class="auto-style3" style="padding-right: 15px; text-align: right">PASSWORD</td>
-                    <td class="auto-style5">
+                    <td style=" text-align:right;">PASSWORD: </td>
+                    <td>
                         <asp:TextBox ID="txtPassword" runat="server" TextMode="Password"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>
-                    <td class="auto-style3" style="text-align: center; padding-center: 15px;" colspan="2">
-                        <asp:Button ID="btnSubmit" runat="server" OnClick="btnSubmit_Click" Text="SUBMIT" />
+                    <td colspan="2">
+                        <asp:Button ID="btnLogin" runat="server" OnClick="btnLogin_Click1" Text="login" />
                     </td>
                 </tr>
             </table>

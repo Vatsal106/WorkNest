@@ -16,7 +16,7 @@ namespace WorkNest
 
         }
 
-        protected void btnSubmit_Click(object sender, EventArgs e)
+        protected void btnLogin_Click1(object sender, EventArgs e)
         {
             string username = txtUsername.Text.Trim();
             string password = txtPassword.Text.Trim();
@@ -38,14 +38,14 @@ namespace WorkNest
                     if (count == 1)
                     {
                         lblMessage.Text = "Login succussful!";
-                        lblMessage.ForeColor= System.Drawing.Color.Green;
+                        lblMessage.ForeColor = System.Drawing.Color.Green;
                     }
                     else
                     {
                         lblMessage.Text = "Invalid Username or Password!";
                         lblMessage.ForeColor = System.Drawing.Color.Red;
                     }
-                    
+
                 }
                 catch (Exception ex)
                 {
