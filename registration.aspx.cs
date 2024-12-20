@@ -45,13 +45,13 @@ namespace WorkNest
 
             if (!System.Text.RegularExpressions.Regex.IsMatch(password, "[!@#$%^&*(),.?\"{}|<>]"))
             {
-                lblError.Text = "Invalide Password, Please Rewrite!!";
+                lblError.Text = "Invalid Password, Please Rewrite!!";
                 return false;
             }
 
             if (txtPassword.Text != txtRepassword.Text)
             {
-                lblError.Text = "Passwords do not match.";
+                lblError.Text = "Password does not matched.";
                 
                 return false;
             }
