@@ -5,17 +5,20 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
+using System.Data;
 using System.Drawing;
 using System.IO;
+using System.Configuration;
 
 
 namespace WorkNest
 {
     public partial class registration : System.Web.UI.Page
     {
+        SqlConnection con;
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            dbConnect();
         }
         private bool ValidatePassword(string password)
         {
@@ -88,15 +91,25 @@ namespace WorkNest
             }
         }
 
+        protected void dbConnect()
+        {
+            string conStr = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            con = new SqlConnection(conStr);
+            con.Open();
+
+            if (con.State == ConnectionState.Open)
+            {
+                Response.Write("Database connection established successfully.");
+
+            }
+            else
+            {
+                Response.Write("Failed to connect to the database.");
+            }
+        }
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-
-
-            string connectionString = "Data Source=LAPTOP-C6B669RO\\SQLEXPRESS;Initial Catalog=WORKNEST;Integrated Security=True";
-            //string connectionString = "Data Source=VATSAL\\SQLEXPRESS;Initial Catalog=WORKNEST;Integrated Security=True";
-            //string connectionString = "Data Source=DESKTOP-4D8U420\\SQLEXPRESS;Initial Catalog=WORKNEST;Integrated Security=True";
-
             string selectedCity = ddlCity.SelectedItem.Text;
 
             // DATE FORMET:-'2023-01-24'
@@ -104,72 +117,66 @@ namespace WorkNest
 
 
             // Execute the query
-            using (SqlConnection conn = new SqlConnection(connectionString))
+
+            try
             {
-                try
+
+
+                if (string.IsNullOrWhiteSpace(txtName.Text))
                 {
+                    lblError.Text = "Please enter your name.";
+                    lblError.ForeColor = Color.Red;
+                    return;
+                }
 
+                else if (string.IsNullOrWhiteSpace(txtPhone.Text) || string.IsNullOrWhiteSpace(txtEmail.Text) || string.IsNullOrWhiteSpace(txtUsername.Text))
+                {
+                    lblError.Text = "Please fill all required fields.";
+                    lblError.ForeColor = Color.Red;
+                    return;
+                }
+                else if (!ValidatePassword(txtPassword.Text))
+                {
+                    lblError.ForeColor = Color.Red;
+                    return;
+                }
+                else
+                {
+                    byte[] imageBytes = null;
 
-                    if (string.IsNullOrWhiteSpace(txtName.Text))
+                    // Check if a file is uploaded
+                    if (fuImage.HasFile)
                     {
-                        lblError.Text = "Please enter your name.";
-                        lblError.ForeColor = Color.Red;
-                        return;
-                    }
-
-                    else if (string.IsNullOrWhiteSpace(txtPhone.Text) || string.IsNullOrWhiteSpace(txtEmail.Text) || string.IsNullOrWhiteSpace(txtUsername.Text))
-                    {
-                        lblError.Text = "Please fill all required fields.";
-                        lblError.ForeColor = Color.Red;
-                        return;
-                    }
-                    else if (!ValidatePassword(txtPassword.Text))
-                    {
-                        lblError.ForeColor = Color.Red;
-                        return;
-                    }
-                    else
-                    {
-                        byte[] imageBytes = null;
-
-                        // Check if a file is uploaded
-                        if (fuImage.HasFile)
+                        using (Stream fs = fuImage.PostedFile.InputStream)
                         {
-                            using (Stream fs = fuImage.PostedFile.InputStream)
+                            using (BinaryReader br = new BinaryReader(fs))
                             {
-                                using (BinaryReader br = new BinaryReader(fs))
-                                {
-                                    imageBytes = br.ReadBytes((int)fs.Length);
-                                }
+                                imageBytes = br.ReadBytes((int)fs.Length);
                             }
                         }
-                        conn.Open();
-                        string query = "INSERT INTO REGISTER(NAME, PHONE, EMAIL, USERNAME, PASSWORD, GENDER, CITY, ADDRESS,DOB,IMAGE) " +
-                          "VALUES ('" + txtName.Text + "', '" + txtPhone.Text + "', '" + txtEmail.Text + "', '" +
-                          txtUsername.Text + "', '" + txtPassword.Text + "', '" + rblGender.SelectedItem.Text + "', '" +
-                          selectedCity + "', '" + txtAddress.Text + "','" + txtDate.Text + "',@IMAGE)";
-                        SqlCommand cmd = new SqlCommand(query, conn);
-                        cmd.Parameters.AddWithValue("@Image", (object)imageBytes ?? DBNull.Value);
-
-                        cmd.ExecuteNonQuery();
-
-
                     }
-                    Response.Write("Registration Successful");
-                    Response.Redirect("login.aspx");
-                }
-                catch (Exception ex)
-                {
-                    // Log the error (in a real application, consider using a logging framework)
-                    Response.Write($"Error: {ex.Message.ToString()}");
-                }
-                finally
-                {
-                    conn.Close();
+                    dbConnect();
+                    string query = "INSERT INTO REGISTER(NAME, PHONE, EMAIL, USERNAME, PASSWORD, GENDER, CITY, ADDRESS,DOB,IMAGE) " +
+                      "VALUES ('" + txtName.Text + "', '" + txtPhone.Text + "', '" + txtEmail.Text + "', '" +
+                      txtUsername.Text + "', '" + txtPassword.Text + "', '" + rblGender.SelectedItem.Text + "', '" +
+                      selectedCity + "', '" + txtAddress.Text + "','" + txtDate.Text + "',@IMAGE)";
+                    SqlCommand cmd = new SqlCommand(query, con);
+                    cmd.Parameters.AddWithValue("@Image", (object)imageBytes ?? DBNull.Value);
+
+                    cmd.ExecuteNonQuery();
+
 
                 }
+                Response.Write("Registration Successful");
+                Response.Redirect("login.aspx");
+            }
+            catch (Exception ex)
+            {
+                // Log the error (in a real application, consider using a logging framework)
+                Response.Write($"Error: {ex.Message.ToString()}");
             }
 
         }
     }
+
 }
