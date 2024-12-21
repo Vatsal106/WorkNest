@@ -19,11 +19,18 @@
         <asp:TextBox ID="txtPassword" runat="server" CssClass="input" TextMode="Password" Placeholder="Password"></asp:TextBox>
     </div>
     <div>
-        <button type="submit" runat="server" OnClick="btnSubmit_Click">Submit</button>
+       
+        <asp:Button ID="btnLogin" runat="server" OnClick="btnLogin_Click" Text="Login" />
+       
     </div>
     <p>
         Don't have an account? <asp:HyperLink ID="hplSignup" runat="server" NavigateUrl="~/registration.aspx">Sign up.</asp:HyperLink>
     </p>
+       <p>
+           <asp:Label ID="lblMessage" runat="server"></asp:Label>
+    </p>
+       <asp:Image ID="imgPhoto" runat="server" />
+       
 </form>
 </body>
 </html>
