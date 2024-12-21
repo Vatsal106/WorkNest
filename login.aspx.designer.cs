@@ -69,12 +69,12 @@ namespace WorkNest
         protected global::System.Web.UI.WebControls.Label lblMessage;
 
         /// <summary>
-        /// imgPhoto control.
+        /// imgIllustration control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgPhoto;
+        protected global::System.Web.UI.WebControls.Image imgIllustration;
     }
 }
