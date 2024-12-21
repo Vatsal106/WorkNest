@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 
+
 namespace WorkNest
 {
     public partial class registration : System.Web.UI.Page
@@ -86,19 +87,33 @@ namespace WorkNest
                     }
                     else
                     {
+                        byte[] imageBytes = null;
+
+                        // Check if a file is uploaded
+                        if (fuImage.HasFile)
+                        {
+                            using (Stream fs = fuImage.PostedFile.InputStream)
+                            {
+                                using (BinaryReader br = new BinaryReader(fs))
+                                {
+                                    imageBytes = br.ReadBytes((int)fs.Length);
+                                }
+                            }
+                        }
                         conn.Open();
-                        string query = "INSERT INTO REGISTER(NAME, PHONE, EMAIL, USERNAME, PASSWORD, GENDER, CITY, ADDRESS,DOB) " +
+                        string query = "INSERT INTO REGISTER(NAME, PHONE, EMAIL, USERNAME, PASSWORD, GENDER, CITY, ADDRESS,DOB,IMAGE) " +
                           "VALUES ('" + txtName.Text + "', '" + txtPhone.Text + "', '" + txtEmail.Text + "', '" +
                           txtUsername.Text + "', '" + txtPassword.Text + "', '" + rblGender.SelectedItem.Text + "', '" +
-                          selectedCity + "', '" + txtAddress.Text + "','" + txtDate.Text + "')";
+                          selectedCity + "', '" + txtAddress.Text + "','" + txtDate.Text + "',@IMAGE)";
                         SqlCommand cmd = new SqlCommand(query, conn);
+                        cmd.Parameters.AddWithValue("@Image", (object)imageBytes ?? DBNull.Value);
 
                         cmd.ExecuteNonQuery();
 
-                        Response.Write("Registration Successful");
-                        Response.Redirect("login.aspx");
-                    }
 
+                    }
+                    Response.Write("Registration Successful");
+                    Response.Redirect("login.aspx");
                 }
                 catch (Exception ex)
                 {

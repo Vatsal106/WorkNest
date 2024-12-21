@@ -52,7 +52,8 @@
             <asp:Label ID="lblMessage" runat="server"></asp:Label>
         </p>
         <p>
-            &nbsp;</p>
+            <asp:Image ID="imgPhoto" runat="server" />
+        </p>
     </form>
 </body>
 </html>
