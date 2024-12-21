@@ -13,7 +13,6 @@ namespace WorkNest
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
         }
 
 
@@ -47,21 +46,22 @@ namespace WorkNest
                         lblMessage.Text = "Login successful!";
                         lblMessage.ForeColor = System.Drawing.Color.Green;
 
-                        // Fetch the user's image
-                        SqlCommand imageCmd = new SqlCommand(imageQuery, conn);
-                        imageCmd.Parameters.AddWithValue("@Username", username);
-                        imageCmd.Parameters.AddWithValue("@Password", password);
+                        //// Fetch the user's image
+                        //SqlCommand imageCmd = new SqlCommand(imageQuery, conn);
+                        //imageCmd.Parameters.AddWithValue("@Username", username);
+                        //imageCmd.Parameters.AddWithValue("@Password", password);
 
-                        byte[] imageBytes = imageCmd.ExecuteScalar() as byte[];
-                        if (imageBytes != null && imageBytes.Length > 0)
-                        {
-                            string base64Image = Convert.ToBase64String(imageBytes);
-                            imgPhoto.ImageUrl = "data:image/png;base64," + base64Image;
-                        }
-                        else
-                        {
-                            imgPhoto.ImageUrl = "~/Images/default.png"; // Fallback to default image
-                        }
+                        //byte[] imageBytes = imageCmd.ExecuteScalar() as byte[];
+                        //if (imageBytes != null && imageBytes.Length > 0)
+                        //{
+                        //    imgPhoto.EnableViewState = true;
+                        //    string base64Image = Convert.ToBase64String(imageBytes);
+                        //    imgPhoto.ImageUrl = "data:image/png;base64," + base64Image;
+                        //}
+                        //else
+                        //{
+                        //    imgPhoto.ImageUrl = "~/Images/default.png"; // Fallback to default image
+                        //}
                     }
                     else
                     {

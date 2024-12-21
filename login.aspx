@@ -29,7 +29,7 @@
        <p>
            <asp:Label ID="lblMessage" runat="server"></asp:Label>
     </p>
-       <asp:Image ID="imgPhoto" runat="server" BorderStyle="Solid" Height="100px" Width="100px" />
+       <asp:Image ID="imgPhoto" runat="server" EnableViewState="False" Height="100px" Width="100px" />
        
 </form>
 </body>
