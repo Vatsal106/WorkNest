@@ -60,7 +60,7 @@
                 <tr>
                     <td style="text-align: right; padding-right: 15px;" class="auto-style3">Password:</td>
                     <td class="auto-style3">
-                       <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" OnTextChanged="PasswordChanged" AutoPostBack="true"></asp:TextBox>
+                       <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" OnTextChanged="PasswordChanged" ></asp:TextBox>
                     </td>
                 </tr>
                 <tr>
