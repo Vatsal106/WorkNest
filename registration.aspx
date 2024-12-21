@@ -17,6 +17,12 @@
         .auto-style3 {
             height: 29px;
         }
+        .valid {
+    color: green;
+}
+.invalid {
+    color: red;
+}
     </style>
     </head>
 <body>
@@ -54,23 +60,22 @@
                 <tr>
                     <td style="text-align: right; padding-right: 15px;" class="auto-style3">Password:</td>
                     <td class="auto-style3">
-                        <asp:TextBox ID="txtPassword" runat="server" TextMode="Password"></asp:TextBox>
+                       <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" OnTextChanged="PasswordChanged" AutoPostBack="true"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>
                     <td style="text-align: right; padding-right: 15px;">Rewrite Parssword:</td>
                     <td>
                         <asp:TextBox ID="txtRepassword" runat="server" TextMode="Password"></asp:TextBox>
-                    </td>
+                       
+                        </td>
                 </tr>
                 <tr>
                     <td style="text-align: right; padding-right: 15px;">&nbsp;</td>
                     <td>
-                        &nbsp;-<span style="color: rgb(0, 0, 0); font-family: &quot;Times New Roman&quot;; font-size: medium; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(192, 192, 192); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">Password length must be between 8 and 20 characters.<br />
-                        -Password must contain at least one uppercase letter<br />
-                        -Password must contain at least one lowercase letter.<br />
-                        -Password must contain at least one numeric digit.<br />
-                        -Password must contain at least one special character like(@$#).</span></td>
+                     <asp:Label ID="lblLength" runat="server" ForeColor="Red" Text="At least 8 characters"></asp:Label><br />
+                     <asp:Label ID="lblNumberOrSymbol" runat="server" ForeColor="Red" Text="At least one number (0-9) or a symbol"></asp:Label><br />
+                     <asp:Label ID="lblCase" runat="server" ForeColor="Red" Text="Lowercase (a-z) and uppercase (A-Z)"></asp:Label><br />
                 </tr>
                 <tr>
                     <td style="text-align: right; padding-right: 15px;">Gender:</td>

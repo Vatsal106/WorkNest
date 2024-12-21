@@ -78,6 +78,33 @@ namespace WorkNest
         protected global::System.Web.UI.WebControls.TextBox txtRepassword;
 
         /// <summary>
+        /// lblLength control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblLength;
+
+        /// <summary>
+        /// lblNumberOrSymbol control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblNumberOrSymbol;
+
+        /// <summary>
+        /// lblCase control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCase;
+
+        /// <summary>
         /// rblGender control.
         /// </summary>
         /// <remarks>

@@ -46,12 +46,55 @@ namespace WorkNest
             return true;
 
         }
+
+        protected void PasswordChanged(object sender, EventArgs e)
+        {
+            string password = txtPassword.Text;
+
+            // Check for minimum length
+            if (password.Length >= 8)
+            {
+                lblLength.ForeColor = System.Drawing.Color.Green;
+                lblLength.Text = "✓ At least 8 characters";
+            }
+            else
+            {
+                lblLength.ForeColor = System.Drawing.Color.Red;
+                lblLength.Text = "At least 8 characters";
+            }
+
+            // Check for at least one number or symbol
+            if (System.Text.RegularExpressions.Regex.IsMatch(password, @"[\d!@#$%^&*(),.?""{}|<>]"))
+            {
+                lblNumberOrSymbol.ForeColor = System.Drawing.Color.Green;
+                lblNumberOrSymbol.Text = "✓ At least one number (0-9) or a symbol";
+            }
+            else
+            {
+                lblNumberOrSymbol.ForeColor = System.Drawing.Color.Red;
+                lblNumberOrSymbol.Text = "At least one number (0-9) or a symbol";
+            }
+
+            // Check for both uppercase and lowercase letters
+            if (System.Text.RegularExpressions.Regex.IsMatch(password, "[A-Z]") && System.Text.RegularExpressions.Regex.IsMatch(password, "[a-z]"))
+            {
+                lblCase.ForeColor = System.Drawing.Color.Green;
+                lblCase.Text = "✓ Lowercase (a-z) and uppercase (A-Z)";
+            }
+            else
+            {
+                lblCase.ForeColor = System.Drawing.Color.Red;
+                lblCase.Text = "Lowercase (a-z) and uppercase (A-Z)";
+            }
+        }
+
+
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
 
 
-            //string connectionString = "Data Source=LAPTOP-C6B669RO\\SQLEXPRESS;Initial Catalog=WORKNEST;Integrated Security=True";
-            string connectionString = "Data Source=VATSAL\\SQLEXPRESS;Initial Catalog=WORKNEST;Integrated Security=True";
+            string connectionString = "Data Source=LAPTOP-C6B669RO\\SQLEXPRESS;Initial Catalog=WORKNEST;Integrated Security=True";
+            //string connectionString = "Data Source=VATSAL\\SQLEXPRESS;Initial Catalog=WORKNEST;Integrated Security=True";
             //string connectionString = "Data Source=DESKTOP-4D8U420\\SQLEXPRESS;Initial Catalog=WORKNEST;Integrated Security=True";
 
             string selectedCity = ddlCity.SelectedItem.Text;
