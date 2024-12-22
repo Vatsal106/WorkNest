@@ -13,13 +13,13 @@ namespace WorkNest
 
     public partial class login : System.Web.UI.Page
     {
-        SqlConnection conn;
+        //SqlConnection conn;
         protected void Page_Load(object sender, EventArgs e)
         {
 
         }
 
-        
+
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
@@ -27,15 +27,16 @@ namespace WorkNest
             string username = txtUsername.Text.Trim();
             string password = txtPassword.Text.Trim();
 
-
+            registration fnconn = new registration();
+            fnconn.dbConnect();
             string loginQuery = "SELECT COUNT(1) FROM REGISTER WHERE USERNAME = @Username AND PASSWORD = @Password";
             string imageQuery = "SELECT IMAGE FROM REGISTER WHERE USERNAME = @Username AND PASSWORD = @Password";
             try
             {
-                conn.Open();
+
 
                 // Check user credentials
-                SqlCommand loginCmd = new SqlCommand(loginQuery, conn);
+                SqlCommand loginCmd = new SqlCommand(loginQuery, fnconn.con);
                 loginCmd.Parameters.AddWithValue("@Username", username);
                 loginCmd.Parameters.AddWithValue("@Password", password);
 
@@ -75,7 +76,7 @@ namespace WorkNest
             }
             finally
             {
-                conn.Close();
+                fnconn.con.Close();
             }
 
         }

@@ -15,10 +15,10 @@ namespace WorkNest
 {
     public partial class registration : System.Web.UI.Page
     {
-        SqlConnection con;
+        public SqlConnection con;
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+
         }
         private bool ValidatePassword(string password)
         {
@@ -91,21 +91,11 @@ namespace WorkNest
             }
         }
 
-        protected void dbConnect()
+        public void dbConnect()
         {
             string strconn = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
             con = new SqlConnection(strconn);
             con.Open();
-
-            if (con.State == ConnectionState.Open)
-            {
-                Response.Write("Database connection established successfully.");
-
-            }
-            else
-            {
-                Response.Write("Failed to connect to the database.");
-            }
         }
 
         protected void btnSubmit_Click(object sender, EventArgs e)

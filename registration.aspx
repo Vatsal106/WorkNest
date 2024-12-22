@@ -11,25 +11,29 @@
             border: 1px solid #000000;
             background-color: #C0C0C0;
         }
+
         .auto-style2 {
             height: 26px;
         }
+
         .auto-style3 {
             height: 29px;
         }
+
         .valid {
-    color: green;
-}
-.invalid {
-    color: red;
-}
+            color: green;
+        }
+
+        .invalid {
+            color: red;
+        }
     </style>
-    </head>
+</head>
 <body>
     <form id="regestration" runat="server">
         <div>
-           
-             <table align="center" class="auto-style1" style="width: 50%">
+
+            <table align="center" class="auto-style1" style="width: 50%">
                 <tr>
                     <td colspan="2" rowspan="1" style="text-align: center; font-size: xx-large;">Registration Form&nbsp;</td>
                 </tr>
@@ -60,22 +64,22 @@
                 <tr>
                     <td style="text-align: right; padding-right: 15px;" class="auto-style3">Password:</td>
                     <td class="auto-style3">
-                       <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" OnTextChanged="PasswordChanged" ></asp:TextBox>
+                        <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" OnTextChanged="PasswordChanged"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>
                     <td style="text-align: right; padding-right: 15px;">Rewrite Parssword:</td>
                     <td>
                         <asp:TextBox ID="txtRepassword" runat="server" TextMode="Password"></asp:TextBox>
-                       
-                        </td>
+
+                    </td>
                 </tr>
                 <tr>
                     <td style="text-align: right; padding-right: 15px;">&nbsp;</td>
                     <td>
-                     <asp:Label ID="lblLength" runat="server" ForeColor="Red" Text="At least 8 characters"></asp:Label><br />
-                     <asp:Label ID="lblNumberOrSymbol" runat="server" ForeColor="Red" Text="At least one number (0-9) or a symbol"></asp:Label><br />
-                     <asp:Label ID="lblCase" runat="server" ForeColor="Red" Text="Lowercase (a-z) and uppercase (A-Z)"></asp:Label><br />
+                        <asp:Label ID="lblLength" runat="server" ForeColor="Red" Text="At least 8 characters"></asp:Label><br />
+                        <asp:Label ID="lblNumberOrSymbol" runat="server" ForeColor="Red" Text="At least one number (0-9) or a symbol"></asp:Label><br />
+                        <asp:Label ID="lblCase" runat="server" ForeColor="Red" Text="Lowercase (a-z) and uppercase (A-Z)"></asp:Label><br />
                 </tr>
                 <tr>
                     <td style="text-align: right; padding-right: 15px;">Gender:</td>
@@ -119,12 +123,12 @@
                     <td colspan="2" style="text-align: center; padding-right: 10px;">
                         <asp:Label ID="lblError" runat="server"></asp:Label>
                         <br />
-                        <asp:Button ID="btnSubmit" runat="server"  Text="Submit" Width="69px" OnClick="btnSubmit_Click" />
-                        <asp:Button ID="btnReset" runat="server" Text="Reset"  />
+                        <asp:Button ID="btnSubmit" runat="server" Text="Submit" Width="69px" OnClick="btnSubmit_Click" />
+                        <asp:Button ID="btnReset" runat="server" Text="Reset" />
                     </td>
                 </tr>
-                </table>
-           
+            </table>
+
         </div>
         <asp:Label ID="lblCon" runat="server"></asp:Label>
     </form>
