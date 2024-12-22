@@ -19,30 +19,7 @@ namespace WorkNest
 
         }
 
-        public void fnConnectDB()
-        {
-            try
-            {
-                string strconn = ConfigurationManager.ConnectionStrings["conStr"].ConnectionString;
-
-                conn = new SqlConnection(strconn);
-                if (conn.State != ConnectionState.Open)
-                {
-                    conn.Open();
-                    Response.Write("Connected Successfully");
-                }
-                else
-                {
-                    Response.Write("Already Connected");
-                }
-            }
-            catch (Exception ex)
-            {
-                Response.Write($"Error: " + ex.ToString());
-
-            }
-
-        }
+        
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
@@ -53,8 +30,6 @@ namespace WorkNest
 
             string loginQuery = "SELECT COUNT(1) FROM REGISTER WHERE USERNAME = @Username AND PASSWORD = @Password";
             string imageQuery = "SELECT IMAGE FROM REGISTER WHERE USERNAME = @Username AND PASSWORD = @Password";
-
-            fnConnectDB();
             try
             {
                 conn.Open();

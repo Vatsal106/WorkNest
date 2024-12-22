@@ -18,7 +18,7 @@ namespace WorkNest
         SqlConnection con;
         protected void Page_Load(object sender, EventArgs e)
         {
-            dbConnect();
+            
         }
         private bool ValidatePassword(string password)
         {
@@ -93,7 +93,7 @@ namespace WorkNest
 
         protected void dbConnect()
         {
-            string strconn = ConfigurationManager.ConnectionStrings["conStr"].ConnectionString;
+            string strconn = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
             con = new SqlConnection(strconn);
             con.Open();
 
