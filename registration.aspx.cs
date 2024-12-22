@@ -108,6 +108,20 @@ namespace WorkNest
             {
 
 
+                dbConn.dbConnect();
+                string queryUser = "SELECT COUNT(USERNAME) FROM REGISTER WHERE USERNAME = '" + txtUsername.Text.Trim() + "'";
+                SqlCommand cmdUser = new SqlCommand(queryUser, dbConn.con);
+
+                int count = Convert.ToInt32(cmdUser.ExecuteScalar());
+                Response.Write(count);
+                if (count > 0)
+                {
+
+                    lblError.Text = "This User name is taken,Please tack unother!!";
+                    lblError.ForeColor = Color.Red;
+                    return;
+                }
+
                 if (string.IsNullOrWhiteSpace(txtName.Text))
                 {
                     lblError.Text = "Please enter your name.";
@@ -121,6 +135,9 @@ namespace WorkNest
                     lblError.ForeColor = Color.Red;
                     return;
                 }
+
+
+
                 else if (!ValidatePassword(txtPassword.Text))
                 {
                     lblError.ForeColor = Color.Red;
@@ -141,11 +158,10 @@ namespace WorkNest
                             }
                         }
                     }
-                    dbConn.dbConnect();
-                    string query = "INSERT INTO REGISTER(NAME, PHONE, EMAIL, USERNAME, PASSWORD, GENDER, CITY, ADDRESS,DOB,IMAGE) " +
-                      "VALUES ('" + txtName.Text + "', '" + txtPhone.Text + "', '" + txtEmail.Text + "', '" +
-                      txtUsername.Text + "', '" + txtPassword.Text + "', '" + rblGender.SelectedItem.Text + "', '" +
-                      selectedCity + "', '" + txtAddress.Text + "','" + txtDate.Text + "',@IMAGE)";
+\                    string query = "INSERT INTO REGISTER(NAME, PHONE, EMAIL, USERNAME, PASSWORD, GENDER, CITY, ADDRESS,DOB,IMAGE) " +
+                      "VALUES ('" + txtName.Text.Trim() + "', '" + txtPhone.Text.Trim() + "', '" + txtEmail.Text.Trim() + "', '" +
+                      txtUsername.Text.Trim() + "', '" + txtPassword.Text.Trim() + "', '" + rblGender.SelectedItem.Text + "', '" +
+                      selectedCity + "', '" + txtAddress.Text.Trim() + "','" + txtDate.Text + "',@IMAGE)";
                     SqlCommand cmd = new SqlCommand(query, dbConn.con);
                     cmd.Parameters.AddWithValue("@Image", (object)imageBytes ?? DBNull.Value);
 
