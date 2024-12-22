@@ -27,8 +27,8 @@ namespace WorkNest
             string username = txtUsername.Text.Trim();
             string password = txtPassword.Text.Trim();
 
-            registration fnconn = new registration();
-            fnconn.dbConnect();
+            dbConnection dbConn = new dbConnection();
+            dbConn.dbConnect();
             string loginQuery = "SELECT COUNT(1) FROM REGISTER WHERE USERNAME = @Username AND PASSWORD = @Password";
             string imageQuery = "SELECT IMAGE FROM REGISTER WHERE USERNAME = @Username AND PASSWORD = @Password";
             try
@@ -36,7 +36,7 @@ namespace WorkNest
 
 
                 // Check user credentials
-                SqlCommand loginCmd = new SqlCommand(loginQuery, fnconn.con);
+                SqlCommand loginCmd = new SqlCommand(loginQuery, dbConn.con);
                 loginCmd.Parameters.AddWithValue("@Username", username);
                 loginCmd.Parameters.AddWithValue("@Password", password);
 

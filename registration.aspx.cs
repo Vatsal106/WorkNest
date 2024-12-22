@@ -15,7 +15,7 @@ namespace WorkNest
 {
     public partial class registration : System.Web.UI.Page
     {
-        public SqlConnection con;
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -91,15 +91,11 @@ namespace WorkNest
             }
         }
 
-        public void dbConnect()
-        {
-            string strconn = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-            con = new SqlConnection(strconn);
-            con.Open();
-        }
+
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
+            dbConnection dbConn = new dbConnection();
             string selectedCity = ddlCity.SelectedItem.Text;
 
             // DATE FORMET:-'2023-01-24'
@@ -145,12 +141,12 @@ namespace WorkNest
                             }
                         }
                     }
-                    dbConnect();
+                    dbConn.dbConnect();
                     string query = "INSERT INTO REGISTER(NAME, PHONE, EMAIL, USERNAME, PASSWORD, GENDER, CITY, ADDRESS,DOB,IMAGE) " +
                       "VALUES ('" + txtName.Text + "', '" + txtPhone.Text + "', '" + txtEmail.Text + "', '" +
                       txtUsername.Text + "', '" + txtPassword.Text + "', '" + rblGender.SelectedItem.Text + "', '" +
                       selectedCity + "', '" + txtAddress.Text + "','" + txtDate.Text + "',@IMAGE)";
-                    SqlCommand cmd = new SqlCommand(query, con);
+                    SqlCommand cmd = new SqlCommand(query, dbConn.con);
                     cmd.Parameters.AddWithValue("@Image", (object)imageBytes ?? DBNull.Value);
 
                     cmd.ExecuteNonQuery();
