@@ -20,9 +20,9 @@ body {
 .container {
     display: flex;
     flex-direction: row;
-    width: 80%;
+    width: 100%;
     max-width: 1200px;
-    height: 600px;
+    height: 500px;
     background: #ffffff;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
     border-radius: 15px;
@@ -99,7 +99,7 @@ form {
 /* Image section styling */
 #loginImage {
     flex: 1.2;
-    background: linear-gradient(135deg, #6c63ff, #987eff);
+    background: #ffffff;
     display: flex;
     justify-content: center;
     align-items: center;

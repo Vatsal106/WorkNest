@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -13,8 +15,33 @@ namespace WorkNest
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+           
         }
 
+        public void fnConnectDB()
+        {
+            try
+            {
+                string strconn = ConfigurationManager.ConnectionStrings["conStr"].ConnectionString;
+                SqlConnection conn;
+                conn = new SqlConnection(strconn);
+                if (conn.State != ConnectionState.Open)
+                {
+                    conn.Open();
+                    Response.Write("Connected Successfully");
+                }
+                else
+                {
+                    Response.Write("Already Connected");
+                }
+            }
+            catch (Exception ex)
+            {
+                Response.Write($"Error: " + ex.ToString());
+
+            }
+
+        }
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {

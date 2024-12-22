@@ -93,8 +93,8 @@ namespace WorkNest
 
         protected void dbConnect()
         {
-            string conStr = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-            con = new SqlConnection(conStr);
+            string strconn = ConfigurationManager.ConnectionStrings["conStr"].ConnectionString;
+            con = new SqlConnection(strconn);
             con.Open();
 
             if (con.State == ConnectionState.Open)
