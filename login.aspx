@@ -8,9 +8,6 @@
     <link rel="stylesheet" type="text/css" href="Style.css">
 </head>
 <body>
-    
-    <div class="container">
-        
         <div class="form-section">
             <form id="form1" runat="server">
                 <h2>Holla, Welcome Back</h2>
@@ -30,14 +27,7 @@
                     <asp:Label ID="lblMessage" runat="server"></asp:Label>
                 </p>
             </form>
-        </div>
-
-       
-        <div id="loginImage">
-            <asp:Image ID="imgIllustration" runat="server" 
-                       ImageUrl="~/original-ba68e98ea10e1867e831884c3b153387 (1) (1).png" 
-                       AlternateText="Illustration" />
-        </div>
+        
     </div>
 </body>
 </html>
