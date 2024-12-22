@@ -67,6 +67,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\Demo.mdf" />
+    <Content Include="App_Data\Demo_log.ldf">
+      <DependentUpon>Demo.mdf</DependentUpon>
+    </Content>
     <Content Include="login.aspx" />
     <Content Include="original-ba68e98ea10e1867e831884c3b153387 %281%29 %281%29.png" />
     <Content Include="registration.aspx" />
