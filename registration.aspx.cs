@@ -17,6 +17,7 @@ namespace WorkNest
     {
         dbConnection dbConn = new dbConnection();
         Boolean runInsert = false;
+        Boolean checkUserduplicate=false;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsPostBack)
@@ -28,7 +29,7 @@ namespace WorkNest
         // check user duplication
         protected void checkUser(object sender, EventArgs e)
         {
-            runInsert = true;
+            checkUserduplicate = true;
             dbConn.dbConnect();
             string queryUser = "SELECT COUNT(USERNAME) FROM REGISTER WHERE USERNAME = '" + txtUsername.Text.Trim() + "'";
             SqlCommand cmdUser = new SqlCommand(queryUser, dbConn.con);
@@ -41,7 +42,7 @@ namespace WorkNest
 
                 lblError.Text = "This username is already taken. Please choose another.!!";
                 lblError.ForeColor = Color.Red;
-                runInsert = false;
+                checkUserduplicate = false;
                 return;
             }
             else
@@ -187,7 +188,7 @@ namespace WorkNest
                             }
                         }
                     }
-                    if (runInsert == true)
+                    if (runInsert == true && checkUserduplicate== true )
                     {
                         string query = "INSERT INTO REGISTER(NAME, PHONE, EMAIL, USERNAME, PASSWORD, GENDER, CITY, ADDRESS,DOB,IMAGE) " +
                           "VALUES ('" + txtName.Text.Trim() + "', '" + txtPhone.Text.Trim() + "', '" + txtEmail.Text.Trim() + "', '" +
