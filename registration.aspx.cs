@@ -16,7 +16,7 @@ namespace WorkNest
     public partial class registration : System.Web.UI.Page
     {
         dbConnection dbConn = new dbConnection();
-        Boolean insertRun = false;
+        Boolean runInsert = false;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsPostBack)
@@ -25,40 +25,67 @@ namespace WorkNest
                 txtRepassword.Attributes["value"] = txtRepassword.Text;
             }
         }
-        private bool ValidatePassword(string password)
+        // check user duplication
+        protected void checkUser(object sender, EventArgs e)
         {
+            runInsert = true;
+            dbConn.dbConnect();
+            string queryUser = "SELECT COUNT(USERNAME) FROM REGISTER WHERE USERNAME = '" + txtUsername.Text.Trim() + "'";
+            SqlCommand cmdUser = new SqlCommand(queryUser, dbConn.con);
 
-
-            const int MinLength = 8;
-            const int MaxLength = 20;
-
-
-
-            if (password.Length < MinLength || password.Length > MaxLength ||
-                !System.Text.RegularExpressions.Regex.IsMatch(password, "[A-Z]") ||
-                !System.Text.RegularExpressions.Regex.IsMatch(password, "[a-z]") ||
-                !System.Text.RegularExpressions.Regex.IsMatch(password, "\\d") ||
-                !System.Text.RegularExpressions.Regex.IsMatch(password, "[!@#$%^&*(),.?\"{}|<>]"))
+            int count = Convert.ToInt32(cmdUser.ExecuteScalar());
+            //Response.Write("Count: " + count);
+            dbConn.con.Close();
+            if (count > 0)
             {
-                lblError.Text = "Invalid Password, Please Rewrite!!";
-                return false;
-            }
 
-            if (txtPassword.Text != txtRepassword.Text)
+                lblError.Text = "This username is already taken. Please choose another.!!";
+                lblError.ForeColor = Color.Red;
+                runInsert = false;
+                return;
+            }
+            else
             {
-                lblError.Text = "Password does not matched.";
-
-                return false;
+                lblError.Text = "";
             }
-
-            return true;
-
         }
 
+        // check password is valide or not?
+        //private bool ValidatePassword(string password)
+        //{
+
+
+        //const int MinLength = 8;
+        //const int MaxLength = 20;
+
+
+
+        //if (password.Length < MinLength || password.Length > MaxLength ||
+        //    !System.Text.RegularExpressions.Regex.IsMatch(password, "[A-Z]") ||
+        //    !System.Text.RegularExpressions.Regex.IsMatch(password, "[a-z]") ||
+        //    !System.Text.RegularExpressions.Regex.IsMatch(password, "\\d") ||
+        //    !System.Text.RegularExpressions.Regex.IsMatch(password, "[!@#$%^&*(),.?\"{}|<>]"))
+        //{
+        //    lblError.Text = "Invalid Password, Please Rewrite!!";
+        //    return false;
+        //}
+
+        //if (txtPassword.Text != txtRepassword.Text)
+        //{
+        //    lblError.Text = "Password does not matched.";
+
+        //    return false;
+        //}
+
+        //return true;
+
+        //}
+
+        //event for password is acording conditon or not,that user can view what is on password and what is not 
         protected void PasswordChanged(object sender, EventArgs e)
         {
             string password = txtPassword.Text;
-
+            runInsert = true;
             // Check for minimum length
             if (password.Length >= 8)
             {
@@ -69,6 +96,7 @@ namespace WorkNest
             {
                 lblLength.ForeColor = System.Drawing.Color.Red;
                 lblLength.Text = "At least 8 characters";
+                runInsert = false;
             }
 
             // Check for at least one number or symbol
@@ -81,6 +109,8 @@ namespace WorkNest
             {
                 lblNumberOrSymbol.ForeColor = System.Drawing.Color.Red;
                 lblNumberOrSymbol.Text = "At least one number (0-9) or a symbol";
+                runInsert = false;
+
             }
 
             // Check for both uppercase and lowercase letters
@@ -93,10 +123,27 @@ namespace WorkNest
             {
                 lblCase.ForeColor = System.Drawing.Color.Red;
                 lblCase.Text = "Lowercase (a-z) and uppercase (A-Z)";
+                runInsert = false;
+
             }
+
         }
 
+        protected void checkBothPass_TextChanged(object sender, EventArgs e)
+        {
+            if (txtPassword.Text != txtRepassword.Text)
+            {
+                lblError.Text = "Password does not matched.";
 
+                runInsert = false;
+            }
+            else
+            {
+                lblError.Text = "";
+            }
+
+            runInsert = true;
+        }
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
@@ -123,14 +170,9 @@ namespace WorkNest
                     lblError.ForeColor = Color.Red;
                     return;
                 }
-                else if (!ValidatePassword(txtPassword.Text))
-                {
-                    lblError.ForeColor = Color.Red;
-                    return;
-                }
                 else
                 {
-                    insertRun = true;
+                    runInsert = true;
                     dbConn.dbConnect();
                     byte[] imageBytes = null;
 
@@ -145,7 +187,7 @@ namespace WorkNest
                             }
                         }
                     }
-                    if (insertRun == true)
+                    if (runInsert == true)
                     {
                         string query = "INSERT INTO REGISTER(NAME, PHONE, EMAIL, USERNAME, PASSWORD, GENDER, CITY, ADDRESS,DOB,IMAGE) " +
                           "VALUES ('" + txtName.Text.Trim() + "', '" + txtPhone.Text.Trim() + "', '" + txtEmail.Text.Trim() + "', '" +
@@ -171,28 +213,7 @@ namespace WorkNest
 
         }
 
-        protected void checkUser(object sender, EventArgs e)
-        {
-            dbConn.dbConnect();
-            string queryUser = "SELECT COUNT(USERNAME) FROM REGISTER WHERE USERNAME = '" + txtUsername.Text.Trim() + "'";
-            SqlCommand cmdUser = new SqlCommand(queryUser, dbConn.con);
 
-            int count = Convert.ToInt32(cmdUser.ExecuteScalar());
-            //Response.Write("Count: " + count);
-            dbConn.con.Close();
-            if (count > 0)
-            {
-
-                lblError.Text = "This username is already taken. Please choose another.!!";
-                lblError.ForeColor = Color.Red;
-                insertRun = false;
-                return;
-            }
-            else
-            {
-                lblError.Text = "";
-            }
-        }
     }
 
 }

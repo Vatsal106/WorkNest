@@ -70,7 +70,7 @@
                 <tr>
                     <td style="text-align: right; padding-right: 15px;">Rewrite Parssword:</td>
                     <td>
-                        <asp:TextBox ID="txtRepassword" runat="server" TextMode="Password"></asp:TextBox>
+                        <asp:TextBox ID="txtRepassword" runat="server" TextMode="Password" OnTextChanged="checkBothPass_TextChanged" AutoPostBack="true"></asp:TextBox>
 
                     </td>
                 </tr>
