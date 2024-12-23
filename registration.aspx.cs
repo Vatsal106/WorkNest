@@ -15,10 +15,15 @@ namespace WorkNest
 {
     public partial class registration : System.Web.UI.Page
     {
-
+        dbConnection dbConn = new dbConnection();
+        Boolean insertRun = false;
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (IsPostBack)
+            {
+                txtPassword.Attributes["value"] = txtPassword.Text;
+                txtRepassword.Attributes["value"] = txtRepassword.Text;
+            }
         }
         private bool ValidatePassword(string password)
         {
@@ -95,7 +100,7 @@ namespace WorkNest
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-            dbConnection dbConn = new dbConnection();
+
             string selectedCity = ddlCity.SelectedItem.Text;
 
             // DATE FORMET:-'2023-01-24'
@@ -106,38 +111,18 @@ namespace WorkNest
 
             try
             {
-
-
-                dbConn.dbConnect();
-                string queryUser = "SELECT COUNT(USERNAME) FROM REGISTER WHERE USERNAME = '" + txtUsername.Text.Trim() + "'";
-                SqlCommand cmdUser = new SqlCommand(queryUser, dbConn.con);
-
-                int count = Convert.ToInt32(cmdUser.ExecuteScalar());
-                Response.Write(count);
-                if (count > 0)
-                {
-
-                    lblError.Text = "This User name is taken,Please tack unother!!";
-                    lblError.ForeColor = Color.Red;
-                    return;
-                }
-
                 if (string.IsNullOrWhiteSpace(txtName.Text))
                 {
                     lblError.Text = "Please enter your name.";
                     lblError.ForeColor = Color.Red;
                     return;
                 }
-
                 else if (string.IsNullOrWhiteSpace(txtPhone.Text) || string.IsNullOrWhiteSpace(txtEmail.Text) || string.IsNullOrWhiteSpace(txtUsername.Text))
                 {
                     lblError.Text = "Please fill all required fields.";
                     lblError.ForeColor = Color.Red;
                     return;
                 }
-
-
-
                 else if (!ValidatePassword(txtPassword.Text))
                 {
                     lblError.ForeColor = Color.Red;
@@ -145,6 +130,8 @@ namespace WorkNest
                 }
                 else
                 {
+                    insertRun = true;
+                    dbConn.dbConnect();
                     byte[] imageBytes = null;
 
                     // Check if a file is uploaded
@@ -158,19 +145,23 @@ namespace WorkNest
                             }
                         }
                     }
-\                    string query = "INSERT INTO REGISTER(NAME, PHONE, EMAIL, USERNAME, PASSWORD, GENDER, CITY, ADDRESS,DOB,IMAGE) " +
-                      "VALUES ('" + txtName.Text.Trim() + "', '" + txtPhone.Text.Trim() + "', '" + txtEmail.Text.Trim() + "', '" +
-                      txtUsername.Text.Trim() + "', '" + txtPassword.Text.Trim() + "', '" + rblGender.SelectedItem.Text + "', '" +
-                      selectedCity + "', '" + txtAddress.Text.Trim() + "','" + txtDate.Text + "',@IMAGE)";
-                    SqlCommand cmd = new SqlCommand(query, dbConn.con);
-                    cmd.Parameters.AddWithValue("@Image", (object)imageBytes ?? DBNull.Value);
+                    if (insertRun == true)
+                    {
+                        string query = "INSERT INTO REGISTER(NAME, PHONE, EMAIL, USERNAME, PASSWORD, GENDER, CITY, ADDRESS,DOB,IMAGE) " +
+                          "VALUES ('" + txtName.Text.Trim() + "', '" + txtPhone.Text.Trim() + "', '" + txtEmail.Text.Trim() + "', '" +
+                          txtUsername.Text.Trim() + "', '" + txtPassword.Text.Trim() + "', '" + rblGender.SelectedItem.Text + "', '" +
+                          selectedCity + "', '" + txtAddress.Text.Trim() + "','" + txtDate.Text + "',@IMAGE)";
+                        SqlCommand cmd = new SqlCommand(query, dbConn.con);
 
-                    cmd.ExecuteNonQuery();
+                        cmd.Parameters.AddWithValue("@Image", (object)imageBytes ?? DBNull.Value);
 
+                        cmd.ExecuteNonQuery();
+                    }
 
                 }
                 Response.Write("Registration Successful");
                 Response.Redirect("login.aspx");
+
             }
             catch (Exception ex)
             {
@@ -178,6 +169,29 @@ namespace WorkNest
                 Response.Write($"Error: {ex.Message.ToString()}");
             }
 
+        }
+
+        protected void checkUser(object sender, EventArgs e)
+        {
+            dbConn.dbConnect();
+            string queryUser = "SELECT COUNT(USERNAME) FROM REGISTER WHERE USERNAME = '" + txtUsername.Text.Trim() + "'";
+            SqlCommand cmdUser = new SqlCommand(queryUser, dbConn.con);
+
+            int count = Convert.ToInt32(cmdUser.ExecuteScalar());
+            //Response.Write("Count: " + count);
+            dbConn.con.Close();
+            if (count > 0)
+            {
+
+                lblError.Text = "This username is already taken. Please choose another.!!";
+                lblError.ForeColor = Color.Red;
+                insertRun = false;
+                return;
+            }
+            else
+            {
+                lblError.Text = "";
+            }
         }
     }
 

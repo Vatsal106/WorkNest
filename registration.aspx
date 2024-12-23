@@ -58,13 +58,13 @@
                 <tr>
                     <td class="auto-style2" style="text-align: right; padding-right: 15px;">User Name:</td>
                     <td class="auto-style2">
-                        <asp:TextBox ID="txtUsername" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="txtUsername" runat="server" AutoPostBack="True" OnTextChanged="checkUser" ></asp:TextBox>
                     </td>
                 </tr>
                 <tr>
                     <td style="text-align: right; padding-right: 15px;" class="auto-style3">Password:</td>
                     <td class="auto-style3">
-                        <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" OnTextChanged="PasswordChanged"></asp:TextBox>
+                        <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" OnTextChanged="PasswordChanged" AutoPostBack="True"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>
