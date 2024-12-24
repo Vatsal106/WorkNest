@@ -10,7 +10,7 @@
 <body>
         <div class="form-section">
             <form id="form1" runat="server">
-                <h2>Holla, Welcome Back</h2>
+                <h2>Hello, Welcome Back</h2>
                 <div>
                     <asp:TextBox ID="txtUsername" runat="server" CssClass="input" Placeholder="Username"></asp:TextBox>
                 </div>
