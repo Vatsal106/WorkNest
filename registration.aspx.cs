@@ -33,7 +33,7 @@ namespace WorkNest
         {
             dbConn.dbConnect();
             string nameof = txtUsername.Text.Trim();
-            string queryUser = "SELECT COUNT(USERNAME) FROM REGISTER WHERE USERNAME ='" + nameof + "'";
+            string queryUser = "SELECT COUNT(USERNAME) FROM tblRegister WHERE USERNAME ='" + nameof + "'";
             SqlCommand cmdUser = new SqlCommand(queryUser, dbConn.con);
 
             int count = Convert.ToInt32(cmdUser.ExecuteScalar());
@@ -188,7 +188,7 @@ namespace WorkNest
 
                 if (checkUserduplicate && imgSeted)
                 {
-                    string query = "INSERT INTO REGISTER(NAME, PHONE, EMAIL, USERNAME, PASSWORD, GENDER, CITY, ADDRESS,DOB,IMAGE) " +
+                    string query = "INSERT INTO tblRegister(NAME, PHONE, EMAIL, USERNAME, PASSWORD, GENDER, CITY, ADDRESS,DOB,IMAGE) " +
                       "VALUES ('" + txtName.Text.Trim() + "', '" + txtPhone.Text.Trim() + "', '" + txtEmail.Text.Trim() + "', '" +
                       txtUsername.Text.Trim() + "', '" + txtPassword.Text.Trim() + "', '" + rblGender.SelectedItem.Text + "', '" +
                       selectedCity + "', '" + txtAddress.Text.Trim() + "','" + txtDate.Text + "',@IMAGE)";

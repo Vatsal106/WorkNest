@@ -29,8 +29,8 @@ namespace WorkNest
 
             dbConnection dbConn = new dbConnection();
             dbConn.dbConnect();
-            string loginQuery = "SELECT COUNT(1) FROM REGISTER WHERE USERNAME = @Username AND PASSWORD = @Password";
-            string imageQuery = "SELECT IMAGE FROM REGISTER WHERE USERNAME = @Username AND PASSWORD = @Password";
+            string loginQuery = "SELECT COUNT(1) FROM tblRegister WHERE USERNAME = @Username AND PASSWORD = @Password";
+            string imageQuery = "SELECT IMAGE FROM tblRegister WHERE USERNAME = @Username AND PASSWORD = @Password";
             try
             {
 
