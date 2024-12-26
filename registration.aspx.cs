@@ -18,8 +18,10 @@ namespace WorkNest
         dbConnection dbConn = new dbConnection();
         Boolean runInsert = false;
         Boolean checkUserduplicate = false;
+
         protected void Page_Load(object sender, EventArgs e)
         {
+
             if (IsPostBack)
             {
                 txtPassword.Attributes["value"] = txtPassword.Text;
@@ -161,9 +163,10 @@ namespace WorkNest
 
                 dbConn.dbConnect();
                 byte[] imageBytes = null;
-
+                bool imgSeted = false;
                 if (fuImage.HasFile)
                 {
+                    imgSeted = true;
                     string fileExtension = Path.GetExtension(fuImage.FileName).ToLower();
                     string[] allowedExtensions = { ".jpg", ".jpeg", ".png", ".gif" };
 
@@ -182,7 +185,8 @@ namespace WorkNest
                         }
                     }
                 }
-                if (checkUserduplicate)
+
+                if (checkUserduplicate && imgSeted)
                 {
                     string query = "INSERT INTO REGISTER(NAME, PHONE, EMAIL, USERNAME, PASSWORD, GENDER, CITY, ADDRESS,DOB,IMAGE) " +
                       "VALUES ('" + txtName.Text.Trim() + "', '" + txtPhone.Text.Trim() + "', '" + txtEmail.Text.Trim() + "', '" +
@@ -196,10 +200,9 @@ namespace WorkNest
                     Response.Write("Registration Successful");
                     Response.Redirect("login.aspx");
                 }
-                else
+                else if (!imgSeted)
                 {
-                    lblError.Text = "This username is already taken. Please choose another.";
-                    lblError.ForeColor = Color.Red;
+                    lblError.Text = "Please Select Image!!";
                 }
 
             }
@@ -214,7 +217,34 @@ namespace WorkNest
 
         }
 
+        protected void btnReset_Click(object sender, EventArgs e)
+        {
 
+            txtName.Text = string.Empty;
+            txtPhone.Text = string.Empty;
+            txtEmail.Text = string.Empty;
+            txtUsername.Text = string.Empty;
+            txtPassword.Text = string.Empty;
+            txtRepassword.Text = string.Empty;
+            txtDate.Text = string.Empty;
+            txtAddress.Text = string.Empty;
+            rblGender.ClearSelection();
+            ddlCity.SelectedIndex = 0;
+            fuImage.Attributes.Clear();
+            txtPassword.Attributes["value"] = string.Empty;
+            txtRepassword.Attributes["value"] = string.Empty;
+
+            lblError.Text = string.Empty;
+            lblCon.Text = string.Empty;
+
+            lblLength.ForeColor = System.Drawing.Color.Red;
+            lblNumberOrSymbol.ForeColor = System.Drawing.Color.Red;
+            lblCase.ForeColor = System.Drawing.Color.Red;
+
+            lblLength.Text = "At least 8 characters";
+            lblNumberOrSymbol.Text = "At least one number (0-9) or a symbol";
+            lblCase.Text = "Lowercase (a-z) and uppercase (A-Z)";
+        }
     }
 
 }
