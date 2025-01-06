@@ -33,7 +33,7 @@ namespace WorkNest
         {
             dbConn.dbConnect();
             string nameof = txtUsername.Text.Trim();
-            string queryUser = "SELECT COUNT(USERNAME) FROM tblRegister WHERE USERNAME ='" + nameof + "'";
+            string queryUser = "SELECT COUNT(username) FROM tbl_user WHERE username ='" + nameof + "'";
             SqlCommand cmdUser = new SqlCommand(queryUser, dbConn.con);
 
             int count = Convert.ToInt32(cmdUser.ExecuteScalar());
@@ -188,15 +188,35 @@ namespace WorkNest
 
                 if (checkUserduplicate && imgSeted)
                 {
-                    string query = "INSERT INTO tblRegister(NAME, PHONE, EMAIL, USERNAME, PASSWORD, GENDER, CITY, ADDRESS,DOB,IMAGE) " +
-                      "VALUES ('" + txtName.Text.Trim() + "', '" + txtPhone.Text.Trim() + "', '" + txtEmail.Text.Trim() + "', '" +
-                      txtUsername.Text.Trim() + "', '" + txtPassword.Text.Trim() + "', '" + rblGender.SelectedItem.Text + "', '" +
-                      selectedCity + "', '" + txtAddress.Text.Trim() + "','" + txtDate.Text + "',@IMAGE)";
-                    SqlCommand cmd = new SqlCommand(query, dbConn.con);
 
+                    string query = "INSERT INTO tbl_employee (name, phone, email, gender, city, address, dob, image) " +
+                  "VALUES (@Name, @Phone, @Email, @Gender, @City, @Address, @Dob, @Image)";
+
+                    SqlCommand cmd = new SqlCommand(query, dbConn.con);
+                    cmd.Parameters.AddWithValue("@Name", txtName.Text.Trim());
+                    cmd.Parameters.AddWithValue("@Phone", txtPhone.Text.Trim());
+                    cmd.Parameters.AddWithValue("@Email", txtEmail.Text.Trim());
+                    cmd.Parameters.AddWithValue("@Gender", rblGender.SelectedItem.Text);
+                    cmd.Parameters.AddWithValue("@City", selectedCity);
+                    cmd.Parameters.AddWithValue("@Address", txtAddress.Text.Trim());
+                    cmd.Parameters.AddWithValue("@Dob", txtDate.Text);
                     cmd.Parameters.AddWithValue("@Image", (object)imageBytes ?? DBNull.Value);
 
                     cmd.ExecuteNonQuery();
+
+                    string query1 = "SELECT empid FROM tbl_employee WHERE email = @Email";
+                    SqlCommand cmdid = new SqlCommand(query1, dbConn.con);
+                    cmdid.Parameters.AddWithValue("@Email", txtEmail.Text.Trim());
+                    int empid = Convert.ToInt32(cmdid.ExecuteScalar());
+
+                    string queryUser = "INSERT INTO tbl_user (username, password, empid) VALUES (@Username, @Password, @EmpID)";
+                    SqlCommand cmdUser = new SqlCommand(queryUser, dbConn.con);
+                    cmdUser.Parameters.AddWithValue("@Username", txtUsername.Text.Trim());
+                    cmdUser.Parameters.AddWithValue("@Password", txtPassword.Text.Trim());
+                    cmdUser.Parameters.AddWithValue("@EmpID", empid);
+
+                    cmdUser.ExecuteNonQuery();
+
                     Response.Write("Registration Successful");
                     Response.Redirect("login.aspx");
                 }
