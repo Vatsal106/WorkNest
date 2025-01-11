@@ -7,6 +7,76 @@
 
     <title>Registration</title>
     <style type="text/css">
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+.auto-style1 {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: #ffffff;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.auto-style3 {
+    text-align: right;
+    padding-right: 15px;
+    font-weight: bold;
+}
+
+.auto-style4, .auto-style5, .auto-style6, .auto-style7 {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: border-color 0.3s;
+}
+
+.auto-style4:focus, .auto-style5:focus, .auto-style6:focus, .auto-style7:focus {
+    border-color: #007BFF;
+    outline: none;
+}
+
+label {
+    color: #555;
+}
+
+.valid {
+    color: green;
+}
+
+.invalid {
+    color: red;
+}
+
+button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.error-message {
+    color: red;
+    font-weight: bold;
+    text-align: center;
+}
         .auto-style1 {
             width: 100%;
             border: 1px solid #000000;

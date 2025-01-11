@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace WorkNest
 {
@@ -29,8 +22,8 @@ namespace WorkNest
 
             dbConnection dbConn = new dbConnection();
             dbConn.dbConnect();
-            string loginQuery = "SELECT COUNT(1) FROM tblRegister WHERE USERNAME = @Username AND PASSWORD = @Password";
-            string imageQuery = "SELECT IMAGE FROM tblRegister WHERE USERNAME = @Username AND PASSWORD = @Password";
+            string loginQuery = "SELECT COUNT(1) FROM tbl_user WHERE USERNAME = @Username AND PASSWORD = @Password";
+            string imageQuery = "SELECT IMAGE FROM tbl_employee WHERE USERNAME = @Username AND PASSWORD = @Password";
             try
             {
 
