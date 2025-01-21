@@ -27,13 +27,18 @@ namespace WorkNest
                 txtPassword.Attributes["value"] = txtPassword.Text;
                 txtRepassword.Attributes["value"] = txtRepassword.Text;
             }
+            if (!IsPostBack)
+            {
+            bindDept();
+                
+            }
         }
         // check user duplication
         protected void checkUser(object sender, EventArgs e)
         {
             dbConn.dbConnect();
             string nameof = txtUsername.Text.Trim();
-            string queryUser = "SELECT COUNT(username) FROM tbl_user WHERE username ='" + nameof + "'";
+            string queryUser = "SELECT COUNT(USER_NAME) FROM USER_CREDENTIALS WHERE USER_NAME ='" + nameof + "'";
             SqlCommand cmdUser = new SqlCommand(queryUser, dbConn.con);
 
             int count = Convert.ToInt32(cmdUser.ExecuteScalar());
@@ -135,8 +140,7 @@ namespace WorkNest
         {
             //checkUserduplicate = true;
             checkUser(sender, e);
-            string selectedCity = ddlCity.SelectedItem.Text;
-
+           
             try
             {
                 if (string.IsNullOrWhiteSpace(txtName.Text) ||
@@ -189,27 +193,24 @@ namespace WorkNest
                 if (checkUserduplicate && imgSeted)
                 {
 
-                    string query = "INSERT INTO tbl_employee (name, phone, email, gender, city, address, dob, image) " +
-                  "VALUES (@Name, @Phone, @Email, @Gender, @City, @Address, @Dob, @Image)";
+                    string query = "INSERT INTO EMPLOYEE (FULL_NAME, EMAIL,PHONE_NUMBER, HIRE_DATE,IMAGE,DEPARTMENT_ID) " +
+                  "VALUES (@Name, @Email, @Phone,@Hire, @Image,@Department)";
 
                     SqlCommand cmd = new SqlCommand(query, dbConn.con);
                     cmd.Parameters.AddWithValue("@Name", txtName.Text.Trim());
-                    cmd.Parameters.AddWithValue("@Phone", txtPhone.Text.Trim());
                     cmd.Parameters.AddWithValue("@Email", txtEmail.Text.Trim());
-                    cmd.Parameters.AddWithValue("@Gender", rblGender.SelectedItem.Text);
-                    cmd.Parameters.AddWithValue("@City", selectedCity);
-                    cmd.Parameters.AddWithValue("@Address", txtAddress.Text.Trim());
-                    cmd.Parameters.AddWithValue("@Dob", txtDate.Text);
+                    cmd.Parameters.AddWithValue("@Phone", txtPhone.Text.Trim());
+                    cmd.Parameters.AddWithValue("@Hire", txtDate.Text);
                     cmd.Parameters.AddWithValue("@Image", (object)imageBytes ?? DBNull.Value);
-
+                    cmd.Parameters.AddWithValue("@Department", ddlDept.SelectedValue);
                     cmd.ExecuteNonQuery();
 
-                    string query1 = "SELECT empid FROM tbl_employee WHERE email = @Email";
+                    string query1 = "SELECT EMPLOYEE_ID FROM EMPLOYEE WHERE EMAIL = @Email";
                     SqlCommand cmdid = new SqlCommand(query1, dbConn.con);
                     cmdid.Parameters.AddWithValue("@Email", txtEmail.Text.Trim());
                     int empid = Convert.ToInt32(cmdid.ExecuteScalar());
 
-                    string queryUser = "INSERT INTO tbl_user (username, password, empid) VALUES (@Username, @Password, @EmpID)";
+                    string queryUser = "INSERT INTO USER_CREDENTIALS (USER_NAME, PASSWORD, EMPLOYEE_ID) VALUES (@Username, @Password, @EmpID)";
                     SqlCommand cmdUser = new SqlCommand(queryUser, dbConn.con);
                     cmdUser.Parameters.AddWithValue("@Username", txtUsername.Text.Trim());
                     cmdUser.Parameters.AddWithValue("@Password", txtPassword.Text.Trim());
@@ -247,9 +248,7 @@ namespace WorkNest
             txtPassword.Text = string.Empty;
             txtRepassword.Text = string.Empty;
             txtDate.Text = string.Empty;
-            txtAddress.Text = string.Empty;
-            rblGender.ClearSelection();
-            ddlCity.SelectedIndex = 0;
+            
             fuImage.Attributes.Clear();
             txtPassword.Attributes["value"] = string.Empty;
             txtRepassword.Attributes["value"] = string.Empty;
@@ -265,6 +264,20 @@ namespace WorkNest
             lblNumberOrSymbol.Text = "At least one number (0-9) or a symbol";
             lblCase.Text = "Lowercase (a-z) and uppercase (A-Z)";
         }
+        public void bindDept()
+        {
+            dbConn.dbConnect();
+            string query = "SELECT * FROM DEPARTMENT";
+            SqlDataAdapter adpt = new SqlDataAdapter(query, dbConn.con);
+            DataSet ds = new DataSet();
+            adpt.Fill(ds);
+            ddlDept.DataSource = ds;
+            ddlDept.DataTextField = "DEPARTMENT_NAME";
+            ddlDept.DataValueField = "DEPARTMENT_ID";
+            ddlDept.DataBind();
+        }
+
+       
     }
 
 }

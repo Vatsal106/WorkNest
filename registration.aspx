@@ -132,7 +132,7 @@ button:hover {
                 <tr>
                     <td style="text-align: right; padding-right: 15px;">Phone number:</td>
                     <td class="auto-style5">
-                        <asp:TextBox ID="txtPhone" runat="server" TextMode="Number"></asp:TextBox>
+                        <asp:TextBox ID="txtPhone" runat="server" TextMode="Number" ></asp:TextBox>
                     </td>
                 </tr>
                 <tr>
@@ -154,7 +154,7 @@ button:hover {
                     </td>
                 </tr>
                 <tr>
-                    <td style="text-align: right; padding-right: 15px;">Rewrite Parssword:</td>
+                    <td style="text-align: right; padding-right: 15px;">Rewrite Password:</td>
                     <td class="auto-style5">
                         <asp:TextBox ID="txtRepassword" runat="server" TextMode="Password" OnTextChanged="checkBothPass_TextChanged" AutoPostBack="true"></asp:TextBox>
 
@@ -168,41 +168,23 @@ button:hover {
                         <asp:Label ID="lblCase" runat="server" ForeColor="Red" Text="Lowercase (a-z) and uppercase (A-Z)"></asp:Label><br />
                 </tr>
                 <tr>
-                    <td style="text-align: right; padding-right: 15px;">Gender:</td>
-                    <td class="auto-style7">
-                        <asp:RadioButtonList ID="rblGender" runat="server" CellPadding="1" CellSpacing="1" RepeatDirection="Horizontal" TextAlign="Left">
-                            <asp:ListItem>Male</asp:ListItem>
-                            <asp:ListItem>Female</asp:ListItem>
-                        </asp:RadioButtonList>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="text-align: right; padding-right: 15px;">City:</td>
-                    <td class="auto-style5">
-                        <asp:DropDownList ID="ddlCity" runat="server">
-                            <asp:ListItem>-----select-----</asp:ListItem>
-                            <asp:ListItem>surat</asp:ListItem>
-                            <asp:ListItem>tapi</asp:ListItem>
-                            <asp:ListItem>botad</asp:ListItem>
-                        </asp:DropDownList>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="text-align: right; padding-right: 15px;">Date of birth:</td>
+                    <td style="text-align: right; padding-right: 15px;">Date of Hiring:</td>
                     <td class="auto-style5">
                         <asp:TextBox ID="txtDate" runat="server" TextMode="Date"></asp:TextBox>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="text-align: right; padding-right: 15px;">Address:</td>
-                    <td class="auto-style5">
-                        <asp:TextBox ID="txtAddress" runat="server" Height="57px" TextMode="MultiLine"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>
                     <td style="text-align: right; padding-right: 15px;">Image:</td>
                     <td class="auto-style5">
                         <asp:FileUpload ID="fuImage" runat="server" />
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: right; padding-right: 15px;">DEPT:</td>
+                    <td class="auto-style5">
+                        <asp:DropDownList ID="ddlDept" runat="server" AutoPostBack="True">
+                            <asp:ListItem>abc</asp:ListItem>
+                        </asp:DropDownList>
                     </td>
                 </tr>
                 <tr>
