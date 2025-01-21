@@ -183,7 +183,6 @@ button:hover {
                     <td style="text-align: right; padding-right: 15px;">DEPT:</td>
                     <td class="auto-style5">
                         <asp:DropDownList ID="ddlDept" runat="server" AutoPostBack="True">
-                            <asp:ListItem>abc</asp:ListItem>
                         </asp:DropDownList>
                     </td>
                 </tr>
