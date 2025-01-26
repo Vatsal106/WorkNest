@@ -33,6 +33,15 @@ namespace WorkNest
         protected global::System.Web.UI.WebControls.TextBox txtName;
 
         /// <summary>
+        /// lblEname control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblEname;
+
+        /// <summary>
         /// txtPhone control.
         /// </summary>
         /// <remarks>
@@ -42,6 +51,15 @@ namespace WorkNest
         protected global::System.Web.UI.WebControls.TextBox txtPhone;
 
         /// <summary>
+        /// lblEphone control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblEphone;
+
+        /// <summary>
         /// txtEmail control.
         /// </summary>
         /// <remarks>
@@ -49,6 +67,15 @@ namespace WorkNest
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtEmail;
+
+        /// <summary>
+        /// lblEemail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblEemail;
 
         /// <summary>
         /// txtUsername control.
@@ -114,15 +141,6 @@ namespace WorkNest
         protected global::System.Web.UI.WebControls.TextBox txtDate;
 
         /// <summary>
-        /// fuImage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload fuImage;
-
-        /// <summary>
         /// ddlDept control.
         /// </summary>
         /// <remarks>
@@ -130,6 +148,15 @@ namespace WorkNest
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlDept;
+
+        /// <summary>
+        /// fuImage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload fuImage;
 
         /// <summary>
         /// lblError control.
