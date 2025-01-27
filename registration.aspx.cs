@@ -54,85 +54,6 @@ namespace WorkNest
             }
         }
 
-        // check password is valide or not?
-        //private bool ValidatePassword()
-        //{
-        //    string password = txtPassword.Text;
-
-        //    if (password.Length < 8 ||
-        //        !System.Text.RegularExpressions.Regex.IsMatch(password, "[A-Z]") ||
-        //        !System.Text.RegularExpressions.Regex.IsMatch(password, "[a-z]") ||
-        //        !System.Text.RegularExpressions.Regex.IsMatch(password, "[0-9]") ||
-        //        !System.Text.RegularExpressions.Regex.IsMatch(password, "[!@#$%^&*(),.?\"{}|<>]"))
-        //    {
-        //        lblError.Text = "Invalid password. Please make sure it meets the requirements.";
-        //        lblError.ForeColor = Color.Red;
-        //        return false;
-        //    }
-        //    return true;
-        //}
-
-        ////event for password is acording conditon or not,that user can view what is on password and what is not 
-        //protected void PasswordChanged(object sender, EventArgs e)
-        //{
-        //    string password = txtPassword.Text;
-        //    runInsert = true;
-
-        //    if (password.Length >= 8)
-        //    {
-        //        lblLength.ForeColor = Color.Green;
-        //        lblLength.Text = "✓ At least 8 characters";
-        //    }
-        //    else
-        //    {
-        //        lblLength.ForeColor = Color.Red;
-        //        lblLength.Text = "At least 8 characters";
-        //        runInsert = false;
-        //    }
-
-        //    if (System.Text.RegularExpressions.Regex.IsMatch(password, @"[\d!@#$%^&*(),.?""{}|<>]"))
-        //    {
-        //        lblNumberOrSymbol.ForeColor = Color.Green;
-        //        lblNumberOrSymbol.Text = "✓ At least one number (0-9) or a symbol";
-        //    }
-        //    else
-        //    {
-        //        lblNumberOrSymbol.ForeColor = Color.Red;
-        //        lblNumberOrSymbol.Text = "At least one number (0-9) or a symbol";
-        //        runInsert = false;
-        //    }
-
-        //    if (System.Text.RegularExpressions.Regex.IsMatch(password, "[A-Z]") && System.Text.RegularExpressions.Regex.IsMatch(password, "[a-z]"))
-        //    {
-        //        lblCase.ForeColor = Color.Green;
-        //        lblCase.Text = "✓ Lowercase (a-z) and uppercase (A-Z)";
-        //    }
-        //    else
-        //    {
-        //        lblCase.ForeColor = Color.Red;
-        //        lblCase.Text = "Lowercase (a-z) and uppercase (A-Z)";
-        //        runInsert = false;
-        //    }
-        //}
-
-
-        //protected void checkBothPass_TextChanged(object sender, EventArgs e)
-        //{
-        //    if (txtPassword.Text != txtRepassword.Text)
-        //    {
-        //        lblError.Text = "Password does not matched.";
-
-        //        runInsert = false;
-        //    }
-        //    else
-        //    {
-        //        lblError.Text = "";
-        //        runInsert = true;
-        //    }
-
-
-        //}
-
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
             //checkUserduplicate = true;
@@ -140,27 +61,15 @@ namespace WorkNest
 
             try
             {
-                //    if (string.IsNullOrWhiteSpace(txtName.Text) ||
-                //        string.IsNullOrWhiteSpace(txtPhone.Text) ||
-                //        string.IsNullOrWhiteSpace(txtEmail.Text) ||
-                //        string.IsNullOrWhiteSpace(txtUsername.Text))
-                //    {
-                //        lblError.Text = "Please fill all required fields.";
-                //        lblError.ForeColor = Color.Red;
-                //        return;
-                //    }
-
-                //if (!ValidatePassword())
+                //if (string.IsNullOrWhiteSpace(txtName.Text) ||
+                //    string.IsNullOrWhiteSpace(txtPhone.Text) ||
+                //    string.IsNullOrWhiteSpace(txtEmail.Text) ||
+                //    string.IsNullOrWhiteSpace(txtUsername.Text))
                 //{
+                //    lblError.Text = "Please fill all required fields.";
+                //    lblError.ForeColor = Color.Red;
                 //    return;
                 //}
-
-                if (txtPassword.Text != txtRepassword.Text)
-                {
-                    lblError.Text = "Passwords do not match.";
-                    lblError.ForeColor = Color.Red;
-                    return;
-                }
 
                 dbConn.dbConnect();
                 byte[] imageBytes = null;

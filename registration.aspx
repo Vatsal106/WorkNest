@@ -14,8 +14,14 @@
             validate = true;
             var nameInput = document.getElementById('<%= txtName.ClientID %>');
             var phoneInput = document.getElementById('<%= txtPhone.ClientID %>');
-            checkName(nameInput);  
+            var Pass = document.getElementById('<%= txtPassword.ClientID %>');
+            var Repass = document.getElementById('<%= txtRepassword.ClientID %>');
+            checkName(nameInput);
             PhoneSize(phoneInput);
+            validatePassword(Pass);
+
+            matchPass(Repass);
+
             if (validate == true) {
                 return true;
             }
@@ -24,15 +30,51 @@
         function validatePassword(input) {
             const password = input.value;
 
-            
+
             const lblLength = document.getElementById('<%= lblLength.ClientID %>');
             const lblNumberOrSymbol = document.getElementById('<%= lblNumberOrSymbol.ClientID %>');
             const lblCase = document.getElementById('<%= lblCase.ClientID %>');
 
-           
-            lblLength.style.color = password.length >= 8 ? "green" : "red";      
-            lblNumberOrSymbol.style.color = /[0-9!@#$%^&*(),.?":{}|<>]/.test(password) ? "green" : "red";
-            lblCase.style.color = /[a-z]/.test(password) && /[A-Z]/.test(password) ? "green" : "red";
+            validate = true;
+            if (password.length >= 8) {
+                lblLength.style.color = "green";
+
+            } else {
+                lblLength.style.color = "red";
+                validate = false;
+            }
+
+            if (/[0-9!@#$%^&*(),.?":{}|<>]/.test(password)) {
+                lblNumberOrSymbol.style.color = "green";
+
+            } else {
+                lblNumberOrSymbol.style.color = "red";
+                validate = false;
+            }
+
+            if (/[a-z]/.test(password) && /[A-Z]/.test(password)) {
+                lblCase.style.color = "green";
+
+            } else {
+                lblCase.style.color = "red";
+                validate = false;
+            }
+
+        }
+
+        function matchPass(input) {
+            const Repass = input.value;
+            const Pass = document.getElementById('<%= txtPassword.ClientID %>');
+            const lblErepass = document.getElementById('<%= lblErepass.ClientID %>');
+
+            if (Repass !== Pass) {
+                lblErepass.textContent = "Password Not matched!!";
+                lblErepass.style.color = "red";
+                validate = false;
+            } else {
+                lblErepass.textContent = "";
+                validate = true;
+            }
         }
 
         function PhoneSize(input) {
@@ -54,16 +96,16 @@
             const Fname = name.split(' ');
             const lblE = document.getElementById('<%= lblEname.ClientID %>');
 
-             if (Fname.length <2) {
-                 lblE.textContent = "Enter full name!!"
-                 lblE.style.color = "red";
-                 validate = false;
-             }
-             else {
-                 lblE.textContent = "";
-                 validate = true;
-             }
-         }
+            if (Fname.length < 2) {
+                lblE.textContent = "Enter full name!!"
+                lblE.style.color = "red";
+                validate = false;
+            }
+            else {
+                lblE.textContent = "";
+                validate = true;
+            }
+        }
     </script>
 
 
@@ -193,14 +235,14 @@
                     <td class="auto-style3" style="text-align: right; padding-right: 15px;">Name:</td>
                     <td class="auto-style4">
                         <asp:TextBox ID="txtName" runat="server" oninput="checkName(this)"></asp:TextBox>
-                        <asp:Label runat="server" Text="" ID="lblEname" ></asp:Label>
+                        <asp:Label runat="server" Text="" ID="lblEname"></asp:Label>
                     </td>
                 </tr>
                 <tr>
                     <td style="text-align: right; padding-right: 15px;">Phone number:</td>
                     <td class="auto-style5">
                         <asp:TextBox ID="txtPhone" runat="server" TextMode="Number" oninput="PhoneSize(this)"></asp:TextBox>
-                        <asp:Label ID="lblEphone" runat="server"  ForeColor="Red"></asp:Label>
+                        <asp:Label ID="lblEphone" runat="server" ForeColor="Red"></asp:Label>
                     </td>
                 </tr>
                 <tr>
@@ -219,16 +261,14 @@
                 <tr>
                     <td style="text-align: right; padding-right: 15px;" class="auto-style3">Password:</td>
                     <td class="auto-style4">
-                        <%--OnTextChanged="PasswordChanged" AutoPostBack="True"--%>
                         <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" oninput="validatePassword(this)"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>
                     <td style="text-align: right; padding-right: 15px;">Rewrite Password:</td>
                     <td class="auto-style5">
-                        <%--OnTextChanged="checkBothPass_TextChanged" AutoPostBack="true"--%>
-                        <asp:TextBox ID="txtRepassword" runat="server" TextMode="Password"></asp:TextBox>
-
+                        <asp:TextBox ID="txtRepassword" runat="server" TextMode="Password" oninput="matchPass(this)"></asp:TextBox>
+                        <asp:Label runat="server" Text="" ID="lblErepass"></asp:Label>
                     </td>
                 </tr>
                 <tr>
@@ -237,6 +277,7 @@
                         <asp:Label ID="lblLength" runat="server" ForeColor="Red" Text="At least 8 characters"></asp:Label><br />
                         <asp:Label ID="lblNumberOrSymbol" runat="server" ForeColor="Red" Text="At least one number (0-9) or a symbol"></asp:Label><br />
                         <asp:Label ID="lblCase" runat="server" ForeColor="Red" Text="Lowercase (a-z) and uppercase (A-Z)"></asp:Label><br />
+                    </td>
                 </tr>
                 <tr>
                     <td style="text-align: right; padding-right: 15px;">Date of Hiring:</td>

@@ -105,6 +105,15 @@ namespace WorkNest
         protected global::System.Web.UI.WebControls.TextBox txtRepassword;
 
         /// <summary>
+        /// lblErepass control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblErepass;
+
+        /// <summary>
         /// lblLength control.
         /// </summary>
         /// <remarks>
