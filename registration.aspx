@@ -18,10 +18,13 @@
             var Repass = document.getElementById('<%= txtRepassword.ClientID %>');
             var ddl = document.getElementById("<%= ddlDept.ClientID %>").selectedIndex;
             const lblEdept = document.getElementById('<%= lblEdept.ClientID %>');
-
+            var email = document.getElementById('<%= txtEmail.ClientID %>');
+            var user = document.getElementById('<%= txtUsername.ClientID %>');
             if (ddl === 0) {
                 lblEdept.textContent = "select dept!!";
                 isValide = false;
+            } else {
+                lblEdept.textContent = "";
             }
             checkName(nameInput);
             if (validate == false) {
@@ -30,6 +33,20 @@
             PhoneSize(phoneInput);
             if (validate == false) {
                 isValide = false;
+            }
+            if (!isNaN(email.value)) {
+                lblEemail.textContent = "Enter Email Address!!";
+                lblEemail.style.color = "Red";
+                isValide = false;
+            } else {
+                lblEdept.textContent = "";
+            }
+            if (!isNaN(user.value)) {
+                lblEuser.textContent = "Enter UserName !!";
+                lblEuser.style.color = "Red";
+                isValide = false;
+            } else {
+                lblEuser.textContent = "";
             }
             validatePassword(Pass);
             if (validate == false) {
@@ -50,9 +67,12 @@
             const lblCase = document.getElementById('<%= lblCase.ClientID %>');
 
             validate = true;
+
             if (password.length >= 8) {
                 lblLength.style.color = "green";
             } else {
+                lblEpass.textContent = "Enter Password !!"
+                lblEpass.style.color = "Red";
                 lblLength.style.color = "red";
                 validate = false;
             }
@@ -84,13 +104,16 @@
         }
 
         function PhoneSize(input) {
+            validate = true;
             const Phone = input.value;
             const lblE = document.getElementById('<%= lblEphone.ClientID %>');
+
             if (Phone.length != 10) {
-                lblE.textContent = "Enter Valid Number!!";
+                lblE.textContent = "Enter Valid 10 digit Number!!";
                 lblE.style.color = "red";
                 validate = false;
-            } else {
+            }
+            else {
                 lblE.textContent = "";
             }
         }
@@ -100,7 +123,7 @@
             const Fname = name.split(' ');
             const lblE = document.getElementById('<%= lblEname.ClientID %>');
 
-            if (Fname.length < 2) {
+            if (Fname.length < 2 || !isNaN(Fname[1])) {
                 lblE.textContent = "Enter full name!!";
                 lblE.style.color = "red";
                 validate = false;
@@ -108,7 +131,13 @@
                 lblE.textContent = "";
             }
         }
-
+        function selectedDept(input) {
+            const i = input.selectedIndex;
+            if (i !== 0) {
+                lblEdept.textContent = "";
+                
+            }
+        }
     </script>
 
     <style type="text/css">
@@ -146,10 +175,10 @@
             transition: border-color 0.3s;
         }
 
-        .auto-style4:focus, .auto-style5:focus, .auto-style6:focus, .auto-style7:focus {
-            border-color: #007BFF;
-            outline: none;
-        }
+            .auto-style4:focus, .auto-style5:focus, .auto-style6:focus, .auto-style7:focus {
+                border-color: #007BFF;
+                outline: none;
+            }
 
         label {
             color: #555;
@@ -165,9 +194,9 @@
             transition: background-color 0.3s;
         }
 
-        button:hover {
-            background-color: #0056b3;
-        }
+            button:hover {
+                background-color: #0056b3;
+            }
 
         .error-message {
             color: red;
@@ -202,7 +231,7 @@
                 <tr>
                     <td class="auto-style3">Email:</td>
                     <td class="auto-style6">
-                        <asp:TextBox ID="txtEmail" runat="server" TextMode="Email"></asp:TextBox>
+                        <asp:TextBox ID="txtEmail" runat="server" TextMode="Email" OnTextChanged="EmailChange" AutoPostBack="true"></asp:TextBox>
                         <asp:Label runat="server" Text="" ID="lblEemail"></asp:Label>
                         <%--<asp:RequiredFieldValidator ID="rfvEmail" runat="server" ControlToValidate="txtEmail" ErrorMessage="*" ForeColor="Red" Display="Dynamic" />--%>
                     </td>
@@ -211,13 +240,14 @@
                     <td class="auto-style3">User  Name:</td>
                     <td class="auto-style6">
                         <asp:TextBox ID="txtUsername" runat="server" AutoPostBack="True" OnTextChanged="checkUser "></asp:TextBox>
-                        <%--<asp:RequiredFieldValidator ID="rfvUsername" runat="server" ControlToValidate="txtUsername" ErrorMessage="*" ForeColor="Red" Display="Dynamic" />--%>
+                         <asp:Label runat="server" Text="" ID="lblEuser"></asp:Label>
                     </td>
                 </tr>
                 <tr>
                     <td class="auto-style3">Password:</td>
                     <td class="auto-style4">
-                        <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" oninput="validatePassword(this)"></asp:TextBox><br />
+                        <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" oninput="validatePassword(this)" ></asp:TextBox>
+                        <asp:Label runat="server" Text="" ID="lblEpass"></asp:Label>
                     </td>
                 </tr>
                 <tr>
@@ -246,8 +276,8 @@
                 <tr>
                     <td class="auto-style3">DEPT:</td>
                     <td class="auto-style5">
-                        <asp:DropDownList ID="ddlDept" runat="server" ></asp:DropDownList>
-                         <asp:Label runat="server" Text="" ID="lblEdept" ForeColor="Red"></asp:Label>
+                        <asp:DropDownList ID="ddlDept" runat="server" onchange="selectedDept(this)"></asp:DropDownList>
+                        <asp:Label runat="server" Text="" ID="lblEdept" ForeColor="Red"></asp:Label>
                         <%--<asp:RequiredFieldValidator ID="rfvDept" runat="server" ControlToValidate="ddlDept" InitialValue="" ErrorMessage="*" ForeColor="Red" Display="Dynamic" />--%>
                     </td>
                 </tr>

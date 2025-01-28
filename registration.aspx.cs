@@ -11,7 +11,7 @@ namespace WorkNest
     public partial class registration : System.Web.UI.Page
     {
         dbConnection dbConn = new dbConnection();
-        Boolean runInsert = false;
+        Boolean checkEmailduplicate = false;
         Boolean checkUserduplicate = false;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -22,6 +22,7 @@ namespace WorkNest
             {
                 txtPassword.Attributes["value"] = txtPassword.Text;
                 txtRepassword.Attributes["value"] = txtRepassword.Text;
+                lblEphone.Attributes["Text"] = lblEphone.Text;
 
             }
             if (!IsPostBack)
@@ -42,14 +43,14 @@ namespace WorkNest
             dbConn.con.Close();
             if (count > 0)
             {
-                lblError.Text = "This username is already taken. Please choose another.";
-                lblError.ForeColor = Color.Red;
+                lblEuser.Text = "This username is already taken.";
+                lblEuser.ForeColor = Color.Red;
                 checkUserduplicate = false;
 
             }
             else
             {
-                lblError.Text = "";
+                lblEuser.Text = "";
                 checkUserduplicate = true;
             }
         }
@@ -62,6 +63,7 @@ namespace WorkNest
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
             //checkUserduplicate = true;
+            EmailChange(sender, e);
             checkUser(sender, e);
             Lable();
             try
@@ -101,7 +103,7 @@ namespace WorkNest
                     }
                 }
 
-                if (checkUserduplicate && imgSeted)
+                if (checkUserduplicate && imgSeted && checkEmailduplicate)
                 {
 
                     string query = "INSERT INTO EMPLOYEE (FULL_NAME, EMAIL,PHONE_NUMBER, HIRE_DATE,IMAGE,DEPARTMENT_ID) " +
@@ -135,6 +137,12 @@ namespace WorkNest
                 else if (!imgSeted)
                 {
                     lblError.Text = "Please Select Image!!";
+                    lblError.ForeColor = Color.Red;
+                }
+                else
+                {
+                    lblError.Text = "somthing went wrong!!";
+                    lblError.ForeColor = Color.Red;
                 }
 
             }
@@ -189,7 +197,28 @@ namespace WorkNest
             ddlDept.Items.Insert(0, "---select---");
         }
 
+        protected void EmailChange(object sender, EventArgs e)
+        {
+            dbConn.dbConnect();
+            string emaail = txtEmail.Text.Trim();
+            string queryEmail = "SELECT COUNT(*) FROM EMPLOYEE WHERE EMAIL ='" + emaail + "'";
+            SqlCommand cmdEmail = new SqlCommand(queryEmail, dbConn.con);
 
+            int count = Convert.ToInt32(cmdEmail.ExecuteScalar());
+            dbConn.con.Close();
+            if (count > 0)
+            {
+                lblEemail.Text = "This Email Address is already taken!!";
+                lblEemail.ForeColor = Color.Red;
+                checkEmailduplicate = false;
+
+            }
+            else
+            {
+                lblEemail.Text = "";
+                checkEmailduplicate = true;
+            }
+        }
     }
 
 }
