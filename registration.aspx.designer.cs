@@ -15,15 +15,6 @@ namespace WorkNest
     {
 
         /// <summary>
-        /// regestration control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm regestration;
-
-        /// <summary>
         /// txtName control.
         /// </summary>
         /// <remarks>
@@ -96,24 +87,6 @@ namespace WorkNest
         protected global::System.Web.UI.WebControls.TextBox txtPassword;
 
         /// <summary>
-        /// txtRepassword control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtRepassword;
-
-        /// <summary>
-        /// lblErepass control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblErepass;
-
-        /// <summary>
         /// lblLength control.
         /// </summary>
         /// <remarks>
@@ -141,6 +114,24 @@ namespace WorkNest
         protected global::System.Web.UI.WebControls.Label lblCase;
 
         /// <summary>
+        /// txtRepassword control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtRepassword;
+
+        /// <summary>
+        /// lblErepass control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblErepass;
+
+        /// <summary>
         /// txtDate control.
         /// </summary>
         /// <remarks>
@@ -157,6 +148,15 @@ namespace WorkNest
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlDept;
+
+        /// <summary>
+        /// lblEdept control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblEdept;
 
         /// <summary>
         /// fuImage control.

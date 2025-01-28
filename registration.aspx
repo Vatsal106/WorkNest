@@ -4,33 +4,47 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-
-
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Registration</title>
     <script type="text/javascript">
         let validate = true;
+
         function fullFormvalidate() {
             validate = true;
+            isValide = true;
             var nameInput = document.getElementById('<%= txtName.ClientID %>');
             var phoneInput = document.getElementById('<%= txtPhone.ClientID %>');
             var Pass = document.getElementById('<%= txtPassword.ClientID %>');
             var Repass = document.getElementById('<%= txtRepassword.ClientID %>');
-            checkName(nameInput);
-            PhoneSize(phoneInput);
-            validatePassword(Pass);
+            var ddl = document.getElementById("<%= ddlDept.ClientID %>").selectedIndex;
+            const lblEdept = document.getElementById('<%= lblEdept.ClientID %>');
 
-            matchPass(Repass);
-
-            if (validate == true) {
-                return true;
+            if (ddl === 0) {
+                lblEdept.textContent = "select dept!!";
+                isValide = false;
             }
-            return false;
+            checkName(nameInput);
+            if (validate == false) {
+                isValide = false;
+            }
+            PhoneSize(phoneInput);
+            if (validate == false) {
+                isValide = false;
+            }
+            validatePassword(Pass);
+            if (validate == false) {
+                isValide = false;
+            }
+            matchPass(Pass, Repass);
+            if (validate == false) {
+                isValide = false;
+            }
+
+            return isValide;
         }
+
         function validatePassword(input) {
             const password = input.value;
-
-
             const lblLength = document.getElementById('<%= lblLength.ClientID %>');
             const lblNumberOrSymbol = document.getElementById('<%= lblNumberOrSymbol.ClientID %>');
             const lblCase = document.getElementById('<%= lblCase.ClientID %>');
@@ -38,7 +52,6 @@
             validate = true;
             if (password.length >= 8) {
                 lblLength.style.color = "green";
-
             } else {
                 lblLength.style.color = "red";
                 validate = false;
@@ -46,7 +59,6 @@
 
             if (/[0-9!@#$%^&*(),.?":{}|<>]/.test(password)) {
                 lblNumberOrSymbol.style.color = "green";
-
             } else {
                 lblNumberOrSymbol.style.color = "red";
                 validate = false;
@@ -54,26 +66,20 @@
 
             if (/[a-z]/.test(password) && /[A-Z]/.test(password)) {
                 lblCase.style.color = "green";
-
             } else {
                 lblCase.style.color = "red";
                 validate = false;
             }
-
         }
 
-        function matchPass(input) {
-            const Repass = input.value;
-            const Pass = document.getElementById('<%= txtPassword.ClientID %>');
+        function matchPass(passwordInput, repasswordInput) {
             const lblErepass = document.getElementById('<%= lblErepass.ClientID %>');
-
-            if (Repass !== Pass) {
-                lblErepass.textContent = "Password Not matched!!";
+            if (passwordInput.value !== repasswordInput.value) {
+                lblErepass.textContent = "Passwords do not match.";
                 lblErepass.style.color = "red";
                 validate = false;
             } else {
                 lblErepass.textContent = "";
-                validate = true;
             }
         }
 
@@ -81,13 +87,11 @@
             const Phone = input.value;
             const lblE = document.getElementById('<%= lblEphone.ClientID %>');
             if (Phone.length != 10) {
-                lblE.textContent = "Enter Valide Number!!"
+                lblE.textContent = "Enter Valid Number!!";
                 lblE.style.color = "red";
                 validate = false;
-            }
-            else {
+            } else {
                 lblE.textContent = "";
-                validate = true;
             }
         }
 
@@ -97,17 +101,15 @@
             const lblE = document.getElementById('<%= lblEname.ClientID %>');
 
             if (Fname.length < 2) {
-                lblE.textContent = "Enter full name!!"
+                lblE.textContent = "Enter full name!!";
                 lblE.style.color = "red";
                 validate = false;
-            }
-            else {
+            } else {
                 lblE.textContent = "";
-                validate = true;
             }
         }
-    </script>
 
+    </script>
 
     <style type="text/css">
         body {
@@ -144,21 +146,13 @@
             transition: border-color 0.3s;
         }
 
-            .auto-style4:focus, .auto-style5:focus, .auto-style6:focus, .auto-style7:focus {
-                border-color: #007BFF;
-                outline: none;
-            }
+        .auto-style4:focus, .auto-style5:focus, .auto-style6:focus, .auto-style7:focus {
+            border-color: #007BFF;
+            outline: none;
+        }
 
         label {
             color: #555;
-        }
-
-        .valid {
-            color: green;
-        }
-
-        .invalid {
-            color: red;
         }
 
         button {
@@ -171,134 +165,99 @@
             transition: background-color 0.3s;
         }
 
-            button:hover {
-                background-color: #0056b3;
-            }
+        button:hover {
+            background-color: #0056b3;
+        }
 
         .error-message {
             color: red;
             font-weight: bold;
             text-align: center;
         }
-
-        .auto-style1 {
-            width: 100%;
-            border: 1px solid #000000;
-            background-color: #C0C0C0;
-        }
-
-        .auto-style2 {
-            height: 26px;
-        }
-
-        .auto-style3 {
-            height: 29px;
-        }
-
-        .valid {
-            color: green;
-        }
-
-        .invalid {
-            color: red;
-        }
-
-        .auto-style4 {
-            height: 29px;
-            width: 356px;
-        }
-
-        .auto-style5 {
-            width: 356px;
-        }
-
-        .auto-style6 {
-            height: 26px;
-            width: 356px;
-        }
-
-        .auto-style7 {
-            float: left;
-            width: 356px;
-        }
     </style>
 </head>
 <body>
-    <form id="regestration" runat="server">
+    <form id="registration" runat="server">
         <div>
-
             <table align="center" class="auto-style1" style="width: 50%">
                 <tr>
-                    <td colspan="2" rowspan="1" style="text-align: center; font-size: xx-large;">Registration Form&nbsp;</td>
+                    <td colspan="2" style="text-align: center; font-size: xx-large;">Registration Form&nbsp;</td>
                 </tr>
                 <tr>
-                    <td class="auto-style3" style="text-align: right; padding-right: 15px;">Name:</td>
+                    <td class="auto-style3">Name:</td>
                     <td class="auto-style4">
                         <asp:TextBox ID="txtName" runat="server" oninput="checkName(this)"></asp:TextBox>
                         <asp:Label runat="server" Text="" ID="lblEname"></asp:Label>
+                        <%--<asp:RequiredFieldValidator ID="rfvName" runat="server" ControlToValidate="txtName" ErrorMessage="*" ForeColor="Red" Display="Dynamic" />--%>
                     </td>
                 </tr>
                 <tr>
-                    <td style="text-align: right; padding-right: 15px;">Phone number:</td>
+                    <td class="auto-style3">Phone number:</td>
                     <td class="auto-style5">
                         <asp:TextBox ID="txtPhone" runat="server" TextMode="Number" oninput="PhoneSize(this)"></asp:TextBox>
                         <asp:Label ID="lblEphone" runat="server" ForeColor="Red"></asp:Label>
+                        <%--<asp:RequiredFieldValidator ID="rfvPhone" runat="server" ControlToValidate="txtPhone" ErrorMessage="*" ForeColor="Red" Display="Dynamic" />--%>
                     </td>
                 </tr>
                 <tr>
-                    <td class="auto-style2" style="text-align: right; padding-right: 15px;">Email:</td>
+                    <td class="auto-style3">Email:</td>
                     <td class="auto-style6">
                         <asp:TextBox ID="txtEmail" runat="server" TextMode="Email"></asp:TextBox>
                         <asp:Label runat="server" Text="" ID="lblEemail"></asp:Label>
+                        <%--<asp:RequiredFieldValidator ID="rfvEmail" runat="server" ControlToValidate="txtEmail" ErrorMessage="*" ForeColor="Red" Display="Dynamic" />--%>
                     </td>
                 </tr>
                 <tr>
-                    <td class="auto-style2" style="text-align: right; padding-right: 15px;">User Name:</td>
+                    <td class="auto-style3">User  Name:</td>
                     <td class="auto-style6">
-                        <asp:TextBox ID="txtUsername" runat="server" AutoPostBack="True" OnTextChanged="checkUser"></asp:TextBox>
+                        <asp:TextBox ID="txtUsername" runat="server" AutoPostBack="True" OnTextChanged="checkUser "></asp:TextBox>
+                        <%--<asp:RequiredFieldValidator ID="rfvUsername" runat="server" ControlToValidate="txtUsername" ErrorMessage="*" ForeColor="Red" Display="Dynamic" />--%>
                     </td>
                 </tr>
                 <tr>
-                    <td style="text-align: right; padding-right: 15px;" class="auto-style3">Password:</td>
+                    <td class="auto-style3">Password:</td>
                     <td class="auto-style4">
-                        <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" oninput="validatePassword(this)"></asp:TextBox>
+                        <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" oninput="validatePassword(this)"></asp:TextBox><br />
                     </td>
                 </tr>
                 <tr>
-                    <td style="text-align: right; padding-right: 15px;">Rewrite Password:</td>
-                    <td class="auto-style5">
-                        <asp:TextBox ID="txtRepassword" runat="server" TextMode="Password" oninput="matchPass(this)"></asp:TextBox>
-                        <asp:Label runat="server" Text="" ID="lblErepass"></asp:Label>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="text-align: right; padding-right: 15px;">&nbsp;</td>
-                    <td class="auto-style5">
+                    <td></td>
+                    <td class="auto-style4">
                         <asp:Label ID="lblLength" runat="server" ForeColor="Red" Text="At least 8 characters"></asp:Label><br />
                         <asp:Label ID="lblNumberOrSymbol" runat="server" ForeColor="Red" Text="At least one number (0-9) or a symbol"></asp:Label><br />
                         <asp:Label ID="lblCase" runat="server" ForeColor="Red" Text="Lowercase (a-z) and uppercase (A-Z)"></asp:Label><br />
                     </td>
                 </tr>
                 <tr>
-                    <td style="text-align: right; padding-right: 15px;">Date of Hiring:</td>
+                    <td class="auto-style3">Rewrite Password:</td>
+                    <td class="auto-style5">
+                        <asp:TextBox ID="txtRepassword" runat="server" TextMode="Password" oninput="matchPass(txtPassword, this)"></asp:TextBox>
+                        <asp:Label runat="server" Text="" ID="lblErepass"></asp:Label>
+                        <%--<asp:CompareValidator runat="server" ErrorMessage="Password does not match" ForeColor="Red" ControlToValidate="txtPassword"></asp:CompareValidator>--%>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="auto-style3">Date of Hiring:</td>
                     <td class="auto-style5">
                         <asp:TextBox ID="txtDate" runat="server" TextMode="Date"></asp:TextBox>
+                        <%--<asp:RequiredFieldValidator ID="rfvDate" runat="server" ControlToValidate="txtDate" ErrorMessage="*" ForeColor="Red" Display="Dynamic" />--%>
                     </td>
                 </tr>
                 <tr>
-                    <td style="text-align: right; padding-right: 15px;">DEPT:</td>
+                    <td class="auto-style3">DEPT:</td>
                     <td class="auto-style5">
-                        <asp:DropDownList ID="ddlDept" runat="server">
-                        </asp:DropDownList>
+                        <asp:DropDownList ID="ddlDept" runat="server" ></asp:DropDownList>
+                         <asp:Label runat="server" Text="" ID="lblEdept" ForeColor="Red"></asp:Label>
+                        <%--<asp:RequiredFieldValidator ID="rfvDept" runat="server" ControlToValidate="ddlDept" InitialValue="" ErrorMessage="*" ForeColor="Red" Display="Dynamic" />--%>
                     </td>
                 </tr>
                 <tr>
-                    <td style="text-align: right; padding-right: 15px;">Image:</td>
+                    <td class="auto-style3">Image:</td>
                     <td class="auto-style5">
                         <asp:FileUpload ID="fuImage" runat="server" />
+                        <%--<asp:RequiredFieldValidator ID="rfvImage" runat="server" ControlToValidate="fuImage" ErrorMessage="*" ForeColor="Red" Display="Dynamic" />--%>
                     </td>
                 </tr>
-
                 <tr>
                     <td colspan="2" style="text-align: center; padding-right: 10px;">
                         <br />
@@ -309,7 +268,6 @@
                     </td>
                 </tr>
             </table>
-
         </div>
         <asp:Label ID="lblCon" runat="server"></asp:Label>
     </form>

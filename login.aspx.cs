@@ -23,7 +23,7 @@ namespace WorkNest
             dbConnection dbConn = new dbConnection();
             dbConn.dbConnect();
             string loginQuery = "SELECT COUNT(1) FROM USER_CREDENTIALS WHERE USER_NAME = @Username AND PASSWORD = @Password";
-            string imageQuery = "SELECT IMAGE FROM EMPLOYEES WHERE USER_NAME = @Username AND PASSWORD = @Password";
+            //string imageQuery = "SELECT IMAGE FROM EMPLOYEES WHERE USER_NAME = @Username AND PASSWORD = @Password";
             try
             {
 
@@ -32,9 +32,7 @@ namespace WorkNest
                 SqlCommand loginCmd = new SqlCommand(loginQuery, dbConn.con);
                 loginCmd.Parameters.AddWithValue("@Username", username);
                 loginCmd.Parameters.AddWithValue("@Password", password);
-
                 int count = (int)loginCmd.ExecuteScalar();
-
                 if (count == 1)
                 {
                     lblMessage.Text = "Login successful!";
@@ -61,6 +59,7 @@ namespace WorkNest
                 {
                     lblMessage.Text = "Invalid Username or Password!";
                     lblMessage.ForeColor = System.Drawing.Color.Red;
+
                 }
             }
             catch (Exception ex)

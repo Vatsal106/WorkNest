@@ -53,12 +53,17 @@ namespace WorkNest
                 checkUserduplicate = true;
             }
         }
-
+        void Lable()
+        {
+            lblLength.ForeColor = Color.Green;
+            lblCase.ForeColor = Color.Green;
+            lblNumberOrSymbol.ForeColor = Color.Green;
+        }
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
             //checkUserduplicate = true;
             checkUser(sender, e);
-
+            Lable();
             try
             {
                 //if (string.IsNullOrWhiteSpace(txtName.Text) ||
@@ -181,6 +186,7 @@ namespace WorkNest
             ddlDept.DataTextField = "DEPARTMENT_NAME";
             ddlDept.DataValueField = "DEPARTMENT_ID";
             ddlDept.DataBind();
+            ddlDept.Items.Insert(0, "---select---");
         }
 
 

@@ -22,12 +22,13 @@
                     <asp:TextBox ID="txtPassword" runat="server" CssClass="input" TextMode="Password" Placeholder="Password"></asp:TextBox>
                 </div>
                 <div>
-                    <asp:Button ID="btnLogin" runat="server" Text="Sign In" CssClass="button" />
+                    <asp:Button ID="btnLogin" runat="server" Text="Sign In" CssClass="button" OnClick="btnLogin_Click" />
                 </div>
                 <p>
                     Don't have an account? 
                     <asp:HyperLink ID="hplSignup" runat="server" NavigateUrl="~/registration.aspx">Sign Up</asp:HyperLink>
                 </p>
+                <asp:Label runat="server" ID="lblMessage" ></asp:Label>
             </form>
         </div>
     </div>
