@@ -26,6 +26,10 @@
             } else {
                 lblEdept.textContent = "";
             }
+            isEmailEmpty(email);
+             if (validate == false) {
+                isValide = false;
+            }
             checkName(nameInput);
             if (validate == false) {
                 isValide = false;
@@ -33,20 +37,10 @@
             PhoneSize(phoneInput);
             if (validate == false) {
                 isValide = false;
-            }
-            if (!isNaN(email.value)) {
-                lblEemail.textContent = "Enter Email Address!!";
-                lblEemail.style.color = "Red";
-                isValide = false;
-            } else {
-                lblEdept.textContent = "";
-            }
-            if (!isNaN(user.value)) {
-                lblEuser.textContent = "Enter UserName !!";
-                lblEuser.style.color = "Red";
-                isValide = false;
-            } else {
-                lblEuser.textContent = "";
+            }          
+            isUsernameEmpty(user);
+            if (validate == false) {
+                isValide = false;   
             }
             validatePassword(Pass);
             if (validate == false) {
@@ -59,7 +53,31 @@
 
             return isValide;
         }
+        function isEmailEmpty(input){
+           const email=input.value;
+           const lblEemail = document.getElementById('<%= lblEemail.ClientID %>');
+            if (email.trim().length===0) {
+                lblEemail.textContent = "Enter Email Address!!";
+                lblEemail.style.color = "Red";
+                validate = false;
+             } else {
+                lblEemail.textContent = "";
+                validate=true;
+             }
+        }
+        function isUsernameEmpty(input){
+            const user=input.value;
+            const lblEuser = document.getElementById('<%= lblEuser.ClientID %>');
 
+            if (user.trim().length===0) {
+                lblEuser.textContent = "Enter UserName !!";
+                 lblEuser.style.color = "Red";
+                validate = false;
+            } else {
+                lblEuser.textContent = "";
+                validate=true; 
+            }
+        }
         function validatePassword(input) {
             const password = input.value;
             const lblLength = document.getElementById('<%= lblLength.ClientID %>');
@@ -67,10 +85,14 @@
             const lblCase = document.getElementById('<%= lblCase.ClientID %>');
 
             validate = true;
-
+            
             if (password.length >= 8) {
                 lblLength.style.color = "green";
-            } else {
+            }
+            else if (password.length!=0){
+                 lblEpass.textContent ="";
+                }
+                else {
                 lblEpass.textContent = "Enter Password !!"
                 lblEpass.style.color = "Red";
                 lblLength.style.color = "red";
@@ -135,12 +157,12 @@
             const i = input.selectedIndex;
             if (i !== 0) {
                 lblEdept.textContent = "";
-                
+
             }
         }
     </script>
 
-    <style type="text/css">
+     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
@@ -148,64 +170,81 @@
             padding: 20px;
         }
 
-        .auto-style1 {
-            width: 100%;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            background-color: #ffffff;
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
             padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
-        h1 {
+        h2 {
             text-align: center;
             color: #333;
         }
 
-        .auto-style3 {
-            text-align: right;
-            padding-right: 15px;
-            font-weight: bold;
+        .form-group {
+            margin-bottom: 15px;
         }
 
-        .auto-style4, .auto-style5, .auto-style6, .auto-style7 {
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="number"],
+        input[type="date"],
+        input[type="password"],
+        select {
             width: 100%;
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 4px;
-            transition: border-color 0.3s;
+            box-sizing: border-box;
         }
-
-            .auto-style4:focus, .auto-style5:focus, .auto-style6:focus, .auto-style7:focus {
-                border-color: #007BFF;
-                outline: none;
-            }
-
-        label {
-            color: #555;
-        }
-
-        button {
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-            button:hover {
-                background-color: #0056b3;
-            }
 
         .error-message {
             color: red;
-            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        .auto-style4 {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .form-group button {
+            background-color: #5cb85c;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 48%;
+            margin: 1%;
+        }
+
+        .form-group button:hover {
+            background-color: #4cae4c;
+        }
+
+        .form-group #btnReset {
+            background-color: #d9534f;
+        }
+
+        .form-group #btnReset:hover {
+            background-color: #c9302c;
+        }
+
+        .form-group {
             text-align: center;
         }
     </style>
-</head>
-<body>
+</head><body>
     <form id="registration" runat="server">
         <div>
             <table align="center" class="auto-style1" style="width: 50%">
@@ -217,7 +256,6 @@
                     <td class="auto-style4">
                         <asp:TextBox ID="txtName" runat="server" oninput="checkName(this)"></asp:TextBox>
                         <asp:Label runat="server" Text="" ID="lblEname"></asp:Label>
-                        <%--<asp:RequiredFieldValidator ID="rfvName" runat="server" ControlToValidate="txtName" ErrorMessage="*" ForeColor="Red" Display="Dynamic" />--%>
                     </td>
                 </tr>
                 <tr>
@@ -225,7 +263,6 @@
                     <td class="auto-style5">
                         <asp:TextBox ID="txtPhone" runat="server" TextMode="Number" oninput="PhoneSize(this)"></asp:TextBox>
                         <asp:Label ID="lblEphone" runat="server" ForeColor="Red"></asp:Label>
-                        <%--<asp:RequiredFieldValidator ID="rfvPhone" runat="server" ControlToValidate="txtPhone" ErrorMessage="*" ForeColor="Red" Display="Dynamic" />--%>
                     </td>
                 </tr>
                 <tr>
@@ -233,7 +270,6 @@
                     <td class="auto-style6">
                         <asp:TextBox ID="txtEmail" runat="server" TextMode="Email" OnTextChanged="EmailChange" AutoPostBack="true"></asp:TextBox>
                         <asp:Label runat="server" Text="" ID="lblEemail"></asp:Label>
-                        <%--<asp:RequiredFieldValidator ID="rfvEmail" runat="server" ControlToValidate="txtEmail" ErrorMessage="*" ForeColor="Red" Display="Dynamic" />--%>
                     </td>
                 </tr>
                 <tr>
@@ -263,14 +299,12 @@
                     <td class="auto-style5">
                         <asp:TextBox ID="txtRepassword" runat="server" TextMode="Password" oninput="matchPass(txtPassword, this)"></asp:TextBox>
                         <asp:Label runat="server" Text="" ID="lblErepass"></asp:Label>
-                        <%--<asp:CompareValidator runat="server" ErrorMessage="Password does not match" ForeColor="Red" ControlToValidate="txtPassword"></asp:CompareValidator>--%>
                     </td>
                 </tr>
                 <tr>
                     <td class="auto-style3">Date of Hiring:</td>
                     <td class="auto-style5">
                         <asp:TextBox ID="txtDate" runat="server" TextMode="Date"></asp:TextBox>
-                        <%--<asp:RequiredFieldValidator ID="rfvDate" runat="server" ControlToValidate="txtDate" ErrorMessage="*" ForeColor="Red" Display="Dynamic" />--%>
                     </td>
                 </tr>
                 <tr>
@@ -278,14 +312,12 @@
                     <td class="auto-style5">
                         <asp:DropDownList ID="ddlDept" runat="server" onchange="selectedDept(this)"></asp:DropDownList>
                         <asp:Label runat="server" Text="" ID="lblEdept" ForeColor="Red"></asp:Label>
-                        <%--<asp:RequiredFieldValidator ID="rfvDept" runat="server" ControlToValidate="ddlDept" InitialValue="" ErrorMessage="*" ForeColor="Red" Display="Dynamic" />--%>
                     </td>
                 </tr>
                 <tr>
                     <td class="auto-style3">Image:</td>
                     <td class="auto-style5">
                         <asp:FileUpload ID="fuImage" runat="server" />
-                        <%--<asp:RequiredFieldValidator ID="rfvImage" runat="server" ControlToValidate="fuImage" ErrorMessage="*" ForeColor="Red" Display="Dynamic" />--%>
                     </td>
                 </tr>
                 <tr>
