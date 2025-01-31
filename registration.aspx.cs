@@ -177,9 +177,7 @@ namespace WorkNest
             lblError.Text = string.Empty;
             //lblCon.Text = string.Empty;
 
-            lblLength.ForeColor = System.Drawing.Color.Red;
-            lblNumberOrSymbol.ForeColor = System.Drawing.Color.Red;
-            lblCase.ForeColor = System.Drawing.Color.Red;
+
 
             lblLength.Text = "At least 8 characters";
             lblNumberOrSymbol.Text = "At least one number (0-9) or a symbol";
