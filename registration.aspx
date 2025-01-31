@@ -4,7 +4,9 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <title>Registration</title>
     <script type="text/javascript">
         let validate = true;
@@ -167,78 +169,102 @@
             }
         }
     </script>
+      <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .form-container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .image-container img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+    </style>
 </head>
 <body>
-    <form id="registration" runat="server">
-        <div style="text-align: center; diaplay:flax;">
-            <%--<asp:Label ID="lblCon" runat="server"></asp:Label>--%>
-            <div style="font-size: xx-large;">Registration Form&nbsp;</div>
-
-            <div>
-                <asp:Label runat="server" Text="Name:" AssociatedControlID="txtName" />
-                <asp:TextBox ID="txtName" runat="server" oninput="checkName(this)"></asp:TextBox>
-                <asp:Label runat="server" Text="" ID="lblEname"></asp:Label>
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6 image-container">
+          <asp:Image ID="Image1" runat="server" ImageUrl="~/loginimage.png"/>
+                
             </div>
+            <div class="col-md-6 form-container">
+                <h2 class="text-center mb-4">Registration Form</h2>
+                <form id="registration" runat="server" class="needs-validation" novalidate>
+                    <div class="mb-3">
+                        <asp:Label runat="server" Text="Name:" AssociatedControlID="txtName" CssClass="form-label" />
+                        <asp:TextBox ID="txtName" runat="server" CssClass="form-control" oninput="checkName(this)"></asp:TextBox>
+                        <asp:Label runat="server" Text="" ID="lblEname" CssClass="text-danger"></asp:Label>
+                    </div>
 
-            <div>
-                <asp:Label runat="server" Text="Phone number:" AssociatedControlID="txtPhone" />
-                <asp:TextBox ID="txtPhone" runat="server" TextMode="Number" oninput="PhoneSize(this)"></asp:TextBox>
-                <asp:Label ID="lblEphone" runat="server" ForeColor="Red"></asp:Label>
-            </div>
+                    <div class="mb-3">
+                        <asp:Label runat="server" Text="Phone number:" AssociatedControlID="txtPhone" CssClass="form-label" />
+                        <asp:TextBox ID="txtPhone" runat="server" TextMode="Number" CssClass="form-control" oninput="PhoneSize(this)"></asp:TextBox>
+                        <asp:Label ID="lblEphone" runat="server" CssClass="text-danger"></asp:Label>
+                    </div>
 
-            <div>
-                <asp:Label runat="server" Text="Email:" AssociatedControlID="txtEmail" />
-                <asp:TextBox ID="txtEmail" runat="server" TextMode="Email" OnTextChanged="EmailChange" AutoPostBack="true"></asp:TextBox>
-                <asp:Label runat="server" Text="" ID="lblEemail"></asp:Label>
-            </div>
+                    <div class="mb-3">
+                        <asp:Label runat="server" Text="Email:" AssociatedControlID="txtEmail" CssClass="form-label" />
+                        <asp:TextBox ID="txtEmail" runat="server" TextMode="Email" CssClass="form-control" OnTextChanged="EmailChange" AutoPostBack="true"></asp:TextBox>
+                        <asp:Label runat="server" Text="" ID="lblEemail" CssClass="text-danger"></asp:Label>
+                    </div>
 
-            <div>
-                <asp:Label runat="server" Text="User Name:" AssociatedControlID="txtUsername" />
-                <asp:TextBox ID="txtUsername" runat="server" AutoPostBack="True" OnTextChanged="checkUser"></asp:TextBox>
-                <asp:Label runat="server" Text="" ID="lblEuser"></asp:Label>
-            </div>
+                    <div class="mb-3">
+                        <asp:Label runat="server" Text="User Name:" AssociatedControlID="txtUsername" CssClass="form-label" />
+                        <asp:TextBox ID="txtUsername" runat="server" CssClass="form-control" AutoPostBack="True" OnTextChanged="checkUser"></asp:TextBox>
+                        <asp:Label runat="server" Text="" ID="lblEuser" CssClass="text-danger"></asp:Label>
+                    </div>
 
-            <div>
-                <asp:Label runat="server" Text="Password:" AssociatedControlID="txtPassword" />
-                <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" oninput="validatePassword(this)" Enabled="false"></asp:TextBox>
-                <asp:Label runat="server" Text="" ID="lblEpass"></asp:Label>
-            </div>
+                    <div class="mb-3">
+                        <asp:Label runat="server" Text="Password:" AssociatedControlID="txtPassword" CssClass="form-label" />
+                        <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" CssClass="form-control" oninput="validatePassword(this)" Enabled="false"></asp:TextBox>
+                        <asp:Label runat="server" Text="" ID="lblEpass" CssClass="text-danger"></asp:Label>
+                    </div>
 
-            <div>
-                <asp:Label ID="lblLength" runat="server" ForeColor="Red" Text="At least 8 characters"></asp:Label><br />
-                <asp:Label ID="lblNumberOrSymbol" runat="server" ForeColor="Red" Text="At least one number (0-9) or a symbol"></asp:Label><br />
-                <asp:Label ID="lblCase" runat="server" ForeColor="Red" Text="Lowercase (a-z) and uppercase (A-Z)"></asp:Label><br />
-            </div>
+                    <div class="mb-3">
+                        <asp:Label ID="lblLength" runat="server"  Text="At least 8 characters"></asp:Label><br />
+                        <asp:Label ID="lblNumberOrSymbol" runat="server"  Text="At least one number (0-9) or a symbol"></asp:Label><br />
+                        <asp:Label ID="lblCase" runat="server"  Text="Lowercase (a-z) and uppercase (A-Z)"></asp:Label>
+                    </div>
 
-            <div>
-                <asp:Label runat="server" Text="Rewrite Password:" AssociatedControlID="txtRepassword" />
-                <asp:TextBox ID="txtRepassword" runat="server" TextMode="Password" oninput="matchPass(txtPassword, this)" Disabled="true"></asp:TextBox>
-                <asp:Label runat="server" Text="" ID="lblErepass"></asp:Label>
-            </div>
+                    <div class="mb-3">
+                        <asp:Label runat="server" Text="Rewrite Password:" AssociatedControlID="txtRepassword" CssClass="form-label" />
+                        <asp:TextBox ID="txtRepassword" runat="server" TextMode="Password" CssClass="form-control" oninput="matchPass(txtPassword, this)" Disabled="true"></asp:TextBox>
+                        <asp:Label runat="server" Text="" ID="lblErepass" CssClass="text-danger"></asp:Label>
+                    </div>
 
-            <div>
-                <asp:Label runat="server" Text="Date of Hiring:" AssociatedControlID="txtDate" />
-                <asp:TextBox ID="txtDate" runat="server" TextMode="Date"></asp:TextBox>
-            </div>
+                    <div class="mb-3">
+                        <asp:Label runat="server" Text="Date of Hiring:" AssociatedControlID="txtDate" CssClass="form-label" />
+                        <asp:TextBox ID="txtDate" runat="server" TextMode="Date" CssClass="form-control"></asp:TextBox>
+                    </div>
 
-            <div>
-                <asp:Label runat="server" Text="DEPT:" AssociatedControlID="ddlDept" />
-                <asp:DropDownList ID="ddlDept" runat="server" onchange="selectedDept(this)"></asp:DropDownList>
-                <asp:Label runat="server" Text="" ID="lblEdept" ForeColor="Red"></asp:Label>
-            </div>
+                    <div class="mb-3">
+                        <asp:Label runat="server" Text="Department:" AssociatedControlID="ddlDept" CssClass="form-label" />
+                        <asp:DropDownList ID="ddlDept" runat="server" CssClass="form-select" onchange="selectedDept(this)"></asp:DropDownList>
+                        <asp:Label runat="server" Text="" ID="lblEdept" CssClass="text-danger"></asp:Label>
+                    </div>
 
-            <div>
-                <asp:Label runat="server" Text="Image:" AssociatedControlID="fuImage" />
-                <asp:FileUpload ID="fuImage" runat="server" />
-            </div>
+                    <div class="mb-3">
+                        <asp:Label runat="server" Text="Upload Image:" AssociatedControlID="fuImage" CssClass="form-label" />
+                        <asp:FileUpload ID="fuImage" runat="server" CssClass="form-control" />
+                    </div>
 
-            <div>
-                <asp:Label ID="lblError" runat="server"></asp:Label><br />
-                <asp:Button ID="btnSubmit" runat="server" Text="Submit" Width="69px" OnClick="btnSubmit_Click" OnClientClick="return fullFormvalidate()" />
-                <asp:Button ID="btnReset" runat="server" Text="Reset" OnClick="btnReset_Click" />
+                    <div class="text-center">
+                        <asp:Label ID="lblError" runat="server" CssClass="text-danger"></asp:Label><br />
+                        <asp:Button ID="btnSubmit" runat="server" Text="Submit" CssClass="btn btn-primary" OnClick="btnSubmit_Click" OnClientClick="return fullFormvalidate()" />
+                        <asp:Button ID="btnReset" runat="server" Text="Reset" CssClass="btn btn-secondary" OnClick="btnReset_Click" />
+                    </div>
+                </form>
             </div>
         </div>
-    </form>
-
+    </div>
 </body>
 </html>
