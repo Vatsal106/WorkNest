@@ -27,7 +27,7 @@
                 lblEdept.textContent = "";
             }
             isEmailEmpty(email);
-             if (validate == false) {
+            if (validate == false) {
                 isValide = false;
             }
             checkName(nameInput);
@@ -37,10 +37,10 @@
             PhoneSize(phoneInput);
             if (validate == false) {
                 isValide = false;
-            }          
+            }
             isUsernameEmpty(user);
             if (validate == false) {
-                isValide = false;   
+                isValide = false;
             }
             validatePassword(Pass);
             if (validate == false) {
@@ -53,29 +53,29 @@
 
             return isValide;
         }
-        function isEmailEmpty(input){
-           const email=input.value;
-           const lblEemail = document.getElementById('<%= lblEemail.ClientID %>');
-            if (email.trim().length===0) {
+        function isEmailEmpty(input) {
+            const email = input.value;
+            const lblEemail = document.getElementById('<%= lblEemail.ClientID %>');
+            if (email.trim().length === 0) {
                 lblEemail.textContent = "Enter Email Address!!";
                 lblEemail.style.color = "Red";
                 validate = false;
-             } else {
+            } else {
                 lblEemail.textContent = "";
-                validate=true;
-             }
+                validate = true;
+            }
         }
-        function isUsernameEmpty(input){
-            const user=input.value;
+        function isUsernameEmpty(input) {
+            const user = input.value;
             const lblEuser = document.getElementById('<%= lblEuser.ClientID %>');
 
-            if (user.trim().length===0) {
+            if (user.trim().length === 0) {
                 lblEuser.textContent = "Enter UserName !!";
-                 lblEuser.style.color = "Red";
+                lblEuser.style.color = "Red";
                 validate = false;
             } else {
                 lblEuser.textContent = "";
-                validate=true; 
+                validate = true;
             }
         }
         function validatePassword(input) {
@@ -83,17 +83,18 @@
             const lblLength = document.getElementById('<%= lblLength.ClientID %>');
             const lblNumberOrSymbol = document.getElementById('<%= lblNumberOrSymbol.ClientID %>');
             const lblCase = document.getElementById('<%= lblCase.ClientID %>');
-
+            const rePass = document.getElementById('<%= txtRepassword.ClientID %>');
             validate = true;
-            
+
             if (password.length >= 8) {
                 lblLength.style.color = "green";
+
             }
-            else if (password.length!=0){
-                 lblEpass.textContent ="";
-                }
-                else {
-                lblEpass.textContent = "Enter Password !!"
+            else if (password.length != 0) {
+                lblEpass.textContent = "";
+            }
+            else {
+                lblEpass.textContent = "Enter Password !";
                 lblEpass.style.color = "Red";
                 lblLength.style.color = "red";
                 validate = false;
@@ -111,6 +112,11 @@
             } else {
                 lblCase.style.color = "red";
                 validate = false;
+            }
+            if (validate) {
+                rePass.disabled = false;
+            } else {
+                rePass.disabled = true;
             }
         }
 
@@ -161,177 +167,78 @@
             }
         }
     </script>
-
-     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 600px;
-            margin: auto;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        h2 {
-            text-align: center;
-            color: #333;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-            color: #555;
-        }
-
-        input[type="text"],
-        input[type="email"],
-        input[type="number"],
-        input[type="date"],
-        input[type="password"],
-        select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-
-        .error-message {
-            color: red;
-            font-size: 0.9em;
-        }
-
-        .auto-style4 {
-            margin-top: 10px;
-            margin-bottom: 10px;
-        }
-
-        .form-group button {
-            background-color: #5cb85c;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            width: 48%;
-            margin: 1%;
-        }
-
-        .form-group button:hover {
-            background-color: #4cae4c;
-        }
-
-        .form-group #btnReset {
-            background-color: #d9534f;
-        }
-
-        .form-group #btnReset:hover {
-            background-color: #c9302c;
-        }
-
-        .form-group {
-            text-align: center;
-        }
-    </style>
-</head><body>
+</head>
+<body>
     <form id="registration" runat="server">
-        <div>
-            <table align="center" class="auto-style1" style="width: 50%">
-                <tr>
-                    <td colspan="2" style="text-align: center; font-size: xx-large;">Registration Form&nbsp;</td>
-                </tr>
-                <tr>
-                    <td class="auto-style3">Name:</td>
-                    <td class="auto-style4">
-                        <asp:TextBox ID="txtName" runat="server" oninput="checkName(this)"></asp:TextBox>
-                        <asp:Label runat="server" Text="" ID="lblEname"></asp:Label>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="auto-style3">Phone number:</td>
-                    <td class="auto-style5">
-                        <asp:TextBox ID="txtPhone" runat="server" TextMode="Number" oninput="PhoneSize(this)"></asp:TextBox>
-                        <asp:Label ID="lblEphone" runat="server" ForeColor="Red"></asp:Label>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="auto-style3">Email:</td>
-                    <td class="auto-style6">
-                        <asp:TextBox ID="txtEmail" runat="server" TextMode="Email" OnTextChanged="EmailChange" AutoPostBack="true"></asp:TextBox>
-                        <asp:Label runat="server" Text="" ID="lblEemail"></asp:Label>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="auto-style3">User  Name:</td>
-                    <td class="auto-style6">
-                        <asp:TextBox ID="txtUsername" runat="server" AutoPostBack="True" OnTextChanged="checkUser "></asp:TextBox>
-                         <asp:Label runat="server" Text="" ID="lblEuser"></asp:Label>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="auto-style3">Password:</td>
-                    <td class="auto-style4">
-                        <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" oninput="validatePassword(this)" ></asp:TextBox>
-                        <asp:Label runat="server" Text="" ID="lblEpass"></asp:Label>
-                    </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td class="auto-style4">
-                        <asp:Label ID="lblLength" runat="server" ForeColor="Red" Text="At least 8 characters"></asp:Label><br />
-                        <asp:Label ID="lblNumberOrSymbol" runat="server" ForeColor="Red" Text="At least one number (0-9) or a symbol"></asp:Label><br />
-                        <asp:Label ID="lblCase" runat="server" ForeColor="Red" Text="Lowercase (a-z) and uppercase (A-Z)"></asp:Label><br />
-                    </td>
-                </tr>
-                <tr>
-                    <td class="auto-style3">Rewrite Password:</td>
-                    <td class="auto-style5">
-                        <asp:TextBox ID="txtRepassword" runat="server" TextMode="Password" oninput="matchPass(txtPassword, this)"></asp:TextBox>
-                        <asp:Label runat="server" Text="" ID="lblErepass"></asp:Label>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="auto-style3">Date of Hiring:</td>
-                    <td class="auto-style5">
-                        <asp:TextBox ID="txtDate" runat="server" TextMode="Date"></asp:TextBox>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="auto-style3">DEPT:</td>
-                    <td class="auto-style5">
-                        <asp:DropDownList ID="ddlDept" runat="server" onchange="selectedDept(this)"></asp:DropDownList>
-                        <asp:Label runat="server" Text="" ID="lblEdept" ForeColor="Red"></asp:Label>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="auto-style3">Image:</td>
-                    <td class="auto-style5">
-                        <asp:FileUpload ID="fuImage" runat="server" />
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2" style="text-align: center; padding-right: 10px;">
-                        <br />
-                        <asp:Label ID="lblError" runat="server"></asp:Label>
-                        <br />
-                        <asp:Button ID="btnSubmit" runat="server" Text="Submit" Width="69px" OnClick="btnSubmit_Click" OnClientClick="return fullFormvalidate()" />
-                        <asp:Button ID="btnReset" runat="server" Text="Reset" OnClick="btnReset_Click" />
-                    </td>
-                </tr>
-            </table>
+        <div style="text-align: center; diaplay:flax;">
+            <%--<asp:Label ID="lblCon" runat="server"></asp:Label>--%>
+            <div style="font-size: xx-large;">Registration Form&nbsp;</div>
+
+            <div>
+                <asp:Label runat="server" Text="Name:" AssociatedControlID="txtName" />
+                <asp:TextBox ID="txtName" runat="server" oninput="checkName(this)"></asp:TextBox>
+                <asp:Label runat="server" Text="" ID="lblEname"></asp:Label>
+            </div>
+
+            <div>
+                <asp:Label runat="server" Text="Phone number:" AssociatedControlID="txtPhone" />
+                <asp:TextBox ID="txtPhone" runat="server" TextMode="Number" oninput="PhoneSize(this)"></asp:TextBox>
+                <asp:Label ID="lblEphone" runat="server" ForeColor="Red"></asp:Label>
+            </div>
+
+            <div>
+                <asp:Label runat="server" Text="Email:" AssociatedControlID="txtEmail" />
+                <asp:TextBox ID="txtEmail" runat="server" TextMode="Email" OnTextChanged="EmailChange" AutoPostBack="true"></asp:TextBox>
+                <asp:Label runat="server" Text="" ID="lblEemail"></asp:Label>
+            </div>
+
+            <div>
+                <asp:Label runat="server" Text="User Name:" AssociatedControlID="txtUsername" />
+                <asp:TextBox ID="txtUsername" runat="server" AutoPostBack="True" OnTextChanged="checkUser"></asp:TextBox>
+                <asp:Label runat="server" Text="" ID="lblEuser"></asp:Label>
+            </div>
+
+            <div>
+                <asp:Label runat="server" Text="Password:" AssociatedControlID="txtPassword" />
+                <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" oninput="validatePassword(this)" Enabled="false"></asp:TextBox>
+                <asp:Label runat="server" Text="" ID="lblEpass"></asp:Label>
+            </div>
+
+            <div>
+                <asp:Label ID="lblLength" runat="server" ForeColor="Red" Text="At least 8 characters"></asp:Label><br />
+                <asp:Label ID="lblNumberOrSymbol" runat="server" ForeColor="Red" Text="At least one number (0-9) or a symbol"></asp:Label><br />
+                <asp:Label ID="lblCase" runat="server" ForeColor="Red" Text="Lowercase (a-z) and uppercase (A-Z)"></asp:Label><br />
+            </div>
+
+            <div>
+                <asp:Label runat="server" Text="Rewrite Password:" AssociatedControlID="txtRepassword" />
+                <asp:TextBox ID="txtRepassword" runat="server" TextMode="Password" oninput="matchPass(txtPassword, this)" Disabled="true"></asp:TextBox>
+                <asp:Label runat="server" Text="" ID="lblErepass"></asp:Label>
+            </div>
+
+            <div>
+                <asp:Label runat="server" Text="Date of Hiring:" AssociatedControlID="txtDate" />
+                <asp:TextBox ID="txtDate" runat="server" TextMode="Date"></asp:TextBox>
+            </div>
+
+            <div>
+                <asp:Label runat="server" Text="DEPT:" AssociatedControlID="ddlDept" />
+                <asp:DropDownList ID="ddlDept" runat="server" onchange="selectedDept(this)"></asp:DropDownList>
+                <asp:Label runat="server" Text="" ID="lblEdept" ForeColor="Red"></asp:Label>
+            </div>
+
+            <div>
+                <asp:Label runat="server" Text="Image:" AssociatedControlID="fuImage" />
+                <asp:FileUpload ID="fuImage" runat="server" />
+            </div>
+
+            <div>
+                <asp:Label ID="lblError" runat="server"></asp:Label><br />
+                <asp:Button ID="btnSubmit" runat="server" Text="Submit" Width="69px" OnClick="btnSubmit_Click" OnClientClick="return fullFormvalidate()" />
+                <asp:Button ID="btnReset" runat="server" Text="Reset" OnClick="btnReset_Click" />
+            </div>
         </div>
-        <asp:Label ID="lblCon" runat="server"></asp:Label>
     </form>
+
 </body>
 </html>

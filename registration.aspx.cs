@@ -52,6 +52,7 @@ namespace WorkNest
             {
                 lblEuser.Text = "";
                 checkUserduplicate = true;
+                txtPassword.Enabled = true;
             }
         }
         void Lable()
@@ -170,10 +171,11 @@ namespace WorkNest
 
             fuImage.Attributes.Clear();
             txtPassword.Attributes["value"] = string.Empty;
+            txtPassword.Enabled = false;
             txtRepassword.Attributes["value"] = string.Empty;
-
+            txtRepassword.Enabled = false;
             lblError.Text = string.Empty;
-            lblCon.Text = string.Empty;
+            //lblCon.Text = string.Empty;
 
             lblLength.ForeColor = System.Drawing.Color.Red;
             lblNumberOrSymbol.ForeColor = System.Drawing.Color.Red;
