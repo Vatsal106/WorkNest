@@ -89,11 +89,12 @@
             validate = true;
 
             if (password.length >= 8) {
-                lblLength.style.color = "green";
+                lblLength.style.color = "blue";
 
             }
             else if (password.length != 0) {
                 lblEpass.textContent = "";
+                 lblLength.style.color = "red";
             }
             else {
                 lblEpass.textContent = "Enter Password !";
@@ -103,14 +104,14 @@
             }
 
             if (/[0-9!@#$%^&*(),.?":{}|<>]/.test(password)) {
-                lblNumberOrSymbol.style.color = "green";
+                lblNumberOrSymbol.style.color = "blue";
             } else {
                 lblNumberOrSymbol.style.color = "red";
                 validate = false;
             }
 
             if (/[a-z]/.test(password) && /[A-Z]/.test(password)) {
-                lblCase.style.color = "green";
+                lblCase.style.color = "blue";
             } else {
                 lblCase.style.color = "red";
                 validate = false;
@@ -176,59 +177,64 @@
 
         .container {
             margin-top: 10px;
+align-content:center;
+align-items:center;
+border:solid 2px black;
+
         }
 
         .form-container {
-            background: #1C2529;
+            background: #A1D1B1;
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             margin:0;
-             height: 680px;
-             color:#A1D1B1;
-            
+             height: auto;
+             color:#1C2529;
+            width:50%;
         }
 
         .image-container img {
             width: 80%;
-            height: 675px;
+            height: 623px;
             border-radius: 10px;
         }
         .image-container{
             padding:0;
             z-index:-1;
+width:50%;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="row align-items-center">
-            <div class="col-md-6 image-container">
+            <div class="col-md-5 image-container">
                 <asp:Image ID="Image1" runat="server" ImageUrl="~/registrationImage.png" />
 
             </div>
-            <div class="col-md-6 form-container">
-                <h2 class="text-center mb-4">Registration Form</h2>
+            <div class="col-md-5 form-container">
+                <h2 class="text-center mb-4">Add new Employee</h2>
                 <form id="registration" runat="server" class="needs-validation" novalidate>
-                    <div class="mb-3">
+                    <div class="mb-2">
                         <%-- <asp:Label runat="server" Text="Name:" AssociatedControlID="txtName" CssClass="form-label" />--%>
                         <asp:TextBox ID="txtName" runat="server" CssClass="form-control" oninput="checkName(this)" placeholder="Enter FullName"></asp:TextBox>
                         <asp:Label runat="server" Text="" ID="lblEname" CssClass="text-danger"></asp:Label>
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mb-2">
                         <%--<asp:Label runat="server" Text="Phone number:" AssociatedControlID="txtPhone" CssClass="form-label" />--%>
                         <asp:TextBox ID="txtPhone" runat="server" TextMode="Number" CssClass="form-control" oninput="PhoneSize(this)" placeholder="Enter Phone Number"></asp:TextBox>
                         <asp:Label ID="lblEphone" runat="server" CssClass="text-danger"></asp:Label>
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mb-2">
                         <%--<asp:Label runat="server" Text="Email:" AssociatedControlID="txtEmail" CssClass="form-label" />--%>
                         <asp:TextBox ID="txtEmail" runat="server" TextMode="Email" CssClass="form-control" OnTextChanged="EmailChange" AutoPostBack="true" placeholder="Email Address"></asp:TextBox>
                         <asp:Label runat="server" Text="" ID="lblEemail" CssClass="text-danger"></asp:Label>
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mb-2">
                         <%--<asp:Label runat="server" Text="User Name:" AssociatedControlID="txtUsername" CssClass="form-label" />--%>
                         <asp:TextBox ID="txtUsername" runat="server" CssClass="form-control" AutoPostBack="True" OnTextChanged="checkUser" placeholder="Select Username"></asp:TextBox>
                         <asp:Label runat="server" Text="" ID="lblEuser" CssClass="text-danger"></asp:Label>
@@ -245,10 +251,10 @@
                             <asp:Label runat="server" Text="" ID="lblErepass" CssClass="text-danger"></asp:Label>
                         </div>
                     </div>
-                    <div class="mb-3">
-                        <asp:Label ID="lblLength" runat="server" Text="At least 8 characters" ForeColor="#A1D1B1"></asp:Label><br />
-                        <asp:Label ID="lblNumberOrSymbol" runat="server" Text="At least one number (0-9) or a symbol" ForeColor="#A1D1B1"></asp:Label><br />
-                        <asp:Label ID="lblCase" runat="server" Text="Lowercase (a-z) and uppercase (A-Z)" ForeColor="#A1D1B1"></asp:Label>
+                    <div class="mb-2">
+                        <asp:Label ID="lblLength" runat="server" Text="Password must Contain At least 8 characters , " ForeColor="#1C2529"></asp:Label>
+                        <asp:Label ID="lblNumberOrSymbol" runat="server" Text="At least one number (0-9) or a symbol, " ForeColor="#1C2529"></asp:Label>
+                        <asp:Label ID="lblCase" runat="server" Text="Lowercase (a-z) and uppercase (A-Z)." ForeColor="#1C2529"></asp:Label>
                     </div>
                     <div class="row g-3 mb-3">
                         <div class="col-md-6">
@@ -262,7 +268,7 @@
                             <asp:Label runat="server" Text="" ID="lblEdept" CssClass="text-danger"></asp:Label>
                         </div>
                     </div>
-                    <div class="mb-1.5">
+                    <div class="mb-2">
                         <asp:Label runat="server" Text="Upload Image:" AssociatedControlID="fuImage" CssClass="form-label" />
                         <asp:FileUpload ID="fuImage" runat="server" CssClass="form-control" />
                     </div>

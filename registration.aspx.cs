@@ -57,9 +57,9 @@ namespace WorkNest
         }
         void Lable()
         {
-            lblLength.ForeColor = Color.Green;
-            lblCase.ForeColor = Color.Green;
-            lblNumberOrSymbol.ForeColor = Color.Green;
+            lblLength.ForeColor = Color.Blue;
+            lblCase.ForeColor = Color.Blue;
+            lblNumberOrSymbol.ForeColor = Color.Blue;
         }
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
