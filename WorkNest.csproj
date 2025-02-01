@@ -69,6 +69,7 @@
     <Content Include="loginimage.png" />
     <Content Include="registration.aspx" />
     <Content Include="Style.css" />
+    <Content Include="registrationImage.png" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

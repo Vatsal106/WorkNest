@@ -171,7 +171,7 @@
     </script>
     <style>
         body {
-            background-color: #A1D1B1;
+            background-color: #1C2529;
         }
 
         .container {
@@ -190,7 +190,7 @@
         }
 
         .image-container img {
-            width: 100%;
+            width: 80%;
             height: 680px;
             border-radius: 10px;
         }
@@ -204,7 +204,7 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md-6 image-container">
-                <asp:Image ID="Image1" runat="server" ImageUrl="~/loginimage.png" />
+                <asp:Image ID="Image1" runat="server" ImageUrl="~/registrationImage.png" />
 
             </div>
             <div class="col-md-6 form-container">
