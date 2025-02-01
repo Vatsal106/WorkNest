@@ -191,7 +191,7 @@
 
         .image-container img {
             width: 80%;
-            height: 680px;
+            height: 675px;
             border-radius: 10px;
         }
         .image-container{
