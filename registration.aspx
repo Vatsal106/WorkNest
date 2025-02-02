@@ -23,7 +23,7 @@
             var email = document.getElementById('<%= txtEmail.ClientID %>');
             var user = document.getElementById('<%= txtUsername.ClientID %>');
             if (ddl === 0) {
-                lblEdept.textContent = "select dept!!";
+                lblEdept.textContent = "*";
                 isValide = false;
             } else {
                 lblEdept.textContent = "";
@@ -89,29 +89,29 @@
             validate = true;
 
             if (password.length >= 8) {
-                lblLength.style.color = "blue";
+                lblLength.style.color = "#0D0D30";
 
             }
             else if (password.length != 0) {
-                lblEpass.textContent = "";
-                 lblLength.style.color = "red";
+                //lblEpass.textContent = "";
+                lblLength.style.color = "red";
             }
             else {
-                lblEpass.textContent = "Enter Password !";
-                lblEpass.style.color = "Red";
+                //lblEpass.textContent = "Enter Password !";
+                //lblEpass.style.color = "Red";
                 lblLength.style.color = "red";
                 validate = false;
             }
 
             if (/[0-9!@#$%^&*(),.?":{}|<>]/.test(password)) {
-                lblNumberOrSymbol.style.color = "blue";
+                lblNumberOrSymbol.style.color = "#0D0D30";
             } else {
                 lblNumberOrSymbol.style.color = "red";
                 validate = false;
             }
 
             if (/[a-z]/.test(password) && /[A-Z]/.test(password)) {
-                lblCase.style.color = "blue";
+                lblCase.style.color = "#0D0D30";
             } else {
                 lblCase.style.color = "red";
                 validate = false;
@@ -172,114 +172,123 @@
     </script>
     <style>
         body {
-            background-color: #1C2529;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #0D0D30 ;
+            font-family: Arial, sans-serif;
+            padding: 10px;
         }
-
         .container {
-            margin-top: 10px;
-align-content:center;
-align-items:center;
-border:solid 2px black;
-
-        }
-
-        .form-container {
-            background: #A1D1B1;
-            padding: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            background: #fff;
+            width: 90%;
+/*            max-width: 800px;*/
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin:0;
-             height: auto;
-             color:#1C2529;
+            overflow: hidden;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            padding:0;
+        }
+        .image-section img {
+            width: 100%;
+            height:640px;
+/*            background: url('registrationImage.png') center/cover;*/
+        }
+        .form-section {
+            width: 50%;
+            padding: 40px;
+            background:#8B9EB2;
+            color:#0D0D30;
+        }
+        .image-section{
             width:50%;
         }
+        @media (max-width: 700px) {
+            .container {
+                flex-direction: column;
+            }
+            .image-section {
+                width: 100%;
+                height: 100%;
+            }
+            .form-section {
+                width: 100%;
+            }
+        }
+        .input-group{
+            margin-bottom:10px;
+            border-radius:13px;
+            display:flex;
+            justify-content:space-between;
+            width:100%
 
-        .image-container img {
-            width: 80%;
-            height: 623px;
-            border-radius: 10px;
         }
-        .image-container{
-            padding:0;
-            z-index:-1;
-width:50%;
+        .input-col{
+            width:48%;
         }
+       
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="row align-items-center">
-            <div class="col-md-5 image-container">
-                <asp:Image ID="Image1" runat="server" ImageUrl="~/registrationImage.png" />
-
-            </div>
-            <div class="col-md-5 form-container">
-                <h2 class="text-center mb-4">Add new Employee</h2>
-                <form id="registration" runat="server" class="needs-validation" novalidate>
-                    <div class="mb-2">
-                        <%-- <asp:Label runat="server" Text="Name:" AssociatedControlID="txtName" CssClass="form-label" />--%>
-                        <asp:TextBox ID="txtName" runat="server" CssClass="form-control" oninput="checkName(this)" placeholder="Enter FullName"></asp:TextBox>
-                        <asp:Label runat="server" Text="" ID="lblEname" CssClass="text-danger"></asp:Label>
+        <div class="image-section">
+            <asp:Image ID="Image1" runat="server" ImageUrl="~/AddEmp.png" />
+        </div>
+        <div class="form-section">
+            <h2 class="text-center mb-4">Add new Employee</h2>
+            <form id="registration" runat="server" class="form-Cont" novalidate>
+                <div class="input-group">
+                    <asp:TextBox ID="txtName" runat="server" CssClass="form-control" oninput="checkName(this)" placeholder="Enter FullName"></asp:TextBox>
+                   <asp:Label runat="server" Text="" ID="lblEname" CssClass="text-danger"></asp:Label>
+                </div>
+                <div class="input-group">
+                    <asp:TextBox ID="txtPhone" runat="server" TextMode="Number" CssClass="form-control" oninput="PhoneSize(this)" placeholder="Enter Phone Number"></asp:TextBox>
+                    <asp:Label ID="lblEphone" runat="server" CssClass="text-danger"></asp:Label>
+                </div>
+                <div class="input-group">
+                    <asp:TextBox ID="txtEmail" runat="server" TextMode="Email" CssClass="form-control" OnTextChanged="EmailChange" AutoPostBack="true" placeholder="Email Address"></asp:TextBox>
+                    <asp:Label runat="server" Text="" ID="lblEemail" CssClass="text-danger"></asp:Label>
+                </div>
+                <div class="input-group md-12">
+                    <asp:TextBox ID="txtUsername" runat="server" CssClass="form-control" AutoPostBack="True" OnTextChanged="checkUser" placeholder="Select Username"></asp:TextBox>
+                    <asp:Label runat="server" Text="" ID="lblEuser" CssClass="text-danger"></asp:Label>
+                </div>
+                <div class="input-group">
+                    <div class="input-col">
+                        <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" CssClass="form-control" oninput="validatePassword(this)" Enabled="false" placeholder="Enter Password"></asp:TextBox>
                     </div>
-
-                    <div class="mb-2">
-                        <%--<asp:Label runat="server" Text="Phone number:" AssociatedControlID="txtPhone" CssClass="form-label" />--%>
-                        <asp:TextBox ID="txtPhone" runat="server" TextMode="Number" CssClass="form-control" oninput="PhoneSize(this)" placeholder="Enter Phone Number"></asp:TextBox>
-                        <asp:Label ID="lblEphone" runat="server" CssClass="text-danger"></asp:Label>
+                    <div class="input-col">
+                        <asp:TextBox ID="txtRepassword" runat="server" TextMode="Password" CssClass="form-control" oninput="matchPass(txtPassword, this)" Disabled="true" placeholder="Confirm your Password"></asp:TextBox>
+                        <asp:Label runat="server" Text="" ID="lblErepass" CssClass="text-danger"></asp:Label>
                     </div>
-
-                    <div class="mb-2">
-                        <%--<asp:Label runat="server" Text="Email:" AssociatedControlID="txtEmail" CssClass="form-label" />--%>
-                        <asp:TextBox ID="txtEmail" runat="server" TextMode="Email" CssClass="form-control" OnTextChanged="EmailChange" AutoPostBack="true" placeholder="Email Address"></asp:TextBox>
-                        <asp:Label runat="server" Text="" ID="lblEemail" CssClass="text-danger"></asp:Label>
+                </div>
+                <div>
+                        <asp:Label ID="lblLength" runat="server" Text="Password must Contain At least 8 characters , " ForeColor="#0D0D30"></asp:Label>
+                        <asp:Label ID="lblNumberOrSymbol" runat="server" Text="At least one number (0-9) or a symbol, " ForeColor="#0D0D30"></asp:Label>
+                        <asp:Label ID="lblCase" runat="server" Text="Lowercase (a-z) and uppercase (A-Z)." ForeColor="#0D0D30"></asp:Label>
                     </div>
-
-                    <div class="mb-2">
-                        <%--<asp:Label runat="server" Text="User Name:" AssociatedControlID="txtUsername" CssClass="form-label" />--%>
-                        <asp:TextBox ID="txtUsername" runat="server" CssClass="form-control" AutoPostBack="True" OnTextChanged="checkUser" placeholder="Select Username"></asp:TextBox>
-                        <asp:Label runat="server" Text="" ID="lblEuser" CssClass="text-danger"></asp:Label>
+                <div class="input-group">
+                    <div class="input-col">
+                        <asp:Label runat="server" Text="Date of Hiring:" AssociatedControlID="txtDate" CssClass="form-label" />
+                        <asp:TextBox ID="txtDate" runat="server" TextMode="Date" CssClass="form-control"></asp:TextBox>
                     </div>
-                    <div class="row g-3 mb-3">
-                        <div class="col-md-6">
-                            <%--<asp:Label runat="server" Text="Password:" AssociatedControlID="txtPassword" CssClass="form-label" />--%>
-                            <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" CssClass="form-control" oninput="validatePassword(this)" Enabled="false" placeholder="Enter Password"></asp:TextBox>
-                            <asp:Label runat="server" Text="" ID="lblEpass" CssClass="text-danger"></asp:Label>
-                        </div>
-                        <div class="col-md-6">
-                            <%--<asp:Label runat="server" Text="Rewrite Password:" AssociatedControlID="txtRepassword" CssClass="form-label" />--%>
-                            <asp:TextBox ID="txtRepassword" runat="server" TextMode="Password" CssClass="form-control" oninput="matchPass(txtPassword, this)" Disabled="true" placeholder="Confirm your Password"></asp:TextBox>
-                            <asp:Label runat="server" Text="" ID="lblErepass" CssClass="text-danger"></asp:Label>
-                        </div>
+                    <div class="input-col">
+                        <asp:Label runat="server" Text="Department:" AssociatedControlID="ddlDept" CssClass="form-label" /><asp:Label runat="server" Text="" ID="lblEdept" CssClass="text-danger"></asp:Label>
+                        <asp:DropDownList ID="ddlDept" runat="server" CssClass="form-select" onchange="selectedDept(this)"></asp:DropDownList>
                     </div>
-                    <div class="mb-2">
-                        <asp:Label ID="lblLength" runat="server" Text="Password must Contain At least 8 characters , " ForeColor="#1C2529"></asp:Label>
-                        <asp:Label ID="lblNumberOrSymbol" runat="server" Text="At least one number (0-9) or a symbol, " ForeColor="#1C2529"></asp:Label>
-                        <asp:Label ID="lblCase" runat="server" Text="Lowercase (a-z) and uppercase (A-Z)." ForeColor="#1C2529"></asp:Label>
-                    </div>
-                    <div class="row g-3 mb-3">
-                        <div class="col-md-6">
-                            <asp:Label runat="server" Text="Date of Hiring:" AssociatedControlID="txtDate" CssClass="form-label" />
-                            <asp:TextBox ID="txtDate" runat="server" TextMode="Date" CssClass="form-control"></asp:TextBox>
-                        </div>
-
-                        <div class="col-md-6">
-                            <asp:Label runat="server" Text="Department:" AssociatedControlID="ddlDept" CssClass="form-label" />
-                            <asp:DropDownList ID="ddlDept" runat="server" CssClass="form-select" onchange="selectedDept(this)"></asp:DropDownList>
-                            <asp:Label runat="server" Text="" ID="lblEdept" CssClass="text-danger"></asp:Label>
-                        </div>
-                    </div>
-                    <div class="mb-2">
-                        <asp:Label runat="server" Text="Upload Image:" AssociatedControlID="fuImage" CssClass="form-label" />
-                        <asp:FileUpload ID="fuImage" runat="server" CssClass="form-control" />
-                    </div>
-
-                    <div class="text-center">
-                        <asp:Label ID="lblError" runat="server" CssClass="text-danger"></asp:Label><br />
-                        <asp:Button ID="btnSubmit" runat="server" Text="Submit" CssClass="btn btn-primary" OnClick="btnSubmit_Click" OnClientClick="return fullFormvalidate()" />
-                        <asp:Button ID="btnReset" runat="server" Text="Reset" CssClass="btn btn-secondary" OnClick="btnReset_Click" />
-                    </div>
-                </form>
-            </div>
+                </div>
+                <div class="input-group">
+                    <asp:Label runat="server" Text="Upload Image:" AssociatedControlID="fuImage" CssClass="form-label" />
+                    <asp:FileUpload ID="fuImage" runat="server" CssClass="form-control" />
+                </div>
+                <div class="text-center">
+                    <asp:Label ID="lblError" class="btn" runat="server" CssClass="text-danger"></asp:Label><br />
+                    <asp:Button ID="btnSubmit" class="btn" runat="server" Text="Submit" CssClass="btn btn-primary" OnClick="btnSubmit_Click" OnClientClick="return fullFormvalidate()" />
+                    <asp:Button ID="btnReset" runat="server" Text="Reset" CssClass="btn btn-secondary" OnClick="btnReset_Click" />
+                </div>
+            </form>
         </div>
     </div>
 </body>

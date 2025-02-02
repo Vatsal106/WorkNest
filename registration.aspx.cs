@@ -175,6 +175,7 @@ namespace WorkNest
             txtRepassword.Attributes["value"] = string.Empty;
             txtRepassword.Enabled = false;
             lblError.Text = string.Empty;
+            lblEemail.Text = string.Empty;
             //lblCon.Text = string.Empty;
 
 
