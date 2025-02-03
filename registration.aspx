@@ -176,7 +176,7 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background: #0D0D30 ;
+            background: #fff ;
             font-family: Arial, sans-serif;
             padding: 10px;
         }
@@ -185,16 +185,14 @@
             flex-wrap: wrap;
             background: #fff;
             width: 90%;
-/*            max-width: 800px;*/
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 10px 4px 10px rgba(0, 0, 0, 0.1);
             padding:0;
         }
         .image-section img {
             width: 100%;
             height:640px;
-/*            background: url('registrationImage.png') center/cover;*/
         }
         .form-section {
             width: 50%;
@@ -223,6 +221,7 @@
             display:flex;
             justify-content:space-between;
             width:100%
+            
 
         }
         .input-col{
@@ -240,17 +239,20 @@
             <h2 class="text-center mb-4">Add new Employee</h2>
             <form id="registration" runat="server" class="form-Cont" novalidate>
                 <div class="input-group">
-                    <asp:TextBox ID="txtName" runat="server" CssClass="form-control" oninput="checkName(this)" placeholder="Enter FullName"></asp:TextBox>
-                   <asp:Label runat="server" Text="" ID="lblEname" CssClass="text-danger"></asp:Label>
+                    <asp:TextBox class="mr-2" ID="txtName" runat="server" CssClass="form-control" oninput="checkName(this)" placeholder="Enter FullName"></asp:TextBox>
+                     <asp:Label runat="server" Text="" ID="lblEname" ></asp:Label>
                 </div>
+                     
                 <div class="input-group">
                     <asp:TextBox ID="txtPhone" runat="server" TextMode="Number" CssClass="form-control" oninput="PhoneSize(this)" placeholder="Enter Phone Number"></asp:TextBox>
                     <asp:Label ID="lblEphone" runat="server" CssClass="text-danger"></asp:Label>
                 </div>
                 <div class="input-group">
                     <asp:TextBox ID="txtEmail" runat="server" TextMode="Email" CssClass="form-control" OnTextChanged="EmailChange" AutoPostBack="true" placeholder="Email Address"></asp:TextBox>
-                    <asp:Label runat="server" Text="" ID="lblEemail" CssClass="text-danger"></asp:Label>
+                    <asp:Label runat="server" Text="  " ID="lblEemail" CssClass="text-danger"></asp:Label>
                 </div>
+                   
+
                 <div class="input-group md-12">
                     <asp:TextBox ID="txtUsername" runat="server" CssClass="form-control" AutoPostBack="True" OnTextChanged="checkUser" placeholder="Select Username"></asp:TextBox>
                     <asp:Label runat="server" Text="" ID="lblEuser" CssClass="text-danger"></asp:Label>
