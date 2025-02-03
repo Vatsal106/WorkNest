@@ -233,7 +233,7 @@
 <body>
     <div class="container">
         <div class="image-section">
-            <asp:Image ID="Image1" runat="server" ImageUrl="~/AddEmp.png" />
+            <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/Add Emp.png" />
         </div>
         <div class="form-section">
             <h2 class="text-center mb-4">Add new Employee</h2>

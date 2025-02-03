@@ -68,6 +68,10 @@
     <Content Include="Admin\Dashbord.html" />
     <Content Include="Admin\Home.html" />
     <Content Include="Global.asax" />
+    <Content Include="Images\Add Emp.png" />
+    <Content Include="Images\LoginIMG.png" />
+    <Content Include="Images\Logo-Dark.png" />
+    <Content Include="Images\Logo-Light.png" />
     <Content Include="login.aspx" />
     <Content Include="loginimage.png" />
     <Content Include="registration.aspx" />
