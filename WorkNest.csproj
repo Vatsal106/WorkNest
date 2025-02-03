@@ -73,7 +73,6 @@
     <Content Include="Images\Logo-Dark.png" />
     <Content Include="Images\Logo-Light.png" />
     <Content Include="login.aspx" />
-    <Content Include="loginimage.png" />
     <Content Include="registration.aspx" />
     <Content Include="Style.css" />
     <Content Include="Web.config" />
