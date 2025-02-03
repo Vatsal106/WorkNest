@@ -187,7 +187,7 @@
             width: 90%;
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 10px 4px 10px rgba(0, 0, 0, 0.1);
+           box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
             padding:0;
         }
         .image-section img {
