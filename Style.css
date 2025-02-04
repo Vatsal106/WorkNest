@@ -1,5 +1,4 @@
-﻿/* Reset and Base Styles */
-body, html {
+﻿body, html {
     margin: 0;
     padding: 0;
     width: 100%;
@@ -8,7 +7,7 @@ body, html {
     align-items: center;
     justify-content: center;
     font-family: 'Poppins', sans-serif;
-    background: #f4f4f4;
+    background: #eef2f7;
 }
 
 /* Main Container */
@@ -19,7 +18,7 @@ body, html {
     height: 500px;
     border-radius: 15px;
     overflow: hidden;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
     background: white;
     align-items: center; /* Ensures both sections are aligned */
 }
@@ -30,7 +29,6 @@ body, html {
     align-items: center;
     justify-content: center;
     background: #eef2f7;
-    padding: 20px;
 }
 
 .login-image {
@@ -47,18 +45,21 @@ body, html {
     justify-content: center;
     align-items: center;
     padding: 40px;
-    background: white;
+    background: #8B9EB2;
+    color: #0D0D30;
+    height: 100%;
 }
+
 h2 {
     font-size: 28px;
     font-weight: 600;
     margin-bottom: 10px;
-    color: #333;
+    color: #0D0D30;
 }
 
 .subtext {
     font-size: 14px;
-    color: #777;
+    color: #0D0D30;
     margin-bottom: 20px;
 }
 
@@ -148,5 +149,20 @@ h2 {
 
     .login-image {
         border-radius: 15px 15px 0 0;
+    }
+}
+
+h2:hover .wave {
+    display: inline-block;
+    animation: wave-animation 0.5s infinite alternate;
+}
+
+@keyframes wave-animation {
+    0% {
+        transform: rotate(20deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
     }
 }
