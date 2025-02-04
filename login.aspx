@@ -16,7 +16,7 @@ body, html {
     align-items: center;
     justify-content: center;
     font-family: 'Poppins', sans-serif;
-    background: #0D0D30;
+    background: #eef2f7;
 }
 
 /* Main Container */
@@ -166,7 +166,7 @@ h2 {
     <div class="container">
         <!-- Left Half: Image Section -->
         <div class="image-section">
-            <asp:Image ID="LoginImg" runat="server" ImageUrl="~/Images/LoginIMG.png" CssClass="login-image"/>
+            <asp:Image ID="LoginImg" runat="server" ImageUrl="~/Images/LOGINIMAGE.png" CssClass="login-image"/>
         </div>
 
         <!-- Right Half: Form Section -->
@@ -181,7 +181,7 @@ h2 {
                 <div class="input-group">
                     <asp:TextBox ID="txtPassword" runat="server" CssClass="input" TextMode="Password" Placeholder="Password"></asp:TextBox>
                 </div>
-                <div class="button-group">
+                <div class="button-group input-group">
                     <asp:Button ID="btnLogin" runat="server" Text="Sign In" CssClass="button" OnClick="btnLogin_Click" />
                 </div>
 
