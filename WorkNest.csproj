@@ -72,6 +72,7 @@
     <Content Include="Images\Add Emp.png" />
     <Content Include="Images\Logo-Dark.png" />
     <Content Include="Images\Logo-Light.png" />
+    <Content Include="Images\Registration Image.png" />
     <Content Include="login.aspx" />
     <Content Include="Project_Manager\PMDashboard.aspx" />
     <Content Include="Project_Manager\PMHomePage.aspx" />
