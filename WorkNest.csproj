@@ -65,35 +65,17 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Admin\AdminDashboard.aspx" />
-    <Content Include="Admin\AdminHomePage.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Images\LOGINIMAGE.png" />
     <Content Include="Images\Add Emp.png" />
     <Content Include="Images\Logo-Dark.png" />
     <Content Include="Images\Logo-Light.png" />
     <Content Include="login.aspx" />
-    <Content Include="Project_Manager\PMDashboard.aspx" />
-    <Content Include="Project_Manager\PMHomePage.aspx" />
     <Content Include="registration.aspx" />
     <Content Include="Style.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Admin\AdminDashboard.aspx.cs">
-      <DependentUpon>AdminDashboard.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\AdminDashboard.aspx.designer.cs">
-      <DependentUpon>AdminDashboard.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Admin\AdminHomePage.aspx.cs">
-      <DependentUpon>AdminHomePage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\AdminHomePage.aspx.designer.cs">
-      <DependentUpon>AdminHomePage.aspx</DependentUpon>
-    </Compile>
     <Compile Include="dbConnection.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -105,19 +87,11 @@
     <Compile Include="login.aspx.designer.cs">
       <DependentUpon>login.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Project_Manager\PMDashboard.aspx.cs">
-      <DependentUpon>PMDashboard.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
+    <Compile Include="Admin\AdminM.Master.cs">
+      <DependentUpon>AdminM.Master</DependentUpon>
     </Compile>
-    <Compile Include="Project_Manager\PMDashboard.aspx.designer.cs">
-      <DependentUpon>PMDashboard.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Project_Manager\PMHomePage.aspx.cs">
-      <DependentUpon>PMHomePage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Project_Manager\PMHomePage.aspx.designer.cs">
-      <DependentUpon>PMHomePage.aspx</DependentUpon>
+    <Compile Include="Admin\AdminM.Master.designer.cs">
+      <DependentUpon>AdminM.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="registration.aspx.cs">
@@ -130,6 +104,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <Content Include="Admin\AdminM.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -137,7 +112,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Project_Manager\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
