@@ -73,7 +73,7 @@
     <Content Include="Images\Logo-Light.png" />
     <Content Include="Images\Registration Image.png" />
     <Content Include="login.aspx" />
-    <Content Include="registration.aspx" />
+    <Content Include="Admin\registration.aspx" />
     <Content Include="Style.css" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -104,11 +104,11 @@
       <DependentUpon>AdminM.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="registration.aspx.cs">
+    <Compile Include="Admin\registration.aspx.cs">
       <DependentUpon>registration.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="registration.aspx.designer.cs">
+    <Compile Include="Admin\registration.aspx.designer.cs">
       <DependentUpon>registration.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
