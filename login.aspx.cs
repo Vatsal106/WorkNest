@@ -40,7 +40,7 @@ namespace WorkNest
                     return;
                 }
                 int empId = Convert.ToInt32(empIdObj);
-                string roleQuery = "SELECT ROLE_ID FROM EMPLOYEE_ROLES WHERE EMPLOYEE_ID = @empId";
+                string roleQuery = "SELECT R.ROLE_NAME FROM ROLES R JOIN EMPLOYEE_ROLES E ON R.ROLE_ID=E.ROLE_ID WHERE EMPLOYEE_ID = @empId";
                 SqlCommand roleCmd = new SqlCommand(roleQuery, dbConn.con);
                 roleCmd.Parameters.AddWithValue("@empId", empId);
                 object roleObj = roleCmd.ExecuteScalar();
@@ -52,10 +52,10 @@ namespace WorkNest
                 }
                 if (roleObj != null)
                 {
-                    int roleId = Convert.ToInt32(roleObj);
+                    string roleName = roleObj.ToString();
 
                     
-                    if (roleId == 1) 
+                    if (roleName == "Admin") 
                     {
                         Response.Redirect("Admin/AdminHome.aspx");
                     }
