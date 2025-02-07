@@ -65,19 +65,30 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Admin\AdminDashboard.aspx" />
     <Content Include="Admin\AdminHome.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Images\TranLogoLight.png" />
     <Content Include="Images\LOGINIMAGE.png" />
     <Content Include="Images\Add Emp.png" />
     <Content Include="Images\Logo-Dark.png" />
     <Content Include="Images\Logo-Light.png" />
     <Content Include="Images\Registration Image.png" />
+    <Content Include="Images\TranLogoDark.png" />
+    <Content Include="Images\Untitled design %283%29.png" />
     <Content Include="login.aspx" />
     <Content Include="Admin\registration.aspx" />
     <Content Include="Style.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\AdminDashboard.aspx.cs">
+      <DependentUpon>AdminDashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\AdminDashboard.aspx.designer.cs">
+      <DependentUpon>AdminDashboard.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\AdminHome.aspx.cs">
       <DependentUpon>AdminHome.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

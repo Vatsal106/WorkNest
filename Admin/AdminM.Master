@@ -5,526 +5,90 @@
 <html>
 <head runat="server">
     <title>Admin Panel</title>
-    <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
-    <script>
-        const theme = document.getElementById("theme");
-
-        theme.addEventListener("click", () =>
-            document.body.classList.toggle("dark-theme")
-        );
-    </script>
-    <style>
-        /* Basic styles for layout */
-        :root {
-  --bg-primary: #fff;
-  --bg-secondary: #fafafa;
-
-  --logo-text: #000;
-
-  --separator: #d9d9d9;
-
-  --btn-hover: #f0efef;
-  --btn-active: #e5e5e5;
-
-  --item-text: #5c5e64;
-  --item-hover: #f6f6f6;
-  --item-active-bg: #e8e5e5;
-  --item-active-text: #000;
-
-  --tooltip-bg: #000;
-  --tooltip-text: #fff;
-
-  --switch-bg: #f0f0f0;
-  --switch-active: #fff;
-}
-.dark-theme {
-  --bg-primary: #161a23;
-  --bg-secondary: #2d2f39;
-
-  --logo-text: #c0c0c0;
-
-  --separator: #5c5f65;
-
-  --btn-hover: #202533;
-  --btn-active: #141720;
-
-  --item-text: #8a8c91;
-  --item-hover: #2d2f39;
-  --item-active-bg: #262831;
-  --item-active-text: #fff;
-
-  --tooltip-bg: #2d2f39;
-  --tooltip-text: #d5d5d7;
-
-  --switch-bg: #161a23;
-  --switch-active: #2d2f39;
-}
-
-* {
-  box-sizing: border-box;
-}
-
+     <style>
         body {
+            font-family: Arial, sans-serif;
             margin: 0;
-            background: linear-gradient( 45deg, rgba(215, 219, 232, 1) 50%, rgba(111, 121, 148, 1) 100% );
-            min-height: 100vh;
-            font-family: "Poppins", serif;
+            padding: 0;
+            display: flex;
         }
         .sidebar {
-            display: flex;
-            flex-direction: column;
-            background-color: var(--bg-primary);
-            min-height: 100vh;
-            width: 19rem;
-            transition: width 0.4s, background-color 0.3s;
+            width: 250px;
+            background-color: #0D0D30;
+            color: #8B9EB2;
+            height: 100vh;
+            padding-top: 20px;
+            position: fixed;
+            text-align: center;
         }
-    .header
-        {
-            padding: 1.5rem;
+        .sidebar .menu {
+            display: block;
+            color: #8B9EB2;
+            padding: 15px;
+            text-decoration: none;
+        }
+        .sidebar a:hover {
+            background-color: #5A738E;
+        }
+        .header {
+            width: calc(100% - 250px);
+            background-color:#0D0D30 ;
+            color: #8B9EB2;
+            padding: 15px;
+            text-align: right;
+            position: fixed;
+            left: 250px;
+            top: 0;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background-color: var(--bg-secondary);
-            position: relative;
-            transition: background-color 0.3s;
+            padding-right:15px;
         }
-        a {
-            text-decoration: none;
-            color: var(--logo-text);
-            font-size: 1.3rem;
-            font-weight: 550;
-        }
-        .unfocus,
-        .focus {
-          display: inline-block;
-          max-width: 20rem;
-          overflow: hidden;
-          transition: all 0.4s, color 0.3s;
-        }
-        
-        .focus {
-          outline: 1px dashed transparent;
-          outline-offset: 0.5rem;
-          border-radius: 0.5px;
-        }
-
-        button {
-            background-color: transparent;
-            border: none;
-            cursor: pointer;
-            padding: 0;
-            width: 1.7rem;
-            height: 1.7rem;
+        .header img {
+            height: 40px;
+            width: 40px;
             border-radius: 50%;
-            color: var(--logo-text);
-            max-width: 20rem;
-            transition: background-color 0.3s, max-width 0.4s, opacity 0.4s, visibility 0.4s, color 0.3s;
+            margin-right: 20px;
         }
-        i {
-          font-size: 1rem;
+        .content {
+            margin-left: 250px;
+            padding: 20px;
+            margin-top: 60px;
         }
-
-        &:hover {
-          background-color: var(--btn-hover);
-        }
-
-        &:active {
-          background-color: var(--btn-active);
-        }
-      }
-    }
-
-    .separator-wrapper {
-      position: relative;
-
-      .separator {
-        margin: 0;
-        border: 0.5px solid var(--separator);
-        transition: border-color 0.3s;
-      }
-
-      .minimize-btn {
-        border: 1px solid var(--separator);
-        background-color: var(--bg-primary);
-        display: block;
-        width: 1.9rem;
-        height: 1.9rem;
-        border-radius: 0.5rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%) translateX(50%);
-        right: 0;
-        cursor: pointer;
-        transition: background-color 0.3s, border-color 0.3s;
-
-        input {
-          display: none;
-        }
-
-        i {
-          font-size: 1.2rem;
-          transition: transform 0.3s;
-          color: var(--logo-text);
-          transition: all 0.3s;
-        }
-
-        &:hover {
-          background-color: var(--btn-hover);
-        }
-
-        &:active {
-          background-color: var(--btn-active);
-        }
-      }
-    }
-
-    .navigation {
-      padding: 1.5rem;
-      flex-grow: 1;
-
-      .section {
-        .title-wrapper {
-          height: 1.9rem;
-          position: relative;
-
-          .title {
-            padding-inline: 0.5rem;
-            color: var(--item-text);
-            text-transform: uppercase;
-            transition: all 0.4s, color 0.3s;
-          }
-        }
-
-        .items {
-          padding: 0;
-          margin-block: 0.9rem;
-          list-style-type: none;
-
-          .item {
-            a {
-              text-decoration: none;
-              display: flex;
-              align-items: center;
-              gap: 1rem;
-              padding-inline: 0.5rem;
-              color: var(--item-text);
-              padding-block: 0.8rem;
-              border-radius: 0.4rem;
-              transition: background-color 0.3s, color 0.3s;
-              position: relative;
-
-              i {
-                width: 1rem;
-                transition: all 0.4s;
-              }
-
-              .item-text {
-                max-width: 20rem;
-                transition: all 0.4s;
-              }
-
-              .item-tooltip {
-                position: absolute;
-                background-color: var(--tooltip-bg);
-                color: var(--tooltip-text);
-                left: 109%;
-                padding: 0.4rem;
-                border-radius: 0.3rem;
-                opacity: 0;
-                visibility: hidden;
-                transition: all 0.3s;
-                display: none;
-
-                &:before {
-                  content: "";
-                  position: absolute;
-                  width: 0;
-                  height: 0;
-                  border-top: 8px solid transparent;
-                  border-bottom: 8px solid transparent;
-                  border-right: 8px solid var(--tooltip-bg);
-                  right: 100%;
-                  top: 50%;
-                  transform: translateY(-50%);
-                }
-              }
-
-              &:hover {
-                background-color: var(--item-hover);
-              }
-
-              &:active {
-                background-color: var(--item-active-bg);
-                color: var(--item-active-text);
-              }
-            }
-          }
-        }
-
-        &.settings-section {
-          margin-top: 2rem;
-        }
-      }
-    }
-
-    .footer {
-      background-color: var(--bg-secondary);
-      border-top: 1px solid var(--separator);
-      padding: 1.5rem;
-      transition: background-color 0.3s, border-color 0.3s;
-
-      .switch {
-        display: block;
-        height: 3.1rem;
-        background-color: var(--switch-bg);
-        border-radius: 0.6rem;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        position: relative;
-        cursor: pointer;
-        transition: all 0.3s;
-
-        input {
-          display: none;
-        }
-
-        .item {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 0.5rem;
-          color: var(--item-text);
-          position: relative;
-          z-index: 1;
-          max-width: 20rem;
-          transition: color 0.3s, max-width 0.3s;
-        }
-
-        .active {
-          position: absolute;
-          height: 100%;
-          width: 50%;
-          padding: 0.3rem;
-          transition: transform 0.2s;
-
-          &:before {
-            content: "";
+        .logo {
             display: block;
-            background-color: var(--switch-active);
-            width: 100%;
-            height: 100%;
-            border-radius: 0.6rem;
-            border: 1px solid var(--separator);
-            transform: translateX(0);
-            transition: all 0.3s;
-          }
+            width: 150px;
+            height: 70px;
+            margin-left:25px;
         }
-
-        &:has(input:checked) {
-          .item:last-of-type {
-            color: var(--item-active-text);
-          }
-
-          .active {
-            transform: translateX(100%);
-          }
-        }
-
-        &:not(:has(input:checked)) {
-          .item:first-of-type {
-            color: var(--item-active-text);
-          }
-        }
-      }
-    }
-
-    // minimize styles
-    &:has(#minimize:checked) {
-      width: 9rem;
-
-      .header {
-        a {
-          .unfocus {
-            max-width: 0;
-            opacity: 0;
-            visibility: hidden;
-          }
-
-          .focus {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%) rotate(-15deg);
-            outline-color: var(--logo-text);
-          }
-        }
-
-        button {
-          max-width: 0;
-          opacity: 0;
-          visibility: hidden;
-        }
-      }
-
-      .navigation .section {
-        .title-wrapper .title {
-          position: absolute;
-          left: 50%;
-          transform: translateX(-50%);
-        }
-
-        .items .item a {
-          i {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-          }
-
-          .item-text {
-            max-width: 0;
-            overflow: hidden;
-            opacity: 0;
-            visibility: hidden;
-          }
-
-          .item-tooltip {
-            display: block;
-          }
-
-          &:hover {
-            .item-tooltip {
-              left: 115%;
-              opacity: 1;
-              visibility: visible;
-            }
-          }
-        }
-      }
-
-      .separator-wrapper .minimize-btn i {
-        transform: rotate(180deg);
-      }
-
-      .footer .switch {
-        border-radius: 5rem;
-
-        .item {
-          max-width: 0;
-          overflow: hidden;
-          opacity: 0;
-          visibility: hidden;
-        }
-
-        .active:before {
-          border-radius: 5rem;
-        }
-      }
-    }
-  }
-}
     </style>
+    <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
 </head>
 <body>
-    <section class="sidebar">
-  <div class="header">
-    <a href="#"><span class="focus">L</span><span class="unfocus">ogoipsum</span></a>
-    <button><i class="fa-solid fa-ellipsis-vertical"></i></button>
-  </div>
-  <div class="separator-wrapper">
-    <hr class="separator" />
-    <label for="minimize" class="minimize-btn">
-      <input type="checkbox" id="minimize" />
-      <i class="fa-solid fa-angle-left"></i>
-    </label>
-  </div>
-  <div class="navigation">
-    <div class="section main-section">
-      <div class="title-wrapper">
-        <span class="title">Main</span>
-      </div>
-      <ul class="items">
-        <li class="item">
-          <a href="#">
-            <i class="fa-solid fa-house"></i>
-            <span class="item-text">Dashboard</span>
-            <span class="item-tooltip">Dashboard</span>
-          </a>
-        </li>
-        <li class="item">
-          <a href="#">
-            <i class="fa-solid fa-user"></i>
-            <span class="item-text">Account</span>
-            <span class="item-tooltip">Account</span>
-          </a>
-        </li>
-        <li class="item">
-          <a href="#">
-            <i class="fa-solid fa-file"></i>
-            <span class="item-text">Posts</span>
-            <span class="item-tooltip">Posts</span>
-          </a>
-        </li>
-        <li class="item">
-          <a href="#">
-            <i class="fa-solid fa-calendar"></i>
-            <span class="item-text">Schedules</span>
-            <span class="item-tooltip">Schedules</span>
-          </a>
-        </li>
-      </ul>
-    </div>
-    <div class="section settings-section">
-      <div class="title-wrapper">
-        <span class="title">Settings</span>
-      </div>
-      <ul class="items">
-        <li class="item">
-          <a href="#">
-            <i class="fa-solid fa-bell"></i>
-            <span class="item-text">Notifications</span>
-            <span class="item-tooltip">Notifications</span>
-          </a>
-        </li>
-        <li class="item">
-          <a href="#">
-            <i class="fa-solid fa-gear"></i>
-            <span class="item-text">Settings</span>
-            <span class="item-tooltip">Settings</span>
-          </a>
-        </li>
-      </ul>
-    </div>
-  </div>
- <%-- <div class="footer">
-    <label class="switch" for="theme">
-      <input type="checkbox" id="theme" />
-      <div class="item">
-        <i class="fa-solid fa-sun"></i>
-        <span>Light</span>
-      </div>
-      <div class="item">
-        <i class="fa-solid fa-moon"></i>
-        <span>Dark</span>
-      </div>
-      <span class="active"> </span>
-    </label>
-  </div>--%>
-</section>
     <form id="form1" runat="server">
-        
-
-            <!-- Main Section -->
-            
-                <div class="content">
-                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
-                </div>
-
-            <!-- Footer Section -->
-            <div class="footer">
-                &copy; 2025 WorkNest | All Rights Reserved.
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <a href="AdminHome.aspx">
+                    <img src="../Images/Untitled design (3).png" alt="Logo" class="logo" />
+                </a>
             </div>
+            <h2 style="text-align: center;">Admin Panel</h2>
+            <a class="menu" href="AdminDashboard.aspx">Dashboard</a>
+            <a class="menu" href="Users.aspx">Users</a>
+            <a class="menu" href="Settings.aspx">Settings</a>
+            <a class="menu" href="Logout.aspx">Logout</a>
+        </div>
+        
+        <!-- Header -->
+        <div class="header">
+            <span>Welcome, Admin</span>
+            <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/Add Emp.png" />
+        </div>
+        
+        <!-- Main Content -->
+        <div class="content">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
         </div>
     </form>
 </body>
