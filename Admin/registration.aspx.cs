@@ -139,6 +139,7 @@ namespace WorkNest
                     cmdRole.Parameters.AddWithValue("@EmpId", EmpId);
                     cmdRole.Parameters.AddWithValue("@RoleId", RoleId);
                     cmdRole.Parameters.AddWithValue("@AssignedDate", txtDate.Text);
+                    cmdRole.ExecuteNonQuery();
                     Response.Write("Registration Successful");
                     //Response.Redirect("login.aspx");
                 }
