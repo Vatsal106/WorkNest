@@ -68,6 +68,8 @@
     <Content Include="Admin\AdminDashboard.aspx" />
     <Content Include="Admin\AdminHome.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Images\Logo Blue Transparent.png" />
+    <Content Include="Images\Logo Light Blue Transparent.png" />
     <Content Include="Images\TranLogoLight.png" />
     <Content Include="Images\LOGINIMAGE.png" />
     <Content Include="Images\Add Emp.png" />
