@@ -19,10 +19,10 @@ namespace WorkNest
 
             string username = txtUsername.Text.Trim();
             string password = txtPassword.Text.Trim();
-
+            
             dbConnection dbConn = new dbConnection();
             dbConn.dbConnect();
-            string loginQuery = "SELECT COUNT(1) FROM USER_CREDENTIALS WHERE USER_NAME = @Username AND PASSWORD = @Password";
+            string loginQuery = "SELECT EMPLOYEE_ID FROM USER_CREDENTIALS WHERE USER_NAME = @Username AND PASSWORD = @Password";
             //string imageQuery = "SELECT IMAGE FROM EMPLOYEES WHERE USER_NAME = @Username AND PASSWORD = @Password";
             try
             {
@@ -32,6 +32,40 @@ namespace WorkNest
                 SqlCommand loginCmd = new SqlCommand(loginQuery, dbConn.con);
                 loginCmd.Parameters.AddWithValue("@Username", username);
                 loginCmd.Parameters.AddWithValue("@Password", password);
+                object empIdObj = loginCmd.ExecuteScalar();
+                if (empIdObj == null)
+                {
+                    lblMessage.Text = "Invalid Username or Password!";
+                    lblMessage.ForeColor = System.Drawing.Color.Red;
+                    return;
+                }
+                int empId = Convert.ToInt32(empIdObj);
+                string roleQuery = "SELECT ROLE_ID FROM EMPLOYEE_ROLES WHERE EMPLOYEE_ID = @empId";
+                SqlCommand roleCmd = new SqlCommand(roleQuery, dbConn.con);
+                roleCmd.Parameters.AddWithValue("@empId", empId);
+                object roleObj = roleCmd.ExecuteScalar();
+                if (roleObj == null)
+                {
+                    lblMessage.Text = "Role not assigned!";
+                    lblMessage.ForeColor = System.Drawing.Color.Red;
+                    return;
+                }
+                if (roleObj != null)
+                {
+                    int roleId = Convert.ToInt32(roleObj);
+
+                    
+                    if (roleId == 1) 
+                    {
+                        Response.Redirect("Admin/AdminHome.aspx");
+                    }
+                    else
+                    {
+                        Response.Redirect("Admin/registration.aspx");
+                    }
+                }
+               
+            
                 int count = (int)loginCmd.ExecuteScalar();
                 if (count == 1)
                 {
@@ -70,7 +104,7 @@ namespace WorkNest
             {
                 dbConn.con.Close();
             }
-
+            
         }
     }
 }

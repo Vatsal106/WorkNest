@@ -13,7 +13,7 @@
             display: flex;
         }
         .sidebar {
-            width: 250px;
+            width: 200px;
             background-color: #0D0D30;
             color: #8B9EB2;
             height: 100vh;
@@ -37,12 +37,12 @@
             padding: 15px;
             text-align: right;
             position: fixed;
-            left: 250px;
+            left: 200px;
             top: 0;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding-right:15px;
+            padding-right:40px;
         }
         .header img {
             height: 40px;
@@ -59,8 +59,9 @@
             display: block;
             width: 150px;
             height: 70px;
-            margin-left:25px;
+            margin-left:13px;
         }
+        
     </style>
     <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
 </head>
@@ -82,7 +83,7 @@
         
         <!-- Header -->
         <div class="header">
-            <span>Welcome, Admin</span>
+            <span><div class="welcome-text">Welcome, Admin</div></span>
             <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/Add Emp.png" />
         </div>
         
