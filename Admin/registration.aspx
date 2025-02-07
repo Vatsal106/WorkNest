@@ -281,6 +281,12 @@
                         <asp:DropDownList ID="ddlDept" runat="server" CssClass="form-select" onchange="selectedDept(this)"></asp:DropDownList>
                     </div>
                 </div>
+                 <div class="input-group">
+                      <div class="input-col">
+     <asp:Label runat="server" Text="Role:" AssociatedControlID="ddlRole" CssClass="form-label" /><asp:Label runat="server" Text="" ID="lblRole" CssClass="text-danger"></asp:Label>
+     <asp:DropDownList ID="ddlRole" runat="server" CssClass="form-select" onchange="selectedDept(this)"></asp:DropDownList>
+ </div>
+                 </div>
                 <div class="input-group">
                     <asp:Label runat="server" Text="Upload Image:" AssociatedControlID="fuImage" CssClass="form-label" />
                     <asp:FileUpload ID="fuImage" runat="server" CssClass="form-control" />

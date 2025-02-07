@@ -28,7 +28,7 @@ namespace WorkNest
             if (!IsPostBack)
             {
                 bindDept();
-
+                bindRoles();
             }
         }
         // check user duplication
@@ -133,7 +133,7 @@ namespace WorkNest
                     cmdUser.ExecuteNonQuery();
 
                     Response.Write("Registration Successful");
-                    Response.Redirect("login.aspx");
+                    //Response.Redirect("login.aspx");
                 }
                 else if (!imgSeted)
                 {
@@ -219,6 +219,19 @@ namespace WorkNest
                 lblEemail.Text = "";
                 checkEmailduplicate = true;
             }
+        }
+        public void bindRoles()
+        {
+            dbConn.dbConnect();
+            string query = "SELECT * FROM ROLES";
+            SqlDataAdapter adpt = new SqlDataAdapter(query, dbConn.con);
+            DataSet ds = new DataSet();
+            adpt.Fill(ds);
+            ddlRole.DataSource = ds;
+            ddlRole.DataTextField = "ROLE_NAME";
+            ddlRole.DataValueField = "ROLE_ID";
+            ddlRole.DataBind();
+            ddlRole.Items.Insert(0, "---select---");
         }
     }
 
