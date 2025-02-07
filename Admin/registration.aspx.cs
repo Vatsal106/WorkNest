@@ -132,6 +132,13 @@ namespace WorkNest
 
                     cmdUser.ExecuteNonQuery();
 
+                    int EmpId = Convert.ToInt32(cmd.ExecuteScalar()); ;
+                    int RoleId = Convert.ToInt32(ddlRole.SelectedValue);
+                    string queryRole = "INSERT INTO EMPLOYEE_ROLES (EMPLOYEE_ID,ROLE_ID,ASSIGNED_DATE) VALUES(@EmpId,@RoleId,@AssignedDate)";
+                    SqlCommand cmdRole = new SqlCommand(queryRole, dbConn.con);
+                    cmdRole.Parameters.AddWithValue("@EmpId", EmpId);
+                    cmdRole.Parameters.AddWithValue("@RoleId", RoleId);
+                    cmdRole.Parameters.AddWithValue("@AssignedDate", txtDate.Text);
                     Response.Write("Registration Successful");
                     //Response.Redirect("login.aspx");
                 }
@@ -202,8 +209,10 @@ namespace WorkNest
         {
             dbConn.dbConnect();
             string emaail = txtEmail.Text.Trim();
-            string queryEmail = "SELECT COUNT(*) FROM EMPLOYEE WHERE EMAIL ='" + emaail + "'";
+            string queryEmail = "SELECT COUNT(*) FROM EMPLOYEE WHERE EMAIL = @Email";
             SqlCommand cmdEmail = new SqlCommand(queryEmail, dbConn.con);
+            cmdEmail.Parameters.AddWithValue("@Email", emaail);
+
 
             int count = Convert.ToInt32(cmdEmail.ExecuteScalar());
             dbConn.con.Close();
