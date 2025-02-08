@@ -11,6 +11,7 @@
             margin: 0;
             padding: 0;
             display: flex;
+            flex-direction: column;
         }
         .sidebar {
             width: 200px;
@@ -61,8 +62,93 @@
             height: 70px;
             margin-left:13px;
         }
-        
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                padding-top: 10px;
+            }
+            .sidebar .logo {
+                margin: 0 auto;
+            }
+            .sidebar h2 {
+                font-size: 1.5em;
+            }
+            .sidebar .menu {
+                padding: 10px;
+            }
+            .header {
+                width: 100%;
+                left: 0;
+                padding: 10px;
+                position: relative;
+                text-align: center;
+            }
+            .content {
+                margin-left: 0;
+                padding: 10px;
+                margin-top: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .sidebar h2 {
+                font-size: 1.2em;
+            }
+            .sidebar .menu {
+                padding: 8px;
+                font-size: 0.9em;
+            }
+            .header {
+                flex-direction: column;
+                align-items: center;
+            }
+            .header img {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+            .content {
+                padding: 5px;
+            }
+        }
+        @media (max-width: 425px) {
+            .header {
+                flex-direction: column;
+                align-items: center;
+                padding: 10px;
+            }
+            .header img {
+                margin: 5px 0;
+            }
+            .content {
+                padding: 10px;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 375px) {
+            .header {
+                padding: 5px;
+                font-size: 14px;
+            }
+            .content {
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 320px) {
+            .header {
+                font-size: 12px;
+            }
+            .content {
+                font-size: 12px;
+            }
+        }
     </style>
+
     <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
 </head>
 <body>
