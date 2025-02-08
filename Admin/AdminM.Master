@@ -1,11 +1,10 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="AdminM.master.cs" Inherits="WorkNest.Project_Manager.AdminM" %>
 
 <!DOCTYPE html>
-
 <html>
 <head runat="server">
     <title>Admin Panel</title>
-     <style>
+    <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -13,6 +12,7 @@
             display: flex;
             flex-direction: column;
         }
+        
         .sidebar {
             width: 200px;
             background-color: #0D0D30;
@@ -20,157 +20,150 @@
             height: 100vh;
             padding-top: 20px;
             position: fixed;
+            top:100px;
             text-align: center;
+            transition: all 0.3s;
         }
+        
         .sidebar .menu {
             display: block;
             color: #8B9EB2;
             padding: 15px;
             text-decoration: none;
         }
+        
         .sidebar a:hover {
             background-color: #5A738E;
         }
+        
         .header {
-            width: calc(105% - 250px);
-            background-color:#0D0D30 ;
+            width:100%;
+            background-color: #0D0D30;
             color: #8B9EB2;
             padding: 15px;
             text-align: right;
             position: fixed;
-            left: 200px;
+            left: 0;
             top: 0;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding-right:40px;
+            padding-right: 40px;
         }
-        .header img {
-            height: 40px;
-            width: 40px;
-            border-radius: 50%;
-            margin-right: 20px;
-        }
+        
         .content {
-            margin-left: 250px;
+            margin-left: 220px;
             padding: 20px;
-            margin-top: 60px;
+            margin-top: 100px;
         }
-        .logo {
+        
+        .Profile {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-left: 10px;
+        }
+        
+        .ddlAdd {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .ddlAdd button {
+            background-color: #5A738E;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        
+        .ddlAdd .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #ffffff;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            border-radius: 5px;
+        }
+        
+        .ddlAdd .dropdown-content a {
+            color: #0D0D30;
+            padding: 12px 16px;
+            text-decoration: none;
             display: block;
-            width: 150px;
-            height: 70px;
-            margin-left:13px;
+            transition: background 0.3s;
         }
-
-        /* Responsive Styles */
+        
+        .ddlAdd .dropdown-content a:hover {
+            background-color: #5A738E;
+            color: white;
+        }
+        
+        .ddlAdd:hover .dropdown-content {
+            display: block;
+        }
+        
         @media (max-width: 768px) {
             .sidebar {
                 width: 100%;
                 height: auto;
                 position: relative;
-                padding-top: 10px;
+                display: none;
             }
-            .sidebar .logo {
-                margin: 0 auto;
+            
+            .sidebar.active {
+                display: block;
             }
-            .sidebar h2 {
-                font-size: 1.5em;
-            }
-            .sidebar .menu {
-                padding: 10px;
-            }
+            
             .header {
                 width: 100%;
                 left: 0;
-                padding: 10px;
                 position: relative;
                 text-align: center;
             }
+            
             .content {
                 margin-left: 0;
-                padding: 10px;
-                margin-top: 20px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .sidebar h2 {
-                font-size: 1.2em;
-            }
-            .sidebar .menu {
-                padding: 8px;
-                font-size: 0.9em;
-            }
-            .header {
-                flex-direction: column;
-                align-items: center;
-            }
-            .header img {
-                margin-right: 0;
-                margin-bottom: 10px;
-            }
-            .content {
-                padding: 5px;
-            }
-        }
-        @media (max-width: 425px) {
-            .header {
-                flex-direction: column;
-                align-items: center;
-                padding: 10px;
-            }
-            .header img {
-                margin: 5px 0;
-            }
-            .content {
-                padding: 10px;
-                font-size: 14px;
-            }
-        }
-
-        @media (max-width: 375px) {
-            .header {
-                padding: 5px;
-                font-size: 14px;
-            }
-            .content {
-                font-size: 13px;
-            }
-        }
-
-        @media (max-width: 320px) {
-            .header {
-                font-size: 12px;
-            }
-            .content {
-                font-size: 12px;
             }
         }
     </style>
-
-    <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
+    <div>
+        <asp:ContentPlaceHolder ID="Head" runat="server"></asp:ContentPlaceHolder>
+    </div>
 </head>
 <body>
     <form id="form1" runat="server">
-        <!-- Sidebar -->
-        <div class="sidebar">
+        <!-- Header -->
+        <div class="header">
             <div class="logo">
                 <a href="AdminHome.aspx">
-                    <img src="../Images/Logo Light Blue Transparent.png" alt="Logo" class="logo" />
+                    <img src="../Images/Logo Light Blue Transparent.png" alt="Logo" class="logo" width="150" height="70"/>
                 </a>
             </div>
-            <h3 style="text-align: center;">Admin Panel</h3>
+            <span><div class="welcome-text">Welcome, Admin</div></span>
+            
+            <!-- Dropdown Add Button -->
+            <div class="ddlAdd">
+                <button>Add</button>
+                <div class="dropdown-content">
+                    <a href="registration.aspx">Add Employee</a>
+                    <a href="AddProject.aspx">Add Project</a>
+                    <a href="ChangeRole.aspx">Change in Role</a>
+                </div>
+            </div>
+            
+            <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/Add Emp.png" CssClass="Profile" />
+        </div>
+        
+        <!-- Sidebar (transforms into navbar on smaller screens) -->
+        <div class="sidebar">
+            <h3>Admin Panel</h3>
             <a class="menu" href="AdminDashboard.aspx">Dashboard</a>
             <a class="menu" href="Users.aspx">Users</a>
             <a class="menu" href="Settings.aspx">Settings</a>
             <a class="menu" href="Logout.aspx">Logout</a>
-        </div>
-        
-        <!-- Header -->
-        <div class="header">
-            <span><div class="welcome-text">Welcome, Admin</div></span>
-            <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/Add Emp.png" />
         </div>
         
         <!-- Main Content -->

@@ -11,7 +11,7 @@ namespace WorkNest.Admin
 {
 
 
-    public partial class AdminDeshboard
+    public partial class AdminDashboard
     {
     }
 }

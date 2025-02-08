@@ -66,7 +66,7 @@ namespace WorkNest
             //checkUserduplicate = true;
             EmailChange(sender, e);
             checkUser(sender, e);
-            Lable();
+            //Lable();
             try
             {
                 //if (string.IsNullOrWhiteSpace(txtName.Text) ||
@@ -232,7 +232,7 @@ namespace WorkNest
         public void bindRoles()
         {
             dbConn.dbConnect();
-            string query = "SELECT * FROM ROLES";
+            string query = "SELECT * FROM ROLES where ROLE_ID <> 1";
             SqlDataAdapter adpt = new SqlDataAdapter(query, dbConn.con);
             DataSet ds = new DataSet();
             adpt.Fill(ds);

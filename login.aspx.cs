@@ -19,7 +19,7 @@ namespace WorkNest
 
             string username = txtUsername.Text.Trim();
             string password = txtPassword.Text.Trim();
-            
+
             dbConnection dbConn = new dbConnection();
             dbConn.dbConnect();
             string loginQuery = "SELECT EMPLOYEE_ID FROM USER_CREDENTIALS WHERE USER_NAME = @Username AND PASSWORD = @Password";
@@ -54,18 +54,22 @@ namespace WorkNest
                 {
                     string roleName = roleObj.ToString();
 
-                    
-                    if (roleName == "Admin") 
+
+                    if (roleName == "Admin")
                     {
                         Response.Redirect("Admin/AdminHome.aspx");
                     }
+                    else if (roleName == "Project_Manager")
+                    {
+                        Response.Redirect("Project_Manager/P_ManagerHome.aspx");
+                    }
                     else
                     {
-                        Response.Redirect("Admin/registration.aspx");
+                        Response.Redirect("P_Member/MemberHome.aspx");
                     }
                 }
-               
-            
+
+
                 int count = (int)loginCmd.ExecuteScalar();
                 if (count == 1)
                 {
@@ -104,7 +108,7 @@ namespace WorkNest
             {
                 dbConn.con.Close();
             }
-            
+
         }
     }
 }

@@ -11,17 +11,17 @@ namespace WorkNest.Project_Manager
 {
 
 
-    public partial class P_Manager
+    public partial class AdminM
     {
 
         /// <summary>
-        /// head control.
+        /// Head control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder head;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder Head;
 
         /// <summary>
         /// form1 control.
@@ -42,12 +42,12 @@ namespace WorkNest.Project_Manager
         protected global::System.Web.UI.WebControls.Image Image1;
 
         /// <summary>
-        /// ContentPlaceHolder3 control.
+        /// ContentPlaceHolder1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolder3;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolder1;
     }
 }

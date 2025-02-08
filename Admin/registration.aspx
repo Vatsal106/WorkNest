@@ -247,6 +247,7 @@
         <div class="form-section">
             <h2 class="text-center mb-4">Add new Employee</h2>
             <form id="registration" runat="server" class="form-Cont" novalidate>
+                <a href="AdminHome.aspx"><-</a>
                 <div class="input-group">
                     <asp:TextBox class="mr-2" ID="txtName" runat="server" CssClass="form-control" oninput="checkName(this)" placeholder="Enter FullName"></asp:TextBox>
                     <asp:Label runat="server" Text="" ID="lblEname"></asp:Label>
@@ -300,7 +301,7 @@
                     <asp:FileUpload ID="fuImage" runat="server" CssClass="form-control" />
                 </div>
                 <div class="text-center">
-                    <asp:Label ID="lblError" class="btn" runat="server" CssClass="text-danger"></asp:Label><br />
+                    <asp:Label ID="lblError" class="btn" runat="server"></asp:Label><br />
                     <asp:Button ID="btnSubmit" class="btn" runat="server" Text="Submit" CssClass="btn btn-primary" OnClick="btnSubmit_Click" OnClientClick="return fullFormvalidate()" />
                     <asp:Button ID="btnReset" runat="server" Text="Reset" CssClass="btn btn-secondary" OnClick="btnReset_Click" />
                 </div>
