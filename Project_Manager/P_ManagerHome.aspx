@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Project_Manager/P_Manager.Master" AutoEventWireup="true" CodeBehind="P_ManagerHome.aspx.cs" Inherits="WorkNest.Project_Manager.P_ManagerHome" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 
     <style>
         .functionality-box {
@@ -44,7 +44,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder3" runat="server">
     <div class="container">
-        <h2 class="text-center mt-4">Project Manager Dashboard</h2>
+        <h2 class="text-center mt-4">Project Manager</h2>
 
         <div class="row mt-4">
             <asp:Repeater ID="rptFunctionalities" runat="server">

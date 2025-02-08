@@ -4,7 +4,7 @@
 
 <html>
 <head runat="server">
-   <title>Admin Panel</title>
+   <title>Project Manager Panel</title>
  <style>
     body {
         font-family: Arial, sans-serif;
