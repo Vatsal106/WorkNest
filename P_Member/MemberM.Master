@@ -1,0 +1,206 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MemberM.master.cs" Inherits="WorkNest.P_Member.MemberM" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title>Project Member Panel</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar {
+            width: 200px;
+            background-color: #0D0D30;
+            color: #8B9EB2;
+            height: 100vh;
+            padding-top: 20px;
+            position: fixed;
+            text-align: center;
+        }
+
+            .sidebar .menu {
+                display: block;
+                color: #8B9EB2;
+                padding: 15px;
+                text-decoration: none;
+            }
+
+            .sidebar a:hover {
+                background-color: #5A738E;
+            }
+
+        .header {
+            width: calc(105% - 250px);
+            background-color: #0D0D30;
+            color: #8B9EB2;
+            padding: 15px;
+            text-align: right;
+            position: fixed;
+            left: 200px;
+            top: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-right: 40px;
+        }
+
+            .header img {
+                height: 40px;
+                width: 40px;
+                border-radius: 50%;
+                margin-right: 20px;
+            }
+
+        .content {
+            margin-left: 250px;
+            padding: 20px;
+            margin-top: 60px;
+        }
+
+        .logo {
+            display: block;
+            width: 150px;
+            height: 70px;
+            margin-left: 13px;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                padding-top: 10px;
+            }
+
+                .sidebar .logo {
+                    margin: 0 auto;
+                }
+
+                .sidebar h2 {
+                    font-size: 1.5em;
+                }
+
+                .sidebar .menu {
+                    padding: 10px;
+                }
+
+            .header {
+                width: 100%;
+                left: 0;
+                padding: 10px;
+                position: relative;
+                text-align: center;
+            }
+
+            .content {
+                margin-left: 0;
+                padding: 10px;
+                margin-top: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .sidebar h2 {
+                font-size: 1.2em;
+            }
+
+            .sidebar .menu {
+                padding: 8px;
+                font-size: 0.9em;
+            }
+
+            .header {
+                flex-direction: column;
+                align-items: center;
+            }
+
+                .header img {
+                    margin-right: 0;
+                    margin-bottom: 10px;
+                }
+
+            .content {
+                padding: 5px;
+            }
+        }
+
+        @media (max-width: 425px) {
+            .header {
+                flex-direction: column;
+                align-items: center;
+                padding: 10px;
+            }
+
+                .header img {
+                    margin: 5px 0;
+                }
+
+            .content {
+                padding: 10px;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 375px) {
+            .header {
+                padding: 5px;
+                font-size: 14px;
+            }
+
+            .content {
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 320px) {
+            .header {
+                font-size: 12px;
+            }
+
+            .content {
+                font-size: 12px;
+            }
+        }
+    </style>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <a href="AdminHome.aspx">
+                    <img src="../Images/Logo Light Blue Transparent.png" alt="Logo" class="logo" />
+                </a>
+            </div>
+            <h3 style="text-align: center;">Project Member Panel</h3>
+            <a class="menu" href="#">Dashboard</a>
+            <a class="menu" href="#">Project Lists</a>
+            <a class="menu" href="#">Project Members</a>
+            <a class="menu" href="#">Settings</a>
+            <a class="menu" href="#">Logout</a>
+        </div>
+
+        <!-- Header -->
+        <div class="header">
+            <span>
+                <div class="welcome-text">Welcome, Project Member</div>
+            </span>
+            <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/Add Emp.png" />
+        </div>
+        <!-- Main Content -->
+        <div class="content">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+</body>
+</html>
