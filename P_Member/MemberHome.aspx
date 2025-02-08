@@ -50,7 +50,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container">
         <div class="dashboard-header">
-            <h2>Project Members Dashboard</h2>
+            <h2>Project Member</h2>
         </div>
         
         <div class="row mt-4">
