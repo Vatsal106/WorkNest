@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace WorkNest.Admin
 {
@@ -28,8 +24,8 @@ namespace WorkNest.Admin
                 new { Title = "Notifications & Alerts", Description = "Receive important updates on approvals and deadlines." }
             };
 
-            rptFunctionalities.DataSource = functionalities;
-            rptFunctionalities.DataBind();
+            rptfunctionalities.DataSource = functionalities;
+            rptfunctionalities.DataBind();
         }
     }
 }

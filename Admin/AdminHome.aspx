@@ -35,7 +35,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
      <h2>Admin Dashboard - Functionalities</h2>
     
-    <asp:Repeater ID="rptFunctionalities" runat="server">
+    <asp:Repeater ID="rptfunctionalities" runat="server">
         <ItemTemplate>
             <div class="functionality-box">
                 <strong><%# Eval("Title") %></strong>
