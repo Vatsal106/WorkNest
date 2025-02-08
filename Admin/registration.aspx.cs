@@ -132,16 +132,18 @@ namespace WorkNest
 
                     cmdUser.ExecuteNonQuery();
 
-                    int EmpId = Convert.ToInt32(cmd.ExecuteScalar()); ;
+                    //int EmpId = Convert.ToInt32(cmd.ExecuteScalar()); 
                     int RoleId = Convert.ToInt32(ddlRole.SelectedValue);
                     string queryRole = "INSERT INTO EMPLOYEE_ROLES (EMPLOYEE_ID,ROLE_ID,ASSIGNED_DATE) VALUES(@EmpId,@RoleId,@AssignedDate)";
                     SqlCommand cmdRole = new SqlCommand(queryRole, dbConn.con);
-                    cmdRole.Parameters.AddWithValue("@EmpId", EmpId);
+                    cmdRole.Parameters.AddWithValue("@EmpId", empid);
                     cmdRole.Parameters.AddWithValue("@RoleId", RoleId);
-                    cmdRole.Parameters.AddWithValue("@AssignedDate", txtDate.Text);
+                    cmdRole.Parameters.AddWithValue("@AssignedDate", DateTime.Now.Date);
                     cmdRole.ExecuteNonQuery();
-                    Response.Write("Registration Successful");
-                    //Response.Redirect("login.aspx");
+
+                    btnReset_Click(sender, e);
+                    lblError.Text = "Employee added!!";
+                    lblError.ForeColor = Color.Green;
                 }
                 else if (!imgSeted)
                 {
@@ -185,12 +187,9 @@ namespace WorkNest
             lblError.Text = string.Empty;
             lblEemail.Text = string.Empty;
             //lblCon.Text = string.Empty;
-
-
-
-            lblLength.Text = "At least 8 characters";
-            lblNumberOrSymbol.Text = "At least one number (0-9) or a symbol";
-            lblCase.Text = "Lowercase (a-z) and uppercase (A-Z)";
+            //lblLength.Text = "At least 8 characters";
+            //lblNumberOrSymbol.Text = "At least one number (0-9) or a symbol";
+            //lblCase.Text = "Lowercase (a-z) and uppercase (A-Z)";
         }
         public void bindDept()
         {

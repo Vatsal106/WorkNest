@@ -176,10 +176,11 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background: #fff ;
+            background: #fff;
             font-family: Arial, sans-serif;
             padding: 10px;
         }
+
         .container {
             display: flex;
             flex-wrap: wrap;
@@ -187,62 +188,70 @@
             width: 90%;
             border-radius: 10px;
             overflow: hidden;
-           box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
-            padding:0;
+            box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+            padding: 0;
         }
+
         .image-section img {
             width: 100%;
-            height:640px;
+            height: 640px;
         }
+
         .form-section {
             width: 50%;
             padding: 40px;
-            background:#8B9EB2;
-            color:#0D0D30;
+            background: #8B9EB2;
+            color: #0D0D30;
         }
-        .image-section{
-            width:50%;
+
+        .image-section {
+            width: 50%;
         }
+
         @media (max-width: 700px) {
             .container {
                 flex-direction: column;
             }
+
             .image-section {
                 width: 100%;
                 height: 100%;
             }
+
             .form-section {
                 width: 100%;
             }
         }
-        .input-group{
-            margin-bottom:10px;
-            border-radius:13px;
-            display:flex;
-            justify-content:space-between;
-            width:100%
-            
 
+        .input-group {
+            margin-bottom: 10px;
+            border-radius: 13px;
+            display: flex;
+            justify-content: space-between;
+            width: 100%
         }
-        .input-col{
-            width:48%;
+
+        .input-col {
+            width: 48%;
         }
-       
+        .input-col-row{
+            width:33%;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="image-section">
-            <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/Add Emp.png"  />
+            <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/Add Emp.png" />
         </div>
         <div class="form-section">
             <h2 class="text-center mb-4">Add new Employee</h2>
             <form id="registration" runat="server" class="form-Cont" novalidate>
                 <div class="input-group">
                     <asp:TextBox class="mr-2" ID="txtName" runat="server" CssClass="form-control" oninput="checkName(this)" placeholder="Enter FullName"></asp:TextBox>
-                     <asp:Label runat="server" Text="" ID="lblEname" ></asp:Label>
+                    <asp:Label runat="server" Text="" ID="lblEname"></asp:Label>
                 </div>
-                     
+
                 <div class="input-group">
                     <asp:TextBox ID="txtPhone" runat="server" TextMode="Number" CssClass="form-control" oninput="PhoneSize(this)" placeholder="Enter Phone Number"></asp:TextBox>
                     <asp:Label ID="lblEphone" runat="server" CssClass="text-danger"></asp:Label>
@@ -251,7 +260,7 @@
                     <asp:TextBox ID="txtEmail" runat="server" TextMode="Email" CssClass="form-control" OnTextChanged="EmailChange" AutoPostBack="true" placeholder="Email Address"></asp:TextBox>
                     <asp:Label runat="server" Text="  " ID="lblEemail" CssClass="text-danger"></asp:Label>
                 </div>
-                   
+
 
                 <div class="input-group md-12">
                     <asp:TextBox ID="txtUsername" runat="server" CssClass="form-control" AutoPostBack="True" OnTextChanged="checkUser" placeholder="Select Username"></asp:TextBox>
@@ -267,26 +276,25 @@
                     </div>
                 </div>
                 <div>
-                        <asp:Label ID="lblLength" runat="server" Text="Password must Contain At least 8 characters , " ForeColor="#0D0D30"></asp:Label>
-                        <asp:Label ID="lblNumberOrSymbol" runat="server" Text="At least one number (0-9) or a symbol, " ForeColor="#0D0D30"></asp:Label>
-                        <asp:Label ID="lblCase" runat="server" Text="Lowercase (a-z) and uppercase (A-Z)." ForeColor="#0D0D30"></asp:Label>
-                    </div>
+                    <asp:Label ID="lblLength" runat="server" Text="Password must Contain At least 8 characters , " ForeColor="#0D0D30"></asp:Label>
+                    <asp:Label ID="lblNumberOrSymbol" runat="server" Text="At least one number (0-9) or a symbol, " ForeColor="#0D0D30"></asp:Label>
+                    <asp:Label ID="lblCase" runat="server" Text="Lowercase (a-z) and uppercase (A-Z)." ForeColor="#0D0D30"></asp:Label>
+                </div>
                 <div class="input-group">
-                    <div class="input-col">
+                    <div class="input-col-row">
                         <asp:Label runat="server" Text="Date of Hiring:" AssociatedControlID="txtDate" CssClass="form-label" />
                         <asp:TextBox ID="txtDate" runat="server" TextMode="Date" CssClass="form-control"></asp:TextBox>
                     </div>
-                    <div class="input-col">
+                    <div class="input-col-row">
                         <asp:Label runat="server" Text="Department:" AssociatedControlID="ddlDept" CssClass="form-label" /><asp:Label runat="server" Text="" ID="lblEdept" CssClass="text-danger"></asp:Label>
                         <asp:DropDownList ID="ddlDept" runat="server" CssClass="form-select" onchange="selectedDept(this)"></asp:DropDownList>
                     </div>
+                    <div class="input-col-row">
+                        <asp:Label runat="server" Text="Role:" AssociatedControlID="ddlRole" CssClass="form-label" /><asp:Label runat="server" Text="" ID="lblRole" CssClass="text-danger"></asp:Label>
+                        <asp:DropDownList ID="ddlRole" runat="server" CssClass="form-select" onchange="selectedDept(this)"></asp:DropDownList>
+                    </div>
                 </div>
-                 <div class="input-group">
-                      <div class="input-col">
-     <asp:Label runat="server" Text="Role:" AssociatedControlID="ddlRole" CssClass="form-label" /><asp:Label runat="server" Text="" ID="lblRole" CssClass="text-danger"></asp:Label>
-     <asp:DropDownList ID="ddlRole" runat="server" CssClass="form-select" onchange="selectedDept(this)"></asp:DropDownList>
- </div>
-                 </div>
+               
                 <div class="input-group">
                     <asp:Label runat="server" Text="Upload Image:" AssociatedControlID="fuImage" CssClass="form-label" />
                     <asp:FileUpload ID="fuImage" runat="server" CssClass="form-control" />
