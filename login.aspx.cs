@@ -50,12 +50,12 @@ namespace WorkNest
                     return;
                 }
 
-                string roleName = roleObj.ToString().Trim();
+                string roleName = roleObj.ToString();
 
                 // Store session variables
                 Session["Username"] = username;
                 Session["EmployeeID"] = empId;
-                Session["Role"] = roleName;
+                Session["UserRole"] = roleName;
 
                 // Redirect based on user role
                 if (roleName == "Admin")

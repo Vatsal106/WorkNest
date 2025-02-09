@@ -7,7 +7,7 @@ namespace WorkNest
         protected void Page_Load(object sender, EventArgs e)
         {
             Session.Clear();   // Clear all session data
-            Session.Abandon();
+            //Session.Abandon();
         }
     }
 }

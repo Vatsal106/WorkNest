@@ -11,7 +11,7 @@ namespace WorkNest.Project_Manager
 {
 
 
-    public partial class AdminM
+    public partial class P_Manager
     {
 
         /// <summary>

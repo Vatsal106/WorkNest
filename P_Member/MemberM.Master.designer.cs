@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WorkNest.Project_Manager
+namespace WorkNest.P_Member
 {
 
 
-    public partial class AdminM
+    public partial class MemberM
     {
 
         /// <summary>

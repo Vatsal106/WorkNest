@@ -7,10 +7,10 @@ namespace WorkNest.P_Member
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["UserRole"] == null || Session["UserRole"].ToString() != "Project_Member")
-            {
-                Response.Redirect("~/AccessDenied.aspx");
-            }
+            //if (Session["UserRole"] == null || Session["UserRole"].ToString() != "Project_Member")
+            //{
+            //    Response.Redirect("~/AccessDenied.aspx");
+            //}
             if (!IsPostBack)
             {
                 LoadProjectMemberTasks();

@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="AdminM.master.cs" Inherits="WorkNest.Project_Manager.AdminM" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="P_Manager.master.cs" Inherits="WorkNest.Project_Manager.P_Manager" %>
 
 <!DOCTYPE html>
 <html>
