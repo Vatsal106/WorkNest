@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Project_Manager/P_Manager.Master" AutoEventWireup="true" CodeBehind="P_ManagerHome.aspx.cs" Inherits="WorkNest.Project_Manager.P_ManagerHome" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
+<asp:Content ID="Content1" ContentPlaceHolderID="Head2" runat="server">
      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 
     <style>
@@ -42,7 +42,7 @@
         }
     </style>
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
     <div class="container">
         <h2 class="text-center mt-4">Project Manager Dashboard</h2>
 

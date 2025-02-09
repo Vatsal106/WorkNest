@@ -89,11 +89,11 @@
         }
     </style>
      <div >
-     <asp:ContentPlaceHolder ID="Head" runat="server"></asp:ContentPlaceHolder>
+     <asp:ContentPlaceHolder ID="Head3" runat="server"></asp:ContentPlaceHolder>
  </div>
 </head>
 <body>
-    <form id="form1" runat="server">
+    <form id="MemberForm" runat="server">
         <!-- Header -->
         <div class="header">
             <div class="logo">
@@ -102,7 +102,7 @@
                 </a>
             </div>
             <span><div class="welcome-text">Welcome, Admin</div></span>
-            <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/Add Emp.png" CssClass="Profile" />
+            <asp:Image ID="MemberProfile" runat="server" ImageUrl="~/Images/Add Emp.png" CssClass="Profile" />
         </div>
         
         <!-- Sidebar (transforms into navbar on smaller screens) -->
@@ -116,7 +116,7 @@
         
         <!-- Main Content -->
         <div class="content">
-            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder3" runat="server"></asp:ContentPlaceHolder>
         </div>
     </form>
 </body>

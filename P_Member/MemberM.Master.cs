@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace WorkNest.P_Member
 {
@@ -11,7 +6,10 @@ namespace WorkNest.P_Member
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["UserRole"] == null || Session["UserRole"].ToString() != "Project_Member")
+            {
+                Response.Redirect("~/AccessDenied.aspx");
+            }
         }
     }
 }

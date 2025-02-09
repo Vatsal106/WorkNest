@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace WorkNest.Project_Manager
 {
@@ -11,6 +7,10 @@ namespace WorkNest.Project_Manager
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["UserRole"] == null || Session["UserRole"].ToString() != "Project_Manager")
+            {
+                Response.Redirect("~/AccessDenied.aspx");
+            }
             if (!IsPostBack)
             {
                 LoadFunctionalities();
