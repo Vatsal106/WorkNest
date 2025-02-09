@@ -235,7 +235,7 @@
             width: 48%;
         }
         .input-col-row{
-            width:33%;
+            width:48%;
         }
     </style>
 </head>
@@ -290,10 +290,10 @@
                         <asp:Label runat="server" Text="Department:" AssociatedControlID="ddlDept" CssClass="form-label" /><asp:Label runat="server" Text="" ID="lblEdept" CssClass="text-danger"></asp:Label>
                         <asp:DropDownList ID="ddlDept" runat="server" CssClass="form-select" onchange="selectedDept(this)"></asp:DropDownList>
                     </div>
-                    <div class="input-col-row">
+                   <%-- <div class="input-col-row">
                         <asp:Label runat="server" Text="Role:" AssociatedControlID="ddlRole" CssClass="form-label" /><asp:Label runat="server" Text="" ID="lblRole" CssClass="text-danger"></asp:Label>
                         <asp:DropDownList ID="ddlRole" runat="server" CssClass="form-select" onchange="selectedDept(this)"></asp:DropDownList>
-                    </div>
+                    </div>--%>
                 </div>
                
                 <div class="input-group">

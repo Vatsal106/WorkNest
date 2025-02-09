@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace WorkNest.Admin
@@ -29,8 +25,13 @@ namespace WorkNest.Admin
         public void bindProjectManagerName()
         {
             dbConn.dbConnect();
-            string query = "SELECT E.EMPLOYEE_ID,E.FULL_NAME FROM EMPLOYEE E JOIN EMPLOYEE_ROLES ER ON E.EMPLOYEE_ID = ER.EMPLOYEE_ID JOIN ROLES R ON ER.ROLE_ID = R.ROLE_ID WHERE ROLE_NAME = 'Project Manager'";
-            SqlDataAdapter adpt = new SqlDataAdapter(query,dbConn.con);
+            string query = @"
+                           SELECT DISTINCT E.EMPLOYEE_ID, E.FULL_NAME 
+                           FROM EMPLOYEE E 
+                           JOIN EMPLOYEE_ROLES ER ON E.EMPLOYEE_ID = ER.EMPLOYEE_ID 
+                           JOIN ROLES R ON ER.ROLE_ID = R.ROLE_ID 
+                           WHERE R.ROLE_NAME NOT IN ('Project_Manager', 'Admin')";
+            SqlDataAdapter adpt = new SqlDataAdapter(query, dbConn.con);
             DataSet ds = new DataSet();
             adpt.Fill(ds);
             ddlProjectManager.DataSource = ds;
@@ -71,33 +72,43 @@ namespace WorkNest.Admin
             string sDate = dateStart.Text;
             string eDate = dateEnd.Text;
             string status = ddlStatus.SelectedItem.Text;
-            int pId = Convert.ToInt32( ddlProjectManager.SelectedValue);
+            int pId = Convert.ToInt32(ddlProjectManager.SelectedValue);
             int cId = Convert.ToInt32(ddlClient.SelectedValue);
             string query = "INSERT INTO PROJECT (PROJECT_NAME,DESCRIPTION,START_DATE,END_DATE,STATUS,PROJECT_MANAGER_ID,CLIENT_ID) VALUES(@p_name,@desc,@sDate,@eDate,@status,@pId,@cId)";
             SqlCommand cmd = new SqlCommand(query, dbConn.con);
-            cmd.Parameters.AddWithValue("@p_name",p_name);
+            cmd.Parameters.AddWithValue("@p_name", p_name);
             cmd.Parameters.AddWithValue("@desc", desc);
             cmd.Parameters.AddWithValue("@sDate", sDate);
             cmd.Parameters.AddWithValue("@eDate", eDate);
             cmd.Parameters.AddWithValue("@status", status);
             cmd.Parameters.AddWithValue("@pId", pId);
             cmd.Parameters.AddWithValue("@cId", cId);
-            object project = cmd.ExecuteNonQuery();
-            if (project!=null)
+            int rowsAffected = cmd.ExecuteNonQuery();
+            if (rowsAffected > 0)
             {
-                lblError.Text = "Project added!!";
+                string queryRole = @"UPDATE Employee_roles 
+                                SET ROLE_ID = 2, assigned_date = @AssignedDate 
+                                WHERE employee_id = @pId";
+                SqlCommand cmdRole = new SqlCommand(queryRole, dbConn.con);
+                cmdRole.Parameters.AddWithValue("@pId", pId);
+                cmdRole.Parameters.AddWithValue("@AssignedDate", DateTime.Now.Date);
+
+                cmdRole.ExecuteNonQuery();
+
+                lblError.Text = "Project added successfully!";
                 lblError.ForeColor = Color.Green;
             }
             else
             {
-                lblError.Text = "Project Not added!!";
+                lblError.Text = "Project Not added!";
                 lblError.ForeColor = Color.Red;
             }
+
         }
 
         protected void btnReset_Click(object sender, EventArgs e)
         {
-             txtProjectName.Text = string.Empty;
+            txtProjectName.Text = string.Empty;
             txtDesc.Text = string.Empty;
             dateStart.Text = string.Empty;
             dateEnd.Text = string.Empty;

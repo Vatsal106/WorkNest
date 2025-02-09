@@ -31,7 +31,7 @@ namespace WorkNest
             if (!IsPostBack)
             {
                 bindDept();
-                bindRoles();
+                //bindRoles();
             }
         }
         // check user duplication
@@ -136,13 +136,13 @@ namespace WorkNest
                     cmdUser.ExecuteNonQuery();
 
                     //int EmpId = Convert.ToInt32(cmd.ExecuteScalar()); 
-                    int RoleId = Convert.ToInt32(ddlRole.SelectedValue);
-                    string queryRole = "INSERT INTO EMPLOYEE_ROLES (EMPLOYEE_ID,ROLE_ID,ASSIGNED_DATE) VALUES(@EmpId,@RoleId,@AssignedDate)";
-                    SqlCommand cmdRole = new SqlCommand(queryRole, dbConn.con);
-                    cmdRole.Parameters.AddWithValue("@EmpId", empid);
-                    cmdRole.Parameters.AddWithValue("@RoleId", RoleId);
-                    cmdRole.Parameters.AddWithValue("@AssignedDate", DateTime.Now.Date);
-                    cmdRole.ExecuteNonQuery();
+                    //int RoleId = Convert.ToInt32(ddlRole.SelectedValue);
+                    //string queryRole = "INSERT INTO EMPLOYEE_ROLES (EMPLOYEE_ID,ROLE_ID,ASSIGNED_DATE) VALUES(@EmpId,@RoleId,@AssignedDate)";
+                    //SqlCommand cmdRole = new SqlCommand(queryRole, dbConn.con);
+                    //cmdRole.Parameters.AddWithValue("@EmpId", empid);
+                    //cmdRole.Parameters.AddWithValue("@RoleId", RoleId);
+                    //cmdRole.Parameters.AddWithValue("@AssignedDate", DateTime.Now.Date);
+                    //cmdRole.ExecuteNonQuery();
 
                     btnReset_Click(sender, e);
                     lblError.Text = "Employee added!!";
@@ -232,19 +232,19 @@ namespace WorkNest
                 checkEmailduplicate = true;
             }
         }
-        public void bindRoles()
-        {
-            dbConn.dbConnect();
-            string query = "SELECT * FROM ROLES where ROLE_ID <> 1";
-            SqlDataAdapter adpt = new SqlDataAdapter(query, dbConn.con);
-            DataSet ds = new DataSet();
-            adpt.Fill(ds);
-            ddlRole.DataSource = ds;
-            ddlRole.DataTextField = "ROLE_NAME";
-            ddlRole.DataValueField = "ROLE_ID";
-            ddlRole.DataBind();
-            ddlRole.Items.Insert(0, "---select---");
-        }
+        //public void bindRoles()
+        //{
+        //    dbConn.dbConnect();
+        //    string query = "SELECT * FROM ROLES where ROLE_ID <> 1";
+        //    SqlDataAdapter adpt = new SqlDataAdapter(query, dbConn.con);
+        //    DataSet ds = new DataSet();
+        //    adpt.Fill(ds);
+        //    ddlRole.DataSource = ds;
+        //    ddlRole.DataTextField = "ROLE_NAME";
+        //    ddlRole.DataValueField = "ROLE_ID";
+        //    ddlRole.DataBind();
+        //    ddlRole.Items.Insert(0, "---select---");
+        //}
     }
 
 }
