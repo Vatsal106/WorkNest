@@ -149,7 +149,7 @@
                 <button>Add</button>
                 <div class="dropdown-content">
                     <a href="registration.aspx">Add Employee</a>
-                    <a href="AddProject.aspx">Add Project</a>
+                    <a href="addProject.aspx">Add Project</a>
                     <a href="ChangeRole.aspx">Change in Role</a>
                 </div>
             </div>
