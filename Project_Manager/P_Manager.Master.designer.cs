@@ -15,13 +15,13 @@ namespace WorkNest.Project_Manager
     {
 
         /// <summary>
-        /// Head2 control.
+        /// Manager_Head control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder Head2;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder Manager_Head;
 
         /// <summary>
         /// Managerform control.
@@ -33,21 +33,21 @@ namespace WorkNest.Project_Manager
         protected global::System.Web.UI.HtmlControls.HtmlForm Managerform;
 
         /// <summary>
-        /// ManagerProfile control.
+        /// Manager_Header_Title control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image ManagerProfile;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder Manager_Header_Title;
 
         /// <summary>
-        /// ContentPlaceHolder2 control.
+        /// Manager_Content control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolder2;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder Manager_Content;
     }
 }

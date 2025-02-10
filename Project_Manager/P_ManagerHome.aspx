@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Project_Manager/P_Manager.Master" AutoEventWireup="true" CodeBehind="P_ManagerHome.aspx.cs" Inherits="WorkNest.Project_Manager.P_ManagerHome" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="Head2" runat="server">
+<asp:Content ID="Content1" ContentPlaceHolderID="Manager_Head" runat="server">
      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 
     <style>
@@ -10,6 +10,7 @@
             border-left: 5px solid #007bff;
             transition: transform 0.3s ease-in-out;
             border-radius: 8px;
+            height:100px;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
         }
 
@@ -42,10 +43,12 @@
         }
     </style>
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
+<asp:Content ID="PM_Title" ContentPlaceHolderID="Manager_Header_Title" runat="server">
+     <h2 class="text-center">Project Manager Dashboard</h2>
+</asp:content>
+   
+<asp:Content ID="Content2" ContentPlaceHolderID="Manager_Content" runat="server">
     <div class="container">
-        <h2 class="text-center mt-4">Project Manager Dashboard</h2>
-
         <div class="row mt-4">
             <asp:Repeater ID="rptFunctionalities" runat="server">
                 <ItemTemplate>

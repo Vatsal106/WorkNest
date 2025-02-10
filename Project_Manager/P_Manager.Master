@@ -12,111 +12,197 @@
             display: flex;
             flex-direction: column;
         }
-        
+
         .sidebar {
-            width: 200px;
-            background-color: #0D0D30;
+            width: 250px;
+            background-color: #333333;
             color: #8B9EB2;
             height: 100vh;
             padding-top: 20px;
             position: fixed;
-            top:100px;
-            text-align: center;
+            text-align: left;
             transition: all 0.3s;
+            padding-left: 20px;
         }
-        
-        .sidebar .menu {
-            display: block;
-            color: #8B9EB2;
-            padding: 15px;
-            text-decoration: none;
-        }
-        
-        .sidebar a:hover {
-            background-color: #5A738E;
-        }
-        
+
+            .sidebar .logo {
+                text-align: center;
+                margin-bottom: 20px;
+            }
+
+                .sidebar .logo img {
+                    width: 180px;
+                    height: auto;
+                }
+
+            .sidebar h3 {
+                color: #FF8C00;
+                font-size: 24px;
+                font-weight: bold;
+                padding-bottom: 20px;
+            }
+
+            .sidebar .menu {
+                display: flex;
+                align-items: center;
+                color: #E4F1F9;
+                padding: 15px;
+                text-decoration: none;
+                font-size: 18px;
+                transition: background 0.3s;
+            }
+
+                .sidebar .menu:hover {
+                    background-color: #4A6D85;
+                    color: white;
+                }
+
         .header {
-            width:100%;
-            background-color: #0D0D30;
-            color: #8B9EB2;
-            padding: 15px;
+            width: calc(100% - 250px);
+            background-color: #F7F9FB;
+            color: #333333;
+            padding: 15px 40px;
             text-align: right;
             position: fixed;
-            left: 0;
+            left: 250px;
             top: 0;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding-right: 40px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
         }
-        
-        .content {
-            margin-left: 220px;
-            padding: 20px;
-            margin-top: 100px;
+
+        .Right-Header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
-        
-        .Profile {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            margin-left: 10px;
+
+        .ddlAdd {
+            position: relative;
+            display: inline-block;
+            margin-right: 10px;
         }
-        
-        @media (max-width: 768px) {
-            .sidebar {
-                width: 100%;
-                height: auto;
-                position: relative;
-                display: none;
+
+            .ddlAdd button {
+                background-color: #FF8C00;
+                color: white;
+                padding: 10px 20px;
+                border: none;
+                cursor: pointer;
+                border-radius: 5px;
+                font-size: 16px;
             }
-            
-            .sidebar.active {
+
+                .ddlAdd button:hover {
+                    background-color: #e07b00;
+                }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #F7F9FB;
+            min-width: 160px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+            z-index: 1;
+            border-radius: 5px;
+        }
+
+            .dropdown-content a {
+                color: #333333;
+                padding: 10px;
+                text-decoration: none;
                 display: block;
             }
-            
-            .header {
-                width: 100%;
-                left: 0;
-                position: relative;
-                text-align: center;
+
+                .dropdown-content a:hover {
+                    background-color: #E4F1F9;
+                }
+
+        .ddlAdd:hover .dropdown-content {
+            display: block;
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+            margin-right: 3px;
+        }
+
+            .profile img {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                margin-left: 10px;
             }
-            
-            .content {
-                margin-left: 0;
-            }
+
+        .content {
+            margin-left: 250px;
+            padding: 20px;
+            margin-top: 80px;
         }
     </style>
-     <div >
-     <asp:ContentPlaceHolder ID="Head2" runat="server"></asp:ContentPlaceHolder>
- </div>
+    <script>
+        // Function to toggle dropdown visibility when clicking on the button
+        function toggleDropdown() {
+            var dropdown = document.getElementById('dropdown-content');
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        }
+
+        // Function to close dropdown if clicked outside
+        window.onclick = function (event) {
+            var dropdown = document.getElementById('dropdown-content');
+            var ddlAdd = document.getElementById('ddlAdd');
+
+            if (!ddlAdd.contains(event.target)) {
+                dropdown.style.display = 'none';
+            }
+        }
+ </script>
+    <div>
+        <asp:ContentPlaceHolder ID="Manager_Head" runat="server"></asp:ContentPlaceHolder>
+    </div>
 </head>
 <body>
     <form id="Managerform" runat="server">
-        <!-- Header -->
-        <div class="header">
+        <!-- Sidebar -->
+        <div class="sidebar">
             <div class="logo">
                 <a href="P_ManagerHome.aspx">
-                    <img src="../Images/Logo Light Blue Transparent.png" alt="Logo" class="logo" width="150" height="70"/>
+                    <img src="../Images/Logo Light Blue Transparent.png" alt="Logo">
                 </a>
             </div>
-            <span><div class="welcome-text">Welcome, Admin</div></span>
-            <asp:Image ID="ManagerProfile" runat="server" ImageUrl="~/Images/Add Emp.png" CssClass="Profile" />
-        </div>
-        
-        <!-- Sidebar (transforms into navbar on smaller screens) -->
-        <div class="sidebar">
             <h3>Admin Panel</h3>
-            <a class="menu" href="AdminDashboard.aspx">Dashboard</a>
-            <a class="menu" href="Users.aspx">Users</a>
-            <a class="menu" href="Settings.aspx">Settings</a>
-            <a class="menu" href="Logout.aspx">Logout</a>
+            <a class="menu" href="P_ManagerDashboard.aspx">📊 Dashboard</a>
+            <a class="menu" href="Users.aspx">👥 Users</a>
+            <a class="menu" href="Settings.aspx">⚙️ Settings</a>
+            <a class="menu" href="Logout.aspx">🚪 Logout</a>
         </div>
-        
+
+
+        <div class="header">
+            <div class="Left-Header">
+                <asp:ContentPlaceHolder ID="Manager_Header_Title" runat="server"></asp:ContentPlaceHolder>
+            </div>
+            <div class="Right-Header">
+                <div id="ddlAdd" class="ddlAdd">
+                    <button type="button" onclick="toggleDropdown()">Add</button>
+                    <div id="dropdown-content" class="dropdown-content">
+                        <a href="registration.aspx">Add Employee</a>
+                        <a href="addProject.aspx">Add Project</a>
+                        <a href="ChangeRole.aspx">Change in Role</a>
+                    </div>
+                </div>
+                <div class="profile">
+                    <span>Alexander Aronowitz</span>
+                    <img src="../Images/employee photo.jpg" alt="Profile">
+                </div>
+            </div>
+        </div>
+
         <!-- Main Content -->
         <div class="content">
-            <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server"></asp:ContentPlaceHolder>
+            <asp:ContentPlaceHolder ID="Manager_Content" runat="server"></asp:ContentPlaceHolder>
         </div>
     </form>
 </body>

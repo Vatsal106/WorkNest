@@ -15,13 +15,13 @@ namespace WorkNest.P_Member
     {
 
         /// <summary>
-        /// Head3 control.
+        /// MemberHead control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder Head3;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder MemberHead;
 
         /// <summary>
         /// MemberForm control.
@@ -33,21 +33,21 @@ namespace WorkNest.P_Member
         protected global::System.Web.UI.HtmlControls.HtmlForm MemberForm;
 
         /// <summary>
-        /// MemberProfile control.
+        /// Member_Header_Title control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image MemberProfile;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder Member_Header_Title;
 
         /// <summary>
-        /// ContentPlaceHolder3 control.
+        /// MemberContent control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolder3;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder MemberContent;
     }
 }
