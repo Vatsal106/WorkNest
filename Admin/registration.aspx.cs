@@ -135,14 +135,14 @@ namespace WorkNest
 
                     cmdUser.ExecuteNonQuery();
 
-                    //int EmpId = Convert.ToInt32(cmd.ExecuteScalar()); 
-                    //int RoleId = Convert.ToInt32(ddlRole.SelectedValue);
-                    //string queryRole = "INSERT INTO EMPLOYEE_ROLES (EMPLOYEE_ID,ROLE_ID,ASSIGNED_DATE) VALUES(@EmpId,@RoleId,@AssignedDate)";
-                    //SqlCommand cmdRole = new SqlCommand(queryRole, dbConn.con);
-                    //cmdRole.Parameters.AddWithValue("@EmpId", empid);
-                    //cmdRole.Parameters.AddWithValue("@RoleId", RoleId);
-                    //cmdRole.Parameters.AddWithValue("@AssignedDate", DateTime.Now.Date);
-                    //cmdRole.ExecuteNonQuery();
+                    int EmpId = Convert.ToInt32(cmd.ExecuteScalar());
+                    int RoleId = 3;
+                    string queryRole = "INSERT INTO EMPLOYEE_ROLES (EMPLOYEE_ID,ROLE_ID,ASSIGNED_DATE) VALUES(@EmpId,@RoleId,@AssignedDate)";
+                    SqlCommand cmdRole = new SqlCommand(queryRole, dbConn.con);
+                    cmdRole.Parameters.AddWithValue("@EmpId", empid);
+                    cmdRole.Parameters.AddWithValue("@RoleId", RoleId);
+                    cmdRole.Parameters.AddWithValue("@AssignedDate", DateTime.Now.Date);
+                    cmdRole.ExecuteNonQuery();
 
                     btnReset_Click(sender, e);
                     lblError.Text = "Employee added!!";
