@@ -110,43 +110,67 @@ namespace WorkNest
                 if (checkUserduplicate && imgSeted && checkEmailduplicate)
                 {
 
-                    string query = "INSERT INTO EMPLOYEE (FULL_NAME, EMAIL,PHONE_NUMBER, HIRE_DATE,IMAGE,DEPARTMENT_ID) " +
-                  "VALUES (@Name, @Email, @Phone,@Hire, @Image,@Department)";
+                    SqlTransaction transaction = dbConn.con.BeginTransaction();
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.Connection = dbConn.con;
+                    cmd.Transaction = transaction;
 
-                    SqlCommand cmd = new SqlCommand(query, dbConn.con);
-                    cmd.Parameters.AddWithValue("@Name", txtName.Text.Trim());
-                    cmd.Parameters.AddWithValue("@Email", txtEmail.Text.Trim());
-                    cmd.Parameters.AddWithValue("@Phone", txtPhone.Text.Trim());
-                    cmd.Parameters.AddWithValue("@Hire", txtDate.Text);
-                    cmd.Parameters.AddWithValue("@Image", (object)imageBytes ?? DBNull.Value);
-                    cmd.Parameters.AddWithValue("@Department", ddlDept.SelectedValue);
-                    cmd.ExecuteNonQuery();
+                    try
+                    {
+                        // Insert Employee data
+                        string query = "INSERT INTO EMPLOYEE (FULL_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, IMAGE, DEPARTMENT_ID) " +
+                                       "VALUES (@Name, @Email, @Phone, @Hire, @Image, @Department)";
+                        cmd.CommandText = query;
+                        cmd.Parameters.AddWithValue("@Name", txtName.Text.Trim());
+                        cmd.Parameters.AddWithValue("@Email", txtEmail.Text.Trim());
+                        cmd.Parameters.AddWithValue("@Phone", txtPhone.Text.Trim());
+                        cmd.Parameters.AddWithValue("@Hire", txtDate.Text);
+                        cmd.Parameters.AddWithValue("@Image", (object)imageBytes ?? DBNull.Value);
+                        cmd.Parameters.AddWithValue("@Department", ddlDept.SelectedValue);
+                        cmd.ExecuteNonQuery();
 
-                    string query1 = "SELECT EMPLOYEE_ID FROM EMPLOYEE WHERE EMAIL = @Email";
-                    SqlCommand cmdid = new SqlCommand(query1, dbConn.con);
-                    cmdid.Parameters.AddWithValue("@Email", txtEmail.Text.Trim());
-                    int empid = Convert.ToInt32(cmdid.ExecuteScalar());
+                        // Get the inserted employee's ID
+                        string queryID = "SELECT EMPLOYEE_ID FROM EMPLOYEE WHERE EMAIL = @Email";
+                        cmd.CommandText = queryID;
+                        cmd.Parameters.Clear();
+                        cmd.Parameters.AddWithValue("@Email", txtEmail.Text.Trim());
+                        int empid = Convert.ToInt32(cmd.ExecuteScalar());
 
-                    string queryUser = "INSERT INTO USER_CREDENTIALS (USER_NAME, PASSWORD, EMPLOYEE_ID) VALUES (@Username, @Password, @EmpID)";
-                    SqlCommand cmdUser = new SqlCommand(queryUser, dbConn.con);
-                    cmdUser.Parameters.AddWithValue("@Username", txtUsername.Text.Trim());
-                    cmdUser.Parameters.AddWithValue("@Password", txtPassword.Text.Trim());
-                    cmdUser.Parameters.AddWithValue("@EmpID", empid);
+                        // Insert User Credentials
+                        string queryUser = "INSERT INTO USER_CREDENTIALS (USER_NAME, PASSWORD, EMPLOYEE_ID) VALUES (@Username, @Password, @EmpID)";
+                        cmd.CommandText = queryUser;
+                        cmd.Parameters.Clear();
+                        cmd.Parameters.AddWithValue("@Username", txtUsername.Text.Trim());
+                        cmd.Parameters.AddWithValue("@Password", txtPassword.Text.Trim());
+                        cmd.Parameters.AddWithValue("@EmpID", empid);
+                        cmd.ExecuteNonQuery();
 
-                    cmdUser.ExecuteNonQuery();
+                        // Assign Role to Employee
+                        int RoleId = 3;
+                        string queryRole = "INSERT INTO EMPLOYEE_ROLES (EMPLOYEE_ID, ROLE_ID, ASSIGNED_DATE) VALUES (@EmpId, @RoleId, @AssignedDate)";
+                        cmd.CommandText = queryRole;
+                        cmd.Parameters.Clear();
+                        cmd.Parameters.AddWithValue("@EmpId", empid);
+                        cmd.Parameters.AddWithValue("@RoleId", RoleId);
+                        cmd.Parameters.AddWithValue("@AssignedDate", DateTime.Now.Date);
+                        cmd.ExecuteNonQuery();
 
-                    int EmpId = Convert.ToInt32(cmd.ExecuteScalar());
-                    int RoleId = 3;
-                    string queryRole = "INSERT INTO EMPLOYEE_ROLES (EMPLOYEE_ID,ROLE_ID,ASSIGNED_DATE) VALUES(@EmpId,@RoleId,@AssignedDate)";
-                    SqlCommand cmdRole = new SqlCommand(queryRole, dbConn.con);
-                    cmdRole.Parameters.AddWithValue("@EmpId", empid);
-                    cmdRole.Parameters.AddWithValue("@RoleId", RoleId);
-                    cmdRole.Parameters.AddWithValue("@AssignedDate", DateTime.Now.Date);
-                    cmdRole.ExecuteNonQuery();
+                        // Commit transaction if all queries succeed
+                        transaction.Commit();
 
-                    btnReset_Click(sender, e);
-                    lblError.Text = "Employee added!!";
-                    lblError.ForeColor = Color.Green;
+                        // Clear the form and display success message
+                        btnReset_Click(sender, e);
+                        lblError.Text = "Employee added successfully!";
+                        lblError.ForeColor = Color.Green;
+                    }
+                    catch (Exception ex)
+                    {
+                        // Rollback transaction on failure
+                        transaction.Rollback();
+                        lblError.Text = "An error occurred: " + ex.Message;
+                        lblError.ForeColor = Color.Red;
+
+                    }
                 }
                 else if (!imgSeted)
                 {
@@ -165,7 +189,7 @@ namespace WorkNest
 
             catch (Exception ex)
             {
-                // Log the error (in a real application, consider using a logging framework)
+
                 Response.Write($"Error: {ex.Message.ToString()}");
             }
 
