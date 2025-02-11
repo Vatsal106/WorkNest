@@ -6,10 +6,10 @@ namespace WorkNest.Project_Manager
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //if (Session["UserRole"] == null || Session["UserRole"].ToString() != "Admin")
-            //{
-            //    Response.Redirect("~/AccessDenied.aspx");
-            //}
+            if (Session["UserRole"] == null || Session["UserRole"].ToString() != "Admin")
+            {
+                Response.Redirect("~/AccessDenied.aspx");
+            }
         }
     }
 }
