@@ -11,8 +11,8 @@
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
             display: flex;
-            justify-content: center;
-            align-items: center;
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
             margin: 0;
             min-height: 100vh;
         }
@@ -38,39 +38,44 @@
             width: 60%;
             box-sizing: border-box;
             border-radius: 0 10px 10px 0;
+            display: flex;                  /* Enable flexbox for form */
+            flex-direction: column;         /* Arrange items vertically */
+            align-items: center;         /* Center items horizontally */
         }
 
-        #formTitle { /* Style for the title */
+        h1 {
             font-weight: bold;
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-            color: #0D0D30; /* Corrected color code */
-            text-align: center; /* Center the title */
-            margin-bottom: 20px; /* Add some space below */
-            font-size: 1.2em; /* Slightly larger font size */
+            color: #0D0D30;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 30px;
         }
 
         form div {
             display: grid;
-            grid-template-columns: 120px 1fr; /* Increased label width slightly */
+            grid-template-columns: 150px 1fr; /* Increased label width */
             gap: 10px;
             align-items: center;
             margin-bottom: 10px;
+            width: 100%; /* Make the divs take full width of the form */
+            max-width: 500px; /* Limit the width of the form elements */
         }
 
         #pp {
             font-weight: bold;
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-            color: #0D0D30; /* Corrected color code */
+            color: #0D0D30;
             text-align: right;
             padding-right: 5px;
         }
 
-        #txtProjectName, #txtDesc, #dateStart, #dateEnd, #ddlStatus, #ddlProjectManager, #ddlClient {
+       #txtProjectName, #txtDesc, #dateStart, #dateEnd, #ddlStatus, #ddlProjectManager, #ddlClient {
             padding: 7px;
             border-radius: 5px;
             box-sizing: border-box;
-            width: calc(100% - 14px);
-            font-size: smaller; /* Make the fields smaller */
+            width: calc(100% - 95px); /* Adjust width to fit inside grid */
+            font-size: smaller;
         }
 
         #txtDesc {
@@ -78,48 +83,13 @@
         }
 
         .button-container {
-            grid-column: 1 / 3;
             display: flex;
             justify-content: center;
             gap: 10px;
+            margin-top: 20px; /* Add some space above the buttons */
         }
 
-        #btnSubmit, #btnReset {
-            background-color: skyblue;
-            color: black;
-            padding: 8px 16px;
-            display: inline-block;
-            width: auto;
-            border-radius: 5px;
-            transition: 0.3s;
-            cursor: pointer;
-            font-size: smaller; /* Make the buttons smaller */
-        }
-
-        #btnSubmit:hover, #btnReset:hover {
-            background-color: white;
-            color: skyblue;
-        }
-
-        #lblError {
-            color: red;
-            font-weight: bold;
-            margin-top: 10px;
-            text-align: center;
-            font-size: smaller;
-        }
-
-
-         h1{
-    font-weight: bold;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    color: #0D0D30;
-    display:flex;
-    text-align: center; 
-    margin-bottom: 20px;
-    font-size: 30px;
-} 
-
+        /* ... rest of your CSS ... */
 
     </style>
 
@@ -128,7 +98,7 @@
     <div class="container">
         <img id="im" src="../images/Project Add image.png" alt="Project Image" />
         <form id="addProject" runat="server">
-            <div><h1>Add Project</h1></div> <%-- Title in same line and centered --%>
+            <h1>Add Project</h1>
             <div><label id="pp">Project Name:</label><asp:TextBox ID="txtProjectName" runat="server"></asp:TextBox></div>
             <div><label id="pp">Description:</label><asp:TextBox ID="txtDesc" runat="server" TextMode="MultiLine"></asp:TextBox></div>
             <div><label id="pp">Start Date:</label><asp:TextBox ID="dateStart" runat="server" TextMode="Date"></asp:TextBox></div>
