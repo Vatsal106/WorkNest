@@ -71,7 +71,7 @@
     <Content Include="Admin\AdminDashboard.aspx" />
     <Content Include="Admin\AdminHome.aspx" />
     <Content Include="Global.asax" />
-    <Content Include="Images\Client Page Photo.png" />
+    <Content Include="Images\ClientPagePhoto.png" />
     <Content Include="Images\employee photo.jpg" />
     <Content Include="Images\Logo Blue Transparent.png" />
     <Content Include="Images\Logo Light Blue Transparent.png" />
