@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AccessDenied.aspx" />
+    <Content Include="Admin\addClient.aspx" />
     <Content Include="Admin\addProject.aspx" />
     <Content Include="Admin\AdminDashboard.aspx" />
     <Content Include="Admin\AdminHome.aspx" />
@@ -99,6 +100,13 @@
     </Compile>
     <Compile Include="AccessDenied.aspx.designer.cs">
       <DependentUpon>AccessDenied.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\addClient.aspx.cs">
+      <DependentUpon>addClient.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\addClient.aspx.designer.cs">
+      <DependentUpon>addClient.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\addProject.aspx.cs">
       <DependentUpon>addProject.aspx</DependentUpon>
