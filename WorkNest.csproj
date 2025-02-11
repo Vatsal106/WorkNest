@@ -85,7 +85,9 @@
     <Content Include="Images\Untitled design %283%29.png" />
     <Content Include="login.aspx" />
     <Content Include="Admin\registration.aspx" />
+    <Content Include="Project_Manager\P_ManagerDashboard.aspx" />
     <Content Include="Project_Manager\P_ManagerHome.aspx" />
+    <Content Include="P_Member\MemberDashboard.aspx" />
     <Content Include="P_Member\MemberHome.aspx" />
     <Content Include="Style.css" />
     <Content Include="Web.config" />
@@ -144,6 +146,13 @@
     <Compile Include="Project_Manager\P_Manager.Master.designer.cs">
       <DependentUpon>P_Manager.Master</DependentUpon>
     </Compile>
+    <Compile Include="Project_Manager\P_ManagerDashboard.aspx.cs">
+      <DependentUpon>P_ManagerDashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Project_Manager\P_ManagerDashboard.aspx.designer.cs">
+      <DependentUpon>P_ManagerDashboard.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Project_Manager\P_ManagerHome.aspx.cs">
       <DependentUpon>P_ManagerHome.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -158,6 +167,13 @@
     </Compile>
     <Compile Include="Admin\registration.aspx.designer.cs">
       <DependentUpon>registration.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="P_Member\MemberDashboard.aspx.cs">
+      <DependentUpon>MemberDashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="P_Member\MemberDashboard.aspx.designer.cs">
+      <DependentUpon>MemberDashboard.aspx</DependentUpon>
     </Compile>
     <Compile Include="P_Member\MemberHome.aspx.cs">
       <DependentUpon>MemberHome.aspx</DependentUpon>

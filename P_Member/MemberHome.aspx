@@ -1,8 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/P_Member/MemberM.Master" AutoEventWireup="true" CodeBehind="MemberHome.aspx.cs" Inherits="WorkNest.P_Member.MemberHome" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="head3" runat="server">
+<asp:Content ID="Content1" ContentPlaceHolderID="MemberHead" runat="server">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-
-     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 
     <style>
         .dashboard-box {
@@ -12,20 +10,12 @@
             border-left: 5px solid #28a745;
             transition: transform 0.3s ease-in-out;
             border-radius: 8px;
+            height:100px;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .dashboard-box:hover {
             transform: scale(1.02);
-        }
-
-        .dashboard-header {
-            background-color: #28a745;
-            color: white;
-            padding: 10px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            text-align: center;
         }
 
         /* Responsive Styling */
@@ -47,11 +37,15 @@
         }
     </style>
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder3" runat="server">
+
+<asp:Content ID="Member_Title" ContentPlaceHolderID="Member_Header_Title" runat="server">
+    
+    <h2>Project Member</h2>
+
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="MemberContent" runat="server">
     <div class="container">
-        <div class="dashboard-header">
-            <h2>Project Member</h2>
-        </div>
+        
         
         <div class="row mt-4">
             <asp:Repeater ID="rptProjectMemberTasks" runat="server">
