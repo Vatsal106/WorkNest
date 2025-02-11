@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-
+//using BCrypt.Net;
 
 namespace WorkNest
 {
@@ -137,8 +137,9 @@ namespace WorkNest
                         int empid = Convert.ToInt32(cmd.ExecuteScalar());
 
                         // Insert User Credentials
-                        string queryUser = "INSERT INTO USER_CREDENTIALS (USER_NAME, PASSWORD, EMPLOYEE_ID) VALUES (@Username, @Password, @EmpID)";
-                        cmd.CommandText = queryUser;
+                        //string hashedPassword = BCrypt.HashPassword(txtPassword.Text.Trim());
+
+                        cmd.CommandText = "INSERT INTO USER_CREDENTIALS (USER_NAME, PASSWORD, EMPLOYEE_ID) VALUES (@Username, @Password, @EmpID)";
                         cmd.Parameters.Clear();
                         cmd.Parameters.AddWithValue("@Username", txtUsername.Text.Trim());
                         cmd.Parameters.AddWithValue("@Password", txtPassword.Text.Trim());
