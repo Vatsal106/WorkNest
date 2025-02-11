@@ -42,6 +42,24 @@ namespace WorkNest.P_Member
         protected global::System.Web.UI.WebControls.ContentPlaceHolder Member_Header_Title;
 
         /// <summary>
+        /// lblFullName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblFullName;
+
+        /// <summary>
+        /// profilePhoto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image profilePhoto;
+
+        /// <summary>
         /// MemberContent control.
         /// </summary>
         /// <remarks>

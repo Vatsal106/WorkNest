@@ -37,6 +37,7 @@ namespace WorkNest
                 }
 
                 int empId = Convert.ToInt32(empIdObj);
+
                 string roleQuery = "SELECT R.ROLE_NAME FROM ROLES R JOIN EMPLOYEE_ROLES E ON R.ROLE_ID=E.ROLE_ID WHERE EMPLOYEE_ID = @empId";
 
                 SqlCommand roleCmd = new SqlCommand(roleQuery, dbConn.con);
@@ -53,6 +54,7 @@ namespace WorkNest
                 string roleName = roleObj.ToString();
 
                 // Store session variables
+
                 Session["Username"] = username;
                 Session["EmployeeID"] = empId;
                 Session["UserRole"] = roleName;

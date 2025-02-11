@@ -20,6 +20,7 @@
             .functionality-box {
                 text-align: center;
             }
+
         }
 
         @media (max-width: 480px) { /* Small Mobile */
@@ -29,7 +30,7 @@
             }
 
             h2 {
-                font-size: 18px;
+                font-size: 14px;
             }
         }
     </style>

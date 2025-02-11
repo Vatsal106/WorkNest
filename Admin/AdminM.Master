@@ -15,47 +15,51 @@
 
         .sidebar {
             width: 250px;
-            background-color: #333333;
-            color: #8B9EB2;
+            background-color: #0d0d30;
+            color: #333333;
             height: 100vh;
             padding-top: 20px;
             position: fixed;
             text-align: left;
-            transition: all 0.3s;
+            transition: left 0.3s ease; /* Smooth transition for sliding */
             padding-left: 20px;
+            left: 0; /* Sidebar is visible by default on larger screens */
         }
 
-            .sidebar .logo {
-                text-align: center;
-                margin-bottom: 20px;
+      
+
+
+        .sidebar .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+            .sidebar .logo img {
+                width: 180px;
+                height: auto;
             }
 
-                .sidebar .logo img {
-                    width: 180px;
-                    height: auto;
-                }
+        .sidebar h3 {
+            color: #FF8C00;
+            font-size: 24px;
+            font-weight: bold;
+            padding-bottom: 20px;
+        }
 
-            .sidebar h3 {
-                color: #FF8C00;
-                font-size: 24px;
-                font-weight: bold;
-                padding-bottom: 20px;
+        .sidebar .menu {
+            display: flex;
+            align-items: center;
+            color: #E4F1F9;
+            padding: 15px;
+            text-decoration: none;
+            font-size: 18px;
+            transition: background 0.3s;
+        }
+
+            .sidebar .menu:hover {
+                background-color: #4A6D85;
+                color: white;
             }
-
-            .sidebar .menu {
-                display: flex;
-                align-items: center;
-                color: #E4F1F9;
-                padding: 15px;
-                text-decoration: none;
-                font-size: 18px;
-                transition: background 0.3s;
-            }
-
-                .sidebar .menu:hover {
-                    background-color: #4A6D85;
-                    color: white;
-                }
 
         .header {
             width: calc(100% - 250px);
@@ -71,11 +75,13 @@
             justify-content: space-between;
             box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
         }
-        .Right-Header{
-            display:flex;
-            align-items:center;
-            justify-content:space-between;
+
+        .Right-Header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
+
         .ddlAdd {
             position: relative;
             display: inline-block;
@@ -139,24 +145,75 @@
             padding: 20px;
             margin-top: 80px;
         }
+
+        .menu-button {
+            display: none;
+            height: 40px;
+            width: 40px;
+        }
+          @media (max-width: 768px) { /* Mobile (Smaller screens) */
+      .sidebar {
+          left: -250px; /* Sidebar is hidden off-screen by default */
+      }
+
+          .sidebar.open {
+              left: 0; /* Sidebar is visible when the 'open' class is added */
+          }
+
+      .menu-button {
+          display: block; /* Show the menu button on smaller screens */
+          position: absolute;
+          top: 20px;
+          left: 20px;
+          font-size: 30px;
+          background: none;
+          border: none;
+          color: #FF8C00;
+          cursor: pointer;
+      }
+
+      .header {
+          width: 100%;
+          left: 0px;
+      }
+
+      .content {
+          margin-left: 0px;
+      }
+  }
     </style>
     <script>
-        // Function to toggle dropdown visibility when clicking on the button
-        function toggleDropdown() {
-            var dropdown = document.getElementById('dropdown-content');
-            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        function toggleSidebar() {
+            var sidebar = document.querySelector('.sidebar');
+            sidebar.classList.toggle('open'); // Toggle the 'open' class to show/hide the sidebar
         }
 
-        // Function to close dropdown if clicked outside
+        // Close sidebar when clicking outside of it (on smaller screens)
         window.onclick = function (event) {
+            var sidebar = document.querySelector('.sidebar');
+            var menuButton = document.querySelector('.menu-button');
+
+            // Close sidebar if clicked outside
+            if (!sidebar.contains(event.target) && !menuButton.contains(event.target)) {
+                sidebar.classList.remove('open');
+            }
+
+            // Close dropdown when clicking outside
             var dropdown = document.getElementById('dropdown-content');
             var ddlAdd = document.getElementById('ddlAdd');
 
             if (!ddlAdd.contains(event.target)) {
                 dropdown.style.display = 'none';
             }
+        };
+
+        // Dropdown toggle
+        function toggleDropdown() {
+            var dropdown = document.getElementById('dropdown-content');
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
         }
     </script>
+
     <asp:ContentPlaceHolder ID="Head" runat="server"></asp:ContentPlaceHolder>
 </head>
 <body>
@@ -178,6 +235,7 @@
 
         <div class="header">
             <div class="Left-Header">
+                <button class="menu-button" onclick="toggleSidebar()">☰</button>
                 <asp:ContentPlaceHolder ID="Header_Title" runat="server"></asp:ContentPlaceHolder>
             </div>
             <div class="Right-Header">
@@ -191,8 +249,8 @@
                     </div>
                 </div>
                 <div class="profile">
-                    <span>Alexander Aronowitz</span>
-                    <img src="../Images/employee photo.jpg" alt="Profile">
+                    <asp:Label ID="lblFullName" runat="server" Text="*"></asp:Label>
+                    <asp:Image ID="profilePhoto" runat="server" Width="40" Height="40" CssClass="profile-image" />
                 </div>
             </div>
         </div>
