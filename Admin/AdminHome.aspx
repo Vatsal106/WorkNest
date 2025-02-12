@@ -37,7 +37,7 @@
 </asp:Content>
 
 <asp:Content ID="title" ContentPlaceHolderID="Header_Title" runat="server">
-    <h2>Admin Panle - Functionalities</h2>
+    <h2>Functionalities</h2>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">

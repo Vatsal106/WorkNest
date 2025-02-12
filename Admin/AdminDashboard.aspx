@@ -3,8 +3,10 @@
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 </asp:Content>
-
+<asp:Content ID="Content3" ContentPlaceHolderID="Header_Title" runat="server">
+    <h1>Deshboard</h1>
+</asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <h1>Deshboard</h1>
+    <%--<h1>Deshboard</h1>--%>
 </asp:Content>
