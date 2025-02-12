@@ -1,64 +1,49 @@
-﻿<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="addClient.aspx.cs" Inherits="WorkNest.Admin.addClient" %>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
     <title>Add Client</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        /* Set body background to white */
         body {
+            font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background: #fff; /* White background */
-            padding: 20px;
+            margin: 0;
+            background-color: #f8f9fa;
         }
 
         .container {
             display: flex;
-            flex-wrap: wrap;
-            width: 90%;
-            max-width: 1000px;
+            width: 80%;
+            max-width: 900px;
             background: white;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
         }
 
-        .left-section {
-            width: 40%;
-            background: #0D0D30;
+        .image-section {
+            width: 50%;
+            background: #e9ecef;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 20px; /* Ensures proper spacing */
         }
 
-        .left-section img {
-            max-width: 100%;
-            height: auto;
-            object-fit: cover;
-            border-radius: 10px;
-        }
-
-        .right-section {
-            width: 60%;
-            padding: 40px;
-            display: flex;
-            flex-direction: column;
-            background: #8B9EB2;
-        }
-
-        .form-container {
+        .image-section img {
             width: 100%;
+            height: auto;
+            border-radius: 10px;
+            object-fit: cover; /* Ensures full image coverage */
+        }
+
+        .form-section {
+            width: 50%;
+            padding: 40px;
         }
 
         h2 {
@@ -67,189 +52,85 @@
             color: #333;
         }
 
-        .input-group {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 15px;
-            flex-wrap: wrap;
-        }
-
         label {
-            flex: 1;
             font-weight: bold;
-            font-size: 16px;
-            min-width: 150px;
+            display: block;
+            margin: 10px 0 5px;
         }
 
-        input {
-            flex: 2;
+        input, textarea {
+            width: 100%;
             padding: 10px;
+            margin-bottom: 15px;
             border: 1px solid #ccc;
             border-radius: 5px;
-            font-size: 16px;
-            width: 100%;
         }
 
-        .submit-btn {
+        .btn-submit {
             width: 100%;
             padding: 12px;
-            background: #007BFF;
-            border: none;
+            background: #28a745;
             color: white;
-            font-size: 18px;
-            cursor: pointer;
+            border: none;
             border-radius: 5px;
-            transition: 0.3s;
+            cursor: pointer;
+            font-size: 16px;
         }
 
-        .submit-btn:hover {
-            background: #0056b3;
+        .btn-submit:hover {
+            background: #218838;
         }
 
-        /* Responsive Design */
-
-        /* LAPTOP (1024px - 1440px) */
-        @media (max-width: 1440px) {
-            .container {
-                width: 85%;
-            }
-            
-            .right-section {
-                padding: 30px;
-            }
-        }
-
-        /* TABLET (768px - 1023px) */
-        @media (max-width: 1023px) {
+        @media screen and (max-width: 768px) {
             .container {
                 flex-direction: column;
+                width: 90%;
             }
 
-            .left-section {
+            .image-section {
+                width: 100%;
+                height: 250px;
+                padding: 10px; /* Adjust padding for mobile */
+            }
+
+            .form-section {
                 width: 100%;
                 padding: 20px;
-            }
-
-            .right-section {
-                width: 100%;
-                padding: 25px;
-            }
-
-            .input-group {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            label {
-                margin-bottom: 5px;
-            }
-        }
-
-        /* PHONE (480px - 767px) */
-        @media (max-width: 767px) {
-            body {
-                padding: 10px;
-            }
-
-            .container {
-                width: 95%;
-            }
-
-            .left-section {
-                padding: 15px;
-            }
-
-            .right-section {
-                padding: 20px;
-            }
-
-            label {
-                font-size: 14px;
-            }
-
-            input {
-                font-size: 14px;
-                padding: 8px;
-            }
-
-            .submit-btn {
-                font-size: 16px;
-                padding: 10px;
-            }
-        }
-
-        /* SMALL PHONE (below 480px) */
-        @media (max-width: 480px) {
-            .container {
-                width: 100%;
-                box-shadow: none;
-            }
-
-            .left-section {
-                padding: 10px;
-            }
-
-            .right-section {
-                padding: 15px;
-            }
-
-            label {
-                font-size: 13px;
-            }
-
-            input {
-                font-size: 13px;
-                padding: 6px;
-            }
-
-            .submit-btn {
-                font-size: 14px;
-                padding: 8px;
             }
         }
     </style>
 </head>
 <body>
-
     <div class="container">
-        <div class="left-section">
+        <!-- Image Section -->
+        <div class="image-section">
             <img src='<%= ResolveUrl("~/Images/ClientPagePhoto.png") %>' alt="Client Image" />
         </div>
 
-        <div class="right-section">
-            <div class="form-container">
-                <h2>Add Client</h2>
-                 <a href="AdminHome.aspx"><-</a>
-                <div class="input-group">
-                    <label>Client Name:</label>
-                    <input type="text" placeholder="Enter Client Name">
-                </div>
-                
-                <div class="input-group">
-                    <label>Email:</label>
-                    <input type="email" placeholder="Enter Email">
-                </div>
+        <!-- Form Section -->
+        <div class="form-section">
+            <h2>Add Client</h2>
+            <form id="form1" runat="server">
+                <label>CLIENT NAME :</label>
+                <asp:TextBox ID="txtClientName" runat="server"></asp:TextBox>
 
-                <div class="input-group">
-                    <label>Phone Number:</label>
-                    <input type="text" placeholder="Enter Phone Number">
-                </div>
+                <label>EMAIL :</label>
+                <asp:TextBox ID="txtEmail" runat="server" TextMode="Email"></asp:TextBox>
 
-                <div class="input-group">
-                    <label>Company Name:</label>
-                    <input type="text" placeholder="Enter Company Name">
-                </div>
+                <label>PHONE NUMBER :</label>
+                <asp:TextBox ID="txtPhoneNumber" runat="server" TextMode="Number"></asp:TextBox>
 
-                <div class="input-group">
-                    <label>Address:</label>
-                    <input type="text" placeholder="Enter Address">
-                </div>
+                <label>COMPANY NAME :</label>
+                <asp:TextBox ID="txtCompanyName" runat="server"></asp:TextBox>
 
-                <button class="submit-btn">Submit</button>
-            </div>
+                <label>ADDRESS :</label>
+                <asp:TextBox ID="txtAddress" runat="server" TextMode="MultiLine"></asp:TextBox>
+
+                <asp:Button ID="btnSubmit" runat="server" CssClass="btn-submit" OnClick="btnSubmit_Click" Text="SUBMIT" />
+
+                <asp:Label ID="lblError" runat="server" ForeColor="Red"></asp:Label>
+            </form>
         </div>
     </div>
-
 </body>
 </html>
