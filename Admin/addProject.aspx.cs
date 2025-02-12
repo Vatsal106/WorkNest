@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Web.UI.WebControls;
 
+
 namespace WorkNest.Admin
 {
     public partial class addProject : System.Web.UI.Page
@@ -17,10 +18,10 @@ namespace WorkNest.Admin
                 bindClient();
                 bindStatus();
             }
-            if (Session["UserRole"] == null || Session["UserRole"].ToString() != "Admin")
-            {
-                Response.Redirect("~/AccessDenied.aspx");
-            }
+            //if (Session["UserRole"] == null || Session["UserRole"].ToString() != "Admin")
+            //{
+            //    Response.Redirect("~/AccessDenied.aspx");
+            //}
         }
         public void bindProjectManagerName()
         {
@@ -30,7 +31,7 @@ namespace WorkNest.Admin
                            FROM EMPLOYEE E 
                            JOIN EMPLOYEE_ROLES ER ON E.EMPLOYEE_ID = ER.EMPLOYEE_ID 
                            JOIN ROLES R ON ER.ROLE_ID = R.ROLE_ID 
-                           WHERE R.ROLE_NAME NOT IN ('Project_Manager', 'Admin')";
+                           WHERE R.ROLE_NAME ='Project_Manager'";
             SqlDataAdapter adpt = new SqlDataAdapter(query, dbConn.con);
             DataSet ds = new DataSet();
             adpt.Fill(ds);
