@@ -12,14 +12,14 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #f8f9fa;
+            background-color: white;
         }
 
         .container {
             display: flex;
             width: 80%;
             max-width: 900px;
-            background: white;
+            background: #8B9EB2;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
             overflow: hidden;
@@ -27,18 +27,17 @@
 
         .image-section {
             width: 50%;
-            background: #e9ecef;
+            background: #0D0D30;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px; /* Ensures proper spacing */
+            padding: 20px;
         }
 
         .image-section img {
             width: 100%;
             height: auto;
-            border-radius: 10px;
-            object-fit: cover; /* Ensures full image coverage */
+            object-fit: cover;
         }
 
         .form-section {
@@ -52,24 +51,42 @@
             color: #333;
         }
 
-        label {
-            font-weight: bold;
-            display: block;
-            margin: 10px 0 5px;
+        /* Form Layout */
+        .form-group {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
         }
 
+/*        label {
+            font-weight: bold;
+            width: 30%;
+            text-align: right;
+            margin-right: 10px;
+        }*/
+
+       label {
+           font-weight: bold;
+           width: 35%; /* Increase width to fit long labels */
+           text-align: right;
+           margin-right: 10px;
+           white-space: nowrap; /* Prevents label text from wrapping */
+       }
+
+
         input, textarea {
-            width: 100%;
+            width: 65%;
             padding: 10px;
-            margin-bottom: 15px;
             border: 1px solid #ccc;
             border-radius: 5px;
+            font-size: 14px;
         }
 
         .btn-submit {
             width: 100%;
             padding: 12px;
-            background: #28a745;
+            background: #007BFF;
             color: white;
             border: none;
             border-radius: 5px;
@@ -78,9 +95,10 @@
         }
 
         .btn-submit:hover {
-            background: #218838;
+            background: #0056b3;
         }
 
+        /* Responsive Styles */
         @media screen and (max-width: 768px) {
             .container {
                 flex-direction: column;
@@ -90,12 +108,26 @@
             .image-section {
                 width: 100%;
                 height: 250px;
-                padding: 10px; /* Adjust padding for mobile */
             }
 
             .form-section {
                 width: 100%;
                 padding: 20px;
+            }
+
+            .form-group {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            label {
+                width: 100%;
+                text-align: left;
+                margin-bottom: 5px;
+            }
+
+            input, textarea {
+                width: 100%;
             }
         }
     </style>
@@ -111,24 +143,35 @@
         <div class="form-section">
             <h2>Add Client</h2>
             <form id="form1" runat="server">
-                <label>CLIENT NAME :</label>
-                <asp:TextBox ID="txtClientName" runat="server"></asp:TextBox>
 
-                <label>EMAIL :</label>
-                <asp:TextBox ID="txtEmail" runat="server" TextMode="Email"></asp:TextBox>
+                <div class="form-group">
+                    <label for="txtClientName">Client Name:</label>
+                    <asp:TextBox ID="txtClientName" runat="server"></asp:TextBox>
+                </div>
 
-                <label>PHONE NUMBER :</label>
-                <asp:TextBox ID="txtPhoneNumber" runat="server" TextMode="Number"></asp:TextBox>
+                <div class="form-group">
+                    <label for="txtEmail">Email:</label>
+                    <asp:TextBox ID="txtEmail" runat="server" TextMode="Email"></asp:TextBox>
+                </div>
 
-                <label>COMPANY NAME :</label>
-                <asp:TextBox ID="txtCompanyName" runat="server"></asp:TextBox>
+                <div class="form-group">
+                    <label for="txtPhoneNumber">Phone Number:</label>
+                    <asp:TextBox ID="txtPhoneNumber" runat="server" TextMode="Number"></asp:TextBox>
+                </div>
 
-                <label>ADDRESS :</label>
-                <asp:TextBox ID="txtAddress" runat="server" TextMode="MultiLine"></asp:TextBox>
+                <div class="form-group">
+                    <label for="txtCompanyName">Company Name:</label>
+                    <asp:TextBox ID="txtCompanyName" runat="server"></asp:TextBox>
+                </div>
 
-                <asp:Button ID="btnSubmit" runat="server" CssClass="btn-submit" OnClick="btnSubmit_Click" Text="SUBMIT" />
+                <div class="form-group">
+                    <label for="txtAddress">Address:</label>
+                    <asp:TextBox ID="txtAddress" runat="server" TextMode="MultiLine"></asp:TextBox>
+                </div>
 
+                <asp:Button ID="btnSubmit" runat="server" CssClass="btn-submit" OnClick="btnSubmit_Click" Text="Submit" />
                 <asp:Label ID="lblError" runat="server" ForeColor="Red"></asp:Label>
+
             </form>
         </div>
     </div>
