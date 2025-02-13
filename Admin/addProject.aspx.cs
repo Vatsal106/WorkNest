@@ -95,7 +95,7 @@ namespace WorkNest.Admin
                 cmdRole.Parameters.AddWithValue("@AssignedDate", DateTime.Now.Date);
 
                 cmdRole.ExecuteNonQuery();
-
+                btnReset_Click(sender, e);
                 lblError.Text = "Project added successfully!";
                 lblError.ForeColor = Color.Green;
             }

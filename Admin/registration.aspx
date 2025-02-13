@@ -382,7 +382,7 @@
                 <div class="text-center">
                     <asp:Label ID="lblError" class="btn" runat="server"></asp:Label><br />
                     <asp:Button ID="btnSubmit" class="btn" runat="server" Text="Submit" CssClass="btn btn-primary" OnClick="btnSubmit_Click" OnClientClick="return fullFormvalidate()" />
-                    <asp:Button ID="btnReset" runat="server" Text="Reset" CssClass="btn btn-secondary" OnClick="btnReset_Click" />
+                    <asp:Button ID="btnReset" runat="server" Text="Reset" CssClass="btn btn-secondary" OnClick="btnReset_Click" OnClientClick="return confirm('Are you sure you want to reset the form?');" />
                 </div>
             </form>
         </div>
