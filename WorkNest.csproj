@@ -86,6 +86,7 @@
     <Content Include="Admin\addProject.aspx" />
     <Content Include="Admin\AdminDashboard.aspx" />
     <Content Include="Admin\AdminHome.aspx" />
+    <Content Include="Admin\changeRole.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Images\ClientPagePhoto.png" />
     <Content Include="Images\employee photo.jpg" />
@@ -144,6 +145,13 @@
     </Compile>
     <Compile Include="Admin\AdminHome.aspx.designer.cs">
       <DependentUpon>AdminHome.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\changeRole.aspx.cs">
+      <DependentUpon>changeRole.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\changeRole.aspx.designer.cs">
+      <DependentUpon>changeRole.aspx</DependentUpon>
     </Compile>
     <Compile Include="dbConnection.cs" />
     <Compile Include="Global.asax.cs">
