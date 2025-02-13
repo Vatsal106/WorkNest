@@ -17,7 +17,7 @@
             <br />
             ROLE :
             
-            <asp:TextBox ID="txtCurrentRole" runat="server"></asp:TextBox>
+            <asp:TextBox ID="txtCurrentRole" runat="server" ReadOnly="True"></asp:TextBox>
             
             <br />
             <br />
