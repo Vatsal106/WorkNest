@@ -9,7 +9,7 @@ using System.Web.UI.WebControls;
 
 namespace WorkNest.Admin
 {
-    public partial class addClient : System.Web.UI.Page
+    public partial class addClients : System.Web.UI.Page
     {
         dbConnection dbConn = new dbConnection();
         protected void Page_Load(object sender, EventArgs e)
@@ -29,14 +29,15 @@ namespace WorkNest.Admin
             string company_name = txtCompanyName.Text;
             string address = txtAddress.Text;
             string query = "INSERT INTO CLIENTS(CLIENT_NAME,EMAIL,PHONE_NUMBER,COMPANY_NAME,ADDRESS) VALUES(@NAME,@EMAIL,@NUMBER,@COMPANY_NAME,@ADDRESS)";
-            SqlCommand cmd = new SqlCommand(query,dbConn.con);
-            cmd.Parameters.AddWithValue("@NAME",cName);
+            SqlCommand cmd = new SqlCommand(query, dbConn.con);
+            cmd.Parameters.AddWithValue("@NAME", cName);
             cmd.Parameters.AddWithValue("@EMAIL", email);
             cmd.Parameters.AddWithValue("@NUMBER", phone_number);
             cmd.Parameters.AddWithValue("@COMPANY_NAME", company_name);
             cmd.Parameters.AddWithValue("@address", address);
             int rowaffected = cmd.ExecuteNonQuery();
-            if (rowaffected > 0) {
+            if (rowaffected > 0)
+            {
                 lblError.Text = "Client added successfully!";
                 lblError.ForeColor = Color.Green;
             }
@@ -46,5 +47,6 @@ namespace WorkNest.Admin
                 lblError.ForeColor = Color.Red;
             }
         }
-    }
+    
+}
 }

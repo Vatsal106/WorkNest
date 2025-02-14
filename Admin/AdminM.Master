@@ -251,7 +251,7 @@
                     <div id="dropdown-content" class="dropdown-content">
                         <a href="registration.aspx">Add Employee</a>
                         <a href="addProject.aspx">Add Project</a>
-                        <a href="addClient.aspx">Add Client</a>
+                        <a href="addClients.aspx">Add Client</a>
                         <a href="changeRole.aspx">Change in Role</a>
                     </div>
                 </div>
