@@ -1,15 +1,16 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="addProject.aspx.cs" Inherits="WorkNest.Admin.addProject" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/AdminM.Master" AutoEventWireup="true" CodeBehind="addProjects.aspx.cs" Inherits="WorkNest.Admin.addProjects" %>
 
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-
+<asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+</asp:Content>
 
+<asp:Content ID="Content2" ContentPlaceHolderID="Header_Title" runat="server">
+    <!-- You can add any header-specific content here if needed -->
+</asp:Content>
+
+<asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -18,13 +19,13 @@
             justify-content: center;
             align-items: center;
             margin: 0;
-            min-height: 100vh;
-            padding: 20px;
+/*            min-height: 100vh;*/
+            
         }
 
         .container {
             display: flex;
-            width: 65%; /* Increased width */
+            width: 100%; /* Increased width */
             max-width: 1000px;
             box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3); /* Increased shadow */
             border-radius: 10px;
@@ -40,7 +41,7 @@
             display: block;
         }
 
-        form {
+        .form-container {
             background-color: #8B9EB2;
             padding: 30px;
             width: 55%;
@@ -60,7 +61,7 @@
             font-size: 28px;
         }
 
-        form div {
+        .form-container div {
             display: grid;
             grid-template-columns: 140px 1fr;
             gap: 10px;
@@ -120,12 +121,12 @@
                 display: none; /* Hide image on small screens */
             }
 
-            form {
+            .form-container {
                 width: 100%;
                 border-radius: 10px;
             }
 
-                form div {
+                .form-container div {
                     grid-template-columns: 1fr;
                     text-align: left;
                 }
@@ -228,13 +229,9 @@
         }
     </script>
 
-
-
-</head>
-<body>
     <div class="container">
         <img id="im" src="../images/Project Add image.png" alt="Project Image" />
-        <form id="addProject" runat="server">
+        <div class="form-container">
             <div class="Form-head">
                 <a href="AdminHome.aspx" class="btn btn-secondary btn-custom">
                     <i class="bi bi-arrow-left"></i>
@@ -270,7 +267,6 @@
             </div>
 
             <asp:Label ID="lblError" runat="server"></asp:Label>
-        </form>
+        </div>
     </div>
-</body>
-</html>
+</asp:Content>

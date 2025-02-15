@@ -11,7 +11,7 @@ namespace WorkNest.Admin
 {
 
 
-    public partial class addProject
+    public partial class addProjects
     {
 
         /// <summary>

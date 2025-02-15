@@ -83,7 +83,7 @@
   <ItemGroup>
     <Content Include="AccessDenied.aspx" />
     <Content Include="Admin\addClients.aspx" />
-    <Content Include="Admin\addProject.aspx" />
+    <Content Include="Admin\addProjects.aspx" />
     <Content Include="Admin\AdminDashboard.aspx" />
     <Content Include="Admin\AdminHome.aspx" />
     <Content Include="Admin\changeRole.aspx" />
@@ -125,12 +125,12 @@
     <Compile Include="Admin\addClients.aspx.designer.cs">
       <DependentUpon>addClients.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\addProject.aspx.cs">
-      <DependentUpon>addProject.aspx</DependentUpon>
+    <Compile Include="Admin\addProjects.aspx.cs">
+      <DependentUpon>addProjects.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Admin\addProject.aspx.designer.cs">
-      <DependentUpon>addProject.aspx</DependentUpon>
+    <Compile Include="Admin\addProjects.aspx.designer.cs">
+      <DependentUpon>addProjects.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\AdminDashboard.aspx.cs">
       <DependentUpon>AdminDashboard.aspx</DependentUpon>

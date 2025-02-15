@@ -4,6 +4,8 @@
 <html>
 <head runat="server">
     <title>Admin Panel</title>
+    <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
+        </asp:ContentPlaceHolder>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -74,7 +76,7 @@
             align-items: center;
             justify-content: space-between;
             box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
-            margin-left:20px
+            
         }
 
         .Right-Header {
