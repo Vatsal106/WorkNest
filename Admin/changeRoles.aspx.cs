@@ -100,6 +100,8 @@ namespace WorkNest.Admin
             ddlName.SelectedIndex = 0;
             txtCurrentRole.Text = string.Empty;
             ddlChangedRole.SelectedIndex = 0;
+            lblMessage.Text = "";
+
         }
 
         
