@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.SqlClient;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -9,7 +9,7 @@ using System.Web.UI.WebControls;
 
 namespace WorkNest.Admin
 {
-    public partial class changeRole : System.Web.UI.Page
+    public partial class changeRoles : System.Web.UI.Page
     {
         dbConnection dbConn = new dbConnection();
         protected void Page_Load(object sender, EventArgs e)
@@ -30,7 +30,7 @@ namespace WorkNest.Admin
         {
             dbConn.dbConnect();
             string query = "SELECT * FROM EMPLOYEE E JOIN EMPLOYEE_ROLES ER ON E.EMPLOYEE_ID = ER.EMPLOYEE_ID JOIN ROLES R ON ER.ROLE_ID = R.ROLE_ID WHERE R.ROLE_NAME != 'Admin'";
-            SqlDataAdapter adpt = new SqlDataAdapter(query,dbConn.con);
+            SqlDataAdapter adpt = new SqlDataAdapter(query, dbConn.con);
             DataSet ds = new DataSet();
             adpt.Fill(ds);
             ddlName.DataSource = ds;
@@ -57,12 +57,12 @@ namespace WorkNest.Admin
                 txtCurrentRole.Text = "No role assigned";
             }
         }
-        
+
         public void bindRoles()
         {
             dbConn.dbConnect();
             string query = "SELECT * FROM ROLES WHERE ROLE_NAME != 'Admin'";
-            SqlDataAdapter adpt = new SqlDataAdapter(query,dbConn.con);
+            SqlDataAdapter adpt = new SqlDataAdapter(query, dbConn.con);
             DataSet ds = new DataSet();
             adpt.Fill(ds);
             ddlChangedRole.DataSource = ds;
@@ -97,9 +97,13 @@ namespace WorkNest.Admin
 
         protected void btnReset_Click(object sender, EventArgs e)
         {
-            ddlName.SelectedIndex = 0;       
-            txtCurrentRole.Text = string.Empty; 
+            ddlName.SelectedIndex = 0;
+            txtCurrentRole.Text = string.Empty;
             ddlChangedRole.SelectedIndex = 0;
+            lblMessage.Text = "";
+
         }
+
+        
     }
 }

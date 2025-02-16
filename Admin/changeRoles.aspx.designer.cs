@@ -11,17 +11,8 @@ namespace WorkNest.Admin
 {
 
 
-    public partial class changeRole
+    public partial class changeRoles
     {
-
-        /// <summary>
-        /// form1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
         /// ddlName control.
