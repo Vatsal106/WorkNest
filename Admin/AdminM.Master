@@ -8,6 +8,11 @@
     <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
     </asp:ContentPlaceHolder>
     <style>
+        html, body {
+            overflow: hidden; /* Disable page scrollbar */
+            height: 100%;
+        }
+
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -27,9 +32,14 @@
             transition: left 0.3s ease; /* Smooth transition for sliding */
             padding-left: 20px;
             left: 0; /* Sidebar is visible by default on larger screens */
+            overflow-y: auto; /* Ensure sidebar scrolling if needed */
+            scrollbar-width: none; /* Hide scrollbar for Firefox */
         }
 
-
+            .sidebar::-webkit-scrollbar,
+            .content::-webkit-scrollbar {
+                display: none;
+            }
 
 
             .sidebar .logo {
@@ -148,6 +158,8 @@
             margin-left: 250px;
             padding: 20px;
             margin-top: 80px;
+            overflow-y: auto; /* Enable scrolling only inside content area */
+            height: calc(100vh - 80px); /* Adjust height considering header */
         }
 
         .menu-button {

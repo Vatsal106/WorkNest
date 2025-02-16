@@ -33,7 +33,7 @@
 </asp:Content>
 
 <asp:Content ID="title" ContentPlaceHolderID="Header_Title" runat="server">
-    <h2>Functionalities</h2>
+    Functionalities
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
