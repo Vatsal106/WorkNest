@@ -4,9 +4,9 @@
 <html>
 <head runat="server">
     <title>Admin Panel</title>
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
     <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
-        </asp:ContentPlaceHolder>
+    </asp:ContentPlaceHolder>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -77,14 +77,13 @@
             align-items: center;
             justify-content: space-between;
             box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
-            
         }
 
         .Right-Header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-/*            margin-right:70px;*/
+            /*            margin-right:70px;*/
         }
 
         .ddlAdd {
@@ -142,7 +141,7 @@
                 width: 40px;
                 height: 40px;
                 border-radius: 50%;
-/*                margin-left: 10px;*/
+                /*                margin-left: 10px;*/
             }
 
         .content {
@@ -159,12 +158,11 @@
 
         @media (max-width: 768px) { /* Mobile (Smaller screens) */
             .sidebar {
-               
                 left: -250px; /* Sidebar is hidden off-screen by default */
             }
 
                 .sidebar.open {
-                     top:100px;
+                    top: 60px;
                     left: 0; /* Sidebar is visible when the 'open' class is added */
                 }
 
@@ -172,7 +170,7 @@
                 display: block; /* Show the menu button on smaller screens */
                 position: absolute;
                 top: 20px;
-                left: 20px;
+                left: 15px; /* Adjusted to prevent overlapping */
                 font-size: 30px;
                 background: none;
                 border: none;
@@ -182,47 +180,62 @@
 
             .header {
                 width: 100%;
-                left: 15px;
+                left: 0;
+                padding-left: 60px; /* Ensure space for menu button */
             }
-            .Left-Header h2{
-                font-size:14px;
+
+            .Left-Header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding-left: 50px; /* Shift title away from button */
             }
+
+                .Left-Header h2 {
+                    font-size: 16px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    max-width: calc(100% - 60px); /* Prevent overflow */
+                }
+
             .content {
                 margin-left: 0px;
+                margin-top: 60px;
             }
         }
     </style>
     <script>
-    function toggleSidebar(event) {
-        event.preventDefault(); // Prevents unwanted form submission (if inside a form)
-        event.stopPropagation(); // Prevents immediate closing due to window.onclick
+        function toggleSidebar(event) {
+            event.preventDefault(); // Prevents unwanted form submission (if inside a form)
+            event.stopPropagation(); // Prevents immediate closing due to window.onclick
 
-        var sidebar = document.querySelector('.sidebar');
-        sidebar.classList.toggle('open');
-    }
-
-    // Close sidebar when clicking outside or selecting a menu item
-    window.onclick = function (event) {
-        var sidebar = document.querySelector('.sidebar');
-        var menuButton = document.querySelector('.menu-button');
-
-        if (sidebar.classList.contains('open') &&
-            !sidebar.contains(event.target) &&
-            !menuButton.contains(event.target)) {
-            sidebar.classList.remove('open');
+            var sidebar = document.querySelector('.sidebar');
+            sidebar.classList.toggle('open');
         }
-    };
 
-    // Close sidebar when clicking a menu item inside it
-    document.addEventListener('DOMContentLoaded', function () {
-        var menuItems = document.querySelectorAll('.sidebar a');
-        menuItems.forEach(item => {
-            item.addEventListener('click', function () {
-                var sidebar = document.querySelector('.sidebar');
+        // Close sidebar when clicking outside or selecting a menu item
+        window.onclick = function (event) {
+            var sidebar = document.querySelector('.sidebar');
+            var menuButton = document.querySelector('.menu-button');
+
+            if (sidebar.classList.contains('open') &&
+                !sidebar.contains(event.target) &&
+                !menuButton.contains(event.target)) {
                 sidebar.classList.remove('open');
+            }
+        };
+
+        // Close sidebar when clicking a menu item inside it
+        document.addEventListener('DOMContentLoaded', function () {
+            var menuItems = document.querySelectorAll('.sidebar a');
+            menuItems.forEach(item => {
+                item.addEventListener('click', function () {
+                    var sidebar = document.querySelector('.sidebar');
+                    sidebar.classList.remove('open');
+                });
             });
         });
-    });
     </script>
 
 
@@ -247,6 +260,7 @@
 
         <div class="header">
             <div class="Left-Header">
+
                 <button type="button" class="menu-button" onclick="toggleSidebar(event)">☰</button>
                 <asp:ContentPlaceHolder ID="Header_Title" runat="server"></asp:ContentPlaceHolder>
             </div>
@@ -272,6 +286,6 @@
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
         </div>
     </form>
-   
+
 </body>
 </html>

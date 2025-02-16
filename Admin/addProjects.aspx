@@ -10,7 +10,7 @@
             align-items: center;
             justify-content: center;
             padding: 0px;
-            background: #F7F9FB;
+           
             max-width: 900px;
             margin: auto;
             /*        gap: 20px;*/
@@ -22,7 +22,7 @@
         #im {
             width: 50%;
             /*        max-width: 300px;*/
-            min-height: 544.2px;
+            min-height: 541.8px;
             height: 100%;
             /*         object-fit: cover;*/
             border-bottom-left-radius: 10px;
@@ -31,15 +31,21 @@
         }
 
         .form-container {
-            background: #ffffff;
+            background:;
             padding: 20px;
             /*        border-radius: 10px;*/
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
             width: 50%;
             border-bottom-right-radius: 10px;
             border-top-right-radius: 10px;
+            background-color: #8B9EB2;
+            color: #000;
         }
-
+            .form-container h3 {
+                text-align: center;
+                margin-bottom: 20px;
+                color: #000;
+            }
         .form-group {
             display: flex;
             align-items: center;
@@ -94,6 +100,7 @@
             #im {
                 width: 80%;
                 max-width: 100%;
+                min-height: auto;
             }
 
             .form-container {
@@ -210,7 +217,7 @@
     <div class="container">
         <img id="im" src="../images/Project Add image.png" alt="Project Image" />
         <div class="form-container">
-            <h1>Add Project</h1>
+            <h3>Add Project</h3>
             <div class="form-group">
                 <label for="txtProjectName">Project Name:</label>
                 <asp:TextBox ID="txtProjectName" runat="server" CssClass="form-control"></asp:TextBox>

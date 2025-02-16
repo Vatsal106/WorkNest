@@ -10,27 +10,32 @@
 
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div>
-        NAME :
-        <asp:DropDownList ID="ddlName" runat="server" AutoPostBack="True" OnSelectedIndexChanged="bindCurrentRole">
-        </asp:DropDownList>
+        <div>
+            <label for="ddlName">NAME :</label>
+            <asp:DropDownList ID="ddlName" runat="server" AutoPostBack="True" OnSelectedIndexChanged="bindCurrentRole">
+            </asp:DropDownList>
+        </div>
         <br />
+        <div>
+            <label for="txtCurrentRole">ROLE :</label>
+            <asp:TextBox ID="txtCurrentRole" runat="server" ReadOnly="True"></asp:TextBox>
+        </div>
         <br />
-        ROLE :
-        <asp:TextBox ID="txtCurrentRole" runat="server" ReadOnly="True"></asp:TextBox>
+        <div>
+            <label for="ddlChangedRole">CHANGE TO :</label>
+            <asp:DropDownList ID="ddlChangedRole" runat="server" AutoPostBack="True">
+            </asp:DropDownList>
+        </div>
         <br />
+        <div>
+            <asp:Button ID="btnUpdateRole" runat="server" OnClick="btnUpdateRole_Click" Text="UPDATE" />
+            &nbsp;
+            <asp:Button ID="btnReset" runat="server" OnClick="btnReset_Click" Text="RESET" />
+        </div>
         <br />
-        CHANGE TO :
-        <asp:DropDownList ID="ddlChangedRole" runat="server" AutoPostBack="True">
-        </asp:DropDownList>
-        <br />
-        <br />
-        <asp:Button ID="btnUpdateRole" runat="server" OnClick="btnUpdateRole_Click" Text="UPDATE" />
-        &nbsp;
-        <asp:Button ID="btnReset" runat="server" OnClick="btnReset_Click" Text="RESET" />
-        <br />
-        <br />
-        <asp:Label ID="lblMessage" runat="server"></asp:Label>
-        <br />
+        <div>
+            <asp:Label ID="lblMessage" runat="server"></asp:Label>
+        </div>
         <br />
     </div>
 </asp:Content>

@@ -28,10 +28,6 @@
                 padding: 10px;
                 font-size: 14px;
             }
-
-            h2 {
-                font-size: 14px;
-            }
         }
     </style>
 </asp:Content>
