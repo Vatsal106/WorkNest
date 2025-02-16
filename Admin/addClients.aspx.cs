@@ -33,6 +33,7 @@ namespace WorkNest.Admin
             int rowaffected = cmd.ExecuteNonQuery();
             if (rowaffected > 0)
             {
+                btnReset_Click(sender, e);
                 lblError.Text = "Client added successfully!";
                 lblError.ForeColor = Color.Green;
             }
@@ -41,6 +42,15 @@ namespace WorkNest.Admin
                 lblError.Text = "Client Not added!";
                 lblError.ForeColor = Color.Red;
             }
+        }
+        protected void btnReset_Click(object sender, EventArgs e)
+        {
+            txtClientName.Text = "";
+            txtEmail.Text = "";
+            txtPhoneNumber.Text = "";
+            txtCompanyName.Text = "";
+            txtAddress.Text = "";
+            lblError.Text = "";
         }
 
     }

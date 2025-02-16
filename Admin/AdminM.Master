@@ -84,7 +84,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-right:70px;
+/*            margin-right:70px;*/
         }
 
         .ddlAdd {
@@ -272,5 +272,6 @@
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
         </div>
     </form>
+   
 </body>
 </html>

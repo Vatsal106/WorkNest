@@ -15,6 +15,7 @@
             border-radius: 10px;
             overflow: hidden;
             margin: 0 auto;
+            padding: 0;
         }
 
         .image-section {
@@ -26,11 +27,11 @@
             padding: 20px;
         }
 
-        .image-section img {
-            width: 100%;
-            height: auto;
-            object-fit: cover;
-        }
+            .image-section img {
+                width: 100%;
+                height: auto;
+                object-fit: cover;
+            }
 
         .form-section {
             width: 50%;
@@ -66,20 +67,49 @@
             font-size: 14px;
         }
 
-        .btn-submit {
-            width: 100%;
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px; /* Adds spacing between buttons */
+            margin-top: 15px;
+        }
+
+        .btn-submit, .btn-reset {
+            width: 48%; /* Ensures both buttons fit side by side */
             padding: 12px;
-            background: #007BFF;
-            color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.2s;
+            text-align: center;
         }
 
-        .btn-submit:hover {
-            background: #0056b3;
+        .btn-submit {
+            background: #007BFF;
+            color: white;
         }
+
+            .btn-submit:hover {
+                background: #0056b3;
+                transform: scale(1.02);
+            }
+
+        .btn-reset {
+            background: #FF8C00; /* Warm Orange for reset */
+            color: white;
+        }
+
+            .btn-reset:hover {
+                background: #cc7000;
+                transform: scale(1.02);
+            }
+
+            .btn-submit:active, .btn-reset:active {
+                transform: scale(0.98);
+            }
+
 
         @media screen and (max-width: 768px) {
             .container {
@@ -111,8 +141,79 @@
             input, textarea {
                 width: 100%;
             }
+
+            .button-group {
+                flex-direction: column; /* Stack buttons on small screens */
+            }
+
+            .btn-submit, .btn-reset {
+                width: 100%;
+            }
         }
     </style>
+    <script>
+        function validateForm() {
+            var clientName = document.getElementById('<%= txtClientName.ClientID %>').value.trim();
+            var email = document.getElementById('<%= txtEmail.ClientID %>').value.trim();
+            var phone = document.getElementById('<%= txtPhoneNumber.ClientID %>').value.trim();
+            var companyName = document.getElementById('<%= txtCompanyName.ClientID %>').value.trim();
+            var address = document.getElementById('<%= txtAddress.ClientID %>').value.trim();
+            var errorLabel = document.getElementById('<%= lblError.ClientID %>');
+
+            var errorMessage = "";
+
+            if (!clientName) errorMessage += "Client Name is required.\n";
+            if (!email) errorMessage += "Email is required.\n";
+            if (!phone) errorMessage += "Phone Number is required.\n";
+            if (!companyName) errorMessage += "Company Name is required.\n";
+            if (!address) errorMessage += "Address is required.\n";
+
+            if (email && !validateEmail(email)) {
+                errorMessage += "Invalid email format.\n";
+            }
+
+            if (phone && !validatePhone(phone)) {
+                errorMessage += "Phone number must be exactly 10 digits.\n";
+            }
+
+            if (errorMessage !== "") {
+                errorLabel.innerText = errorMessage;
+                return false; // Prevent form submission
+            }
+
+            errorLabel.innerText = "";
+            return true; // Allow form submission
+        }
+
+        function validateEmail(email) {
+            var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return regex.test(email);
+        }
+
+        function validatePhone(phone) {
+            return phone.length === 10;
+        }
+
+        function checkEmailFormat() {
+            var emailInput = document.getElementById('<%= txtEmail.ClientID %>');
+            if (!validateEmail(emailInput.value)) {
+                emailInput.style.borderColor = "red";
+            } else {
+                emailInput.style.borderColor = "";
+            }
+        }
+
+        function checkPhoneNumber() {
+            var phoneInput = document.getElementById('<%= txtPhoneNumber.ClientID %>');
+            phoneInput.value = phoneInput.value.replace(/\D/g, ''); // Allow only digits
+            if (!validatePhone(phoneInput.value)) {
+                phoneInput.style.borderColor = "red";
+            } else {
+                phoneInput.style.borderColor = "";
+            }
+        }
+    </script>
+
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="Header_Title" runat="server">
@@ -135,12 +236,12 @@
 
             <div class="form-group">
                 <label for="txtEmail">Email:</label>
-                <asp:TextBox ID="txtEmail" runat="server" TextMode="Email"></asp:TextBox>
+                <asp:TextBox ID="txtEmail" runat="server" TextMode="Email" oninput="checkEmailFormat()"></asp:TextBox>
             </div>
 
             <div class="form-group">
                 <label for="txtPhoneNumber">Phone Number:</label>
-                <asp:TextBox ID="txtPhoneNumber" runat="server" TextMode="Number"></asp:TextBox>
+                <asp:TextBox ID="txtPhoneNumber" runat="server" TextMode="Number" oninput="checkPhoneNumber()"></asp:TextBox>
             </div>
 
             <div class="form-group">
@@ -152,8 +253,13 @@
                 <label for="txtAddress">Address:</label>
                 <asp:TextBox ID="txtAddress" runat="server" TextMode="MultiLine"></asp:TextBox>
             </div>
-
-            <asp:Button ID="btnSubmit" runat="server" CssClass="btn-submit" OnClick="btnSubmit_Click" Text="Submit" />
+            <div class="button-group">
+                <asp:Button ID="btnSubmit" runat="server" CssClass="btn-submit" OnClick="btnSubmit_Click" OnClientClick="return validateForm();" Text="Submit" />
+                <asp:Button ID="btnReset" runat="server" CssClass="btn-reset"
+                    OnClick="btnReset_Click" Text="Reset"
+                    CausesValidation="false" UseSubmitBehavior="false"
+                    />
+            </div>
         </div>
     </div>
 </asp:Content>
