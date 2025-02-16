@@ -2,162 +2,132 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
-</asp:Content>
 
-<asp:Content ID="Content2" ContentPlaceHolderID="Header_Title" runat="server">
-    <!-- You can add any header-specific content here if needed -->
-</asp:Content>
-
-<asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 0;
-/*            min-height: 100vh;*/
-            
-        }
-
+        /* Improved CSS for Add Project Form */
         .container {
             display: flex;
-            width: 100%; /* Increased width */
-            max-width: 1000px;
-            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3); /* Increased shadow */
-            border-radius: 10px;
-            overflow: hidden;
-            background: white;
+            align-items: center;
+            justify-content: center;
             padding: 0px;
+            background: #F7F9FB;
+            max-width: 900px;
+            margin: auto;
+            /*        gap: 20px;*/
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #0d0d30;
+            border-radius: 10px;
         }
 
         #im {
-            width: 45%;
-            max-width: 100%;
-            height: auto;
-            display: block;
+            width: 50%;
+            /*        max-width: 300px;*/
+            min-height: 544.2px;
+            height: 100%;
+            /*         object-fit: cover;*/
+            border-bottom-left-radius: 10px;
+            border-top-left-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         .form-container {
-            background-color: #8B9EB2;
-            padding: 30px;
-            width: 55%;
-            box-sizing: border-box;
-            border-radius: 0 10px 10px 0;
+            background: #ffffff;
+            padding: 20px;
+            /*        border-radius: 10px;*/
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            width: 50%;
+            border-bottom-right-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .form-group {
             display: flex;
-            flex-direction: column;
             align-items: center;
-        }
-
-        h1 {
-            font-weight: bold;
-            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-            color: #0D0D30;
-            text-align: center;
+            justify-content: space-between;
             margin-bottom: 15px;
-            font-size: 28px;
         }
 
-        .form-container div {
-            display: grid;
-            grid-template-columns: 140px 1fr;
-            gap: 10px;
-            align-items: center;
-            margin-bottom: 8px;
-            width: 100%;
-            max-width: 450px;
-        }
-
-        #pp {
+        label {
             font-weight: bold;
-            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-            color: #0D0D30;
-            text-align: right;
-            padding-right: 5px;
+            color: #333333;
+            width: 35%;
+            text-align: left;
         }
 
-        /* Input Fields */
-        #txtProjectName, #txtDesc, #dateStart, #dateEnd, #ddlStatus, #ddlProjectManager, #ddlClient {
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        textarea,
+        select {
+            width: 65%;
             padding: 10px;
+            border: 1px solid #8B9EB2;
             border-radius: 5px;
-            box-sizing: border-box;
-            width: 100%;
-            font-size: 14px;
-            border: none; /* Removed Borders */
-            outline: none;
+            font-size: 16px;
         }
 
-        #txtDesc {
-            height: 60px;
-        }
+            input:focus,
+            textarea:focus,
+            select:focus {
+                border-color: #4A6D85;
+                outline: none;
+                box-shadow: 0px 0px 5px rgba(74, 109, 133, 0.5);
+            }
 
-        /* Bootstrap Button Styles */
         .button-container {
             display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 15px;
-            width: 100%;
+            justify-content: space-between;
         }
 
         .btn-custom {
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-size: 14px;
-            font-weight: bold;
+            width: 48%;
         }
 
         /* Responsive Design */
         @media (max-width: 768px) {
             .container {
                 flex-direction: column;
-                width: 90%;
+                align-items: center;
+                max-width: 100%;
             }
 
             #im {
-                display: none; /* Hide image on small screens */
+                width: 80%;
+                max-width: 100%;
             }
 
             .form-container {
-                width: 100%;
-                border-radius: 10px;
+                width: 90%;
             }
 
-                .form-container div {
-                    grid-template-columns: 1fr;
-                    text-align: left;
-                }
+            .form-group {
+                flex-direction: column;
+                align-items: flex-start;
+            }
 
-            #pp {
-                text-align: left;
-                padding-bottom: 5px;
+            label {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+
+            input,
+            select,
+            textarea {
+                width: 100%;
             }
 
             .button-container {
                 flex-direction: column;
             }
-        }
 
-        .Form-head {
-            display: flex;
-        }
-
-            .Form-head .btn-custom {
-                font-size: 25px;
-                padding: 5px 15px;
-                border-radius: 10%;
-                transition: background 0.3s ease-in-out;
-                margin-right: 120px;
+            .btn-custom {
+                width: 100%;
+                margin-bottom: 10px;
             }
-
-                .Form-head .btn-custom:hover {
-                    background: #4A6D85; /* Darker Blue-Grey from your color scheme */
-                    color: white;
-                }
+        }
     </style>
+
+
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             let startDate = document.getElementById('<%= dateStart.ClientID %>');
@@ -228,45 +198,53 @@
             return true; // Submit form if everything is valid
         }
     </script>
+</asp:Content>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="Header_Title" runat="server">
+    Add Project
+</asp:Content>
+
+<asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
 
     <div class="container">
         <img id="im" src="../images/Project Add image.png" alt="Project Image" />
         <div class="form-container">
-            <div class="Form-head">
-                <a href="AdminHome.aspx" class="btn btn-secondary btn-custom">
-                    <i class="bi bi-arrow-left"></i>
-                </a>
-                <h1>Add Project</h1>
+            <h1>Add Project</h1>
+            <div class="form-group">
+                <label for="txtProjectName">Project Name:</label>
+                <asp:TextBox ID="txtProjectName" runat="server" CssClass="form-control"></asp:TextBox>
             </div>
-            <div>
-                <label id="pp">Project Name:</label><asp:TextBox ID="txtProjectName" runat="server"></asp:TextBox>
+            <div class="form-group">
+                <label for="txtDesc">Description:</label>
+                <asp:TextBox ID="txtDesc" runat="server" TextMode="MultiLine" CssClass="form-control"></asp:TextBox>
             </div>
-            <div>
-                <label id="pp">Description:</label><asp:TextBox ID="txtDesc" runat="server" TextMode="MultiLine"></asp:TextBox>
+            <div class="form-group">
+                <label for="dateStart">Start Date:</label>
+                <asp:TextBox ID="dateStart" runat="server" TextMode="Date" CssClass="form-control"></asp:TextBox>
             </div>
-            <div>
-                <label id="pp">Start Date:</label><asp:TextBox ID="dateStart" runat="server" TextMode="Date"></asp:TextBox>
+            <div class="form-group">
+                <label for="dateEnd">End Date:</label>
+                <asp:TextBox ID="dateEnd" runat="server" TextMode="Date" CssClass="form-control"></asp:TextBox>
             </div>
-            <div>
-                <label id="pp">End Date:</label><asp:TextBox ID="dateEnd" runat="server" TextMode="Date"></asp:TextBox>
+            <div class="form-group">
+                <label for="ddlStatus">Status:</label>
+                <asp:DropDownList ID="ddlStatus" runat="server" AutoPostBack="True" CssClass="form-control"></asp:DropDownList>
             </div>
-            <div>
-                <label id="pp">Status:</label><asp:DropDownList ID="ddlStatus" runat="server" AutoPostBack="True"></asp:DropDownList>
+            <div class="form-group">
+                <label for="ddlProjectManager">Project Manager:</label>
+                <asp:DropDownList ID="ddlProjectManager" runat="server" AutoPostBack="True" CssClass="form-control"></asp:DropDownList>
             </div>
-            <div>
-                <label id="pp">Project Manager:</label><asp:DropDownList ID="ddlProjectManager" runat="server" AutoPostBack="True"></asp:DropDownList>
+            <div class="form-group">
+                <label for="ddlClient">Client:</label>
+                <asp:DropDownList ID="ddlClient" runat="server" AutoPostBack="True" CssClass="form-control"></asp:DropDownList>
             </div>
-            <div>
-                <label id="pp">Client:</label><asp:DropDownList ID="ddlClient" runat="server" AutoPostBack="True"></asp:DropDownList>
-            </div>
-
-            <!-- Bootstrap Styled Buttons -->
             <div class="button-container">
                 <asp:Button ID="btnSubmit" runat="server" CssClass="btn btn-primary btn-custom" OnClick="btnSubmit_Click" Text="SUBMIT" OnClientClick="return validateForm();" />
                 <asp:Button ID="btnReset" runat="server" CssClass="btn btn-secondary btn-custom" Text="RESET" OnClick="btnReset_Click" CausesValidation="False" OnClientClick="return confirm('Are you sure you want to reset the form?');" />
             </div>
-
             <asp:Label ID="lblError" runat="server"></asp:Label>
         </div>
     </div>
+
 </asp:Content>

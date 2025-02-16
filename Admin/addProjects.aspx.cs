@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace WorkNest.Admin
 {
-	public partial class addProjects : System.Web.UI.Page
-	{
+    public partial class addProjects : System.Web.UI.Page
+    {
         dbConnection dbConn = new dbConnection();
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -119,6 +115,7 @@ namespace WorkNest.Admin
             ddlStatus.SelectedIndex = 0;
             ddlProjectManager.SelectedIndex = 0;
             ddlClient.SelectedIndex = 0;
+            lblError.Text = string.Empty;
         }
     }
 }
