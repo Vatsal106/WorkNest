@@ -7,10 +7,10 @@ namespace WorkNest.Project_Manager
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["UserRole"] == null || Session["UserRole"].ToString() != "Project_Manager")
-            {
-                Response.Redirect("~/AccessDenied.aspx");
-            }
+            //if (Session["UserRole"] == null || Session["UserRole"].ToString() != "Project_Manager")
+            //{
+            //    Response.Redirect("~/AccessDenied.aspx");
+            //}
             if (!IsPostBack)
             {
                 FetchEmployeeNameAndProfile();

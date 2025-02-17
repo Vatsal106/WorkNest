@@ -5,239 +5,299 @@
 <head runat="server">
     <title>Admin Panel</title>
     <style>
-      body {
-          font-family: Arial, sans-serif;
-          margin: 0;
-          padding: 0;
-          display: flex;
-          flex-direction: column;
-      }
-
-      .sidebar {
-          width: 250px;
-          background-color: #0d0d30;
-          color: #333333;
-          height: 100vh;
-          padding-top: 20px;
-          position: fixed;
-          text-align: left;
-          transition: left 0.3s ease; /* Smooth transition for sliding */
-          padding-left: 20px;
-          left: 0; /* Sidebar is visible by default on larger screens */
-      }
-
-    
-
-
-      .sidebar .logo {
-          text-align: center;
-          margin-bottom: 20px;
-      }
-
-          .sidebar .logo img {
-              width: 180px;
-              height: auto;
-          }
-
-      .sidebar h3 {
-          color: #FF8C00;
-          font-size: 24px;
-          font-weight: bold;
-          padding-bottom: 20px;
-      }
-
-      .sidebar .menu {
-          display: flex;
-          align-items: center;
-          color: #E4F1F9;
-          padding: 15px;
-          text-decoration: none;
-          font-size: 18px;
-          transition: background 0.3s;
-      }
-
-          .sidebar .menu:hover {
-              background-color: #4A6D85;
-              color: white;
-          }
-
-      .header {
-          width: calc(100% - 250px);
-          background-color: #F7F9FB;
-          color: #333333;
-          padding: 15px 40px;
-          text-align: right;
-          position: fixed;
-          left: 250px;
-          top: 0;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
-      }
-
-      .Right-Header {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-      }
-
-      .ddlAdd {
-          position: relative;
-          display: inline-block;
-          margin-right: 10px;
-      }
-
-          .ddlAdd button {
-              background-color: #FF8C00;
-              color: white;
-              padding: 10px 20px;
-              border: none;
-              cursor: pointer;
-              border-radius: 5px;
-              font-size: 16px;
-          }
-
-              .ddlAdd button:hover {
-                  background-color: #e07b00;
-              }
-
-      .dropdown-content {
-          display: none;
-          position: absolute;
-          background-color: #F7F9FB;
-          min-width: 160px;
-          box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
-          z-index: 1;
-          border-radius: 5px;
-      }
-
-          .dropdown-content a {
-              color: #333333;
-              padding: 10px;
-              text-decoration: none;
-              display: block;
-          }
-
-              .dropdown-content a:hover {
-                  background-color: #E4F1F9;
-              }
-
-      .ddlAdd:hover .dropdown-content {
-          display: block;
-      }
-
-      .profile {
-          display: flex;
-          align-items: center;
-          margin-right: 3px;
-      }
-
-          .profile img {
-              width: 40px;
-              height: 40px;
-              border-radius: 50%;
-              margin-left: 10px;
-          }
-
-      .content {
-          margin-left: 250px;
-          padding: 20px;
-          margin-top: 80px;
-      }
-
-      .menu-button {
-          display: none;
-          height: 40px;
-          width: 40px;
-      }
-        @media (max-width: 768px) { /* Mobile (Smaller screens) */
-    .sidebar {
-        left: -250px; /* Sidebar is hidden off-screen by default */
-    }
-
-        .sidebar.open {
-            left: 0; /* Sidebar is visible when the 'open' class is added */
+        html, body {
+            overflow: hidden; /* Disable page scrollbar */
+            height: 100%;
         }
 
-    .menu-button {
-        display: block; /* Show the menu button on smaller screens */
-        position: absolute;
-        top: 20px;
-        left: 20px;
-        font-size: 30px;
-        background: none;
-        border: none;
-        color: #FF8C00;
-        cursor: pointer;
-    }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+        }
 
-    .header {
-        width: 100%;
-        left: 0px;
-    }
+        .sidebar {
+            width: 250px;
+            background-color: #0d0d30;
+            color: #333333;
+            height: 100vh;
+            padding-top: 20px;
+            position: fixed;
+            text-align: left;
+            transition: left 0.3s ease; /* Smooth transition for sliding */
+            padding-left: 20px;
+            left: 0; /* Sidebar is visible by default on larger screens */
+            overflow-y: auto; /* Ensure sidebar scrolling if needed */
+            scrollbar-width: none; /* Hide scrollbar for Firefox */
+        }
 
-    .content {
-        margin-left: 0px;
-    }
-}
-  </style>
-  <script>
-      function toggleSidebar() {
-          var sidebar = document.querySelector('.sidebar');
-          sidebar.classList.toggle('open'); // Toggle the 'open' class to show/hide the sidebar
-      }
+            .sidebar::-webkit-scrollbar,
+            .content::-webkit-scrollbar {
+                display: none;
+            }
 
-      // Close sidebar when clicking outside of it (on smaller screens)
-      window.onclick = function (event) {
-          var sidebar = document.querySelector('.sidebar');
-          var menuButton = document.querySelector('.menu-button');
 
-          // Close sidebar if clicked outside
-          if (!sidebar.contains(event.target) && !menuButton.contains(event.target)) {
-              sidebar.classList.remove('open');
-          }
+            .sidebar .logo {
+                text-align: center;
+                margin-bottom: 20px;
+            }
 
-          // Close dropdown when clicking outside
-          var dropdown = document.getElementById('dropdown-content');
-          var ddlAdd = document.getElementById('ddlAdd');
+                .sidebar .logo img {
+                    width: 180px;
+                    height: auto;
+                }
 
-          if (!ddlAdd.contains(event.target)) {
-              dropdown.style.display = 'none';
-          }
-      };
+            .sidebar h3 {
+                color: #FF8C00;
+                font-size: 24px;
+                font-weight: bold;
+                padding-bottom: 20px;
+            }
 
-      // Dropdown toggle
-      function toggleDropdown() {
-          var dropdown = document.getElementById('dropdown-content');
-          dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-      }
-  </script>
-    <div>
+            .sidebar .menu {
+                display: flex;
+                align-items: center;
+                color: #E4F1F9;
+                padding: 15px;
+                text-decoration: none;
+                font-size: 18px;
+                transition: background 0.3s;
+            }
+
+                .sidebar .menu:hover {
+                    background-color: #4A6D85;
+                    color: white;
+                }
+
+        .header {
+            width: calc(100% - 250px);
+            background-color: #F7F9FB;
+            color: #333333;
+            padding: 15px 40px;
+            text-align: right;
+            position: fixed;
+            left: 250px;
+            top: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .Right-Header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            /*            margin-right:70px;*/
+        }
+
+        .notification {
+            position: relative;
+            display: inline-block;
+            margin-left: 15px;
+            padding-inline: 10px;
+        }
+
+        .notification-icon {
+            text-decoration: none;
+            font-size: 18px;
+            position: relative;
+        }
+
+        .badge {
+            position: absolute;
+            top: -5px;
+            right: -10px;
+            background-color: red;
+            color: white;
+            border-radius: 50%;
+            padding: 3px 7px;
+            font-size: 12px;
+        }
+
+        .ddlAdd {
+            position: relative;
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+            .ddlAdd button {
+                background-color: #FF8C00;
+                color: white;
+                padding: 10px 20px;
+                border: none;
+                cursor: pointer;
+                border-radius: 5px;
+                font-size: 16px;
+            }
+
+                .ddlAdd button:hover {
+                    background-color: #e07b00;
+                }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #F7F9FB;
+            min-width: 160px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+            z-index: 1;
+            border-radius: 5px;
+        }
+
+            .dropdown-content a {
+                color: #333333;
+                padding: 10px;
+                text-decoration: none;
+                display: block;
+            }
+
+                .dropdown-content a:hover {
+                    background-color: #E4F1F9;
+                }
+
+        .ddlAdd:hover .dropdown-content {
+            display: block;
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+            margin-right: 3px;
+        }
+
+            .profile img {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                /*                margin-left: 10px;*/
+            }
+
+        .content {
+            margin-left: 250px;
+            padding: 20px;
+            margin-top: 80px;
+            overflow-y: auto; /* Enable scrolling only inside content area */
+            height: calc(100vh - 80px); /* Adjust height considering header */
+        }
+
+        .menu-button {
+            display: none;
+            height: 40px;
+            width: 40px;
+        }
+
+        @media (max-width: 768px) { /* Mobile (Smaller screens) */
+            .sidebar {
+                left: -250px; /* Sidebar is hidden off-screen by default */
+            }
+
+                .sidebar.open {
+                    top: 60px;
+                    left: 0; /* Sidebar is visible when the 'open' class is added */
+                }
+
+            .menu-button {
+                display: block; /* Show the menu button on smaller screens */
+                position: absolute;
+                top: 20px;
+                left: 15px; /* Adjusted to prevent overlapping */
+                font-size: 30px;
+                background: none;
+                border: none;
+                color: #FF8C00;
+                cursor: pointer;
+            }
+
+            .header {
+                width: 100%;
+                left: 0;
+                padding-left: 60px; /* Ensure space for menu button */
+            }
+
+            .Left-Header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                /*padding-left: 50px;*/ /* Shift title away from button */
+            }
+
+            
+
+            .Left-Header h2 {
+                font-size: 16px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                max-width: calc(100% - 60px); /* Prevent overflow */
+            }
+
+            .content {
+                margin-left: 0px;
+                margin-top: 60px;
+            }
+           
+        }
+    </style>
+    <script>
+        function toggleSidebar() {
+            var sidebar = document.querySelector('.sidebar');
+            sidebar.classList.toggle('open'); // Toggle the 'open' class to show/hide the sidebar
+        }
+
+        // Close sidebar when clicking outside of it (on smaller screens)
+        window.onclick = function (event) {
+            var sidebar = document.querySelector('.sidebar');
+            var menuButton = document.querySelector('.menu-button');
+
+            // Close sidebar if clicked outside
+            if (!sidebar.contains(event.target) && !menuButton.contains(event.target)) {
+                sidebar.classList.remove('open');
+            }
+
+            // Close dropdown when clicking outside
+            var dropdown = document.getElementById('dropdown-content');
+            var ddlAdd = document.getElementById('ddlAdd');
+
+            if (!ddlAdd.contains(event.target)) {
+                dropdown.style.display = 'none';
+            }
+        };
+
+        // Dropdown toggle
+        function toggleDropdown() {
+            var dropdown = document.getElementById('dropdown-content');
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        }
+    </script>
+    
         <asp:ContentPlaceHolder ID="Manager_Head" runat="server"></asp:ContentPlaceHolder>
-    </div>
+    
 </head>
 <body>
     <form id="Managerform" runat="server">
         <!-- Sidebar -->
+
         <div class="sidebar">
             <div class="logo">
                 <a href="P_ManagerHome.aspx">
                     <img src="../Images/Logo Light Blue Transparent.png" alt="Logo">
                 </a>
             </div>
-            <h3>Admin Panel</h3>
+            <h3>Project Management Panel</h3>
+            <a class="menu" href="P_ManagerHome.aspx">🏠 Home</a>
             <a class="menu" href="P_ManagerDashboard.aspx">📊 Dashboard</a>
             <a class="menu" href="Users.aspx">👥 Users</a>
             <a class="menu" href="Settings.aspx">⚙️ Settings</a>
             <a class="menu" href="Logout.aspx">🚪 Logout</a>
         </div>
 
-
         <div class="header">
             <div class="Left-Header">
-                 <button class="menu-button" onclick="toggleSidebar()">☰</button>
-                <asp:ContentPlaceHolder ID="Manager_Header_Title" runat="server"></asp:ContentPlaceHolder>
+                <button type="button" class="menu-button" onclick="toggleSidebar()">☰</button>
+                <asp:ContentPlaceHolder ID="Manager_Header_Title" runat="server" ></asp:ContentPlaceHolder>
             </div>
             <div class="Right-Header">
                 <div id="ddlAdd" class="ddlAdd">
