@@ -6,163 +6,145 @@
         .dashboard-container {
             display: flex;
             flex-wrap: wrap;
-            height: 100vh; /* Full viewport height */
+            height: 100vh;
+            background-color: #F7F9FB; /* Light background */
+            padding: 20px;
+            gap: 10px;
         }
-
 
         .dashboard-panel {
-            flex: 1 0 0%;
-            border: 1px solid #ccc;
+            flex: 1;
+            min-width: 280px;
+            border: 1px solid #8B9EB2; /* Muted Blue-Grey border */
             padding: 20px;
             box-sizing: border-box;
-            overflow-y: scroll; /* Enable scrolling */
+            background-color: #E4F1F9; /* Light Sky Blue */
+            border-radius: 12px;
+            overflow-y: auto;
             height: 100%;
-            scrollbar-width: none; /* For Firefox */
+            scrollbar-width: none;
         }
 
-            /* Hide scrollbar for Webkit-based browsers (Chrome, Safari, Edge) */
-            .dashboard-panel::-webkit-scrollbar {
-                display: none;
-            }
+        .dashboard-panel h2 {
+            color: #4A6D85; /* Darker Blue-Grey */
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
 
-        .vertical-line {
-            border-left: 1px solid #ccc;
-            height: 100%;
-            margin: 0 10px;
+        .dashboard-panel .card {
+            border: 1px solid #4A6D85; /* Matching card border */
+            background-color: #F7F9FB; /* Very Light Greyish Blue */
+        }
+
+        .dashboard-panel .card-title {
+            color: #333333; /* Charcoal for text */
+        }
+
+        .dashboard-panel .card-text {
+            color: #4A6D85;
+        }
+
+        .dashboard-panel .text-muted {
+            color: #8B9EB2;
         }
 
         @media (max-width: 768px) {
-            .dashboard-panel {
-                flex-basis: 100%; /* Full width on smaller screens */
-                margin-bottom: 10px;
-                height: auto; /* Allow panels to take full available height when stacked */
+            .dashboard-container {
+                flex-direction: column;
+                height: auto;
             }
 
-            .vertical-line {
-                display: none;
+            .dashboard-panel {
+                height: auto;
             }
         }
     </style>
 </asp:Content>
+
 <asp:Content ID="Content3" ContentPlaceHolderID="Header_Title" runat="server">
     Dashboard
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="dashboard-container">
+        <!-- In Progress Projects -->
         <div class="dashboard-panel">
-            <h2>Panel 1</h2>
-            <p>Content for panel 1. Add lots of content here to test scrolling. For example:</p>
-            <%-- Add your controls and content for panel 1 here --%>
-            <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+            <h2>In Progress Projects</h2>
+            <asp:Repeater ID="rptInProgress" runat="server">
+                <ItemTemplate>
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title"><%# Eval("PROJECT_NAME") %></h5>
+                            <p class="card-text"><%# Eval("DESCRIPTION") %></p>
+                            <p class="card-text">
+                                <small class="text-muted">
+                                    Start: <%# Eval("START_DATE", "{0:yyyy-MM-dd}") %> | End: <%# Eval("END_DATE", "{0:yyyy-MM-dd}") %>
+                                </small>
+                            </p>
+                        </div>
+                    </div>
+                </ItemTemplate>
+            </asp:Repeater>
+        </div>
 
-            <%-- More Example Content --%>
-            <p>This is some more content for panel 1.</p>
-            <p>More content...</p>
-            <p>Even more content...</p>
-            <p>This is some more content for panel 1.</p>
-            <p>More content...</p>
-            <p>Even more content...</p>
-            <p>This is some more content for panel 1.</p>
-            <p>More content...</p>
-            <p>Even more content...</p>
-            <p>This is some more content for panel 1.</p>
-            <p>More content...</p>
-            <p>Even more content...</p>
-            <p>This is some more content for panel 1.</p>
-            <p>More content...</p>
-            <p>Even more content...</p>
-            <p>This is some more content for panel 1.</p>
-            <p>More content...</p>
-            <p>Even more content...</p>
-            <p>This is some more content for panel 1.</p>
-            <p>More content...</p>
-            <p>Even more content...</p>
+        <!-- Completed Projects -->
+        <div class="dashboard-panel">
+            <h2>Completed Projects</h2>
+            <asp:Repeater ID="rptCompleted" runat="server">
+                <ItemTemplate>
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title"><%# Eval("PROJECT_NAME") %></h5>
+                            <p class="card-text"><%# Eval("DESCRIPTION") %></p>
+                            <p class="card-text">
+                                <small class="text-muted">
+                                    Start: <%# Eval("START_DATE", "{0:yyyy-MM-dd}") %> | End: <%# Eval("END_DATE", "{0:yyyy-MM-dd}") %>
+                                </small>
+                            </p>
+                        </div>
+                    </div>
+                </ItemTemplate>
+            </asp:Repeater>
+        </div>
 
-        </div>
-        <div class="vertical-line"></div>
+        <!-- On Hold Projects -->
         <div class="dashboard-panel">
-            <h2>Panel 2</h2>
-            <p>Content for panel 2. Add lots of content here to test scrolling.</p>
-            <%-- Add your controls and content for panel 2 here --%>
-            <%-- More Example Content --%>
-            <p>This is some more content for panel 2.</p>
-            <p>More content...</p>
-            <p>Even more content...</p>
-            <p>This is some more content for panel 2.</p>
-            <p>More content...</p>
-            <p>Even more content...</p>
-            <p>This is some more content for panel 2.</p>
-            <p>More content...</p>
-            <p>Even more content...</p>
-            <p>This is some more content for panel 2.</p>
-            <p>More content...</p>
-            <p>Even more content...</p>
-            <p>This is some more content for panel 2.</p>
-            <p>More content...</p>
-            <p>Even more content...</p>
-            <p>This is some more content for panel 2.</p>
-            <p>More content...</p>
-            <p>Even more content...</p>
-            <p>This is some more content for panel 2.</p>
-            <p>More content...</p>
-            <p>Even more content...</p>
+            <h2>On Hold Projects</h2>
+            <asp:Repeater ID="rptHold" runat="server">
+                <ItemTemplate>
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title"><%# Eval("PROJECT_NAME") %></h5>
+                            <p class="card-text"><%# Eval("DESCRIPTION") %></p>
+                            <p class="card-text">
+                                <small class="text-muted">
+                                    Start: <%# Eval("START_DATE", "{0:yyyy-MM-dd}") %> | End: <%# Eval("END_DATE", "{0:yyyy-MM-dd}") %>
+                                </small>
+                            </p>
+                        </div>
+                    </div>
+                </ItemTemplate>
+            </asp:Repeater>
         </div>
-        <div class="vertical-line"></div>
+
+        <!-- In Testing Projects -->
         <div class="dashboard-panel">
-            <h2>Panel 3</h2>
-            <p>Content for panel 3. Add lots of content here to test scrolling.</p>
-            <%-- Add your controls and content for panel 3 here --%>
-            <%-- More Example Content --%>
-            <p>This is some more content for panel 3.</p>
-            <p>More content...</p>
-            <p>Even more content...</p>
-            <p>This is some more content for panel 3.</p>
-            <p>More content...</p>
-            <p>Even more content...</p>
-            <p>This is some more content for panel 3.</p>
-            <p>More content...</p>
-            <p>Even more content...</p>
-            <p>This is some more content for panel 3.</p>
-            <p>More content...</p>
-            <p>Even more content...</p>
-            <p>This is some more content for panel 3.</p>
-            <p>More content...</p>
-            <p>Even more content...</p>
-            <p>This is some more content for panel 3.</p>
-            <p>More content...</p>
-            <p>Even more content...</p>
-            <p>This is some more content for panel 3.</p>
-            <p>More content...</p>
-            <p>Even more content...</p>
-        </div>
-        <div class="vertical-line"></div>
-        <div class="dashboard-panel">
-            <h2>Panel 4</h2>
-            <p>Content for panel 4. Add lots of content here to test scrolling.</p>
-            <%-- Add your controls and content for panel 4 here --%>
-            <%-- More Example Content --%>
-            <p>This is some more content for panel 4.</p>
-            <p>More content...</p>
-            <p>Even more content...</p>
-            <p>This is some more content for panel 4.</p>
-            <p>More content...</p>
-            <p>Even more content...</p>
-            <p>This is some more content for panel 4.</p>
-            <p>More content...</p>
-            <p>Even more content...</p>
-            <p>This is some more content for panel 4.</p>
-            <p>More content...</p>
-            <p>Even more content...</p>
-            <p>This is some more content for panel 4.</p>
-            <p>More content...</p>
-            <p>Even more content...</p>
-            <p>This is some more content for panel 4.</p>
-            <p>More content...</p>
-            <p>Even more content...</p>
-            <p>This is some more content for panel 4.</p>
-            <p>More content...</p>
-            <p>Even more content...</p>
+            <h2>In Testing Projects</h2>
+            <asp:Repeater ID="rptTesting" runat="server">
+                <ItemTemplate>
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title"><%# Eval("PROJECT_NAME") %></h5>
+                            <p class="card-text"><%# Eval("DESCRIPTION") %></p>
+                            <p class="card-text">
+                                <small class="text-muted">
+                                    Start: <%# Eval("START_DATE", "{0:yyyy-MM-dd}") %> | End: <%# Eval("END_DATE", "{0:yyyy-MM-dd}") %>
+                                </small>
+                            </p>
+                        </div>
+                    </div>
+                </ItemTemplate>
+            </asp:Repeater>
         </div>
     </div>
 </asp:Content>
