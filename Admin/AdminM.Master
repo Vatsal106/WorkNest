@@ -76,6 +76,7 @@
 
         .header {
             width: calc(100% - 250px);
+            transition: width 0.3s ease;
             background-color: #F7F9FB;
             color: #333333;
             padding: 15px 40px;
@@ -153,7 +154,7 @@
             background-color: #F7F9FB;
             min-width: 160px;
             box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
-            z-index: 1;
+            z-index: 100000;
             border-radius: 5px;
         }
 
@@ -162,14 +163,17 @@
                 padding: 10px;
                 text-decoration: none;
                 display: block;
+                z-index: 100000;
             }
 
                 .dropdown-content a:hover {
                     background-color: #E4F1F9;
+                    z-index: 100000;
                 }
 
         .ddlAdd:hover .dropdown-content {
             display: block;
+            z-index: 100000;
         }
 
         .profile {
@@ -189,8 +193,9 @@
             margin-left: 250px;
             padding: 20px;
             margin-top: 80px;
-            overflow-y: auto; /* Enable scrolling only inside content area */
-            height: calc(100vh - 80px); /* Adjust height considering header */
+            overflow-y: auto;
+            min-height: calc(100vh - 80px);
+            transition: margin-left 0.3s ease; /* Smooth transition */
         }
 
         .menu-button {
@@ -206,6 +211,7 @@
 
                 .sidebar.open {
                     top: 60px;
+                    z-index: 100000;
                     left: 0; /* Sidebar is visible when the 'open' class is added */
                 }
 
@@ -249,36 +255,35 @@
         }
     </style>
     <script>
-        function toggleSidebar(event) {
-            event.preventDefault(); // Prevents unwanted form submission (if inside a form)
-            event.stopPropagation(); // Prevents immediate closing due to window.onclick
-
+        function toggleSidebar() {
             var sidebar = document.querySelector('.sidebar');
-            sidebar.classList.toggle('open');
+            sidebar.classList.toggle('open'); // Toggle the 'open' class to show/hide the sidebar
         }
 
-        // Close sidebar when clicking outside or selecting a menu item
+        // Close sidebar when clicking outside of it (on smaller screens)
         window.onclick = function (event) {
             var sidebar = document.querySelector('.sidebar');
             var menuButton = document.querySelector('.menu-button');
 
-            if (sidebar.classList.contains('open') &&
-                !sidebar.contains(event.target) &&
-                !menuButton.contains(event.target)) {
+            // Close sidebar if clicked outside
+            if (!sidebar.contains(event.target) && !menuButton.contains(event.target)) {
                 sidebar.classList.remove('open');
+            }
+
+            // Close dropdown when clicking outside
+            var dropdown = document.getElementById('dropdown-content');
+            var ddlAdd = document.getElementById('ddlAdd');
+
+            if (!ddlAdd.contains(event.target)) {
+                dropdown.style.display = 'none';
             }
         };
 
-        // Close sidebar when clicking a menu item inside it
-        document.addEventListener('DOMContentLoaded', function () {
-            var menuItems = document.querySelectorAll('.sidebar a');
-            menuItems.forEach(item => {
-                item.addEventListener('click', function () {
-                    var sidebar = document.querySelector('.sidebar');
-                    sidebar.classList.remove('open');
-                });
-            });
-        });
+        // Dropdown toggle
+        function toggleDropdown() {
+            var dropdown = document.getElementById('dropdown-content');
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        }
     </script>
 
 
