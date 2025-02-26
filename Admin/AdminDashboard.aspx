@@ -5,11 +5,11 @@
     <style>
         .dashboard-container {
             display: grid;
-            grid-template-columns: repeat(4, 1fr); /* Four equal columns */
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid */
             gap: 15px;
             padding: 20px;
-            background-color: #F7F9FB; /* Light Background */
-            height: 100vh; /* Full viewport height */
+            background-color: #F7F9FB;
+            min-height: 100vh;
         }
 
         .dashboard-panel {
