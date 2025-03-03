@@ -315,7 +315,8 @@
             <h3>Admin Panel</h3>
             <a class="menu" href="AdminHome.aspx">🏠 Home</a>
             <a class="menu" href="AdminDashboard.aspx">📊 Dashboard</a>
-            <a class="menu" href="Users.aspx">👥 Users</a>
+            <a class="menu" href="Employees.aspx">👥 Employees</a>
+            <a class="menu" href="Projects.aspx">📁 Projects</a>
             <a class="menu" href="Settings.aspx">⚙️ Settings</a>
             <a class="menu" href="Logout.aspx">🚪 Logout</a>
         </div>
@@ -339,7 +340,7 @@
                 <div id="ddlAdd" class="ddlAdd">
                     <button type="button" onclick="toggleDropdown()">Add</button>
                     <div id="dropdown-content" class="dropdown-content">
-                        <a href="registration.aspx">Add Employee</a>
+                        <a href="registrations.aspx">Add Employee</a>
                         <a href="addProjects.aspx">Add Project</a>
                         <a href="addClients.aspx">Add Client</a>
                         <a href="changeRoles.aspx">Change in Role</a>
