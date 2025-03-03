@@ -88,6 +88,7 @@
     <Content Include="Admin\AdminHome.aspx" />
     <Content Include="Admin\changeRoles.aspx" />
     <Content Include="Admin\Employees.aspx" />
+    <Content Include="Admin\Projects.aspx" />
     <Content Include="Admin\registrations.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Images\ClientPagePhoto.png" />
@@ -160,6 +161,13 @@
     </Compile>
     <Compile Include="Admin\Employees.aspx.designer.cs">
       <DependentUpon>Employees.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Projects.aspx.cs">
+      <DependentUpon>Projects.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Projects.aspx.designer.cs">
+      <DependentUpon>Projects.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\registrations.aspx.cs">
       <DependentUpon>registrations.aspx</DependentUpon>

@@ -18,7 +18,7 @@ namespace WorkNest.Admin
             }
         }
 
-        public void LoadEmployees()
+        public void LoadEmployees(string searchQuery = "")
         {
             dbConn.dbConnect();
 
@@ -34,13 +34,30 @@ namespace WorkNest.Admin
                 FROM EMPLOYEE e
                 JOIN DEPARTMENT d ON e.DEPARTMENT_ID = d.DEPARTMENT_ID";
 
+            // Add search filter
+            if (!string.IsNullOrEmpty(searchQuery))
+            {
+                query += " WHERE e.FULL_NAME LIKE @Search OR e.EMAIL LIKE @Search";
+            }
+
             SqlCommand cmd = new SqlCommand(query, dbConn.con);
+            if (!string.IsNullOrEmpty(searchQuery))
+            {
+                cmd.Parameters.AddWithValue("@Search", "%" + searchQuery + "%");
+            }
+
             SqlDataAdapter adpt = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
-
             adpt.Fill(dt);
+
             rptEmployees.DataSource = dt;
             rptEmployees.DataBind();
+        }
+
+        protected void btnSearch_Click(object sender, EventArgs e)
+        {
+            string searchText = txtSearch.Text.Trim();
+            LoadEmployees(searchText);
         }
 
         public void rptEmployees_ItemCommand(object source, RepeaterCommandEventArgs e)
@@ -64,7 +81,7 @@ namespace WorkNest.Admin
             SqlCommand deleteUserCredentialsCmd = new SqlCommand(deleteUserCredentialsQuery, dbConn.con);
             deleteUserCredentialsCmd.Parameters.AddWithValue("@EmployeeId", employeeId);
             deleteUserCredentialsCmd.ExecuteNonQuery();
-            
+
             string deleteRolesQuery = "DELETE FROM EMPLOYEE_ROLES WHERE EMPLOYEE_ID = @EmployeeId";
             SqlCommand deleteRolesCmd = new SqlCommand(deleteRolesQuery, dbConn.con);
             deleteRolesCmd.Parameters.AddWithValue("@EmployeeId", employeeId);
