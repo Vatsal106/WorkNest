@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WorkNest
+namespace WorkNest.Admin
 {
 
 
-    public partial class registration
+    public partial class registrations
     {
 
         /// <summary>

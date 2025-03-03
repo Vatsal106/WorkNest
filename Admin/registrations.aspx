@@ -1,14 +1,17 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Registration.aspx.cs" Inherits="WorkNest.registration" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/AdminM.Master" AutoEventWireup="true" CodeBehind="registrations.aspx.cs" Inherits="WorkNest.Admin.registrations" %>
 
-<!DOCTYPE html>
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
+    <!-- Content for ContentPlaceHolder2 -->
+</asp:Content>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
+<asp:Content ID="Content2" ContentPlaceHolderID="Head" runat="server">
+    <!-- Head content -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <title>Registration</title>
     <script type="text/javascript">
+        // JavaScript functions from registration.aspx
         let validate = true;
 
         function fullFormvalidate() {
@@ -171,6 +174,7 @@
         }
     </script>
     <style>
+        /* CSS styles from registration.aspx */
         body {
             display: flex;
             justify-content: center;
@@ -310,15 +314,21 @@
             width: 48%;
         }
     </style>
-</head>
-<body>
+</asp:Content>
+
+<asp:Content ID="Content3" ContentPlaceHolderID="Header_Title" runat="server">
+    <!-- Header Title content -->
+</asp:Content>
+
+<asp:Content ID="Content4" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <!-- Main content -->
     <div class="container">
         <div class="image-section">
             <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/Add Emp.png" />
         </div>
         <div class="form-section">
             <h2 class="text-center mb-4">Add new Employee</h2>
-            <form id="registration" runat="server" class="form-Cont" novalidate>
+           
 
                 <div class="input-group">
                     <asp:TextBox class="mr-2" ID="txtName" runat="server" CssClass="form-control" oninput="checkName(this)" placeholder="Enter FullName"></asp:TextBox>
@@ -377,8 +387,7 @@
                     <asp:Button ID="btnSubmit" class="btn" runat="server" Text="Submit" CssClass="btn btn-primary" OnClick="btnSubmit_Click" OnClientClick="return fullFormvalidate()" />
                     <asp:Button ID="btnReset" runat="server" Text="Reset" CssClass="btn btn-secondary" OnClick="btnReset_Click" OnClientClick="return confirm('Are you sure you want to reset the form?');" />
                 </div>
-            </form>
+            
         </div>
     </div>
-</body>
-</html>
+</asp:Content>

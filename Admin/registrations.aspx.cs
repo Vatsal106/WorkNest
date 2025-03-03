@@ -1,13 +1,17 @@
 ﻿using System;
-using System.Data;
+using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 
-namespace WorkNest
+namespace WorkNest.Admin
 {
-    public partial class registration : System.Web.UI.Page
+    public partial class registrations : System.Web.UI.Page
     {
         dbConnection dbConn = new dbConnection();
         Boolean checkEmailduplicate = false;
@@ -270,5 +274,4 @@ namespace WorkNest
         //    ddlRole.Items.Insert(0, "---select---");
         //}
     }
-
 }
