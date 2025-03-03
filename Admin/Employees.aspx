@@ -24,17 +24,17 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .employee-card img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
+            .employee-card img {
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                object-fit: cover;
+            }
 
-        .employee-card:hover {
-            transform: scale(1.05);
-            box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2);
-        }
+            .employee-card:hover {
+                transform: scale(1.05);
+                box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2);
+            }
 
         .action-buttons {
             margin-top: 10px;
@@ -85,7 +85,7 @@
         <asp:Repeater ID="rptEmployees" runat="server" OnItemCommand="rptEmployees_ItemCommand">
             <ItemTemplate>
                 <div class="employee-card">
-                    <img src='<%# Eval("IMAGE") %>' alt="Employee Photo">
+                    <img src='<%# Eval("IMAGE_BASE64") %>' alt="Employee Photo">
                     <h3><%# Eval("FULL_NAME") %></h3>
                     <p>Email: <%# Eval("EMAIL") %></p>
                     <p>Phone: <%# Eval("PHONE_NUMBER") %></p>
@@ -94,11 +94,13 @@
 
                     <div class="action-buttons">
                         <asp:Button ID="btnUpdate" runat="server" Text="Update" CssClass="btn btn-update" />
-                        <asp:Button ID="btnDelete" runat="server" Text="Delete" CssClass="btn btn-delete" 
-                            CommandName="DeleteEmployee" CommandArgument='<%# Eval("EMPLOYEE_ID") %>' />
+                        <asp:Button ID="btnDelete" runat="server" Text="Delete" CssClass="btn btn-delete"
+                            CommandName="DeleteEmployee" CommandArgument='<%# Eval("EMPLOYEE_ID") %>'
+                            OnClientClick="return confirm('Are you sure you want to delete this employee?');" />
                     </div>
                 </div>
             </ItemTemplate>
         </asp:Repeater>
+
     </div>
 </asp:Content>
