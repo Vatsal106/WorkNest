@@ -31,7 +31,7 @@
             } else {
                 lblEdept.textContent = "";
             }
-            isEmailEmpty(email);
+            validateEmail(email);
             if (validate == false) {
                 isValide = false;
             }
@@ -58,18 +58,25 @@
 
             return isValide;
         }
-        function isEmailEmpty(input) {
-            const email = input.value;
-            const lblEemail = document.getElementById('<%= lblEemail.ClientID %>');
-            if (email.trim().length === 0) {
-                lblEemail.textContent = "Enter Email Address!!";
-                lblEemail.style.color = "Red";
+        function validateEmail(input) {
+            var email = input.value.trim(); // Trim spaces
+            var lblEemail = document.getElementById('<%= lblEemail.ClientID %>');
+            var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; // Improved regex
+
+            if (email.length === 0) {
+                lblEemail.textContent = "Email cannot be empty!";
+                lblEemail.style.color = "red";
+                validate = false;
+            } else if (!emailRegex.test(email)) {
+                lblEemail.textContent = "Enter a valid email.!";
+                lblEemail.style.color = "red";
                 validate = false;
             } else {
                 lblEemail.textContent = "";
                 validate = true;
             }
         }
+
         function isUsernameEmpty(input) {
             const user = input.value;
             const lblEuser = document.getElementById('<%= lblEuser.ClientID %>');
@@ -341,7 +348,7 @@
                     <asp:Label ID="lblEphone" runat="server" CssClass="text-danger"></asp:Label>
                 </div>
                 <div class="input-group">
-                    <asp:TextBox ID="txtEmail" runat="server" TextMode="Email" CssClass="form-control" OnTextChanged="EmailChange" AutoPostBack="true" placeholder="Email Address"></asp:TextBox>
+                    <asp:TextBox ID="txtEmail" runat="server" TextMode="Email" CssClass="form-control" OnTextChanged="EmailChange" oninput="validateEmail(this)" AutoPostBack="true" placeholder="Email Address"></asp:TextBox>
                     <asp:Label runat="server" Text="  " ID="lblEemail" CssClass="text-danger"></asp:Label>
                 </div>
 
