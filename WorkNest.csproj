@@ -90,6 +90,7 @@
     <Content Include="Admin\Employees.aspx" />
     <Content Include="Admin\Projects.aspx" />
     <Content Include="Admin\registrations.aspx" />
+    <Content Include="Admin\UpdateEmployee.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Images\ClientPagePhoto.png" />
     <Content Include="Images\employee photo.jpg" />
@@ -175,6 +176,13 @@
     </Compile>
     <Compile Include="Admin\registrations.aspx.designer.cs">
       <DependentUpon>registrations.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\UpdateEmployee.aspx.cs">
+      <DependentUpon>UpdateEmployee.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\UpdateEmployee.aspx.designer.cs">
+      <DependentUpon>UpdateEmployee.aspx</DependentUpon>
     </Compile>
     <Compile Include="dbConnection.cs" />
     <Compile Include="Global.asax.cs">
