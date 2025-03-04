@@ -175,7 +175,7 @@
     </script>
     <style>
         /* CSS styles from registration.aspx */
-        body {
+/*        body {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -183,7 +183,7 @@
             background: #fff;
             font-family: Arial, sans-serif;
             padding: 10px;
-        }
+        }*/
 
         .container {
             display: flex;
@@ -318,6 +318,7 @@
 
 <asp:Content ID="Content3" ContentPlaceHolderID="Header_Title" runat="server">
     <!-- Header Title content -->
+    Add Employee
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
