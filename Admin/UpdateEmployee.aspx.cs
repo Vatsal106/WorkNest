@@ -3,6 +3,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 
 namespace WorkNest.Admin
 {
@@ -67,6 +68,7 @@ namespace WorkNest.Admin
 
         protected void btnUpdateEmployee_Click(object sender, EventArgs e)
         {
+            EmailChange(sender, e);
             if (checkEmailduplicate)
             {
                 string employeeId = hfEmployeeID.Value;
@@ -77,10 +79,22 @@ namespace WorkNest.Admin
                 string departmentId = ddlDepartment.SelectedValue;
 
                 byte[] imageBytes = null;
+
+
                 if (fuProfileImage.HasFile)
                 {
-                    BinaryReader br = new BinaryReader(fuProfileImage.PostedFile.InputStream);
-                    imageBytes = br.ReadBytes(fuProfileImage.PostedFile.ContentLength);
+
+                    string fileExtension = Path.GetExtension(fuProfileImage.FileName).ToLower();
+                    string[] allowedExtensions = { ".jpg", ".jpeg", ".png" };
+
+                    if (!allowedExtensions.Contains(fileExtension))
+                    {
+                        lblError.Text = "Invalid image format. Only .jpg, .jpeg and .png are allowed.";
+                        lblError.ForeColor = Color.Red;
+                        return;
+                    }
+
+                    imageBytes = fuProfileImage.FileBytes;
                 }
 
                 dbConn.dbConnect();

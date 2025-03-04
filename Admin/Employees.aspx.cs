@@ -30,15 +30,17 @@ namespace WorkNest.Admin
                 e.HIRE_DATE, 
                 e.IMAGE, 
                 d.DEPARTMENT_NAME,
-                r.ROLE_NAME
+                r.ROLE_NAME,
+                r.ROLE_ID
                 FROM EMPLOYEE e
                 JOIN DEPARTMENT d ON e.DEPARTMENT_ID = d.DEPARTMENT_ID
                 JOIN EMPLOYEE_ROLES ER ON E.EMPLOYEE_ID = ER.EMPLOYEE_ID
-                JOIN ROLES R ON ER.ROLE_ID = R.ROLE_ID";
+                JOIN ROLES R ON ER.ROLE_ID = R.ROLE_ID
+                Where r.ROLE_ID <> 1";
 
             if (!string.IsNullOrEmpty(searchQuery))
             {
-                query += " WHERE e.FULL_NAME LIKE @Search OR e.EMAIL LIKE @Search";
+                query += " AND (e.FULL_NAME LIKE @Search OR e.EMAIL LIKE @Search)";
             }
 
             SqlCommand cmd = new SqlCommand(query, dbConn.con);

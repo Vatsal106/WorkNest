@@ -136,6 +136,7 @@
         <asp:FileUpload ID="fuProfileImage" runat="server" />
     </div>
     <asp:Label ID="lblError" runat="server" Text="" CssClass="text-danger"></asp:Label>
+    <asp:Button ID="BackToEmployee" runat="server" Text="Back" AccessKey="B" CssClass="btn btn-primary " PostBackUrl="~/Admin/Employees.aspx" />
     <asp:Button ID="btnUpdateEmployee" runat="server" Text="Update Employee" CssClass="btn btn-primary" OnClientClick="return fullFormvalidate();" OnClick="btnUpdateEmployee_Click" />
 
 </asp:Content>

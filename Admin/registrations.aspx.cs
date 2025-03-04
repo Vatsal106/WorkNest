@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace WorkNest.Admin
 {
@@ -88,27 +84,23 @@ namespace WorkNest.Admin
                 dbConn.dbConnect();
                 byte[] imageBytes = null;
                 bool imgSeted = false;
+
                 if (fuImage.HasFile)
                 {
                     imgSeted = true;
                     string fileExtension = Path.GetExtension(fuImage.FileName).ToLower();
-                    string[] allowedExtensions = { ".jpg", ".jpeg", ".png", ".gif" };
+                    string[] allowedExtensions = { ".jpg", ".jpeg", ".png" };
 
                     if (!allowedExtensions.Contains(fileExtension))
                     {
-                        lblError.Text = "Invalid image format. Only .jpg, .jpeg, .png, and .gif are allowed.";
+                        lblError.Text = "Invalid image format. Only .jpg, .jpeg and .png are allowed.";
                         lblError.ForeColor = Color.Red;
                         return;
                     }
 
-                    using (Stream fs = fuImage.PostedFile.InputStream)
-                    {
-                        using (BinaryReader br = new BinaryReader(fs))
-                        {
-                            imageBytes = br.ReadBytes((int)fs.Length);
-                        }
-                    }
+                    imageBytes = fuImage.FileBytes;
                 }
+
 
                 if (checkUserduplicate && imgSeted && checkEmailduplicate)
                 {
@@ -249,7 +241,7 @@ namespace WorkNest.Admin
             dbConn.con.Close();
             if (count > 0)
             {
-                lblEemail.Text = "This Email Address is already taken!!";
+                lblEemail.Text = "This Email is already taken!!";
                 lblEemail.ForeColor = Color.Red;
                 checkEmailduplicate = false;
 
