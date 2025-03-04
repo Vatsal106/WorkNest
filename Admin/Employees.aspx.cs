@@ -116,38 +116,28 @@ namespace WorkNest.Admin
 
                         // 2️⃣ Delete dependent records first
                         string[] queries = {
-                         "DELETE FROM TASK WHERE ASSIGN_TO = @EmployeeId",
-                         "DELETE FROM LEAVES WHERE EMPLOYEE_ID = @EmployeeId",
+                    "DELETE FROM TASK WHERE ASSIGN_TO = @EmployeeId",
+                    "DELETE FROM LEAVES WHERE EMPLOYEE_ID = @EmployeeId",
                     "DELETE FROM USER_CREDENTIALS WHERE EMPLOYEE_ID = @EmployeeId",
                     "DELETE FROM EMPLOYEE_ROLES WHERE EMPLOYEE_ID = @EmployeeId",
                     "DELETE FROM ATTENDANCE WHERE EMPLOYEE_ID = @EmployeeId",
-                    "DELETE FROM EMPLOYEE WHERE EMPLOYEE_ID = @EmployeeId" };
+                    "DELETE FROM EMPLOYEE WHERE EMPLOYEE_ID = @EmployeeId"
+                };
 
-                        //using (SqlCommand cmd = new SqlCommand())
-                        //{
-                        //    cmd.Connection = dbConn.con;
-                        //    cmd.Transaction = transaction;
-
-                        //    foreach (string query in queries)
-                        //    {
-                        //        cmd.CommandText = query;
-                        //        cmd.Parameters.Clear();
-                        //        cmd.Parameters.AddWithValue("@EmployeeId", employeeId);
-                        //        cmd.ExecuteNonQuery();
-                        //    }
-                        //}
-
-                        SqlCommand cmd = new SqlCommand();
-                        cmd.Connection = dbConn.con;
-                        cmd.Transaction = transaction;
-
-                        foreach (string query in queries)
+                        using (SqlCommand cmd = new SqlCommand())
                         {
-                            cmd.CommandText = query;
-                            cmd.Parameters.Clear();
-                            cmd.Parameters.AddWithValue("@EmployeeId", employeeId);
-                            cmd.ExecuteNonQuery();
+                            cmd.Connection = dbConn.con;
+                            cmd.Transaction = transaction;
+
+                            foreach (string query in queries)
+                            {
+                                cmd.CommandText = query;
+                                cmd.Parameters.Clear();
+                                cmd.Parameters.AddWithValue("@EmployeeId", employeeId);
+                                cmd.ExecuteNonQuery();
+                            }
                         }
+
                         transaction.Commit();
                         Response.Write("<script>alert('Employee deleted successfully'); window.location='Employees.aspx';</script>");
                     }
@@ -163,6 +153,7 @@ namespace WorkNest.Admin
                 Response.Write("<script>alert('Error: " + ex.Message + "');</script>");
             }
         }
+
     }
 }
 
