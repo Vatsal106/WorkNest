@@ -93,7 +93,8 @@
                     <p>Department: <%# Eval("DEPARTMENT_NAME") %></p>
 
                     <div class="action-buttons">
-                        <asp:Button ID="btnUpdate" runat="server" Text="Update" CssClass="btn btn-update" />
+                        <asp:Button ID="btnUpdate" runat="server" Text="Update" CssClass="btn btn-update"
+                            OnClientClick='<%# "window.location.href=\"UpdateEmployee.aspx?EmployeeID=" + Eval("EMPLOYEE_ID") + "\"; return false;" %>' />
                         <asp:Button ID="btnDelete" runat="server" Text="Delete" CssClass="btn btn-delete"
                             CommandName="DeleteEmployee" CommandArgument='<%# Eval("EMPLOYEE_ID") %>'
                             OnClientClick="return confirm('Are you sure you want to delete this employee?');" />
