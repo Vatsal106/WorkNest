@@ -4,7 +4,7 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="Head" runat="server">
-    <style>
+    <style> 
         .project-container {
             display: flex;
             flex-wrap: wrap;
