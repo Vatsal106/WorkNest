@@ -91,6 +91,7 @@
                     <p>Phone: <%# Eval("PHONE_NUMBER") %></p>
                     <p>Hire Date: <%# Eval("HIRE_DATE", "{0:dd-MMM-yyyy}") %></p>
                     <p>Department: <%# Eval("DEPARTMENT_NAME") %></p>
+                    <p>Role: <%# Eval("ROLE_NAME") %></p>
 
                     <div class="action-buttons">
                         <asp:Button ID="btnUpdate" runat="server" Text="Update" CssClass="btn btn-update"

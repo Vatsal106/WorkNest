@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace WorkNest.Admin
@@ -23,16 +22,19 @@ namespace WorkNest.Admin
             dbConn.dbConnect();
 
             string query = @"
-    SELECT 
-        e.EMPLOYEE_ID,
-        e.FULL_NAME, 
-        e.EMAIL, 
-        e.PHONE_NUMBER, 
-        e.HIRE_DATE, 
-        e.IMAGE, 
-        d.DEPARTMENT_NAME 
-    FROM EMPLOYEE e
-    JOIN DEPARTMENT d ON e.DEPARTMENT_ID = d.DEPARTMENT_ID";
+                SELECT 
+                e.EMPLOYEE_ID,
+                e.FULL_NAME, 
+                e.EMAIL, 
+                e.PHONE_NUMBER, 
+                e.HIRE_DATE, 
+                e.IMAGE, 
+                d.DEPARTMENT_NAME,
+                r.ROLE_NAME
+                FROM EMPLOYEE e
+                JOIN DEPARTMENT d ON e.DEPARTMENT_ID = d.DEPARTMENT_ID
+                JOIN EMPLOYEE_ROLES ER ON E.EMPLOYEE_ID = ER.EMPLOYEE_ID
+                JOIN ROLES R ON ER.ROLE_ID = R.ROLE_ID";
 
             if (!string.IsNullOrEmpty(searchQuery))
             {

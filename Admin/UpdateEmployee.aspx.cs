@@ -10,8 +10,10 @@ namespace WorkNest.Admin
     {
         dbConnection dbConn = new dbConnection();
         Boolean checkEmailduplicate = false;
+
         protected void Page_Load(object sender, EventArgs e)
         {
+
             if (!IsPostBack)
             {
                 LoadDepartments();
@@ -123,9 +125,10 @@ namespace WorkNest.Admin
         {
             dbConn.dbConnect();
             string emaail = txtEmail.Text.Trim();
-            string queryEmail = "SELECT COUNT(*) FROM EMPLOYEE WHERE EMAIL = @Email";
+            string queryEmail = "SELECT COUNT(*) FROM EMPLOYEE WHERE EMAIL = @Email and Employee_id<>@Emp_id";
             SqlCommand cmdEmail = new SqlCommand(queryEmail, dbConn.con);
             cmdEmail.Parameters.AddWithValue("@Email", emaail);
+            cmdEmail.Parameters.AddWithValue("@Emp_id", hfEmployeeID.Value);
 
 
             int count = Convert.ToInt32(cmdEmail.ExecuteScalar());
