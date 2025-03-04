@@ -7,46 +7,33 @@
 
         function fullFormvalidate() {
             validate = true;
-            isValide = true;
+            let isValid = true;
+
             var nameInput = document.getElementById('<%= txtFullName.ClientID %>');
             var phoneInput = document.getElementById('<%= txtPhoneNumber.ClientID %>');
-      
             var ddl = document.getElementById("<%= ddlDepartment.ClientID %>").selectedIndex;
-            const lblEdept = document.getElementById('<%= lblEdept.ClientID %>');
+            var lblEdept = document.getElementById('<%= lblEdept.ClientID %>');
             var email = document.getElementById('<%= txtEmail.ClientID %>');
+
             if (ddl === 0) {
                 lblEdept.textContent = "*";
-                isValide = false;
+                isValid = false;
             } else {
                 lblEdept.textContent = "";
             }
-            isEmailEmpty(email);
-            if (validate == false) {
-                isValide = false;
-            }
-            checkName(nameInput);
-            if (validate == false) {
-                isValide = false;
-            }
-            PhoneSize(phoneInput);
-            if (validate == false) {
-                isValide = false;
-            }
-            isUsernameEmpty(user);
-            if (validate == false) {
-                isValide = false;
-            }
-            validatePassword(Pass);
-            if (validate == false) {
-                isValide = false;
-            }
-            matchPass(Pass, Repass);
-            if (validate == false) {
-                isValide = false;
-            }
 
-            return isValide;
+            checkName(nameInput);
+            if (!validate) isValid = false;
+
+            isEmailEmpty(email);
+            if (!validate) isValid = false;
+
+            PhoneSize(phoneInput);
+            if (!validate) isValid = false;
+
+            return isValid;
         }
+
         function isEmailEmpty(input) {
             const email = input.value;
             const lblEemail = document.getElementById('<%= lblEemail.ClientID %>');
@@ -61,16 +48,14 @@
         }
 
         function PhoneSize(input) {
-            validate = true;
-            const Phone = input.value;
-            const lblE = document.getElementById('<%= lblEphone.ClientID %>');
+            var phone = input.value;
+            var lblE = document.getElementById('<%= lblEphone.ClientID %>');
 
-            if (Phone.length != 10) {
-                lblE.textContent = "Enter Valid 10 digit Number!!";
+            if (phone.length !== 10 || isNaN(phone)) {
+                lblE.textContent = "Enter a valid 10-digit phone number!";
                 lblE.style.color = "red";
                 validate = false;
-            }
-            else {
+            } else {
                 lblE.textContent = "";
             }
         }
@@ -89,12 +74,26 @@
             }
         }
         function selectedDept(input) {
-            const i = input.selectedIndex;
-            if (i !== 0) {
+            var lblEdept = document.getElementById('<%= lblEdept.ClientID %>');
+            if (input.selectedIndex !== 0) {
                 lblEdept.textContent = "";
-
             }
         }
+
+        function validateEmail(input) {
+            var email = input.value;
+            var lblEemail = document.getElementById('<%= lblEemail.ClientID %>');
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!emailRegex.test(email)) {
+                lblEemail.textContent = "Please enter a valid email address.";
+                lblEemail.style.color = "red";
+                validate = false;
+            } else {
+                lblEemail.textContent = "";
+            }
+        }
+
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Head" runat="server">
@@ -114,7 +113,7 @@
     </div>
     <div>
         <label>Email:</label>
-        <asp:TextBox ID="txtEmail" runat="server" TextMode="Email" OnTextChanged="EmailChange" CssClass="form-control" />
+        <asp:TextBox ID="txtEmail" runat="server" TextMode="Email" oninput="validateEmail(this);" OnTextChanged="EmailChange" CssClass="form-control" />
         <asp:Label runat="server" Text="  " ID="lblEemail" CssClass="text-danger"></asp:Label>
 
     </div>
@@ -129,14 +128,14 @@
     </div>
     <div>
         <label>Department:</label>
-        <asp:DropDownList ID="ddlDepartment" runat="server" CssClass="form-control"></asp:DropDownList>
-   <asp:Label runat="server" Text="" ID="lblEdept" CssClass="text-danger"></asp:Label>
-        </div>
+        <asp:Label runat="server" Text="" ID="lblEdept" CssClass="text-danger"></asp:Label>
+        <asp:DropDownList ID="ddlDepartment" runat="server" CssClass="form-control" oninput="selectedDept(this)"></asp:DropDownList>
+    </div>
     <div>
         <label>Profile Image:</label>
         <asp:FileUpload ID="fuProfileImage" runat="server" />
     </div>
-
-    <asp:Button ID="btnUpdateEmployee" runat="server" Text="Update Employee" CssClass="btn btn-primary" OnClick="btnUpdateEmployee_Click" />
+    <asp:Label ID="lblError" runat="server" Text="" CssClass="text-danger"></asp:Label>
+    <asp:Button ID="btnUpdateEmployee" runat="server" Text="Update Employee" CssClass="btn btn-primary" OnClientClick="return fullFormvalidate();" OnClick="btnUpdateEmployee_Click" />
 
 </asp:Content>

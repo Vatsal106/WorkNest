@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace WorkNest.Admin
@@ -90,7 +89,7 @@ namespace WorkNest.Admin
             if (rowsAffected > 0)
             {
                 Response.Write("<script>alert('Project deleted successfully');</script>");
-                LoadProjects(); // Refresh the list after deletion
+                LoadProjects(""); // Refresh the list after deletion
             }
             else
             {

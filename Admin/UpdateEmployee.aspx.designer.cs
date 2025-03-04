@@ -87,15 +87,6 @@ namespace WorkNest.Admin
         protected global::System.Web.UI.WebControls.TextBox txtHireDate;
 
         /// <summary>
-        /// ddlDepartment control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlDepartment;
-
-        /// <summary>
         /// lblEdept control.
         /// </summary>
         /// <remarks>
@@ -105,6 +96,15 @@ namespace WorkNest.Admin
         protected global::System.Web.UI.WebControls.Label lblEdept;
 
         /// <summary>
+        /// ddlDepartment control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlDepartment;
+
+        /// <summary>
         /// fuProfileImage control.
         /// </summary>
         /// <remarks>
@@ -112,6 +112,15 @@ namespace WorkNest.Admin
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.FileUpload fuProfileImage;
+
+        /// <summary>
+        /// lblError control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblError;
 
         /// <summary>
         /// btnUpdateEmployee control.
