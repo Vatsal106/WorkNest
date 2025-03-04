@@ -70,31 +70,31 @@ namespace WorkNest.Admin
         }
 
         // Delete a project by ID
-        private void DeleteProject(int projectId)
+        public void DeleteProject(int projectId)
         {
-            dbConn.dbConnect(); // Open database connection
+            dbConn.dbConnect();
 
-            string query = "DELETE FROM PROJECT WHERE PROJECT_ID = @ProjectID";
-            SqlCommand cmd = new SqlCommand(query, dbConn.con);
-            cmd.Parameters.AddWithValue("@ProjectID", projectId);
+            // First, delete dependent records from TASK table
+            string deleteTasksQuery = "DELETE FROM TASK WHERE PROJECT_ID = @ProjectId";
+            SqlCommand cmdDeleteTasks = new SqlCommand(deleteTasksQuery, dbConn.con);
+            cmdDeleteTasks.Parameters.AddWithValue("@ProjectId", projectId);
+            cmdDeleteTasks.ExecuteNonQuery(); // Delete tasks first
 
-            try
+            // Now, delete the project
+            string deleteProjectQuery = "DELETE FROM PROJECT WHERE PROJECT_ID = @ProjectId";
+            SqlCommand cmdDeleteProject = new SqlCommand(deleteProjectQuery, dbConn.con);
+            cmdDeleteProject.Parameters.AddWithValue("@ProjectId", projectId);
+
+            int rowsAffected = cmdDeleteProject.ExecuteNonQuery();
+
+            if (rowsAffected > 0)
             {
-                int rowsAffected = cmd.ExecuteNonQuery();
-
-                if (rowsAffected > 0)
-                {
-                    Response.Write("<script>alert('Project deleted successfully');</script>");
-                    LoadProjects(""); // Refresh list after deletion
-                }
-                else
-                {
-                    Response.Write("<script>alert('Failed to delete project');</script>");
-                }
+                Response.Write("<script>alert('Project deleted successfully');</script>");
+                LoadProjects(); // Refresh the list after deletion
             }
-            catch (SqlException ex)
+            else
             {
-                Response.Write("<script>alert('Error: " + ex.Message + "');</script>");
+                Response.Write("<script>alert('Failed to delete project');</script>");
             }
         }
     }
