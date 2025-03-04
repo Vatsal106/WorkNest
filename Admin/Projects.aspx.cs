@@ -90,7 +90,7 @@ namespace WorkNest.Admin
             if (rowsAffected > 0)
             {
                 Response.Write("<script>alert('Project deleted successfully');</script>");
-                LoadProjects(); // Refresh the list after deletion
+                LoadProjects(""); // Refresh the list after deletion
             }
             else
             {

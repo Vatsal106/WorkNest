@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace WorkNest.Admin
@@ -22,16 +23,16 @@ namespace WorkNest.Admin
             dbConn.dbConnect();
 
             string query = @"
-            SELECT 
-                e.EMPLOYEE_ID,
-                e.FULL_NAME, 
-                e.EMAIL, 
-                e.PHONE_NUMBER, 
-                e.HIRE_DATE, 
-                e.IMAGE, 
-                d.DEPARTMENT_NAME 
-            FROM EMPLOYEE e
-            JOIN DEPARTMENT d ON e.DEPARTMENT_ID = d.DEPARTMENT_ID";
+    SELECT 
+        e.EMPLOYEE_ID,
+        e.FULL_NAME, 
+        e.EMAIL, 
+        e.PHONE_NUMBER, 
+        e.HIRE_DATE, 
+        e.IMAGE, 
+        d.DEPARTMENT_NAME 
+    FROM EMPLOYEE e
+    JOIN DEPARTMENT d ON e.DEPARTMENT_ID = d.DEPARTMENT_ID";
 
             if (!string.IsNullOrEmpty(searchQuery))
             {
@@ -70,8 +71,6 @@ namespace WorkNest.Admin
             rptEmployees.DataBind();
         }
 
-
-
         protected void btnSearch_Click(object sender, EventArgs e)
         {
             string searchText = txtSearch.Text.Trim();
@@ -86,19 +85,36 @@ namespace WorkNest.Admin
                 DeleteEmployee(employeeId);
             }
         }
-        //Response.Write("<script>if(!confirm('Are you sure you want to delete this employee?')) {windows.location='Employees.aspx';}</script>");
-
 
         public void DeleteEmployee(string employeeId)
         {
             try
             {
-                dbConn.dbConnect();
+                // Ensure dbConn is initialized
+                if (dbConn == null)
+                {
+                    dbConn = new dbConnection();
+                }
+
+                // Ensure database connection is open
+                if (dbConn.con == null || dbConn.con.State == ConnectionState.Closed)
+                {
+                    dbConn.dbConnect();
+                }
+
                 using (SqlTransaction transaction = dbConn.con.BeginTransaction())
                 {
                     try
                     {
-                        // Delete related records
+                        // 1️⃣ Update PROJECT to remove the reference to the Employee
+                        string updateProjectQuery = "UPDATE PROJECT SET PROJECT_MANAGER_ID = NULL WHERE PROJECT_MANAGER_ID = @EmployeeId";
+                        using (SqlCommand cmd = new SqlCommand(updateProjectQuery, dbConn.con, transaction))
+                        {
+                            cmd.Parameters.AddWithValue("@EmployeeId", employeeId);
+                            cmd.ExecuteNonQuery();
+                        }
+
+                        // 2️⃣ Delete dependent records first
                         string[] queries = {
                     "DELETE FROM TASK WHERE ASSIGN_TO = @EmployeeId",
                     "DELETE FROM LEAVES WHERE EMPLOYEE_ID = @EmployeeId",
@@ -123,23 +139,20 @@ namespace WorkNest.Admin
                         }
 
                         transaction.Commit();
-                        ClientScript.RegisterStartupScript(this.GetType(), "alert",
-                            "alert('Employee deleted successfully'); window.location='Employees.aspx';", true);
+                        Response.Write("<script>alert('Employee deleted successfully'); window.location='Employees.aspx';</script>");
                     }
                     catch (Exception ex)
                     {
                         transaction.Rollback();
-                        ClientScript.RegisterStartupScript(this.GetType(), "alert", $"alert('Error: {ex.Message}');", true);
+                        Response.Write("<script>alert('Transaction Error: " + ex.Message + "');</script>");
                     }
                 }
             }
             catch (Exception ex)
             {
-                ClientScript.RegisterStartupScript(this.GetType(), "alert", $"alert('Error: {ex.Message}');", true);
+                Response.Write("<script>alert('Error: " + ex.Message + "');</script>");
             }
         }
-
-
-
     }
 }
+
