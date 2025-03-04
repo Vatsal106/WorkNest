@@ -21,26 +21,27 @@
             flex-direction: column;
         }
 
+        /* Sidebar Styling */
         .sidebar {
             width: 250px;
             background-color: #0d0d30;
-            color: #333333;
+            color: #E4F1F9;
             height: 100vh;
             padding-top: 20px;
             position: fixed;
             text-align: left;
-            transition: left 0.3s ease;
+            transition: left 0.3s ease-in-out;
             padding-left: 20px;
             left: 0;
             overflow-y: auto;
             scrollbar-width: none;
         }
 
-            .sidebar::-webkit-scrollbar,
-            .content::-webkit-scrollbar {
+            .sidebar::-webkit-scrollbar {
                 display: none;
             }
 
+            /* Sidebar Logo */
             .sidebar .logo {
                 text-align: center;
                 margin-bottom: 20px;
@@ -51,27 +52,90 @@
                     height: auto;
                 }
 
+            /* Sidebar Header */
             .sidebar h3 {
                 color: #FF8C00;
-                font-size: 24px;
+                font-size: 22px;
                 font-weight: bold;
-                padding-bottom: 20px;
+                padding-bottom: 15px;
+                text-align: center;
             }
 
+            /* Sidebar Menu Items */
             .sidebar .menu {
                 display: flex;
                 align-items: center;
                 color: #E4F1F9;
-                padding: 15px;
+                padding: 12px 15px;
                 text-decoration: none;
-                font-size: 18px;
-                transition: background 0.3s;
+                font-size: 16px;
+                font-weight: 500;
+                transition: background 0.3s ease-in-out;
+                border-radius: 5px;
+                cursor: pointer;
             }
 
                 .sidebar .menu:hover {
                     background-color: #4A6D85;
                     color: white;
                 }
+
+            /* Sidebar Submenu */
+            .sidebar .has-submenu {
+                cursor: pointer;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+        .submenu {
+            display: none;
+            padding-left: 20px;
+        }
+
+            .submenu a {
+                display: block;
+                padding: 10px;
+                color: #E4F1F9;
+                text-decoration: none;
+                font-size: 14px;
+                transition: background 0.3s ease-in-out;
+                border-radius: 5px;
+            }
+
+                .submenu a:hover {
+                    background-color: #4A6D85;
+                }
+
+            /* Show submenu when active */
+            .submenu.active {
+                display: block;
+            }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .sidebar {
+                left: -250px;
+            }
+
+                .sidebar.open {
+                    left: 0;
+                    z-index: 2000;
+                }
+
+            .menu-button {
+                display: block;
+                position: absolute;
+                top: 20px;
+                left: 15px;
+                font-size: 24px;
+                background: none;
+                border: none;
+                color: #FF8C00;
+                cursor: pointer;
+            }
+        }
+
 
         .header {
             width: calc(100% - 250px);
@@ -261,9 +325,6 @@
                 margin-top: 60px;
             }
         }
-      
-
-       
     </style>
     <script>
         function toggleSidebar() {
@@ -296,7 +357,11 @@
             dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
         }
 
-       
+        function toggleSubmenu(id) {
+            var submenu = document.getElementById(id);
+            submenu.classList.toggle("active");
+        }
+
 
     </script>
 
@@ -313,13 +378,40 @@
                 </a>
             </div>
             <h3>Admin Panel</h3>
+
             <a class="menu" href="AdminHome.aspx">🏠 Home</a>
-            <a class="menu" href="AdminDashboard.aspx">📊 Dashboard</a>
-            <a class="menu" href="Employees.aspx">👥 Employees</a>
-            <a class="menu" href="Projects.aspx">📁 Projects</a>
+
+            <div class="menu has-submenu" onclick="toggleSubmenu('dashboardMenu')">
+                📊 Dashboard ▼
+            </div>
+            <div id="dashboardMenu" class="submenu">
+                <a href="AdminDashboard.aspx">📈 Overview</a>
+                <a href="Reports.aspx">📊 Reports</a>
+            </div>
+
+            <div class="menu has-submenu" onclick="toggleSubmenu('employeesMenu')">
+                👥 Employees ▼
+            </div>
+            <div id="employeesMenu" class="submenu">
+                <a href="Employees.aspx">📝 Employee List</a>
+                <a href="registrations.aspx">➕ Add Employee</a>
+                <a href="changeRoles.aspx">🔄 Change Role</a>
+            </div>
+
+            <div class="menu has-submenu" onclick="toggleSubmenu('projectsMenu')">
+                📁 Projects ▼
+            </div>
+            <div id="projectsMenu" class="submenu">
+                <a href="Projects.aspx">📂 All Projects</a>
+                <a href="addProjects.aspx">➕ Add Project</a>
+                
+            </div>
+
             <a class="menu" href="Settings.aspx">⚙️ Settings</a>
             <a class="menu" href="Logout.aspx">🚪 Logout</a>
         </div>
+
+
 
 
         <div class="header">
@@ -331,7 +423,7 @@
                 </div>
             </div>
             <div class="Right-Header">
-           
+
 
                 <div class="notification">
                     <a href="Notifications.aspx" class="notification-icon">🔔 <span id="notificationBadge" runat="server" class="badge">3</span>
