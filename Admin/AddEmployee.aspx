@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/AdminM.Master" AutoEventWireup="true" CodeBehind="registrations.aspx.cs" Inherits="WorkNest.Admin.registrations" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/AdminM.Master" AutoEventWireup="true" CodeBehind="AddEmployee.aspx.cs" Inherits="WorkNest.Admin.registrations" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
     <!-- Content for ContentPlaceHolder2 -->

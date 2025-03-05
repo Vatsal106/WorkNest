@@ -394,7 +394,7 @@
             </div>
             <div id="employeesMenu" class="submenu">
                 <a href="Employees.aspx">📝 Employee List</a>
-                <a href="registrations.aspx">➕ Add Employee</a>
+                <a href="AddEmployee.aspx">➕ Add Employee</a>
                 <a href="changeRoles.aspx">🔄 Change Role</a>
             </div>
 
@@ -432,7 +432,7 @@
                 <div id="ddlAdd" class="ddlAdd">
                     <button type="button" onclick="toggleDropdown()">Add</button>
                     <div id="dropdown-content" class="dropdown-content">
-                        <a href="registrations.aspx">Add Employee</a>
+                        <a href="AddEmployee.aspx">Add Employee</a>
                         <a href="addProjects.aspx">Add Project</a>
                         <a href="addClients.aspx">Add Client</a>
                         <a href="changeRoles.aspx">Change in Role</a>

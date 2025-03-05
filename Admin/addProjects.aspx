@@ -10,7 +10,6 @@
             align-items: center;
             justify-content: center;
             padding: 0px;
-           
             max-width: 900px;
             margin: auto;
             /*        gap: 20px;*/
@@ -41,11 +40,13 @@
             background-color: #8B9EB2;
             color: #000;
         }
+
             .form-container h3 {
                 text-align: center;
                 margin-bottom: 20px;
                 color: #000;
             }
+
         .form-group {
             display: flex;
             align-items: center;
@@ -236,7 +237,12 @@
             </div>
             <div class="form-group">
                 <label for="ddlStatus">Status:</label>
-                <asp:DropDownList ID="ddlStatus" runat="server" AutoPostBack="True" CssClass="form-control"></asp:DropDownList>
+                <asp:DropDownList ID="ddlStatus" runat="server" AutoPostBack="True" CssClass="form-control">
+                    <asp:ListItem Text="HOLD" Value="ON HOLD"></asp:ListItem>
+                    <asp:ListItem Text="IN PROGRESS" Value="IN PROGRESS"></asp:ListItem>
+                    <asp:ListItem Text="IN TESTING" Value="IN TESTING"></asp:ListItem>
+                    <asp:ListItem Text="COMPLETED" Value="COMPLETED"></asp:ListItem>
+                </asp:DropDownList>
             </div>
             <div class="form-group">
                 <label for="ddlProjectManager">Project Manager:</label>

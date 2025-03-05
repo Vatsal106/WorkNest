@@ -67,7 +67,7 @@ namespace WorkNest.Admin
                 }
                 else
                 {
-                    row["IMAGE_BASE64"] = "path/to/default/image.jpg";  // Default image path if no photo
+                    row["IMAGE_BASE64"] = "~/Images/employee photo.jpg";  // Default image path if no photo
                 }
             }
 

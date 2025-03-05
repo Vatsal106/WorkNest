@@ -80,23 +80,29 @@ namespace WorkNest.Admin
 
                 byte[] imageBytes = null;
 
-
                 if (fuProfileImage.HasFile)
                 {
-
+                    //imgSeted = true;
                     string fileExtension = Path.GetExtension(fuProfileImage.FileName).ToLower();
                     string[] allowedExtensions = { ".jpg", ".jpeg", ".png" };
+                    int maxFileSize = 4 * 1024 * 1024; // 5MB file size limit
 
                     if (!allowedExtensions.Contains(fileExtension))
                     {
-                        lblError.Text = "Invalid image format. Only .jpg, .jpeg and .png are allowed.";
+                        lblError.Text = "Invalid image format. Only .jpg, .jpeg, and .png are allowed.";
+                        lblError.ForeColor = Color.Red;
+                        return;
+                    }
+
+                    if (fuProfileImage.FileContent.Length > maxFileSize)
+                    {
+                        lblError.Text = "File size must be less than 4MB.";
                         lblError.ForeColor = Color.Red;
                         return;
                     }
 
                     imageBytes = fuProfileImage.FileBytes;
                 }
-
                 dbConn.dbConnect();
                 string query = @"
                 UPDATE EMPLOYEE 

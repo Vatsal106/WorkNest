@@ -89,8 +89,9 @@
     <Content Include="Admin\changeRoles.aspx" />
     <Content Include="Admin\Employees.aspx" />
     <Content Include="Admin\Projects.aspx" />
-    <Content Include="Admin\registrations.aspx" />
+    <Content Include="Admin\AddEmployee.aspx" />
     <Content Include="Admin\UpdateEmployee.aspx" />
+    <Content Include="Admin\UpdateProjects.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Images\ClientPagePhoto.png" />
     <Content Include="Images\employee photo.jpg" />
@@ -170,12 +171,12 @@
     <Compile Include="Admin\Projects.aspx.designer.cs">
       <DependentUpon>Projects.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\registrations.aspx.cs">
-      <DependentUpon>registrations.aspx</DependentUpon>
+    <Compile Include="Admin\AddEmployee.aspx.cs">
+      <DependentUpon>AddEmployee.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Admin\registrations.aspx.designer.cs">
-      <DependentUpon>registrations.aspx</DependentUpon>
+    <Compile Include="Admin\AddEmployee.aspx.designer.cs">
+      <DependentUpon>AddEmployee.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\UpdateEmployee.aspx.cs">
       <DependentUpon>UpdateEmployee.aspx</DependentUpon>
@@ -183,6 +184,13 @@
     </Compile>
     <Compile Include="Admin\UpdateEmployee.aspx.designer.cs">
       <DependentUpon>UpdateEmployee.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\UpdateProjects.aspx.cs">
+      <DependentUpon>UpdateProjects.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\UpdateProjects.aspx.designer.cs">
+      <DependentUpon>UpdateProjects.aspx</DependentUpon>
     </Compile>
     <Compile Include="dbConnection.cs" />
     <Compile Include="Global.asax.cs">
