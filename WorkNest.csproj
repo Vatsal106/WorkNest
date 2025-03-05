@@ -90,6 +90,7 @@
     <Content Include="Admin\Employees.aspx" />
     <Content Include="Admin\Projects.aspx" />
     <Content Include="Admin\AddEmployee.aspx" />
+    <Content Include="Admin\SelectedProject.aspx" />
     <Content Include="Admin\UpdateEmployee.aspx" />
     <Content Include="Admin\UpdateProjects.aspx" />
     <Content Include="Global.asax" />
@@ -177,6 +178,13 @@
     </Compile>
     <Compile Include="Admin\AddEmployee.aspx.designer.cs">
       <DependentUpon>AddEmployee.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\SelectedProject.aspx.cs">
+      <DependentUpon>SelectedProject.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\SelectedProject.aspx.designer.cs">
+      <DependentUpon>SelectedProject.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\UpdateEmployee.aspx.cs">
       <DependentUpon>UpdateEmployee.aspx</DependentUpon>

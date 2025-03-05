@@ -1,5 +1,53 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/AdminM.Master" AutoEventWireup="true" CodeBehind="UpdateProjects.aspx.cs" Inherits="WorkNest.Admin.UpdateProjects" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
+    <script>
+        function ValidateProject() {
+            let isValid = true;
+            let errorMessage = "";
+
+            // Get input values using correct ASP.NET Client IDs
+            let projectName = document.getElementById("<%= txtProjectName.ClientID %>").value.trim();
+            let description = document.getElementById("<%= txtDescription.ClientID %>").value.trim();
+            let startDate = document.getElementById("<%= txtStartDate.ClientID %>").value;
+            let endDate = document.getElementById("<%= txtEndDate.ClientID %>").value;
+            let status = document.getElementById("<%= ddlStatus.ClientID %>").value;
+            let projectManager = document.getElementById("<%= ddlProjectManager.ClientID %>").value;
+            let client = document.getElementById("<%= ddlClient.ClientID %>").value;
+            console.log("Project Name:", projectName);
+            // Validation checks
+            if (projectName === "") errorMessage += "⚠ Project Name is required.\n";
+            if (description === "") errorMessage += "⚠ Description is required.\n";
+            if (startDate === "") errorMessage += "⚠ Start Date is required.\n";
+            if (endDate === "") errorMessage += "⚠ End Date is required.\n";
+            if (startDate !== "" && endDate !== "") {
+                let start = new Date(startDate);
+                let end = new Date(endDate);
+                if (start >= end) errorMessage += "⚠ End Date must be after Start Date.\n";
+            }
+
+            // Prevent setting Start Date before the existing one
+            if (existingStartDate !== "" && new Date(startDate) < new Date(existingStartDate)) {
+                errorMessage += "⚠ Start Date cannot be set before the existing Start Date.\n";
+            }
+
+            if (status === "") errorMessage += "⚠ Please select a project status.\n";
+            if (projectManager == "0") errorMessage += "⚠ Please select a Project Manager.\n";
+            if (client == "0") errorMessage += "⚠ Please select a Client.\n";
+
+            // Display error message or allow form submission
+            let errorLabel = document.getElementById("<%= lblError.ClientID %>");
+            if (errorMessage !== "") {
+                errorLabel.innerText = errorMessage;
+                errorLabel.style.color = "red";
+                return false;
+            } else {
+                errorLabel.innerText = ""; // Clear previous errors
+                return true;
+            }
+        }
+
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Head" runat="server">
 </asp:Content>
@@ -7,8 +55,8 @@
     Update Project
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-     <h2>Update Project</h2>
-    
+    <h2>Update Project</h2>
+
     <asp:HiddenField ID="hfProjectID" runat="server" />
 
     <label>Project Name:</label>
@@ -39,6 +87,8 @@
 
     <br />
     <asp:Label ID="lblError" Text="" runat="server" />
-    <asp:Button ID="btnUpdateProject" runat="server" Text="Update" CssClass="btn btn-success" OnClick="btnUpdateProject_Click" />
+    <asp:Button ID="btnUpdateProject" runat="server"
+        Text="Update" CssClass="btn btn-success"
+        OnClick="ValidateProject" />
     <asp:Button ID="btnCancel" runat="server" Text="Cancel" CssClass="btn btn-secondary" OnClick="btnCancel_Click" />
 </asp:Content>

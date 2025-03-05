@@ -1,0 +1,108 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/AdminM.Master" AutoEventWireup="true" CodeBehind="SelectedProject.aspx.cs" Inherits="WorkNest.Admin.SelectedProject" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
+    <style>
+        .card {
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .card h4 {
+            color: #4A6D85;
+            border-bottom: 2px solid #8B9EB2;
+            padding-bottom: 8px;
+        }
+        .label-title {
+            font-weight: bold;
+            color: #333;
+            margin-top: 10px;
+        }
+        .detail-box {
+            background: #F7F9FB;
+            padding: 8px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .table {
+            background: #fff;
+            border-radius: 5px;
+        }
+    </style>
+</asp:Content>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="Head" runat="server">
+</asp:Content>
+
+<asp:Content ID="Content3" ContentPlaceHolderID="Header_Title" runat="server">
+    <h2 class="text-center text-primary">Project Details</h2>
+</asp:Content>
+
+<asp:Content ID="Content4" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <asp:HiddenField ID="hfProjectID" runat="server" />
+
+    <div class="container">
+        <!-- Project Information Card -->
+        <div class="card">
+            <h4>Project Information</h4>
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="label-title">Name:</label>
+                    <div class="detail-box">
+                        <asp:Label ID="lblProjectName" runat="server"></asp:Label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label class="label-title">Status:</label>
+                    <div class="detail-box">
+                        <asp:Label ID="lblStatus" runat="server"></asp:Label>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <label class="label-title">Description:</label>
+                    <div class="detail-box">
+                        <asp:Label ID="lblDescription" runat="server"></asp:Label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label class="label-title">Start Date:</label>
+                    <div class="detail-box">
+                        <asp:Label ID="lblStartDate" runat="server"></asp:Label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label class="label-title">End Date:</label>
+                    <div class="detail-box">
+                        <asp:Label ID="lblEndDate" runat="server"></asp:Label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label class="label-title">Project Manager:</label>
+                    <div class="detail-box">
+                        <asp:Label ID="lblProjectManager" runat="server"></asp:Label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label class="label-title">Client:</label>
+                    <div class="detail-box">
+                        <asp:Label ID="lblClient" runat="server"></asp:Label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Project Tasks Card -->
+        <div class="card">
+            <h4>Project Tasks</h4>
+            <asp:GridView ID="gvTasks" runat="server" AutoGenerateColumns="False" CssClass="table table-striped table-hover table-bordered">
+                <Columns>
+                    <asp:BoundField DataField="TASK_NAME" HeaderText="Task Name" />
+                    <asp:BoundField DataField="STATUS" HeaderText="Status" />
+                    <asp:BoundField DataField="ASSIGN_TO" HeaderText="Assigned To" />
+                    <asp:BoundField DataField="DUE_DATE" HeaderText="Due Date" DataFormatString="{0:yyyy-MM-dd}" />
+                </Columns>
+            </asp:GridView>
+        </div>
+    </div>
+</asp:Content>

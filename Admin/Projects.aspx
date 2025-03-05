@@ -4,7 +4,7 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="Head" runat="server">
-    <style> 
+    <style>
         .project-container {
             display: flex;
             flex-wrap: wrap;
@@ -23,10 +23,10 @@
             position: relative;
         }
 
-        .project-card:hover {
-            transform: scale(1.05);
-            box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2);
-        }
+            .project-card:hover {
+                transform: scale(1.05);
+                box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2);
+            }
 
         .action-buttons {
             display: flex;
@@ -49,9 +49,18 @@
             color: white;
         }
 
+        .btn-Details {
+            background: #ffd800;
+            color: white;
+        }
+
         .btn-delete {
             background: #dc3545;
             color: white;
+        }
+
+        .btn-Details:hover {
+            background: #ff6a00;
         }
 
         .btn-update:hover {
@@ -78,7 +87,10 @@
         <asp:Repeater ID="rptProjects" runat="server" OnItemCommand="rptProjects_ItemCommand">
             <ItemTemplate>
                 <div class="project-card">
-                    <h3><%# Eval("PROJECT_NAME") %></h3>
+                    <b>
+                        <h3><%# Eval("PROJECT_NAME") %></h3>
+                    </b>
+                    <h6><strong>Description:</strong> <%# Eval("DESCRIPTION") %></h6>
                     <p><strong>Manager:</strong> <%# Eval("PROJECT_MANAGER") %></p>
                     <p><strong>Client:</strong> <%# Eval("CLIENT_NAME") %></p>
                     <p><strong>Start Date:</strong> <%# Eval("START_DATE", "{0:dd-MMM-yyyy}") %></p>
@@ -86,8 +98,10 @@
                     <p><strong>Status:</strong> <%# Eval("STATUS") %></p>
 
                     <div class="action-buttons">
-                         <asp:Button ID="btnUpdate" runat="server" Text="Update" CssClass="btn btn-update"
-     OnClientClick='<%# "window.location.href=\"UpdateProjects.aspx?ProjectID=" + Eval("Project_ID") + "\"; return false;" %>' />
+                        <asp:Button ID="btnDetails" runat="server" Text="See Details" CssClass="btn btn-Details"
+                            OnClientClick='<%# "window.location.href=\"SelectedProject.aspx?ProjectID=" + Eval("Project_ID") + "\"; return false;" %>' />
+                        <asp:Button ID="btnUpdate" runat="server" Text="Update" CssClass="btn btn-update"
+                            OnClientClick='<%# "window.location.href=\"UpdateProjects.aspx?ProjectID=" + Eval("Project_ID") + "\"; return false;" %>' />
                         <asp:Button ID="btnDelete" runat="server" Text="Delete" CssClass="btn btn-delete"
                             CommandName="DeleteProject" CommandArgument='<%# Eval("PROJECT_ID") %>'
                             OnClientClick="return confirm('Are you sure you want to delete this project?');" />

@@ -81,7 +81,93 @@ namespace WorkNest.Admin
             ddlClient.Items.Insert(0, new ListItem("--Select Client--", "0"));
 
         }
-        public void btnUpdateProject_Click(object sender, EventArgs e)
+        protected void ValidateProject(object sender, EventArgs e)
+        {
+            // Retrieve input values
+            string projectName = txtProjectName.Text.Trim();
+            string description = txtDescription.Text.Trim();
+            string startDate = txtStartDate.Text;
+            string endDate = txtEndDate.Text;
+            string status = ddlStatus.SelectedValue;
+            string projectManager = ddlProjectManager.SelectedValue;
+            string client = ddlClient.SelectedValue;
+
+            // Server-side validation
+            if (string.IsNullOrEmpty(projectName))
+            {
+                lblError.Text = "⚠ Project Name is required.";
+                lblError.ForeColor = System.Drawing.Color.Red;
+                return;
+            }
+
+            if (string.IsNullOrEmpty(description))
+            {
+                lblError.Text = "⚠ Description is required.";
+                lblError.ForeColor = System.Drawing.Color.Red;
+                return;
+            }
+
+            if (string.IsNullOrEmpty(startDate))
+            {
+                lblError.Text = "⚠ Start Date is required.";
+                lblError.ForeColor = System.Drawing.Color.Red;
+                return;
+            }
+
+            if (string.IsNullOrEmpty(endDate))
+            {
+                lblError.Text = "⚠ End Date is required.";
+                lblError.ForeColor = System.Drawing.Color.Red;
+                return;
+            }
+
+            // Validate date format
+            DateTime start, end;
+            if (!DateTime.TryParse(startDate, out start) || !DateTime.TryParse(endDate, out end))
+            {
+                lblError.Text = "⚠ Invalid date format.";
+                lblError.ForeColor = System.Drawing.Color.Red;
+                return;
+            }
+
+            // Ensure End Date is after Start Date
+            if (start >= end)
+            {
+                lblError.Text = "⚠ End Date must be after Start Date.";
+                lblError.ForeColor = System.Drawing.Color.Red;
+                return;
+            }
+
+            if (string.IsNullOrEmpty(status))
+            {
+                lblError.Text = "⚠ Please select a project status.";
+                lblError.ForeColor = System.Drawing.Color.Red;
+                return;
+            }
+
+            if (projectManager == "0")
+            {
+                lblError.Text = "⚠ Please select a Project Manager.";
+                lblError.ForeColor = System.Drawing.Color.Red;
+                return;
+            }
+
+            if (client == "0")
+            {
+                lblError.Text = "⚠ Please select a Client.";
+                lblError.ForeColor = System.Drawing.Color.Red;
+                return;
+            }
+
+            // If validation passes, proceed with project update logic
+            lblError.Text = ""; // Clear any previous errors
+            btnUpdateProject_Click(); // Implement database update logic here
+
+            lblError.Text = "✔ Project updated successfully!";
+            lblError.ForeColor = System.Drawing.Color.Green;
+        }
+
+        public void btnUpdateProject_Click()
         {
             dbConn.dbConnect();
             string p_name = txtProjectName.Text;
@@ -124,7 +210,7 @@ namespace WorkNest.Admin
 
         public void btnCancel_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("Projects.aspx");
         }
     }
 }

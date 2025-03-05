@@ -33,12 +33,13 @@ namespace WorkNest.Admin
                     e.FULL_NAME AS PROJECT_MANAGER,
                     c.CLIENT_NAME
                 FROM PROJECT p
-                JOIN EMPLOYEE e ON p.PROJECT_MANAGER_ID = e.EMPLOYEE_ID
+                LEFT JOIN EMPLOYEE e ON p.PROJECT_MANAGER_ID = e.EMPLOYEE_ID
                 JOIN CLIENTS c ON p.CLIENT_ID = c.CLIENT_ID
                 WHERE 
-                    p.PROJECT_NAME LIKE @Search OR 
+                    p.PROJECT_MANAGER_ID IS NULL or
+                    (p.PROJECT_NAME LIKE @Search OR 
                     e.FULL_NAME LIKE @Search OR 
-                    c.CLIENT_NAME LIKE @Search";
+                    c.CLIENT_NAME LIKE @Search)";
 
             SqlCommand cmd = new SqlCommand(query, dbConn.con);
             cmd.Parameters.AddWithValue("@Search", "%" + searchKeyword + "%");
