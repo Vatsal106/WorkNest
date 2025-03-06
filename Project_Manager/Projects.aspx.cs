@@ -22,13 +22,13 @@ namespace WorkNest.Project_Manager
             dbConn.dbConnect(); 
 
             
-            if (Session["PROJECT_MANAGER_ID"] == null)
+            if (Session["EmployeeID"] == null)
             {
                 Response.Write("<script>alert('Session Expired. Please log in again.');</script>");
                 return;
             }
 
-            int managerId = Convert.ToInt32(Session["PROJECT_MANAGER_ID"]);
+            int managerId = Convert.ToInt32(Session["EmployeeID"]);
 
             
             string query = @"

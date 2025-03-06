@@ -71,7 +71,7 @@
                 font-size: 16px;
                 font-weight: 500;
                 transition: background 0.3s ease-in-out;
-                border-radius: 5px;
+                border-radius: 5px 0 0 5px;
                 cursor: pointer;
             }
 
