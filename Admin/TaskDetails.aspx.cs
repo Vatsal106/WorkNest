@@ -7,30 +7,91 @@ namespace WorkNest.Admin
     public partial class TaskDetails : System.Web.UI.Page
     {
         dbConnection dbConn = new dbConnection();
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Request.QueryString["TaskID"] == null)
+            if (!IsPostBack)
             {
-                Response.Redirect("Projects.aspx");
-            }
-            else
-            {
-                string taskId = Request.QueryString["TaskID"];
-                LoadTaskHistory(taskId);
+                if (Request.QueryString["TaskID"] == null)
+                {
+                    Response.Redirect("Projects.aspx");
+                }
+                else
+                {
+                    string taskId = Request.QueryString["TaskID"];
+                    LoadTaskDetails(taskId);
+                    LoadLatestTaskReport(taskId); // Load the latest report
+                    LoadTaskHistory(taskId);      // Load task history
+                }
             }
         }
 
-        private void LoadTaskHistory(string taskId)
+        private void LoadTaskDetails(string taskId)
         {
             dbConn.dbConnect();
             string query = @"
         SELECT 
-            TRH.TRH_ID,
-            TRH.UPDATED_AT, 
-            TRH.DESCRIPTION, 
-            TRH.TASK_FILE
-        FROM TASK_REPORT_HISTORY TRH
-        WHERE TRH.TASK_ID = @TaskID";
+            T.TASK_NAME, 
+            T.STATUS, 
+            E.FULL_NAME AS ASSIGN_TO, 
+            T.DUE_DATE, 
+            T.DESCRIPTION, 
+            P.PROJECT_NAME,
+            TR.TASK_FILE,
+            TR.DESCRIPTION AS REPORT_DESCRIPTION,
+            TR.LAST_UPDATE AS LAST_UPDATE
+        FROM TASK T
+        JOIN EMPLOYEE E ON T.ASSIGN_TO = E.EMPLOYEE_ID
+        JOIN PROJECT P ON T.PROJECT_ID = P.PROJECT_ID
+        LEFT JOIN TASK_REPORT TR ON T.TASK_ID = TR.TASK_ID
+        WHERE T.TASK_ID = @TaskID
+        ORDER BY TR.LAST_UPDATE DESC"; // Get the latest report
+
+            SqlCommand cmd = new SqlCommand(query, dbConn.con);
+            cmd.Parameters.AddWithValue("@TaskID", taskId);
+
+            SqlDataReader reader = cmd.ExecuteReader();
+            if (reader.Read())
+            {
+                lblTaskName.Text = reader["TASK_NAME"].ToString();
+                lblStatus.Text = reader["STATUS"].ToString();
+                lblAssignedTo.Text = reader["ASSIGN_TO"].ToString();
+                lblDueDate.Text = Convert.ToDateTime(reader["DUE_DATE"]).ToString("yyyy-MM-dd");
+                lblDescription.Text = reader["DESCRIPTION"].ToString();
+                lblProjectName.Text = reader["PROJECT_NAME"].ToString();
+
+                if (reader["TASK_FILE"] != DBNull.Value)
+                {
+                    lnkLatestReport.NavigateUrl = "DownloadTaskHistory.aspx?TaskID=" + taskId;
+                    lnkLatestReport.Visible = true;
+                }
+                else
+                {
+                    lnkLatestReport.Visible = false;
+                }
+
+                // Display report details if available
+                if (reader["LAST_UPDATE"] != DBNull.Value)
+                {
+                    lblReportDate.Text = Convert.ToDateTime(reader["LAST_UPDATE"]).ToString("yyyy-MM-dd HH:mm:ss");
+                }
+                else
+                {
+                    lblReportDate.Text = "N/A";
+                }
+
+                lblReportDescription.Text = reader["REPORT_DESCRIPTION"] != DBNull.Value ? reader["REPORT_DESCRIPTION"].ToString() : "No description available.";
+            }
+            reader.Close();
+        }
+
+        private void LoadLatestTaskReport(string taskId)
+        {
+            dbConn.dbConnect();
+            string query = @"
+    SELECT  TR.DESCRIPTION, TR.TASK_FILE
+    FROM TASK_REPORT TR
+    WHERE TR.TASK_ID = @TaskID";
 
             SqlCommand cmd = new SqlCommand(query, dbConn.con);
             cmd.Parameters.AddWithValue("@TaskID", taskId);
@@ -39,7 +100,38 @@ namespace WorkNest.Admin
             DataTable dt = new DataTable();
             adpt.Fill(dt);
 
-            // Add a new column for the download link
+            if (dt.Rows.Count > 0)
+            {
+                DataRow row = dt.Rows[0];
+
+                if (row["TASK_FILE"] != DBNull.Value)
+                {
+                    lnkLatestReport.NavigateUrl = "DownloadReport.aspx?TaskID=" + taskId;
+                    lnkLatestReport.Visible = true;
+                }
+            }
+        }
+
+        private void LoadTaskHistory(string taskId)
+        {
+            dbConn.dbConnect();
+            string query = @"
+                SELECT 
+                    TRH.TRH_ID,
+                    TRH.UPDATED_AT, 
+                    TRH.DESCRIPTION, 
+                    TRH.TASK_FILE
+                FROM TASK_REPORT_HISTORY TRH
+                WHERE TRH.TASK_ID = @TaskID
+                ORDER BY TRH.UPDATED_AT DESC";
+
+            SqlCommand cmd = new SqlCommand(query, dbConn.con);
+            cmd.Parameters.AddWithValue("@TaskID", taskId);
+
+            SqlDataAdapter adpt = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            adpt.Fill(dt);
+
             dt.Columns.Add("TaskHistoryURL", typeof(string));
 
             foreach (DataRow row in dt.Rows)
