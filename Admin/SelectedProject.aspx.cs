@@ -54,7 +54,7 @@ namespace WorkNest.Admin
         private void LoadProjectTasks(string projectId)
         {
             dbConn.dbConnect();
-            string query = @"SELECT T.TASK_NAME, T.STATUS, E.FULL_NAME AS ASSIGN_TO, T.DUE_DATE 
+            string query = @"SELECT T.TASK_NAME, T.STATUS, E.FULL_NAME AS ASSIGN_TO, T.END_DATE 
                              FROM TASK T
                              JOIN EMPLOYEE E ON T.ASSIGN_TO = E.EMPLOYEE_ID
                              WHERE T.PROJECT_ID = '" + projectId + "'";
