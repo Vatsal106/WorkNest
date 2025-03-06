@@ -108,6 +108,7 @@
     <Content Include="Images\TranLogoDark.png" />
     <Content Include="Images\Untitled design %283%29.png" />
     <Content Include="login.aspx" />
+    <Content Include="Project_Manager\Projects.aspx" />
     <Content Include="Project_Manager\P_ManagerDashboard.aspx" />
     <Content Include="Project_Manager\P_ManagerHome.aspx" />
     <Content Include="P_Member\MemberDashboard.aspx" />
@@ -217,6 +218,13 @@
     </Compile>
     <Compile Include="Admin\AdminM.Master.designer.cs">
       <DependentUpon>AdminM.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Project_Manager\Projects.aspx.cs">
+      <DependentUpon>Projects.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Project_Manager\Projects.aspx.designer.cs">
+      <DependentUpon>Projects.aspx</DependentUpon>
     </Compile>
     <Compile Include="Project_Manager\P_Manager.Master.cs">
       <DependentUpon>P_Manager.Master</DependentUpon>

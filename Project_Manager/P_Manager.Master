@@ -288,10 +288,12 @@
             </div>
             <h3>Project Management Panel</h3>
             <a class="menu" href="P_ManagerHome.aspx">🏠 Home</a>
-            <a class="menu" href="P_ManagerDashboard.aspx">📊 Dashboard</a>
-            <a class="menu" href="Users.aspx">👥 Users</a>
-            <a class="menu" href="Settings.aspx">⚙️ Settings</a>
-            <a class="menu" href="Logout.aspx">🚪 Logout</a>
+    <a class="menu" href="P_ManagerDashboard.aspx">📊 Dashboard</a>
+    <a class="menu" href="Projects.aspx">📂 Projects</a>  
+    <a class="menu" href="Tasks.aspx">📋 Tasks</a>  
+    <a class="menu" href="Users.aspx">👥 Users</a>
+    <a class="menu" href="Settings.aspx">⚙️ Settings</a>
+    <a class="menu" href="Logout.aspx">🚪 Logout</a>
         </div>
 
         <div class="header">
