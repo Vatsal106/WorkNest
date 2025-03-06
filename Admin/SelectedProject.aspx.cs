@@ -54,17 +54,40 @@ namespace WorkNest.Admin
         private void LoadProjectTasks(string projectId)
         {
             dbConn.dbConnect();
-            string query = @"SELECT T.TASK_NAME, T.STATUS, E.FULL_NAME AS ASSIGN_TO, T.END_DATE 
-                             FROM TASK T
-                             JOIN EMPLOYEE E ON T.ASSIGN_TO = E.EMPLOYEE_ID
-                             WHERE T.PROJECT_ID = '" + projectId + "'";
+            string query = @"
+        SELECT 
+            T.TASK_ID, 
+            T.TASK_NAME, 
+            T.STATUS, 
+            E.FULL_NAME AS ASSIGN_TO, 
+            T.DUE_DATE, 
+            TR.TASK_FILE
+        FROM TASK T
+        JOIN EMPLOYEE E ON T.ASSIGN_TO = E.EMPLOYEE_ID
+        LEFT JOIN TASK_REPORT TR ON T.TASK_ID = TR.TASK_ID
+        WHERE T.PROJECT_ID = @ProjectID";
 
-            SqlDataAdapter adpt = new SqlDataAdapter(query, dbConn.con);
-            DataSet ds = new DataSet();
-            adpt.Fill(ds);
-            gvTasks.DataSource = ds;
+            SqlCommand cmd = new SqlCommand(query, dbConn.con);
+            cmd.Parameters.AddWithValue("@ProjectID", projectId);
+
+            SqlDataAdapter adpt = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            adpt.Fill(dt);
+
+            dt.Columns.Add("DownloadLink", typeof(string));
+
+            foreach (DataRow row in dt.Rows)
+            {
+                if (row["TASK_FILE"] != DBNull.Value)
+                {
+                    row["DownloadLink"] = "DownloadReport.aspx?TaskID=" + row["TASK_ID"].ToString();
+                }
+            }
+
+            gvTasks.DataSource = dt;
             gvTasks.DataBind();
         }
+
 
     }
 }

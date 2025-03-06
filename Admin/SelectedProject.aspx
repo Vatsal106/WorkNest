@@ -9,22 +9,26 @@
             padding: 20px;
             margin-bottom: 20px;
         }
-        .card h4 {
-            color: #4A6D85;
-            border-bottom: 2px solid #8B9EB2;
-            padding-bottom: 8px;
-        }
+
+            .card h4 {
+                color: #4A6D85;
+                border-bottom: 2px solid #8B9EB2;
+                padding-bottom: 8px;
+            }
+
         .label-title {
             font-weight: bold;
             color: #333;
             margin-top: 10px;
         }
+
         .detail-box {
             background: #F7F9FB;
             padding: 8px;
             border-radius: 5px;
             margin-bottom: 10px;
         }
+
         .table {
             background: #fff;
             border-radius: 5px;
@@ -92,7 +96,7 @@
             </div>
         </div>
 
-        <!-- Project Tasks Card -->
+       
         <div class="card">
             <h4>Project Tasks</h4>
             <asp:GridView ID="gvTasks" runat="server" AutoGenerateColumns="False" CssClass="table table-striped table-hover table-bordered">
@@ -101,8 +105,29 @@
                     <asp:BoundField DataField="STATUS" HeaderText="Status" />
                     <asp:BoundField DataField="ASSIGN_TO" HeaderText="Assigned To" />
                     <asp:BoundField DataField="DUE_DATE" HeaderText="Due Date" DataFormatString="{0:yyyy-MM-dd}" />
+
+                   
+                    <asp:TemplateField HeaderText="Report File">
+                        <ItemTemplate>
+                            <asp:HyperLink ID="lnkDownloadReport" runat="server"
+                                NavigateUrl='<%# Eval("DownloadLink") %>'
+                                Text="Download" Visible='<%# Eval("DownloadLink") != DBNull.Value %>'>
+                            </asp:HyperLink>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+
+                    
+                    <asp:TemplateField HeaderText="Details">
+                        <ItemTemplate>
+                            <asp:HyperLink ID="lnkTaskDetails" runat="server"
+                                NavigateUrl='<%# "TaskDetails.aspx?TaskID=" + Eval("TASK_ID") %>'
+                                Text="View Details">
+                            </asp:HyperLink>
+                        </ItemTemplate>
+                    </asp:TemplateField>
                 </Columns>
             </asp:GridView>
+
         </div>
     </div>
 </asp:Content>
