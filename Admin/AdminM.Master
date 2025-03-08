@@ -404,9 +404,17 @@
             <div id="projectsMenu" class="submenu">
                 <a href="Projects.aspx">📂 All Projects</a>
                 <a href="addProjects.aspx">➕ Add Project</a>
-                
-            </div>
 
+            </div>
+            <div class="menu has-submenu" onclick="toggleSubmenu('tasksMenu')">
+                ✅ Tasks ▼
+   
+            </div>
+            <div id="tasksMenu" class="submenu">
+                <a href="AllTasks.aspx">📋 Task List</a>
+                <a href="AddTask.aspx">➕ Add Task</a>
+                <a href="TaskReports.aspx">📊 Task Reports</a>
+            </div>
             <a class="menu" href="Settings.aspx">⚙️ Settings</a>
             <a class="menu" href="Logout.aspx">🚪 Logout</a>
         </div>
