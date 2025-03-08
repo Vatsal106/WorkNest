@@ -42,6 +42,7 @@ namespace WorkNest.P_Member
                 txttaskDescription.Text = dr["DESCRIPTION"].ToString();
                 ddlStatus.SelectedValue = dr["STATUS"].ToString();
             }
+            dr.Close();
         }
         public void loadLastUpdate(string taskID)
         {
@@ -67,21 +68,11 @@ namespace WorkNest.P_Member
             try
             {
                 byte[] fileBytes = null;
-                bool fileUploaded = false;
+                string fileExtension = "", fileName = "";
 
                 if (fuReport.HasFile)
                 {
-                    fileUploaded = true;
                     int maxFileSize = 10 * 1024 * 1024; // 10MB file size limit
-                    string fileExtension = Path.GetExtension(fuReport.FileName).ToLower();
-                    string allowedExtensions = ".pdf";
-
-                    if (allowedExtensions != fileExtension)
-                    {
-                        lblMessage.Text = "Invalid image format. Only .pdf are allowed.";
-                        lblMessage.ForeColor = Color.Red;
-                        return;
-                    }
                     if (fuReport.FileContent.Length > maxFileSize)
                     {
                         lblMessage.Text = "File size must be less than 10MB.";
@@ -89,59 +80,71 @@ namespace WorkNest.P_Member
                         return;
                     }
 
+                    fileName = Path.GetFileName(fuReport.FileName);
+                    fileExtension = Path.GetExtension(fuReport.FileName).ToLower();
                     fileBytes = fuReport.FileBytes;
                 }
 
                 int taskID = Convert.ToInt32(hfTaskID.Value);
+                bool reportExists = false;
+                int existingTRID = 0;
+                byte[] existingFile = null;
+                string existingDescription = "", existingFileName = "", existingFileExtension = "";
+                DateTime lastUpdate = DateTime.Now;
 
                 // Check if a report already exists for the task
-                string checkExistingQuery = "SELECT TR_ID, TASK_FILE, DESCRIPTION, LAST_UPDATE FROM TASK_REPORT WHERE TASK_ID = @TaskID";
+                string checkExistingQuery = "SELECT TR_ID, TASK_FILE, FILE_NAME, FILE_EXTENSION, DESCRIPTION, LAST_UPDATE FROM TASK_REPORT WHERE TASK_ID = @TaskID";
                 SqlCommand checkCmd = new SqlCommand(checkExistingQuery, dbConn.con, transaction);
                 checkCmd.Parameters.AddWithValue("@TaskID", taskID);
                 SqlDataReader reader = checkCmd.ExecuteReader();
 
-                bool reportExists = reader.Read();
-                int existingTRID = 0;
-                byte[] existingFile = null;
-                string existingDescription = "";
-                DateTime lastUpdate = DateTime.Now;
-
-                if (reportExists)
+                if (reader.Read())
                 {
+                    reportExists = true;
                     existingTRID = Convert.ToInt32(reader["TR_ID"]);
-                    existingFile = (byte[])reader["TASK_FILE"];
+                    existingFile = reader["TASK_FILE"] as byte[];
+                    existingFileName = reader["FILE_NAME"].ToString();
+                    existingFileExtension = reader["FILE_EXTENSION"].ToString();
                     existingDescription = reader["DESCRIPTION"].ToString();
                     lastUpdate = Convert.ToDateTime(reader["LAST_UPDATE"]);
                 }
-                reader.Close();
+
+                if (reader != null && !reader.IsClosed)
+                    reader.Close();
 
                 if (reportExists)
                 {
                     // Move existing record to TASK_REPORT_HISTORY
-                    string insertHistoryQuery = "INSERT INTO TASK_REPORT_HISTORY (TASK_ID, TASK_FILE, DESCRIPTION, UPDATED_AT) VALUES (@TaskID, @TASK_FILE, @DESCRIPTION, @UPDATED_AT)";
+                    string insertHistoryQuery = "INSERT INTO TASK_REPORT_HISTORY (TASK_ID, TASK_FILE, FILE_NAME, FILE_EXTENSION, DESCRIPTION, UPDATED_AT) VALUES (@TaskID, @TASK_FILE, @FILE_NAME, @FILE_EXTENSION, @DESCRIPTION, @UPDATED_AT)";
                     SqlCommand historyCmd = new SqlCommand(insertHistoryQuery, dbConn.con, transaction);
                     historyCmd.Parameters.AddWithValue("@TaskID", taskID);
                     historyCmd.Parameters.AddWithValue("@TASK_FILE", existingFile);
+                    historyCmd.Parameters.AddWithValue("@FILE_NAME", existingFileName);
+                    historyCmd.Parameters.AddWithValue("@FILE_EXTENSION", existingFileExtension);
                     historyCmd.Parameters.AddWithValue("@DESCRIPTION", existingDescription);
                     historyCmd.Parameters.AddWithValue("@UPDATED_AT", lastUpdate);
                     historyCmd.ExecuteNonQuery();
 
                     // Update existing report in TASK_REPORT
-                    string updateReportQuery = "UPDATE TASK_REPORT SET TASK_FILE = @TASK_FILE, DESCRIPTION = @DESCRIPTION, LAST_UPDATE = @LAST_UPDATE WHERE TR_ID = @TR_ID";
+                    string updateReportQuery = "UPDATE TASK_REPORT SET TASK_FILE = @TASK_FILE, FILE_NAME = @FILE_NAME, FILE_EXTENSION = @FILE_EXTENSION, DESCRIPTION = @DESCRIPTION, LAST_UPDATE = @LAST_UPDATE WHERE TASK_ID = @T_ID";
                     SqlCommand updateReportCmd = new SqlCommand(updateReportQuery, dbConn.con, transaction);
                     updateReportCmd.Parameters.AddWithValue("@TASK_FILE", fileBytes);
+                    updateReportCmd.Parameters.AddWithValue("@FILE_NAME", fileName.Trim());
+                    updateReportCmd.Parameters.AddWithValue("@FILE_EXTENSION", fileExtension.Trim());
                     updateReportCmd.Parameters.AddWithValue("@DESCRIPTION", txtDescription.Text);
                     updateReportCmd.Parameters.AddWithValue("@LAST_UPDATE", DateTime.Now);
-                    updateReportCmd.Parameters.AddWithValue("@TR_ID", existingTRID);
+                    updateReportCmd.Parameters.AddWithValue("@T_ID", taskID);
                     updateReportCmd.ExecuteNonQuery();
                 }
                 else
                 {
                     // Insert new report into TASK_REPORT
-                    string insertReportQuery = "INSERT INTO TASK_REPORT (TASK_ID, TASK_FILE, DESCRIPTION, LAST_UPDATE) VALUES (@TaskID, @TASK_FILE, @DESCRIPTION, @LAST_UPDATE)";
+                    string insertReportQuery = "INSERT INTO TASK_REPORT (TASK_ID, TASK_FILE, FILE_NAME, FILE_EXTENSION, DESCRIPTION, LAST_UPDATE) VALUES (@TaskID, @TASK_FILE, @FILE_NAME, @FILE_EXTENSION, @DESCRIPTION, @LAST_UPDATE)";
                     SqlCommand reportCmd = new SqlCommand(insertReportQuery, dbConn.con, transaction);
                     reportCmd.Parameters.AddWithValue("@TaskID", taskID);
                     reportCmd.Parameters.AddWithValue("@TASK_FILE", fileBytes);
+                    reportCmd.Parameters.AddWithValue("@FILE_NAME", fileName.Trim());
+                    reportCmd.Parameters.AddWithValue("@FILE_EXTENSION", fileExtension.Trim());
                     reportCmd.Parameters.AddWithValue("@DESCRIPTION", txtDescription.Text);
                     reportCmd.Parameters.AddWithValue("@LAST_UPDATE", DateTime.Now);
                     reportCmd.ExecuteNonQuery();
@@ -156,6 +159,8 @@ namespace WorkNest.P_Member
 
                 // Commit transaction if everything is successful
                 transaction.Commit();
+                btnClear_Click(sender, e);
+                loadLastUpdate(hfTaskID.Value);
                 lblMessage.Text = "Report submitted successfully!";
                 lblMessage.ForeColor = Color.Green;
             }
@@ -167,6 +172,7 @@ namespace WorkNest.P_Member
                 lblMessage.ForeColor = Color.Red;
             }
         }
+
         public void btnClear_Click(object sender, EventArgs e)
         {
             txtDescription.Text = "";

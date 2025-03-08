@@ -62,7 +62,7 @@ namespace WorkNest.Admin
 
                 if (reader["TASK_FILE"] != DBNull.Value)
                 {
-                    lnkLatestReport.NavigateUrl = "DownloadTaskHistory.aspx?TaskID=" + taskId;
+                    lnkLatestReport.NavigateUrl = "DownloadReport.aspx?TaskID=" + taskId;
                     lnkLatestReport.Visible = true;
                 }
                 else
@@ -138,7 +138,7 @@ namespace WorkNest.Admin
             {
                 if (row["TASK_FILE"] != DBNull.Value)
                 {
-                    row["TaskHistoryURL"] = "DownloadTaskHistory.aspx?TaskHistoryID=" + row["TRH_ID"].ToString();
+                    row["TaskHistoryURL"] = "DownloadReport.aspx?TaskHistoryID=" + row["TRH_ID"].ToString();
                 }
             }
 

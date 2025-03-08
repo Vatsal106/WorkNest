@@ -88,7 +88,6 @@
     <Content Include="Admin\AdminHome.aspx" />
     <Content Include="Admin\changeRoles.aspx" />
     <Content Include="Admin\DownloadReport.aspx" />
-    <Content Include="Admin\DownloadTaskHistory.aspx" />
     <Content Include="Admin\Employees.aspx" />
     <Content Include="Admin\Projects.aspx" />
     <Content Include="Admin\AddEmployee.aspx" />
@@ -132,7 +131,7 @@
     <Content Include="Project_Manager\P_ManagerHome.aspx" />
     <Content Include="P_Member\MemberDashboard.aspx" />
     <Content Include="P_Member\MemberHome.aspx" />
-    <Content Include="P_Member\SubmitReportOfTask.aspx" />
+    <Content Include="Admin\SubmitReportOfTask.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -191,13 +190,6 @@
     </Compile>
     <Compile Include="Admin\DownloadReport.aspx.designer.cs">
       <DependentUpon>DownloadReport.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Admin\DownloadTaskHistory.aspx.cs">
-      <DependentUpon>DownloadTaskHistory.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\DownloadTaskHistory.aspx.designer.cs">
-      <DependentUpon>DownloadTaskHistory.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\Employees.aspx.cs">
       <DependentUpon>Employees.aspx</DependentUpon>
@@ -316,11 +308,11 @@
     <Compile Include="P_Member\MemberM.Master.designer.cs">
       <DependentUpon>MemberM.Master</DependentUpon>
     </Compile>
-    <Compile Include="P_Member\SubmitReportOfTask.aspx.cs">
+    <Compile Include="Admin\SubmitReportOfTask.aspx.cs">
       <DependentUpon>SubmitReportOfTask.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="P_Member\SubmitReportOfTask.aspx.designer.cs">
+    <Compile Include="Admin\SubmitReportOfTask.aspx.designer.cs">
       <DependentUpon>SubmitReportOfTask.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
