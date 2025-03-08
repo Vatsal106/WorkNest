@@ -173,6 +173,7 @@
     <Content Include="Admin\AllTasks.aspx" />
     <Content Include="Admin\changeRoles.aspx" />
     <Content Include="Admin\DownloadReport.aspx" />
+    <Content Include="Admin\EditTask.aspx" />
     <Content Include="Admin\Employees.aspx" />
     <Content Include="Admin\Projects.aspx" />
     <Content Include="Admin\AddEmployee.aspx" />
@@ -282,6 +283,13 @@
     </Compile>
     <Compile Include="Admin\DownloadReport.aspx.designer.cs">
       <DependentUpon>DownloadReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\EditTask.aspx.cs">
+      <DependentUpon>EditTask.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\EditTask.aspx.designer.cs">
+      <DependentUpon>EditTask.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\Employees.aspx.cs">
       <DependentUpon>Employees.aspx</DependentUpon>
