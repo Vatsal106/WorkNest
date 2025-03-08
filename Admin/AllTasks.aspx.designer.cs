@@ -15,6 +15,15 @@ namespace WorkNest.Admin
     {
 
         /// <summary>
+        /// txtSearch control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtSearch;
+
+        /// <summary>
         /// rptProjects control.
         /// </summary>
         /// <remarks>
@@ -22,5 +31,14 @@ namespace WorkNest.Admin
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptProjects;
+
+        /// <summary>
+        /// lblNoProjectTasks control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblNoProjectTasks;
     }
 }
