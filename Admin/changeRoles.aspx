@@ -14,8 +14,8 @@
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
             overflow: hidden;
-            margin: 0 auto; /* Centers horizontally, no extra left space */
-            padding: 0;     /* No extra padding on container */
+            margin: 0 auto; 
+            padding: 0;     
         }
 
         .image-section {
@@ -59,8 +59,7 @@
             white-space: nowrap;
         }
 
-        /* For <asp:TextBox>, <asp:DropDownList>, etc., 
-           ASP.NET will render them as <input> or <select>. */
+       
         input, textarea, select {
             width: 65%;
             padding: 10px;
@@ -69,17 +68,17 @@
             font-size: 14px;
         }
 
-        /* Buttons row (UPDATE, RESET) */
+        
         .button-group {
             display: flex;
             justify-content: space-between;
-            gap: 10px; /* Adds spacing between buttons */
+            gap: 10px; 
             margin-top: 15px;
         }
 
         .btn-submit,
         .btn-reset {
-            width: 48%; /* Ensures both buttons fit side by side */
+            width: 48%; 
             padding: 12px;
             border: none;
             border-radius: 5px;
@@ -91,7 +90,7 @@
         }
 
         .btn-submit {
-            background: #007BFF; /* Blue */
+            background: #007BFF; 
             color: white;
         }
         .btn-submit:hover {
@@ -100,7 +99,7 @@
         }
 
         .btn-reset {
-            background: #FF8C00; /* Orange */
+            background: #FF8C00;
             color: white;
         }
         .btn-reset:hover {
@@ -113,7 +112,7 @@
             transform: scale(0.98);
         }
 
-        /* Responsive for tablets, phones */
+        
         @media screen and (max-width: 768px) {
             .container {
                 flex-direction: column;
@@ -122,7 +121,7 @@
 
             .image-section {
                 width: 100%;
-                height: 250px; /* or auto, if you prefer */
+                height: 250px; 
             }
 
             .form-section {
@@ -146,7 +145,7 @@
             }
 
             .button-group {
-                flex-direction: column; /* Stack buttons on small screens */
+                flex-direction: column; 
             }
 
             .btn-submit,
@@ -163,17 +162,14 @@
 
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container">
-        <!-- Left side: future image (dark background) -->
+        
         <div class="image-section">
-            <!-- Replace "Placeholder.png" with your actual image -->
             <img src='<%= ResolveUrl("~/Images/Placeholder.png") %>' alt="Placeholder Image" />
         </div>
 
-        <!-- Right side: the form -->
         <div class="form-section">
             <h2>Change Roles</h2>
 
-            <!-- Optional error/message label -->
             <asp:Label ID="lblMessage" runat="server" ForeColor="Red"></asp:Label>
 
             <div class="form-group">
@@ -193,7 +189,7 @@
                 </asp:DropDownList>
             </div>
 
-            <!-- Buttons row -->
+            
             <div class="button-group">
                 <asp:Button ID="btnUpdateRole" runat="server"
                             Text="UPDATE"

@@ -4,7 +4,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 
     <style>
-        /* Improved CSS for Add Project Form */
         .container {
             display: flex;
             align-items: center;
@@ -90,7 +89,6 @@
             width: 48%;
         }
 
-        /* Responsive Design */
         @media (max-width: 768px) {
             .container {
                 flex-direction: column;
@@ -140,14 +138,8 @@
         document.addEventListener("DOMContentLoaded", function () {
             let startDate = document.getElementById('<%= dateStart.ClientID %>');
             let endDate = document.getElementById('<%= dateEnd.ClientID %>');
-
-            // Get today's date in YYYY-MM-DD format
             let today = new Date().toISOString().split('T')[0];
-
-            // Set min attribute for Start Date
             startDate.setAttribute("min", today);
-
-            // Ensure End Date is not before Start Date
             startDate.addEventListener("change", function () {
                 endDate.setAttribute("min", startDate.value);
             });
@@ -163,7 +155,7 @@
             let client = document.getElementById('<%= ddlClient.ClientID %>').value;
             let errorLabel = document.getElementById('<%= lblError.ClientID %>');
 
-            errorLabel.innerHTML = ""; // Clear previous errors
+            errorLabel.innerHTML = ""; 
             errorLabel.style.color = "red";
 
             if (projectName === "") {
@@ -203,7 +195,7 @@
                 return false;
             }
 
-            return true; // Submit form if everything is valid
+            return true; 
         }
     </script>
 </asp:Content>

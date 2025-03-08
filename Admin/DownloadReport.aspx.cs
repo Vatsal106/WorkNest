@@ -9,87 +9,113 @@ namespace WorkNest.Admin
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Request.QueryString["TaskID"] != null)
+            try
             {
-                string taskId = Request.QueryString["TaskID"];
-                DownloadTaskReport(taskId);
+                if (Request.QueryString["TaskID"] != null)
+                {
+                    string taskId = Request.QueryString["TaskID"];
+                    DownloadTaskReport(taskId);
+                }
+                else if (Request.QueryString["TaskHistoryID"] != null)
+                {
+                    string taskHistoryId = Request.QueryString["TaskHistoryID"];
+                    DownloadHistoryReport(taskHistoryId);
+                }
+                else
+                {
+                    Response.Write("Invalid Request.");
+                }
             }
-            else if (Request.QueryString["TaskHistoryID"] != null)
+            catch (Exception ex)
             {
-                string taskHistoryId = Request.QueryString["TaskHistoryID"];
-                DownloadHistoryReport(taskHistoryId);
-            }
-            else
-            {
-                Response.Write("Invalid Request.");
+                Response.Write("Error processing request: " + ex.Message);
             }
         }
 
         private void DownloadTaskReport(string taskId)
         {
             dbConn.dbConnect();
-            string query = "SELECT FILE_NAME, FILE_EXTENSION, TASK_FILE FROM TASK_REPORT WHERE TASK_ID = @TaskID";
-
-            SqlCommand cmd = new SqlCommand(query, dbConn.con);
-            cmd.Parameters.AddWithValue("@TaskID", taskId);
-            SqlDataReader dr = cmd.ExecuteReader();
-
-            if (dr.Read())
+            try
             {
-                string fileName = dr["FILE_NAME"].ToString();
-                string fileExt = dr["FILE_EXTENSION"].ToString();
-                byte[] fileData = (byte[])dr["TASK_FILE"];
+                string query = "SELECT FILE_NAME, FILE_EXTENSION, TASK_FILE FROM TASK_REPORT WHERE TASK_ID = @TaskID";
+                SqlCommand cmd = new SqlCommand(query, dbConn.con);
+                cmd.Parameters.AddWithValue("@TaskID", taskId);
+                SqlDataReader dr = cmd.ExecuteReader();
 
-                dr.Close();
-                cmd.Dispose();
+                if (dr.Read())
+                {
+                    string fileName = dr["FILE_NAME"].ToString();
+                    string fileExt = dr["FILE_EXTENSION"].ToString();
+                    byte[] fileData = (byte[])dr["TASK_FILE"];
 
-                ServeFile(fileName, fileExt, fileData);
+                    dr.Close();
+                    cmd.Dispose();
+
+                    ServeFile(fileName, fileExt, fileData);
+                }
+                else
+                {
+                    dr.Close();
+                    cmd.Dispose();
+                    Response.Write("File not found.");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                dr.Close();
-                cmd.Dispose();
-                Response.Write("File not found.");
+                Response.Write("Error downloading task report: " + ex.Message);
             }
         }
 
         private void DownloadHistoryReport(string taskHistoryId)
         {
             dbConn.dbConnect();
-            string query = "SELECT FILE_NAME, FILE_EXTENSION, TASK_FILE FROM TASK_REPORT_HISTORY WHERE TRH_ID = @TaskHistoryID";
-
-            SqlCommand cmd = new SqlCommand(query, dbConn.con);
-            cmd.Parameters.AddWithValue("@TaskHistoryID", taskHistoryId);
-            SqlDataReader dr = cmd.ExecuteReader();
-
-            if (dr.Read() && dr["TASK_FILE"] != DBNull.Value)
+            try
             {
-                string fileName = dr["FILE_NAME"].ToString();
-                string fileExt = dr["FILE_EXTENSION"].ToString();
-                byte[] fileData = (byte[])dr["TASK_FILE"];
+                string query = "SELECT FILE_NAME, FILE_EXTENSION, TASK_FILE FROM TASK_REPORT_HISTORY WHERE TRH_ID = @TaskHistoryID";
+                SqlCommand cmd = new SqlCommand(query, dbConn.con);
+                cmd.Parameters.AddWithValue("@TaskHistoryID", taskHistoryId);
+                SqlDataReader dr = cmd.ExecuteReader();
 
-                dr.Close();
-                cmd.Dispose();
+                if (dr.Read() && dr["TASK_FILE"] != DBNull.Value)
+                {
+                    string fileName = dr["FILE_NAME"].ToString();
+                    string fileExt = dr["FILE_EXTENSION"].ToString();
+                    byte[] fileData = (byte[])dr["TASK_FILE"];
 
-                ServeFile(fileName, fileExt, fileData);
+                    dr.Close();
+                    cmd.Dispose();
+
+                    ServeFile(fileName, fileExt, fileData);
+                }
+                else
+                {
+                    dr.Close();
+                    cmd.Dispose();
+                    Response.Write("No report found for this task history.");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                dr.Close();
-                cmd.Dispose();
-                Response.Write("No report found for this task history.");
+                Response.Write("Error downloading task history report: " + ex.Message);
             }
         }
 
         private void ServeFile(string fileName, string fileExt, byte[] fileData)
         {
-            string contentType = GetContentType(fileExt);
-            fileName = fileName.Split('.')[0];
-            Response.Clear();
-            Response.ContentType = contentType;
-            Response.AddHeader("Content-Disposition", $"attachment; filename={fileName}{fileExt}");
-            Response.BinaryWrite(fileData);
-            Response.End();
+            try
+            {
+                string contentType = GetContentType(fileExt);
+                fileName = fileName.Split('.')[0];
+                Response.Clear();
+                Response.ContentType = contentType;
+                Response.AddHeader("Content-Disposition", $"attachment; filename={fileName}{fileExt}");
+                Response.BinaryWrite(fileData);
+                Response.End();
+            }
+            catch (Exception ex)
+            {
+                Response.Write("Error serving file: " + ex.Message);
+            }
         }
 
         private string GetContentType(string extension)
@@ -112,4 +138,3 @@ namespace WorkNest.Admin
         }
     }
 }
-

@@ -70,12 +70,12 @@
         .button-group {
             display: flex;
             justify-content: space-between;
-            gap: 10px; /* Adds spacing between buttons */
+            gap: 10px; 
             margin-top: 15px;
         }
 
         .btn-submit, .btn-reset {
-            width: 48%; /* Ensures both buttons fit side by side */
+            width: 48%; 
             padding: 12px;
             border: none;
             border-radius: 5px;
@@ -97,7 +97,7 @@
             }
 
         .btn-reset {
-            background: #FF8C00; /* Warm Orange for reset */
+            background: #FF8C00;
             color: white;
         }
 
@@ -143,7 +143,7 @@
             }
 
             .button-group {
-                flex-direction: column; /* Stack buttons on small screens */
+                flex-direction: column; 
             }
 
             .btn-submit, .btn-reset {
@@ -178,11 +178,11 @@
 
             if (errorMessage !== "") {
                 errorLabel.innerText = errorMessage;
-                return false; // Prevent form submission
+                return false; 
             }
 
             errorLabel.innerText = "";
-            return true; // Allow form submission
+            return true; 
         }
 
         function validateEmail(email) {
@@ -205,7 +205,7 @@
 
         function checkPhoneNumber() {
             var phoneInput = document.getElementById('<%= txtPhoneNumber.ClientID %>');
-            phoneInput.value = phoneInput.value.replace(/\D/g, ''); // Allow only digits
+            phoneInput.value = phoneInput.value.replace(/\D/g, ''); 
             if (!validatePhone(phoneInput.value)) {
                 phoneInput.style.borderColor = "red";
             } else {

@@ -4,7 +4,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="Head" runat="server">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
-        /* General Styling */
+        
         .task-details-container {
             max-width: 900px;
             margin: auto;
@@ -17,7 +17,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Card Design */
+        
         .card {
             background: #ffffff;
             border-radius: 12px;
@@ -53,7 +53,7 @@
             font-weight: 600;
         }
 
-        /* Progress Bar */
+        
         .progress-container {
             width: 100%;
             background: #E4F1F9;
@@ -64,7 +64,7 @@
 
         .progress-bar {
             height: 8px;
-            width: 50%; /* Example: Change dynamically */
+            width: 50%; 
             background: #FF8C00;
             transition: width 0.4s ease-in-out;
         }
@@ -89,7 +89,7 @@
             background: #E4F1F9;
         }
 
-        /* Floating Button */
+        
         .floating-btn {
             position: fixed;
             bottom: 20px;
@@ -108,7 +108,7 @@
             background: #e67e00;
         }
 
-        /* Responsive Design */
+        
         @media (max-width: 768px) {
             .task-details-container {
                 padding: 10px;
@@ -123,7 +123,7 @@
 
     <div class="task-details-container">
 
-        <!-- Task Information Section -->
+        
         <div class="card">
             <div class="card-header"><i class="fas fa-tasks"></i> Task Details</div>
             <div class="card-body">
@@ -138,7 +138,7 @@
             </div>
         </div>
 
-        <!-- Latest Task Report Section -->
+        
         <div class="card">
             <div class="card-header"><i class="fas fa-file-alt"></i> Latest Task Report</div>
             <div class="card-body">
@@ -149,7 +149,7 @@
             </div>
         </div>
 
-        <!-- Task History Section -->
+        
         <div class="card">
             <div class="card-header"><i class="fas fa-history"></i> Task History</div>
             <div class="card-body">
@@ -173,7 +173,7 @@
             </div>
         </div>
 
-        <!-- Floating Back Button -->
+        
         <a href="TaskList.aspx" class="floating-btn" title="Back to Tasks"><i class="fas fa-arrow-left"></i></a>
 
     </div>

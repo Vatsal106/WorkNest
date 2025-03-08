@@ -80,7 +80,6 @@
     <div class="task-container">
         <h1 class="page-title">📋 All Tasks</h1>
 
-        <!-- Search Bar -->
         <div class="search-container">
             <asp:TextBox ID="txtSearch" runat="server" CssClass="search-box" placeholder="Search by Project or Task..." AutoPostBack="true" OnTextChanged="txtSearch_TextChanged"></asp:TextBox>
         </div>
@@ -123,7 +122,6 @@
             </ItemTemplate>
         </asp:Repeater>
 
-        <!-- Projects Without Tasks -->
         <h2 class="project-header">Projects Without Tasks</h2>
         <asp:Label ID="lblNoProjectTasks" runat="server" CssClass="no-tasks-message"></asp:Label>
 

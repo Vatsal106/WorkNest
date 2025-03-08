@@ -21,26 +21,29 @@ namespace WorkNest.Admin
             FetchProjectsByStatus("IN PROGRESS", rptInProgress);
             FetchProjectsByStatus("COMPLETED", rptCompleted);
             FetchProjectsByStatus("ON HOLD", rptHold);
-            FetchProjectsByStatus("IN TESTING", rptTesting); // Added "IN TESTING"
+            FetchProjectsByStatus("IN TESTING", rptTesting);
         }
 
         private void FetchProjectsByStatus(string status, System.Web.UI.WebControls.Repeater repeater)
         {
-            db.dbConnect(); // Open the connection
+            try
+            {
+                db.dbConnect();
 
-            SqlCommand cmd = new SqlCommand("SELECT PROJECT_ID, PROJECT_NAME, DESCRIPTION, START_DATE, END_DATE FROM PROJECT WHERE STATUS = @Status", db.con);
-            cmd.Parameters.AddWithValue("@Status", status);
+                SqlCommand cmd = new SqlCommand("SELECT PROJECT_ID, PROJECT_NAME, DESCRIPTION, START_DATE, END_DATE FROM PROJECT WHERE STATUS = @Status", db.con);
+                cmd.Parameters.AddWithValue("@Status", status);
 
-            SqlDataAdapter da = new SqlDataAdapter(cmd);
-            DataTable dt = new DataTable();
-            da.Fill(dt);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
 
-            repeater.DataSource = dt;
-            repeater.DataBind();
-
-            da.Dispose(); // Dispose adapter
-            cmd.Dispose(); // Dispose command
-            db.con.Close(); // Close the connection
+                repeater.DataSource = dt;
+                repeater.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error fetching projects: " + ex.Message);
+            }
         }
     }
 }

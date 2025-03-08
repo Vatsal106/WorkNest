@@ -47,7 +47,6 @@
     <asp:HiddenField ID="hfProjectID" runat="server" />
 
     <div class="container">
-        <!-- Project Information Card -->
         <div class="card">
             <h4>Project Information</h4>
             <div class="row">

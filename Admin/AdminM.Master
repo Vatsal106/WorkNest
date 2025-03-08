@@ -9,7 +9,7 @@
     </asp:ContentPlaceHolder>
     <style>
         html, body {
-            overflow: auto; /* Enable scrolling */
+            overflow: auto; 
             height: 100%;
         }
 
@@ -21,7 +21,7 @@
             flex-direction: column;
         }
 
-        /* Sidebar Styling */
+        
         .sidebar {
             width: 250px;
             background-color: #0d0d30;
@@ -41,7 +41,7 @@
                 display: none;
             }
 
-            /* Sidebar Logo */
+            
             .sidebar .logo {
                 text-align: center;
                 margin-bottom: 20px;
@@ -52,7 +52,7 @@
                     height: auto;
                 }
 
-            /* Sidebar Header */
+           
             .sidebar h3 {
                 color: #FF8C00;
                 font-size: 22px;
@@ -61,7 +61,7 @@
                 text-align: center;
             }
 
-            /* Sidebar Menu Items */
+           
             .sidebar .menu {
                 display: flex;
                 align-items: center;
@@ -80,7 +80,7 @@
                     color: white;
                 }
 
-            /* Sidebar Submenu */
+            
             .sidebar .has-submenu {
                 cursor: pointer;
                 display: flex;
@@ -107,12 +107,12 @@
                     background-color: #4A6D85;
                 }
 
-            /* Show submenu when active */
+            
             .submenu.active {
                 display: block;
             }
 
-        /* Responsive Design */
+        
         @media (max-width: 768px) {
             .sidebar {
                 left: -250px;
@@ -191,7 +191,7 @@
             font-size: 12px;
         }
 
-        /* Dropdown Button */
+        
         .ddlAdd {
             position: relative;
             display: inline-block;
@@ -214,17 +214,17 @@
                     background-color: #e07b00;
                 }
 
-        /* Dropdown Content */
+        
         .dropdown-content {
             display: none;
             position: absolute;
-            top: 100%; /* Positioned below the button */
+            top: 100%; 
             left: 0;
             background-color: #F7F9FB;
             min-width: 160px;
             box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
             border-radius: 5px;
-            z-index: 2000; /* Ensures it is above other elements */
+            z-index: 2000; 
         }
 
             .dropdown-content a {
@@ -238,7 +238,7 @@
                     background-color: #E4F1F9;
                 }
 
-        /* Show dropdown on hover */
+        
         .ddlAdd:hover .dropdown-content {
             display: block;
         }
@@ -255,27 +255,27 @@
                 border-radius: 50%;
             }
 
-        /* Content Section */
+        
         .content {
             margin-left: 250px;
             padding: 20px;
             margin-top: 100px;
             position: relative;
             z-index: 1;
-            overflow-y: auto; /* Enables vertical scrolling */
-            min-height: 100vh; /* Ensures content expands as needed */
+            overflow-y: auto; 
+            min-height: 100vh; 
             height: auto;
             transition: margin-left 0.3s ease;
         }
 
-        /* Menu Button for Mobile */
+        
         .menu-button {
             display: none;
             height: 40px;
             width: 40px;
         }
 
-        /* Responsive Design */
+        
         @media (max-width: 768px) {
             .sidebar {
                 left: -250px;
@@ -329,20 +329,20 @@
     <script>
         function toggleSidebar() {
             var sidebar = document.querySelector('.sidebar');
-            sidebar.classList.toggle('open'); // Toggle the 'open' class to show/hide the sidebar
+            sidebar.classList.toggle('open'); 
         }
 
-        // Close sidebar when clicking outside of it (on smaller screens)
+        
         window.onclick = function (event) {
             var sidebar = document.querySelector('.sidebar');
             var menuButton = document.querySelector('.menu-button');
 
-            // Close sidebar if clicked outside
+           
             if (!sidebar.contains(event.target) && !menuButton.contains(event.target)) {
                 sidebar.classList.remove('open');
             }
 
-            // Close dropdown when clicking outside
+            
             var dropdown = document.getElementById('dropdown-content');
             var ddlAdd = document.getElementById('ddlAdd');
 
@@ -351,7 +351,7 @@
             }
         };
 
-        // Dropdown toggle
+        
         function toggleDropdown() {
             var dropdown = document.getElementById('dropdown-content');
             dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
@@ -370,7 +370,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <!-- Sidebar -->
+       
         <div class="sidebar">
             <div class="logo">
                 <a href="AdminHome.aspx">
@@ -454,7 +454,7 @@
             </div>
         </div>
 
-        <!-- Main Content -->
+        
         <div class="content">
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
         </div>

@@ -10,20 +10,20 @@
             border-left: 5px solid #007bff;
         }
 
-        @media (max-width: 1024px) { /* Tablet */
+        @media (max-width: 1024px) { 
             .functionality-box {
                 padding: 12px;
             }
         }
 
-        @media (max-width: 768px) { /* Mobile */
+        @media (max-width: 768px) { 
             .functionality-box {
                 text-align: center;
             }
 
         }
 
-        @media (max-width: 480px) { /* Small Mobile */
+        @media (max-width: 480px) { 
             .functionality-box {
                 padding: 10px;
                 font-size: 14px;

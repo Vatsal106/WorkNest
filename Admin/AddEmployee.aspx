@@ -1,17 +1,17 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/AdminM.Master" AutoEventWireup="true" CodeBehind="AddEmployee.aspx.cs" Inherits="WorkNest.Admin.registrations" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
-    <!-- Content for ContentPlaceHolder2 -->
+    
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="Head" runat="server">
-    <!-- Head content -->
+    
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <title>Registration</title>
     <script type="text/javascript">
-        // JavaScript functions from registration.aspx
+        
         let validate = true;
 
         function fullFormvalidate() {
@@ -59,9 +59,9 @@
             return isValide;
         }
         function validateEmail(input) {
-            var email = input.value.trim(); // Trim spaces
+            var email = input.value.trim(); 
             var lblEemail = document.getElementById('<%= lblEemail.ClientID %>');
-            var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; // Improved regex
+            var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; 
 
             if (email.length === 0) {
                 lblEemail.textContent = "Email cannot be empty!";
@@ -181,16 +181,7 @@
         }
     </script>
     <style>
-        /* CSS styles from registration.aspx */
-/*        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background: #fff;
-            font-family: Arial, sans-serif;
-            padding: 10px;
-        }*/
+       
 
         .container {
             display: flex;
@@ -235,7 +226,7 @@
         background-color: rgb(255, 65, 65);
     }
 
-    /* plus sign */
+    
     .sign {
         width: 100%;
         transition-duration: .3s;
@@ -252,7 +243,7 @@
         fill: white;
     }
 
-    /* text */
+    
     .text {
         position: absolute;
         right: 0%;
@@ -264,7 +255,7 @@
         transition-duration: .3s;
     }
 
-    /* hover effect on button width */
+    
     .Btn:hover {
         width: 125px;
         border-radius: 40px;
@@ -277,7 +268,7 @@
         padding-left: 20px;
     }
 
-    /* hover effect button's text */
+   
     .Btn:hover .text {
         opacity: 1;
         width: 70%;
@@ -285,7 +276,7 @@
         padding-right: 10px;
     }
 
-    /* button click effect */
+    
     .Btn:active {
         transform: translate(2px, 2px);
     }
@@ -324,12 +315,10 @@
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="Header_Title" runat="server">
-    <!-- Header Title content -->
     Add Employee
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <!-- Main content -->
     <div class="container">
         <div class="image-section">
             <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/Add Emp.png" />

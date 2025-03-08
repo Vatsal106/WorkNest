@@ -11,82 +11,110 @@ namespace WorkNest.Admin
 
         public void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            try
             {
-                LoadEmployees();
+                if (!IsPostBack)
+                {
+                    LoadEmployees();
+                }
+            }
+            catch (Exception ex)
+            {
+                Response.Write("<script>alert('Error loading page: " + ex.Message + "');</script>");
             }
         }
 
         public void LoadEmployees(string searchQuery = "")
         {
             dbConn.dbConnect();
-
-            string query = @"
-                SELECT 
-                e.EMPLOYEE_ID,
-                e.FULL_NAME, 
-                e.EMAIL, 
-                e.PHONE_NUMBER, 
-                e.HIRE_DATE, 
-                e.IMAGE, 
-                d.DEPARTMENT_NAME,
-                r.ROLE_NAME,
-                r.ROLE_ID
-                FROM EMPLOYEE e
-                JOIN DEPARTMENT d ON e.DEPARTMENT_ID = d.DEPARTMENT_ID
-                JOIN EMPLOYEE_ROLES ER ON E.EMPLOYEE_ID = ER.EMPLOYEE_ID
-                JOIN ROLES R ON ER.ROLE_ID = R.ROLE_ID
-                Where r.ROLE_ID <> 1";
-
-            if (!string.IsNullOrEmpty(searchQuery))
+            try
             {
-                query += " AND (e.FULL_NAME LIKE @Search OR e.EMAIL LIKE @Search)";
-            }
+                string query = @"
+                    SELECT 
+                    e.EMPLOYEE_ID,
+                    e.FULL_NAME, 
+                    e.EMAIL, 
+                    e.PHONE_NUMBER, 
+                    e.HIRE_DATE, 
+                    e.IMAGE, 
+                    d.DEPARTMENT_NAME,
+                    r.ROLE_NAME,
+                    r.ROLE_ID
+                    FROM EMPLOYEE e
+                    JOIN DEPARTMENT d ON e.DEPARTMENT_ID = d.DEPARTMENT_ID
+                    JOIN EMPLOYEE_ROLES ER ON E.EMPLOYEE_ID = ER.EMPLOYEE_ID
+                    JOIN ROLES R ON ER.ROLE_ID = R.ROLE_ID
+                    WHERE r.ROLE_ID <> 1";
 
-            SqlCommand cmd = new SqlCommand(query, dbConn.con);
-            if (!string.IsNullOrEmpty(searchQuery))
-            {
-                cmd.Parameters.AddWithValue("@Search", "%" + searchQuery + "%");
-            }
-
-            SqlDataAdapter adpt = new SqlDataAdapter(cmd);
-            DataTable dt = new DataTable();
-            adpt.Fill(dt);
-
-            // Add a new column for the Base64 string
-            dt.Columns.Add("IMAGE_BASE64", typeof(string));
-
-            // Convert image to Base64
-            foreach (DataRow row in dt.Rows)
-            {
-                if (row["IMAGE"] != DBNull.Value)
+                if (!string.IsNullOrEmpty(searchQuery))
                 {
-                    byte[] imageBytes = (byte[])row["IMAGE"];
-                    string base64String = Convert.ToBase64String(imageBytes);
-                    row["IMAGE_BASE64"] = "data:image/png;base64," + base64String;  // Change "png" based on stored format
+                    query += " AND (e.FULL_NAME LIKE @Search OR e.EMAIL LIKE @Search)";
                 }
-                else
-                {
-                    row["IMAGE_BASE64"] = "~/Images/employee photo.jpg";  // Default image path if no photo
-                }
-            }
 
-            rptEmployees.DataSource = dt;
-            rptEmployees.DataBind();
+                SqlCommand cmd = new SqlCommand(query, dbConn.con);
+                if (!string.IsNullOrEmpty(searchQuery))
+                {
+                    cmd.Parameters.AddWithValue("@Search", "%" + searchQuery + "%");
+                }
+
+                SqlDataAdapter adpt = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                adpt.Fill(dt);
+
+                dt.Columns.Add("IMAGE_BASE64", typeof(string));
+
+                foreach (DataRow row in dt.Rows)
+                {
+                    if (row["IMAGE"] != DBNull.Value)
+                    {
+                        byte[] imageBytes = (byte[])row["IMAGE"];
+                        string base64String = Convert.ToBase64String(imageBytes);
+                        row["IMAGE_BASE64"] = "data:image/png;base64," + base64String;
+                    }
+                    else
+                    {
+                        row["IMAGE_BASE64"] = "~/Images/employee photo.jpg";
+                    }
+                }
+
+                rptEmployees.DataSource = dt;
+                rptEmployees.DataBind();
+
+                cmd.Dispose();
+                adpt.Dispose();
+            }
+            catch (Exception ex)
+            {
+                Response.Write("<script>alert('Error loading employees: " + ex.Message + "');</script>");
+            }
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
-            string searchText = txtSearch.Text.Trim();
-            LoadEmployees(searchText);
+            try
+            {
+                string searchText = txtSearch.Text.Trim();
+                LoadEmployees(searchText);
+            }
+            catch (Exception ex)
+            {
+                Response.Write("<script>alert('Error searching employees: " + ex.Message + "');</script>");
+            }
         }
 
         public void rptEmployees_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
-            if (e.CommandName == "DeleteEmployee")
+            try
             {
-                string employeeId = e.CommandArgument.ToString();
-                DeleteEmployee(employeeId);
+                if (e.CommandName == "DeleteEmployee")
+                {
+                    string employeeId = e.CommandArgument.ToString();
+                    DeleteEmployee(employeeId);
+                }
+            }
+            catch (Exception ex)
+            {
+                Response.Write("<script>alert('Error processing employee command: " + ex.Message + "');</script>");
             }
         }
 
@@ -94,70 +122,60 @@ namespace WorkNest.Admin
         {
             try
             {
-                // Ensure dbConn is initialized
                 if (dbConn == null)
                 {
                     dbConn = new dbConnection();
                 }
 
-                // Ensure database connection is open
                 if (dbConn.con == null || dbConn.con.State == ConnectionState.Closed)
                 {
                     dbConn.dbConnect();
                 }
 
-                using (SqlTransaction transaction = dbConn.con.BeginTransaction())
+                SqlTransaction transaction = dbConn.con.BeginTransaction();
+                try
                 {
-                    try
+                    string updateProjectQuery = "UPDATE PROJECT SET PROJECT_MANAGER_ID = NULL WHERE PROJECT_MANAGER_ID = @EmployeeId";
+                    SqlCommand cmd = new SqlCommand(updateProjectQuery, dbConn.con, transaction);
+                    cmd.Parameters.AddWithValue("@EmployeeId", employeeId);
+                    cmd.ExecuteNonQuery();
+                    cmd.Dispose();
+
+                    string[] queries = {
+                        "DELETE FROM TASK WHERE ASSIGN_TO = @EmployeeId",
+                        "DELETE FROM LEAVES WHERE EMPLOYEE_ID = @EmployeeId",
+                        "DELETE FROM USER_CREDENTIALS WHERE EMPLOYEE_ID = @EmployeeId",
+                        "DELETE FROM EMPLOYEE_ROLES WHERE EMPLOYEE_ID = @EmployeeId",
+                        "DELETE FROM ATTENDANCE WHERE EMPLOYEE_ID = @EmployeeId",
+                        "DELETE FROM EMPLOYEE WHERE EMPLOYEE_ID = @EmployeeId"
+                    };
+
+                    cmd = new SqlCommand();
+                    cmd.Connection = dbConn.con;
+                    cmd.Transaction = transaction;
+
+                    foreach (string query in queries)
                     {
-                        // 1️⃣ Update PROJECT to remove the reference to the Employee
-                        string updateProjectQuery = "UPDATE PROJECT SET PROJECT_MANAGER_ID = NULL WHERE PROJECT_MANAGER_ID = @EmployeeId";
-                        using (SqlCommand cmd = new SqlCommand(updateProjectQuery, dbConn.con, transaction))
-                        {
-                            cmd.Parameters.AddWithValue("@EmployeeId", employeeId);
-                            cmd.ExecuteNonQuery();
-                        }
-
-                        // 2️⃣ Delete dependent records first
-                        string[] queries = {
-                    "DELETE FROM TASK WHERE ASSIGN_TO = @EmployeeId",
-                    "DELETE FROM LEAVES WHERE EMPLOYEE_ID = @EmployeeId",
-                    "DELETE FROM USER_CREDENTIALS WHERE EMPLOYEE_ID = @EmployeeId",
-                    "DELETE FROM EMPLOYEE_ROLES WHERE EMPLOYEE_ID = @EmployeeId",
-                    "DELETE FROM ATTENDANCE WHERE EMPLOYEE_ID = @EmployeeId",
-                    "DELETE FROM EMPLOYEE WHERE EMPLOYEE_ID = @EmployeeId"
-                };
-
-                        using (SqlCommand cmd = new SqlCommand())
-                        {
-                            cmd.Connection = dbConn.con;
-                            cmd.Transaction = transaction;
-
-                            foreach (string query in queries)
-                            {
-                                cmd.CommandText = query;
-                                cmd.Parameters.Clear();
-                                cmd.Parameters.AddWithValue("@EmployeeId", employeeId);
-                                cmd.ExecuteNonQuery();
-                            }
-                        }
-
-                        transaction.Commit();
-                        Response.Write("<script>alert('Employee deleted successfully'); window.location='Employees.aspx';</script>");
+                        cmd.CommandText = query;
+                        cmd.Parameters.Clear();
+                        cmd.Parameters.AddWithValue("@EmployeeId", employeeId);
+                        cmd.ExecuteNonQuery();
                     }
-                    catch (Exception ex)
-                    {
-                        transaction.Rollback();
-                        Response.Write("<script>alert('Transaction Error: " + ex.Message + "');</script>");
-                    }
+
+                    cmd.Dispose();
+                    transaction.Commit();
+                    Response.Write("<script>alert('Employee deleted successfully'); window.location='Employees.aspx';</script>");
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    Response.Write("<script>alert('Transaction Error: " + ex.Message + "');</script>");
                 }
             }
             catch (Exception ex)
             {
-                Response.Write("<script>alert('Error: " + ex.Message + "');</script>");
+                Response.Write("<script>alert('Error deleting employee: " + ex.Message + "');</script>");
             }
         }
-
     }
 }
-

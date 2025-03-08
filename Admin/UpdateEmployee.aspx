@@ -2,7 +2,6 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
     <script type="text/javascript">
-        // JavaScript functions from registration.aspx
         let validate = true;
 
         function fullFormvalidate() {
