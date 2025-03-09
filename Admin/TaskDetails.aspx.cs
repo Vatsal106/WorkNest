@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Web.UI.WebControls;
 
 namespace WorkNest.Admin
 {
@@ -178,5 +179,39 @@ namespace WorkNest.Admin
                 Response.Write("<script>alert('Error loading task history: " + ex.Message + "');</script>");
             }
         }
+        protected void btnDeleteHistory_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Button btn = (Button)sender;
+                string historyId = btn.CommandArgument;
+
+                if (string.IsNullOrEmpty(historyId)) return;
+
+                dbConn.dbConnect();
+                string query = "DELETE FROM TASK_REPORT_HISTORY WHERE TRH_ID = @HistoryID";
+
+                SqlCommand cmd = new SqlCommand(query, dbConn.con);
+                cmd.Parameters.AddWithValue("@HistoryID", historyId);
+                int rowsAffected = cmd.ExecuteNonQuery();
+
+                if (rowsAffected > 0)
+                {
+                    Response.Write("<script>alert('Task report history deleted successfully.');</script>");
+                    LoadTaskHistory(Request.QueryString["TaskID"]); // Refresh history after deletion
+                }
+                else
+                {
+                    Response.Write("<script>alert('Failed to delete task report history.');</script>");
+                }
+
+                cmd.Dispose();
+            }
+            catch (Exception ex)
+            {
+                Response.Write("<script>alert('Error deleting task report history: " + ex.Message + "');</script>");
+            }
+        }
+
     }
 }

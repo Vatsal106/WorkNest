@@ -4,7 +4,6 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="Head" runat="server">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
-        
         .task-details-container {
             max-width: 900px;
             margin: auto;
@@ -13,11 +12,18 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        
+
         .card {
             background: #ffffff;
             border-radius: 12px;
@@ -27,9 +33,9 @@
             transition: transform 0.2s ease-in-out;
         }
 
-        .card:hover {
-            transform: scale(1.02);
-        }
+            .card:hover {
+                transform: scale(1.02);
+            }
 
         .card-header {
             font-size: 22px;
@@ -48,26 +54,13 @@
             justify-content: space-between;
         }
 
-        .card-body p strong {
-            color: #4A6D85;
-            font-weight: 600;
-        }
+            .card-body p strong {
+                color: #4A6D85;
+                font-weight: 600;
+            }
 
-        
-        .progress-container {
-            width: 100%;
-            background: #E4F1F9;
-            border-radius: 6px;
-            margin-top: 10px;
-            overflow: hidden;
-        }
 
-        .progress-bar {
-            height: 8px;
-            width: 50%; 
-            background: #FF8C00;
-            transition: width 0.4s ease-in-out;
-        }
+     
 
         /* Table Styling */
         .table-container {
@@ -89,7 +82,7 @@
             background: #E4F1F9;
         }
 
-        
+
         .floating-btn {
             position: fixed;
             bottom: 20px;
@@ -104,11 +97,11 @@
             transition: background 0.3s ease-in-out;
         }
 
-        .floating-btn:hover {
-            background: #e67e00;
-        }
+            .floating-btn:hover {
+                background: #e67e00;
+            }
 
-        
+
         @media (max-width: 768px) {
             .task-details-container {
                 padding: 10px;
@@ -123,35 +116,43 @@
 
     <div class="task-details-container">
 
-        
-        <div class="card">
-            <div class="card-header"><i class="fas fa-tasks"></i> Task Details</div>
-            <div class="card-body">
-                <p><strong><i class="fas fa-project-diagram"></i> Project Name:</strong> <asp:Label ID="lblProjectName" runat="server" /></p>
-                <p><strong><i class="fas fa-tasks"></i> Task Name:</strong> <asp:Label ID="lblTaskName" runat="server" /></p>
-                <p><strong><i class="fas fa-chart-line"></i> Status:</strong> <asp:Label ID="lblStatus" runat="server" /></p>
-                <p><strong><i class="fas fa-user"></i> Assigned To:</strong> <asp:Label ID="lblAssignedTo" runat="server" /></p>
-                <p><strong><i class="fas fa-calendar-alt"></i> Due Date:</strong> <asp:Label ID="lblDueDate" runat="server" /></p>
-                <p><strong><i class="fas fa-align-left"></i> Description:</strong> <asp:Label ID="lblDescription" runat="server" /></p>
 
-                
+        <div class="card">
+            <div class="card-header"><i class="fas fa-tasks"></i>Task Details</div>
+            <div class="card-body">
+                <p><strong><i class="fas fa-project-diagram"></i>Project Name:</strong>
+                    <asp:Label ID="lblProjectName" runat="server" /></p>
+                <p><strong><i class="fas fa-tasks"></i>Task Name:</strong>
+                    <asp:Label ID="lblTaskName" runat="server" /></p>
+                <p><strong><i class="fas fa-chart-line"></i>Status:</strong>
+                    <asp:Label ID="lblStatus" runat="server"  BackColor="Yellow"/></p>
+                <p><strong><i class="fas fa-user"></i>Assigned To:</strong>
+                    <asp:Label ID="lblAssignedTo" runat="server" /></p>
+                <p><strong><i class="fas fa-calendar-alt"></i>Due Date:</strong>
+                    <asp:Label ID="lblDueDate" runat="server" /></p>
+                <p><strong><i class="fas fa-align-left"></i>Description:</strong>
+                    <asp:Label ID="lblDescription" runat="server" /></p>
+
+
             </div>
         </div>
 
-        
+
         <div class="card">
-            <div class="card-header"><i class="fas fa-file-alt"></i> Latest Task Report</div>
+            <div class="card-header"><i class="fas fa-file-alt"></i>Latest Task Report</div>
             <div class="card-body">
-                <p><strong><i class="fas fa-calendar"></i> Report Date:</strong> <asp:Label ID="lblReportDate" runat="server" /></p>
-                <p><strong><i class="fas fa-align-left"></i> Report Description:</strong> <asp:Label ID="lblReportDescription" runat="server" /></p>
+                <p><strong><i class="fas fa-calendar"></i>Report Date:</strong>
+                    <asp:Label ID="lblReportDate" runat="server" /></p>
+                <p><strong><i class="fas fa-align-left"></i>Report Description:</strong>
+                    <asp:Label ID="lblReportDescription" runat="server" /></p>
 
                 <asp:HyperLink ID="lnkLatestReport" runat="server" Text="📥 Download Report" Visible="false" CssClass="btn btn-primary" />
             </div>
         </div>
 
-        
+
         <div class="card">
-            <div class="card-header"><i class="fas fa-history"></i> Task History</div>
+            <div class="card-header"><i class="fas fa-history"></i>Task History</div>
             <div class="card-body">
                 <div class="table-container">
                     <asp:GridView ID="gvTaskReportHistory" runat="server" AutoGenerateColumns="False" CssClass="table table-striped table-hover">
@@ -167,14 +168,23 @@
                                     </asp:HyperLink>
                                 </ItemTemplate>
                             </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Action">
+                                <ItemTemplate>
+                                    <asp:Button ID="btnDeleteHistory" runat="server" Text="🗑 Delete"
+                                        CssClass="btn btn-danger btn-sm"
+                                        OnClick="btnDeleteHistory_Click"
+                                        CommandArgument='<%# Eval("TRH_ID") %>'
+                                        OnClientClick="return confirm('Are you sure you want to delete this task report history?');" />
+                                </ItemTemplate>
+                            </asp:TemplateField>
                         </Columns>
                     </asp:GridView>
                 </div>
             </div>
         </div>
 
-        
-        <a href="TaskList.aspx" class="floating-btn" title="Back to Tasks"><i class="fas fa-arrow-left"></i></a>
+
+        <a href="AllTasks.aspx" class="floating-btn" title="Back to Tasks"><i class="fas fa-arrow-left"></i></a>
 
     </div>
 </asp:Content>
