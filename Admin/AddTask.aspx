@@ -46,6 +46,13 @@
     </div>
 
     <div>
+    <label>Department:</label>
+    <asp:DropDownList ID="ddlDepartment" runat="server" CssClass="form-control" AutoPostBack="true" 
+        OnSelectedIndexChanged="ddlDepartment_SelectedIndexChanged">
+    </asp:DropDownList>
+</div>
+
+    <div>
         <label>Assign To:</label>
         <asp:DropDownList ID="ddlAssignTo" runat="server" CssClass="form-control"></asp:DropDownList>
     </div>
