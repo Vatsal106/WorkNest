@@ -96,46 +96,70 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Head" runat="server">
+    <style>
+        .form-container {
+            max-width: 600px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+        }
+        .form-label {
+            font-weight: bold;
+        }
+    </style>
 </asp:Content>
+
 <asp:Content ID="Content3" ContentPlaceHolderID="Header_Title" runat="server">
+    Update Employee
 </asp:Content>
+
 <asp:Content ID="Content4" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <h2>Update Employee Details</h2>
+    <div class="container mt-4">
+        <div class="form-container mx-auto">
+            <h3 class="text-center text-primary">Update Employee Details</h3>
+            <asp:HiddenField ID="hfEmployeeID" runat="server" />
 
-    <asp:HiddenField ID="hfEmployeeID" runat="server" />
+            <div class="mb-3">
+                <label class="form-label">Full Name</label>
+                <asp:TextBox ID="txtFullName" runat="server" CssClass="form-control" oninput="checkName(this)" />
+                <asp:Label runat="server" Text="" ID="lblEname" CssClass="text-danger"></asp:Label>
+            </div>
 
-    <div>
-        <label>Full Name:</label>
-        <asp:TextBox ID="txtFullName" runat="server" CssClass="form-control" oninput="checkName(this)" />
-        <asp:Label runat="server" Text="" ID="lblEname"></asp:Label>
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <asp:TextBox ID="txtEmail" runat="server" TextMode="Email" oninput="validateEmail(this);" CssClass="form-control" />
+                <asp:Label runat="server" Text="" ID="lblEemail" CssClass="text-danger"></asp:Label>
+            </div>
 
-    </div>
-    <div>
-        <label>Email:</label>
-        <asp:TextBox ID="txtEmail" runat="server" TextMode="Email" oninput="validateEmail(this);" OnTextChanged="EmailChange" CssClass="form-control" />
-        <asp:Label runat="server" Text="  " ID="lblEemail" CssClass="text-danger"></asp:Label>
+            <div class="mb-3">
+                <label class="form-label">Phone Number</label>
+                <asp:TextBox ID="txtPhoneNumber" runat="server" oninput="PhoneSize(this)" CssClass="form-control" />
+                <asp:Label ID="lblEphone" runat="server" CssClass="text-danger"></asp:Label>
+            </div>
 
-    </div>
-    <div>
-        <label>Phone Number:</label>
-        <asp:TextBox ID="txtPhoneNumber" runat="server" oninput="PhoneSize(this)" CssClass="form-control" />
-        <asp:Label ID="lblEphone" runat="server" CssClass="text-danger"></asp:Label>
-    </div>
-    <div>
-        <label>Hire Date:</label>
-        <asp:TextBox ID="txtHireDate" runat="server" CssClass="form-control" TextMode="Date" />
-    </div>
-    <div>
-        <label>Department:</label>
-        <asp:Label runat="server" Text="" ID="lblEdept" CssClass="text-danger"></asp:Label>
-        <asp:DropDownList ID="ddlDepartment" runat="server" CssClass="form-control" oninput="selectedDept(this)"></asp:DropDownList>
-    </div>
-    <div>
-        <label>Profile Image:</label>
-        <asp:FileUpload ID="fuProfileImage" runat="server" />
-    </div>
-    <asp:Label ID="lblError" runat="server" Text="" CssClass="text-danger"></asp:Label>
-    <asp:Button ID="BackToEmployee" runat="server" Text="Back" AccessKey="B" CssClass="btn btn-primary " PostBackUrl="~/Admin/Employees.aspx" />
-    <asp:Button ID="btnUpdateEmployee" runat="server" Text="Update Employee" CssClass="btn btn-primary" OnClientClick="return fullFormvalidate();" OnClick="btnUpdateEmployee_Click" />
+            <div class="mb-3">
+                <label class="form-label">Hire Date</label>
+                <asp:TextBox ID="txtHireDate" runat="server" CssClass="form-control" TextMode="Date" />
+            </div>
 
+            <div class="mb-3">
+                <label class="form-label">Department</label>
+                <asp:DropDownList ID="ddlDepartment" runat="server" CssClass="form-control"></asp:DropDownList>
+                <asp:Label runat="server" Text="" ID="lblEdept" CssClass="text-danger"></asp:Label>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Profile Image</label>
+                <asp:FileUpload ID="fuProfileImage" runat="server" CssClass="form-control" />
+            </div>
+
+            <asp:Label ID="lblError" runat="server" Text="" CssClass="text-danger"></asp:Label>
+            
+            <div class="d-flex justify-content-between">
+                <asp:Button ID="BackToEmployee" runat="server" Text="Back" CssClass="btn btn-outline-secondary" PostBackUrl="~/Admin/Employees.aspx" />
+                <asp:Button ID="btnUpdateEmployee" runat="server" Text="Update" CssClass="btn btn-primary" OnClientClick="return fullFormvalidate();" OnClick="btnUpdateEmployee_Click" />
+            </div>
+        </div>
+    </div>
 </asp:Content>
