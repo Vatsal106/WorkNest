@@ -111,6 +111,7 @@ namespace WorkNest.Admin
                     btnReset_Click(sender, e);
                     lblError.Text = "Project added successfully!";
                     lblError.ForeColor = Color.Green;
+                    Response.Redirect("Projects.aspx");
                 }
                 else
                 {

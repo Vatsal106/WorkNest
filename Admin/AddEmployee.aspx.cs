@@ -145,6 +145,7 @@ namespace WorkNest.Admin
                         btnReset_Click(sender, e);
                         lblError.Text = "Employee added successfully!";
                         lblError.ForeColor = Color.Green;
+                        Response.Redirect("Employees.aspx");
                     }
                     catch (Exception ex)
                     {

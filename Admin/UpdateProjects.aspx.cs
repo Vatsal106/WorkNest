@@ -83,7 +83,7 @@ namespace WorkNest.Admin
         }
         protected void ValidateProject(object sender, EventArgs e)
         {
-            // Retrieve input values
+            
             string projectName = txtProjectName.Text.Trim();
             string description = txtDescription.Text.Trim();
             string startDate = txtStartDate.Text;
@@ -92,7 +92,7 @@ namespace WorkNest.Admin
             string projectManager = ddlProjectManager.SelectedValue;
             string client = ddlClient.SelectedValue;
 
-            // Server-side validation
+           
             if (string.IsNullOrEmpty(projectName))
             {
                 lblError.Text = "⚠ Project Name is required.";
@@ -121,7 +121,7 @@ namespace WorkNest.Admin
                 return;
             }
 
-            // Validate date format
+            
             DateTime start, end;
             if (!DateTime.TryParse(startDate, out start) || !DateTime.TryParse(endDate, out end))
             {
@@ -159,9 +159,9 @@ namespace WorkNest.Admin
                 return;
             }
 
-            // If validation passes, proceed with project update logic
-            lblError.Text = ""; // Clear any previous errors
-            btnUpdateProject_Click(); // Implement database update logic here
+           
+            lblError.Text = ""; 
+            btnUpdateProject_Click(); 
 
             lblError.Text = "✔ Project updated successfully!";
             lblError.ForeColor = System.Drawing.Color.Green;
@@ -198,8 +198,9 @@ namespace WorkNest.Admin
 
                 cmdRole.ExecuteNonQuery();
 
-                // Show message box
+                
                 ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Project details updated successfully.');", true);
+                Response.Redirect("Projects.aspx");
             }
             else
             {

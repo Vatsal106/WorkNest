@@ -122,6 +122,7 @@ namespace WorkNest.Admin
                 {
                     lblMessage.Text = "Role updated successfully!";
                     lblMessage.ForeColor = System.Drawing.Color.Green;
+                    Response.Redirect("Employees.aspx");
                 }
                 else
                 {

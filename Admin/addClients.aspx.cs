@@ -47,6 +47,7 @@ namespace WorkNest.Admin
                         btnReset_Click(sender, e);
                         lblError.Text = "Client added successfully!";
                         lblError.ForeColor = Color.Green;
+                        Response.Redirect("AdminHome.aspx");
                     }
                     else
                     {

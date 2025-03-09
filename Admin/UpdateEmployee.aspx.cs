@@ -153,6 +153,7 @@ namespace WorkNest.Admin
 
                     ClientScript.RegisterStartupScript(this.GetType(), "alert",
                         "alert('Employee updated successfully'); window.location='Employees.aspx';", true);
+                    Response.Redirect("Employees.aspx");
                 }
                 else
                 {
