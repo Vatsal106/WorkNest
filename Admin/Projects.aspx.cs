@@ -129,5 +129,29 @@ namespace WorkNest.Admin
                 Response.Write("<script>alert('Error deleting project: " + ex.Message + "');</script>");
             }
         }
+        protected void btnAddProject_Click(object sender, EventArgs e)
+        {
+
+            Response.Redirect("AddProject.aspx");
+
+
+        }
+        protected string GetStatusClass(string status)
+        {
+            switch (status)
+            {
+                case "IN PROGRESS":
+                    return "status-in-progress";
+                case "COMPLETED":
+                    return "status-completed";
+                case "ON HOLD":
+                    return "status-on-hold";
+                case "IN TESTING":
+                    return "status-in-testing";
+                default:
+                    return "";
+            }
+        }
+
     }
 }
