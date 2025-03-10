@@ -1,50 +1,62 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Data.SqlClient;
 
 namespace WorkNest.Admin
 {
     public partial class AdminHome : System.Web.UI.Page
     {
+        dbConnection dbconn = new dbConnection();
         protected void Page_Load(object sender, EventArgs e)
         {
-            try
+            if (!IsPostBack)
             {
-                //if (Session["UserRole"] == null || Session["UserRole"].ToString() != "Admin")
-                //{
-                //    Response.Redirect("~/AccessDenied.aspx");
-                //}
-                if (!IsPostBack)
-                {
-                    LoadFunctionalities();
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error in Page_Load: " + ex.Message);
+                LoadStatistics();
+                LoadClientReviews();
             }
         }
 
-        public void LoadFunctionalities()
+        private void LoadStatistics()
         {
-            try
-            {
-                var functionalities = new List<object>
-                {
-                    new { Title = "Project Management", Description = "Create, update, and track project progress." },
-                    new { Title = "Employee Management", Description = "Manage employees, track attendance, and performance." },
-                    new { Title = "Task Management", Description = "Assign tasks, set deadlines, and monitor completion." },
-                    new { Title = "Reports & Analytics", Description = "View detailed reports on projects and employees." },
-                    new { Title = "User Roles & Permissions", Description = "Control access levels for different user roles." },
-                    new { Title = "Notifications & Alerts", Description = "Receive important updates on approvals and deadlines." }
-                };
+            dbconn.dbConnect();
 
-                rptfunctionalities.DataSource = functionalities;
-                rptfunctionalities.DataBind();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error in LoadFunctionalities: " + ex.Message);
-            }
+            SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM PROJECT", dbconn.con);
+            lblTotalProject.Text = cmd.ExecuteScalar().ToString();
+
+            cmd.CommandText = "SELECT COUNT(*) FROM EMPLOYEE";
+            lblTotalEmployee.Text = cmd.ExecuteScalar().ToString();
+
+            cmd.CommandText = "SELECT COUNT(*) FROM TASK";
+            lblTotalTask.Text = cmd.ExecuteScalar().ToString();
+
+            dbconn.con.Close();
         }
+
+        private void LoadClientReviews()
+        {
+            dbconn.dbConnect();
+
+            SqlCommand cmd = new SqlCommand("SELECT TOP 2 CLIENT_NAME FROM CLIENTS ORDER BY NEWID()", dbconn.con);
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            int count = 1;
+            while (reader.Read())
+            {
+                if (count == 1)
+                {
+                    //lblReview1.Text = "\"" + reader["Review"].ToString() + "\"";
+                    lblClient1.Text = "- " + reader["CLIENT_NAME"].ToString();
+                }
+                else
+                {
+                    //lblReview2.Text = "\"" + reader["Review"].ToString() + "\"";
+                    lblClient2.Text = "- " + reader["CLIENT_NAME"].ToString();
+                }
+                count++;
+            }
+            dbconn.con.Close();
+        }
+
+
+
     }
 }
