@@ -35,7 +35,7 @@ namespace WorkNest.Admin
         {
             dbconn.dbConnect();
 
-            SqlCommand cmd = new SqlCommand("SELECT TOP 2 CLIENT_NAME FROM CLIENTS ORDER BY NEWID()", dbconn.con);
+            SqlCommand cmd = new SqlCommand("SELECT TOP 2 CLIENT_NAME,Review FROM CLIENTS ORDER BY NEWID()", dbconn.con);
             SqlDataReader reader = cmd.ExecuteReader();
 
             int count = 1;
@@ -43,12 +43,12 @@ namespace WorkNest.Admin
             {
                 if (count == 1)
                 {
-                    //lblReview1.Text = "\"" + reader["Review"].ToString() + "\"";
+                    lblReview1.Text = "\"" + reader["Review"].ToString() + "\"";
                     lblClient1.Text = "- " + reader["CLIENT_NAME"].ToString();
                 }
                 else
                 {
-                    //lblReview2.Text = "\"" + reader["Review"].ToString() + "\"";
+                    lblReview2.Text = "\"" + reader["Review"].ToString() + "\"";
                     lblClient2.Text = "- " + reader["CLIENT_NAME"].ToString();
                 }
                 count++;
