@@ -24,64 +24,64 @@
             -ms-overflow-style: none;
         }
 
-        .dashboard-panel::-webkit-scrollbar {
-            display: none;
-        }
+            .dashboard-panel::-webkit-scrollbar {
+                display: none;
+            }
 
-        .dashboard-panel:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-        }
+            .dashboard-panel:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            }
 
-        .dashboard-panel h2 {
-            color: #4A6D85;
-            font-size: 1.4rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 10px;
-            position: relative;
-        }
+            .dashboard-panel h2 {
+                color: #4A6D85;
+                font-size: 1.4rem;
+                font-weight: bold;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                margin-bottom: 10px;
+                position: relative;
+            }
 
-        .dashboard-panel h2::after {
-            content: "";
-            width: 50px;
-            height: 3px;
-            background-color: #FF8C00;
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            border-radius: 2px;
-        }
+                .dashboard-panel h2::after {
+                    content: "";
+                    width: 50px;
+                    height: 3px;
+                    background-color: #FF8C00;
+                    position: absolute;
+                    bottom: -5px;
+                    left: 0;
+                    border-radius: 2px;
+                }
 
-        .dashboard-panel .card {
-            border: 1px solid #4A6D85;
-            background: #F7F9FB;
-            border-radius: 8px;
-            padding: 12px;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
+            .dashboard-panel .card {
+                border: 1px solid #4A6D85;
+                background: #F7F9FB;
+                border-radius: 8px;
+                padding: 12px;
+                transition: transform 0.2s ease, box-shadow 0.2s ease;
+            }
 
-        .dashboard-panel .card:hover {
-            transform: scale(1.02);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
+                .dashboard-panel .card:hover {
+                    transform: scale(1.02);
+                    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                }
 
-        .dashboard-panel .card-title {
-            color: #333333;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
+            .dashboard-panel .card-title {
+                color: #333333;
+                font-weight: bold;
+                font-size: 1.2rem;
+            }
 
-        .dashboard-panel .card-text {
-            color: #4A6D85;
-            font-size: 0.95rem;
-            line-height: 1.4;
-        }
+            .dashboard-panel .card-text {
+                color: #4A6D85;
+                font-size: 0.95rem;
+                line-height: 1.4;
+            }
 
-        .dashboard-panel .text-muted {
-            color: #8B9EB2;
-        }
+            .dashboard-panel .text-muted {
+                color: #8B9EB2;
+            }
 
         @media (max-width: 1200px) {
             .dashboard-container {
@@ -101,6 +101,81 @@
                 height: auto;
             }
         }
+
+        .section-header {
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #333333;
+            margin: 20px 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Stats Container */
+        .stats-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        /* Stat Box */
+        .stat-box {
+            background: linear-gradient(135deg, #E4F1F9, #FFFFFF);
+            color: #4A6D85;
+            border-radius: 12px;
+            padding: 20px;
+            min-width: 220px;
+            text-align: center;
+            box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.1), -6px -6px 12px rgba(255, 255, 255, 0.6);
+            transition: all 0.3s ease-in-out;
+            border: none;
+            flex: 1;
+            max-width: 250px;
+        }
+
+            .stat-box:hover {
+                transform: translateY(-8px);
+                box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.15), -8px -8px 15px rgba(255, 255, 255, 0.7);
+            }
+
+        /* Card Title */
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #333333;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Card Text */
+        .card-text {
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: #FF8C00;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .stats-container {
+                flex-wrap: wrap;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .stats-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .stat-box {
+                width: 90%;
+                max-width: 300px;
+            }
+        }
     </style>
 </asp:Content>
 
@@ -109,6 +184,96 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <!-- Statistics Section -->
+    <h2 class="section-header">Project Statistics</h2>
+    <div class="stats-container">
+        <div class="card stat-box">
+            <div class="card-body">
+                <h5 class="card-title">Total Projects</h5>
+                <p class="card-text">
+                    <asp:Label ID="lblTotalProjects" runat="server" Text="0" />
+                </p>
+            </div>
+        </div>
+        <div class="card stat-box">
+            <div class="card-body">
+                <h5 class="card-title">Completed</h5>
+                <p class="card-text">
+                    <asp:Label ID="lblCompletedProjects" runat="server" Text="0" />
+                </p>
+            </div>
+        </div>
+        <div class="card stat-box">
+            <div class="card-body">
+                <h5 class="card-title">In Progress</h5>
+                <p class="card-text">
+                    <asp:Label ID="lblInProgressProjects" runat="server" Text="0" />
+                </p>
+            </div>
+        </div>
+        <div class="card stat-box">
+            <div class="card-body">
+                <h5 class="card-title">On Hold</h5>
+                <p class="card-text">
+                    <asp:Label ID="lblTestingProjects" runat="server" Text="0" />
+                </p>
+            </div>
+        </div>
+        <div class="card stat-box">
+            <div class="card-body">
+                <h5 class="card-title">On Hold</h5>
+                <p class="card-text">
+                    <asp:Label ID="lblOnHoldProjects" runat="server" Text="0" />
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tasks Section -->
+    <h2 class="section-header">Task Statistics</h2>
+    <div class="stats-container">
+        <div class="card stat-box">
+            <div class="card-body">
+                <h5 class="card-title">Total Tasks</h5>
+                <p class="card-text">
+                    <asp:Label ID="lblTotalTasks" runat="server" Text="0" />
+                </p>
+            </div>
+        </div>
+        <div class="card stat-box">
+            <div class="card-body">
+                <h5 class="card-title">Completed</h5>
+                <p class="card-text">
+                    <asp:Label ID="lblCompletedTasks" runat="server" Text="0" />
+                </p>
+            </div>
+        </div>
+        <div class="card stat-box">
+            <div class="card-body">
+                <h5 class="card-title">ON Hold</h5>
+                <p class="card-text">
+                    <asp:Label ID="lblOnHoldTasks" runat="server" Text="0" />
+                </p>
+            </div>
+        </div>
+        <div class="card stat-box">
+            <div class="card-body">
+                <h5 class="card-title">In Progress</h5>
+                <p class="card-text">
+                    <asp:Label ID="lblInProgressTasks" runat="server" Text="0" />
+                </p>
+            </div>
+        </div>
+        <div class="card stat-box">
+            <div class="card-body">
+                <h5 class="card-title">Not Started</h5>
+                <p class="card-text">
+                    <asp:Label ID="lblNotStartedTasks" runat="server" Text="0" />
+                </p>
+            </div>
+        </div>
+    </div>
+    <!-- Projects Grid -->
     <div class="dashboard-container">
         <div class="dashboard-panel">
             <h2>In Progress Projects</h2>
