@@ -110,6 +110,18 @@
             transform: scale(1.05);
         }
 
+        .btn-details {
+            background: #28a745;
+            color: white;
+            box-shadow: 0 5px 10px rgba(40, 167, 69, 0.3);
+        }
+
+            .btn-details:hover {
+                background: #218838;
+                box-shadow: 0 6px 14px rgba(40, 167, 69, 0.5);
+                transform: scale(1.05);
+            }
+
         /* Search Bar */
         .search-container {
             margin-left: 20%;

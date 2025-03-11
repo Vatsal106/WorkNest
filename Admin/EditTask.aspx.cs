@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace WorkNest.Admin
@@ -63,11 +62,18 @@ namespace WorkNest.Admin
 
         private void LoadEmployees()
         {
-            dbConn.dbConnect();
+            dbConn.dbConnect(); // Ensure connection is open
             try
             {
-                string query = "SELECT EMPLOYEE_ID, FULL_NAME FROM EMPLOYEE";
+                string query = @"
+        SELECT DISTINCT e.EMPLOYEE_ID, e.FULL_NAME
+        FROM EMPLOYEE e
+        JOIN EMPLOYEE_ROLES er ON e.EMPLOYEE_ID = er.EMPLOYEE_ID
+        WHERE er.ROLE_ID <> @AdminRoleID";
+
                 SqlCommand cmd = new SqlCommand(query, dbConn.con);
+                cmd.Parameters.AddWithValue("@AdminRoleID", 1);  // Exclude ROLE_ID = 1
+
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
@@ -78,8 +84,6 @@ namespace WorkNest.Admin
                 ddlAssignedTo.DataBind();
 
                 ddlAssignedTo.Items.Insert(0, new ListItem("-- Select Employee --", ""));
-               
-               
             }
             catch (Exception ex)
             {
@@ -87,11 +91,16 @@ namespace WorkNest.Admin
             }
         }
 
+
         protected void btnUpdate_Click(object sender, EventArgs e)
         {
             dbConn.dbConnect();
             try
             {
+                // Validate and Convert Due Date
+                DateTime dueDate;
+                bool isValidDate = DateTime.TryParse(txtDueDate.Text, out dueDate);
+
                 string updateQuery = @"
                     UPDATE TASK 
                     SET TASK_NAME = @TaskName, 
@@ -104,13 +113,22 @@ namespace WorkNest.Admin
                 SqlCommand cmd = new SqlCommand(updateQuery, dbConn.con);
                 cmd.Parameters.AddWithValue("@TaskName", txtTaskName.Text.Trim());
                 cmd.Parameters.AddWithValue("@Description", txtTaskDesc.Text.Trim());
-                cmd.Parameters.AddWithValue("@DueDate", txtDueDate.Text);
+
+                // Handle NULL due date
+                if (isValidDate)
+                {
+                    cmd.Parameters.AddWithValue("@DueDate", dueDate);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@DueDate", DBNull.Value);
+                }
+
                 cmd.Parameters.AddWithValue("@Status", ddlStatus.SelectedValue);
                 cmd.Parameters.AddWithValue("@AssignedTo", ddlAssignedTo.SelectedValue);
                 cmd.Parameters.AddWithValue("@TaskID", hfTaskID.Value);
 
                 int rowsAffected = cmd.ExecuteNonQuery();
-                
 
                 if (rowsAffected > 0)
                 {
