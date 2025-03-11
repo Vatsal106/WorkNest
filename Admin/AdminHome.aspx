@@ -1,88 +1,127 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/AdminM.Master" AutoEventWireup="true" CodeBehind="AdminHome.aspx.cs" Inherits="WorkNest.Admin.AdminHome" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
+<asp:content ID="Content1" ContentPlaceHolderID="Head" runat="server">
     <style>
+        /* General Styles */
         body {
             background: #F7F9FB;
             color: #333;
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
         }
 
+        /* Hero Section */
         .hero-section {
-            background: url('Images/company-banner.jpg') center/cover no-repeat;
-            padding: 100px 20px;
+            background: url('../Images/ClientPagePhoto.png') center/cover no-repeat;
+            padding: 120px 20px;
             text-align: center;
-            color: white;
+            color: darkgray;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+         
         }
 
         .hero-text {
-            font-size: 32px;
+            font-size: 36px;
             font-weight: bold;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
         }
 
         .sub-text {
-            font-size: 18px;
-            margin-bottom: 20px;
+            font-size: 20px;
+            max-width: 600px;
+            line-height: 1.5;
+            margin-bottom: 25px;
         }
 
         .btn-learn-more {
             background: #FF8C00;
             color: white;
-            padding: 12px 20px;
+            padding: 14px 24px;
             border: none;
             cursor: pointer;
-            font-size: 16px;
-            border-radius: 5px;
+            font-size: 18px;
+            border-radius: 6px;
+            transition: 0.3s ease-in-out;
         }
 
+            .btn-learn-more:hover {
+                background: #e67e00;
+            }
+
+        /* Sections */
         .section {
-            padding: 50px 20px;
+            padding: 60px 20px;
             text-align: center;
         }
 
             .section h2 {
-                font-size: 28px;
+                font-size: 30px;
                 margin-bottom: 20px;
                 color: #4A6D85;
+                text-transform: uppercase;
             }
 
-        .client-reviews, .achievements, .features, .team, .stats {
+            .section p {
+                font-size: 18px;
+                color: #555;
+                max-width: 800px;
+                margin: 0 auto;
+                line-height: 1.6;
+            }
+
+        /* Cards */
+        .features,
+        .client-reviews,
+        .achievements,
+        .stats {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 25px;
             flex-wrap: wrap;
+            margin-top: 30px;
         }
 
         .card {
             background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            width: 300px;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            width: 320px;
             text-align: left;
+            transition: transform 0.3s ease-in-out;
         }
+
+            .card:hover {
+                transform: translateY(-5px);
+            }
 
         .card-title {
             font-weight: bold;
-            color: #007bff;
-            margin-top: 10px;
+            color: #4A6D85;
+            margin-top: 12px;
         }
 
         .stats-card {
-            font-size: 24px;
+            font-size: 26px;
             font-weight: bold;
             background: #4A6D85;
             color: white;
-            padding: 20px;
-            border-radius: 8px;
-            width: 200px;
+            padding: 25px;
+            border-radius: 10px;
+            width: 220px;
             text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
 
+        /* Call to Action */
         .cta-section {
             text-align: center;
-            padding: 40px 20px;
+            padding: 50px 20px;
             background: #4A6D85;
             color: white;
         }
@@ -90,22 +129,55 @@
         .cta-btn {
             background: #FF8C00;
             color: white;
-            padding: 15px 25px;
+            padding: 16px 28px;
             border: none;
-            font-size: 18px;
-            border-radius: 5px;
+            font-size: 20px;
+            border-radius: 8px;
             cursor: pointer;
+            transition: 0.3s ease-in-out;
+        }
+
+            .cta-btn:hover {
+                background: #e67e00;
+            }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-text {
+                font-size: 28px;
+            }
+
+            .sub-text {
+                font-size: 16px;
+            }
+
+            .btn-learn-more {
+                font-size: 16px;
+                padding: 12px 20px;
+            }
+
+            .stats-card {
+                width: 180px;
+                font-size: 22px;
+            }
+
+            .card {
+                width: 100%;
+                max-width: 350px;
+            }
         }
     </style>
-</asp:Content>
-
+</asp:content>
+    <asp:Content ID="Title" ContentPlaceHolderID="Header_Title" runat="server">
+        Welcome to WorkNest
+    </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
     <!-- Hero Section -->
     <div class="hero-section">
         <div class="hero-text">Welcome to WorkNest</div>
         <div class="sub-text">Your trusted partner in project and employee management.</div>
-        <asp:Button ID="btnLearnMore" runat="server" Text="Learn More" CssClass="btn-learn-more" />
+        <asp:Button ID="btnLearnMore" runat="server" Text="Learn More" CssClass="btn-learn-more" PostBackUrl="~/Admin/AdminDashboard.aspx" />
     </div>
 
     <!-- About Us -->
@@ -173,15 +245,21 @@
     <div class="section">
         <h2>WorkNest in Numbers</h2>
         <div class="stats">
-            <div class="stats-card">💼
-                <asp:Label ID="lblTotalProject" runat="server" Text="0"></asp:Label>
-                Projects</div>
-            <div class="stats-card">👨‍💻
-                <asp:Label ID="lblTotalEmployee" runat="server" Text="0"></asp:Label>
-                Employees</div>
-            <div class="stats-card">📊
-                <asp:Label ID="lblTotalTask" runat="server" Text="0"></asp:Label>
-                Tasks Completed</div>
+            <div class="stats-card">
+                💼
+                <asp:Label ID="lblTotalProject" runat="server" Text="0"></asp:Label><br />
+                Projects
+            </div>
+            <div class="stats-card">
+                👨‍💻
+                <asp:Label ID="lblTotalEmployee" runat="server" Text="0"></asp:Label><br />
+                Employees
+            </div>
+            <div class="stats-card">
+                📊
+                <asp:Label ID="lblTotalTask" runat="server" Text="0"></asp:Label><br />
+                Tasks Completed
+            </div>
         </div>
     </div>
 
