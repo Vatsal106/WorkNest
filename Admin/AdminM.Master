@@ -330,41 +330,23 @@
     </style>
     <script>
         function toggleSidebar() {
-            var sidebar = document.querySelector('.sidebar');
-            sidebar.classList.toggle('open'); 
+            document.querySelector('.sidebar').classList.toggle('open');
         }
 
-        
-        window.onclick = function (event) {
-            var sidebar = document.querySelector('.sidebar');
-            var menuButton = document.querySelector('.menu-button');
-
-           
-            if (!sidebar.contains(event.target) && !menuButton.contains(event.target)) {
-                sidebar.classList.remove('open');
-            }
-
-            
-            var dropdown = document.getElementById('dropdown-content');
-            var ddlAdd = document.getElementById('ddlAdd');
-
-            if (!ddlAdd.contains(event.target)) {
-                dropdown.style.display = 'none';
-            }
-        };
-
-        
         function toggleDropdown() {
             var dropdown = document.getElementById('dropdown-content');
             dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
         }
 
-        function toggleSubmenu(id) {
-            var submenu = document.getElementById(id);
-            submenu.classList.toggle("active");
+        function toggleSubmenu(id) {            
+            document.querySelectorAll('.submenu').forEach(function (submenu) {
+                if (submenu.id !== id) {
+                    submenu.classList.remove("active");
+                }
+            });
+
+            document.getElementById(id).classList.toggle("active");
         }
-
-
     </script>
 
 
@@ -412,11 +394,18 @@
                 ✅ Tasks ▼
    
             </div>
+            
             <div id="tasksMenu" class="submenu">
                 <a href="AllTasks.aspx">📋 Task List</a>
                 <a href="AddTask.aspx">➕ Add Task</a>
                 <a href="TaskReports.aspx">📊 Task Reports</a>
             </div>
+                        <div class="menu has-submenu" onclick="toggleSubmenu('leavesMenu')">
+    🍃 Leaves ▼
+</div>
+<div id="leavesMenu" class="submenu">
+    <a href="ApproveLeaves.aspx">✅ Approve Leaves Of Manager</a>
+</div>
             <a class="menu" href="Settings.aspx">⚙️ Settings</a>
             <a class="menu" href="Logout.aspx">🚪 Logout</a>
         </div>

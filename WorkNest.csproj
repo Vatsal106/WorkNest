@@ -172,7 +172,9 @@
     <Content Include="Admin\AdminDashboard.aspx" />
     <Content Include="Admin\AdminHome.aspx" />
     <Content Include="Admin\AllTasks.aspx" />
+    <Content Include="Admin\ApproveLeaves.aspx" />
     <Content Include="Admin\changeRoles.aspx" />
+    <Content Include="Admin\DownloadFile.aspx" />
     <Content Include="Admin\DownloadReport.aspx" />
     <Content Include="Admin\EditTask.aspx" />
     <Content Include="Admin\EmployeeDetails.aspx" />
@@ -214,6 +216,8 @@
     <Content Include="Images\TranLogoDark.png" />
     <Content Include="Images\Untitled design %283%29.png" />
     <Content Include="login.aspx" />
+    <Content Include="Project_Manager\AddLeave.aspx" />
+    <Content Include="Project_Manager\LeaveList.aspx" />
     <Content Include="Project_Manager\Projects.aspx" />
     <Content Include="Project_Manager\P_ManagerDashboard.aspx" />
     <Content Include="Project_Manager\P_ManagerHome.aspx" />
@@ -279,12 +283,26 @@
     <Compile Include="Admin\AllTasks.aspx.designer.cs">
       <DependentUpon>AllTasks.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\ApproveLeaves.aspx.cs">
+      <DependentUpon>ApproveLeaves.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\ApproveLeaves.aspx.designer.cs">
+      <DependentUpon>ApproveLeaves.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\changeRoles.aspx.cs">
       <DependentUpon>changeRoles.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Admin\changeRoles.aspx.designer.cs">
       <DependentUpon>changeRoles.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\DownloadFile.aspx.cs">
+      <DependentUpon>DownloadFile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\DownloadFile.aspx.designer.cs">
+      <DependentUpon>DownloadFile.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\DownloadReport.aspx.cs">
       <DependentUpon>DownloadReport.aspx</DependentUpon>
@@ -373,6 +391,20 @@
     </Compile>
     <Compile Include="Admin\AdminM.Master.designer.cs">
       <DependentUpon>AdminM.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Project_Manager\AddLeave.aspx.cs">
+      <DependentUpon>AddLeave.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Project_Manager\AddLeave.aspx.designer.cs">
+      <DependentUpon>AddLeave.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Project_Manager\LeaveList.aspx.cs">
+      <DependentUpon>LeaveList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Project_Manager\LeaveList.aspx.designer.cs">
+      <DependentUpon>LeaveList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Project_Manager\Projects.aspx.cs">
       <DependentUpon>Projects.aspx</DependentUpon>

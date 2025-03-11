@@ -278,8 +278,6 @@
 </head>
 <body>
     <form id="Managerform" runat="server">
-        <!-- Sidebar -->
-
         <div class="sidebar">
             <div class="logo">
                 <a href="P_ManagerHome.aspx">
@@ -292,6 +290,12 @@
     <a class="menu" href="Projects.aspx">📂 Projects</a>  
     <a class="menu" href="Tasks.aspx">📋 Tasks</a>  
     <a class="menu" href="Users.aspx">👥 Users</a>
+            <a class="menu" href="#">🍃 Leaves</a>
+<div style="padding-left: 20px;">
+    <a class="menu" href="AddLeave.aspx">➕ Add Leave</a>
+    <a class="menu" href="LeaveList.aspx">✔ Approve Leaves</a>
+</div>
+
     <a class="menu" href="Settings.aspx">⚙️ Settings</a>
     <a class="menu" href="Logout.aspx">🚪 Logout</a>
         </div>
@@ -316,8 +320,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- Main Content -->
         <div class="content">
             <asp:ContentPlaceHolder ID="Manager_Content" runat="server"></asp:ContentPlaceHolder>
         </div>
