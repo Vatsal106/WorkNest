@@ -25,7 +25,7 @@ namespace WorkNest.Project_Manager
             string query = @"
         SELECT L.LEAVE_ID, 
        E.FULL_NAME AS EMPLOYEE_NAME, 
-       L.LEAVE_TYPE, 
+     
        L.START_DATE, 
        L.END_DATE, 
        L.REASON, 
@@ -83,7 +83,7 @@ namespace WorkNest.Project_Manager
                     cmd.ExecuteNonQuery();
                 }
 
-                LoadLeaveRequests(); 
+                LoadLeaveRequests();
             }
         }
     }

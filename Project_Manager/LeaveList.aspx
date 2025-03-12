@@ -48,7 +48,7 @@
             <Columns>
                 <asp:BoundField DataField="LEAVE_ID" HeaderText="ID" />
                 <asp:BoundField DataField="EMPLOYEE_NAME" HeaderText="Employee" />
-                <asp:BoundField DataField="LEAVE_TYPE" HeaderText="Type" />
+                <%--<asp:BoundField DataField="LEAVE_TYPE" HeaderText="Type" />--%>
                 <asp:BoundField DataField="START_DATE" HeaderText="Start Date" DataFormatString="{0:yyyy-MM-dd}" />
                 <asp:BoundField DataField="END_DATE" HeaderText="End Date" DataFormatString="{0:yyyy-MM-dd}" />
                 <asp:BoundField DataField="REASON" HeaderText="Reason" />
