@@ -398,7 +398,7 @@
 </div>
 <div id="leavesMenu" class="submenu">
     <a href="Leavelist.aspx">✅ Approve Leaves Of Employee</a>
-    <a href="AddLeave.aspx">✅ Add Leave</a>
+    <a href="RequestLeave.aspx">✅ Add Leave</a>
 </div>
             <a class="menu" href="Settings.aspx">⚙️ Settings</a>
             <a class="menu" href="Logout.aspx">🚪 Logout</a>
