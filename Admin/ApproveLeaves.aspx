@@ -49,26 +49,26 @@
             display: block;
         }
 
-        .table th {
-            background: #007bff;
-            color: white;
-            padding: 12px;
-            text-align: left;
-        }
+            .table th {
+                background: #007bff;
+                color: white;
+                padding: 12px;
+                text-align: left;
+            }
 
-        .table td {
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
-        }
+            .table td {
+                padding: 10px;
+                border-bottom: 1px solid #ddd;
+            }
 
-        .table tr:nth-child(even) {
-            background: #f9f9f9;
-        }
+            .table tr:nth-child(even) {
+                background: #f9f9f9;
+            }
 
-        .table tr:hover {
-            background: #f1f1f1;
-            transition: 0.3s;
-        }
+            .table tr:hover {
+                background: #f1f1f1;
+                transition: 0.3s;
+            }
 
         /* Buttons */
         .btn-approve, .btn-reject {
@@ -86,18 +86,18 @@
             color: white;
         }
 
-        .btn-approve:hover {
-            background-color: #218838;
-        }
+            .btn-approve:hover {
+                background-color: #218838;
+            }
 
         .btn-reject {
             background-color: #dc3545;
             color: white;
         }
 
-        .btn-reject:hover {
-            background-color: #c82333;
-        }
+            .btn-reject:hover {
+                background-color: #c82333;
+            }
 
         /* Responsive Design */
         @media screen and (max-width: 1200px) { /* Laptops */
@@ -203,13 +203,15 @@
                 <asp:BoundField DataField="REASON" HeaderText="Reason" />
                 <asp:BoundField DataField="STATUS" HeaderText="Status" />
 
-               <asp:TemplateField HeaderText="Attachment">
-    <ItemTemplate>
-        <%# !string.IsNullOrEmpty(Eval("ATTACHMENT_PATH").ToString()) ? 
-            "<a href='DownloadFile.aspx?file=" + HttpUtility.UrlEncode(Eval("ATTACHMENT_PATH").ToString()) + "' class='btn-attachment'>Download</a>" 
-            : "No Attachment" %>
-    </ItemTemplate>
-</asp:TemplateField>
+                <asp:TemplateField HeaderText="Attachment">
+                    <ItemTemplate>
+
+                        <asp:HyperLink ID="lnkDownload" runat="server"
+                            NavigateUrl='<%# "~/Admin/DownloadReport.aspx?LeaveID=" + Eval("LEAVE_ID") %>'
+                            Text="Download" CssClass="btn btn-info" />
+                    </ItemTemplate>
+                </asp:TemplateField>
+
 
 
                 <asp:TemplateField HeaderText="Actions">

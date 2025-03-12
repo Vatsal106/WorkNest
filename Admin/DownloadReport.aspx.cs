@@ -21,6 +21,11 @@ namespace WorkNest.Admin
                     string taskHistoryId = Request.QueryString["TaskHistoryID"];
                     DownloadHistoryReport(taskHistoryId);
                 }
+                else if (Request.QueryString["LeaveID"] != null)
+                {
+                    string leaveid = Request.QueryString["LeaveID"];
+                    DownloadLeaveReport(leaveid);
+                }
                 else
                 {
                     Response.Write("Invalid Request.");
@@ -100,6 +105,36 @@ namespace WorkNest.Admin
             }
         }
 
+        public void DownloadLeaveReport(string leaveid)
+        {
+            dbConn.dbConnect();
+            try
+            {
+                string query = "SELECT FILE_NAME, FILE_EXTANSION, ATTACHMENT FROM LEAVES WHERE LEAVE_ID = @LeaveID";
+                SqlCommand cmd = new SqlCommand(query, dbConn.con);
+                cmd.Parameters.AddWithValue("@LeaveID", leaveid);
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read())
+                {
+                    string fileName = dr["FILE_NAME"].ToString();
+                    string fileExt = dr["FILE_EXTANSION"].ToString();
+                    byte[] fileData = (byte[])dr["ATTACHMENT"];
+                    dr.Close();
+                    cmd.Dispose();
+                    ServeFile(fileName, fileExt, fileData);
+                }
+                else
+                {
+                    dr.Close();
+                    cmd.Dispose();
+                    Response.Write("File not found.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Response.Write("Error downloading leave report: " + ex.Message);
+            }
+        }
         private void ServeFile(string fileName, string fileExt, byte[] fileData)
         {
             try

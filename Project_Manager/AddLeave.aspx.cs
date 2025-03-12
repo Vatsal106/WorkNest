@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Configuration;
 using System.Data.SqlClient;
-using System.Web.UI;
 using System.IO;
+using System.Web.UI;
 
 namespace WorkNest.Project_Manager
 {
@@ -66,23 +65,18 @@ namespace WorkNest.Project_Manager
             string reason = txtReason.Text;
             string status = "Pending"; // Default status
 
-            string attachmentPath = "";
+            byte[] FILE = null;
+            string fileName = "";
+            string fileExtension = "";
             if (fileAttachment.HasFile)
             {
-                string fileExtension = Path.GetExtension(fileAttachment.FileName).ToLower();
+                fileName = Path.GetFileName(fileAttachment.FileName);
+                fileExtension = Path.GetExtension(fileAttachment.FileName).ToLower();
                 string[] allowedExtensions = { ".jpg", ".png", ".pdf", ".doc", ".docx" };
 
                 if (Array.Exists(allowedExtensions, ext => ext == fileExtension))
                 {
-                    string savePath = Server.MapPath("~/Uploads/LeaveAttachments/");
-                    if (!Directory.Exists(savePath))
-                    {
-                        Directory.CreateDirectory(savePath);
-                    }
-
-                    string fileName = Path.GetFileName(fileAttachment.FileName);
-                    attachmentPath = "~/Uploads/LeaveAttachments/" + fileName;
-                    fileAttachment.SaveAs(savePath + fileName);
+                    FILE = fileAttachment.FileBytes;
                 }
                 else
                 {
@@ -94,8 +88,8 @@ namespace WorkNest.Project_Manager
 
             try
             {
-                string query = "INSERT INTO LEAVES (EMPLOYEE_ID, LEAVE_TYPE, START_DATE, END_DATE, REASON, STATUS, ATTACHMENT_PATH) " +
-                               "VALUES (@EMPLOYEE_ID, @LEAVE_TYPE, @START_DATE, @END_DATE, @REASON, @STATUS, @ATTACHMENT_PATH)";
+                string query = "INSERT INTO LEAVES (EMPLOYEE_ID, LEAVE_TYPE, START_DATE, END_DATE, REASON, STATUS, ATTACHMENT,FILE_NAME,FILE_EXTANSION) " +
+                               "VALUES (@EMPLOYEE_ID, @LEAVE_TYPE, @START_DATE, @END_DATE, @REASON, @STATUS, @ATTACHMENT,@FILE_NAME,@FILE_EXTANTION)";
 
                 using (SqlCommand cmd = new SqlCommand(query, dbConn.con))
                 {
@@ -105,7 +99,9 @@ namespace WorkNest.Project_Manager
                     cmd.Parameters.AddWithValue("@END_DATE", endDate);
                     cmd.Parameters.AddWithValue("@REASON", reason);
                     cmd.Parameters.AddWithValue("@STATUS", status);
-                    cmd.Parameters.AddWithValue("@ATTACHMENT_PATH", string.IsNullOrEmpty(attachmentPath) ? (object)DBNull.Value : attachmentPath);
+                    cmd.Parameters.AddWithValue("@ATTACHMENT", FILE);
+                    cmd.Parameters.AddWithValue("@FILE_NAME", fileName);
+                    cmd.Parameters.AddWithValue("@FILE_EXTANTION", fileExtension);
 
                     cmd.ExecuteNonQuery();
                 }
@@ -119,7 +115,7 @@ namespace WorkNest.Project_Manager
                 lblMessage.Text = "Error: " + ex.Message;
                 lblMessage.ForeColor = System.Drawing.Color.Red;
             }
-          
+
         }
     }
 }

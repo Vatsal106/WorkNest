@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Data;
 using System.Data.SqlClient;
-using System.Configuration;
 using System.Web.UI.WebControls;
 
 namespace WorkNest.Admin
@@ -24,13 +22,12 @@ namespace WorkNest.Admin
             try
             {
                 string query = @"
-                    SELECT LEAVES.LEAVE_ID, EMPLOYEE.FULL_NAME AS EMPLOYEE_NAME, LEAVES.START_DATE, LEAVES.END_DATE, 
-                           LEAVES.REASON, LEAVES.STATUS, LEAVES.ATTACHMENT_PATH
-                    FROM LEAVES
-                    INNER JOIN EMPLOYEE ON LEAVES.EMPLOYEE_ID = EMPLOYEE.EMPLOYEE_ID
-                    INNER JOIN EMPLOYEE_ROLES ON EMPLOYEE.EMPLOYEE_ID = EMPLOYEE_ROLES.EMPLOYEE_ID
-                    INNER JOIN ROLES ON EMPLOYEE_ROLES.ROLE_ID = ROLES.ROLE_ID
-                    WHERE ROLES.ROLE_NAME = 'Project_Manager'";
+            SELECT LEAVES.LEAVE_ID, EMPLOYEE.FULL_NAME AS EMPLOYEE_NAME, LEAVES.START_DATE, LEAVES.END_DATE, 
+                   LEAVES.REASON, LEAVES.STATUS
+            FROM LEAVES
+            INNER JOIN EMPLOYEE ON LEAVES.EMPLOYEE_ID = EMPLOYEE.EMPLOYEE_ID
+            INNER JOIN EMPLOYEE_ROLES ON EMPLOYEE.EMPLOYEE_ID = EMPLOYEE_ROLES.EMPLOYEE_ID
+            WHERE EMPLOYEE_ROLES.ROLE_ID = 2";  // ✅ Filter by ROLE_ID = 2
 
                 SqlCommand cmd = new SqlCommand(query, dbConn.con);
                 SqlDataReader reader = cmd.ExecuteReader();
@@ -43,6 +40,7 @@ namespace WorkNest.Admin
                 Response.Write("<script>alert('Error: " + ex.Message + "');</script>");
             }
         }
+
 
         protected void gvProjectManagerLeaves_RowCommand(object sender, GridViewCommandEventArgs e)
         {
