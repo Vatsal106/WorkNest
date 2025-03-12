@@ -21,17 +21,28 @@ namespace WorkNest.Admin
             dbConn.dbConnect();
             try
             {
+                string selectedStatus = ddlStatusFilter.SelectedValue;
+
                 string query = @"
             SELECT LEAVES.LEAVE_ID, EMPLOYEE.FULL_NAME AS EMPLOYEE_NAME, LEAVES.START_DATE, LEAVES.END_DATE, 
                    LEAVES.REASON, LEAVES.STATUS
             FROM LEAVES
             INNER JOIN EMPLOYEE ON LEAVES.EMPLOYEE_ID = EMPLOYEE.EMPLOYEE_ID
             INNER JOIN EMPLOYEE_ROLES ON EMPLOYEE.EMPLOYEE_ID = EMPLOYEE_ROLES.EMPLOYEE_ID
-            WHERE EMPLOYEE_ROLES.ROLE_ID = 2";  // ✅ Filter by ROLE_ID = 2
+            WHERE EMPLOYEE_ROLES.ROLE_ID = 2";
+                if (selectedStatus != "All")
+                {
+                    query += " AND LEAVES.STATUS = @Status";
+                }
 
                 SqlCommand cmd = new SqlCommand(query, dbConn.con);
-                SqlDataReader reader = cmd.ExecuteReader();
 
+                if (selectedStatus != "All")
+                {
+                    cmd.Parameters.AddWithValue("@Status", selectedStatus);
+                }
+
+                SqlDataReader reader = cmd.ExecuteReader();
                 gvProjectManagerLeaves.DataSource = reader;
                 gvProjectManagerLeaves.DataBind();
             }
