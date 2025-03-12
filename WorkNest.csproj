@@ -215,7 +215,8 @@
     <Content Include="Images\TranLogoDark.png" />
     <Content Include="Images\Untitled design %283%29.png" />
     <Content Include="login.aspx" />
-    <Content Include="Project_Manager\AddLeave.aspx" />
+    <Content Include="Logout.aspx" />
+    <Content Include="Project_Manager\RequestLeave.aspx" />
     <Content Include="Project_Manager\LeaveList.aspx" />
     <Content Include="Project_Manager\Projects.aspx" />
     <Content Include="Project_Manager\P_ManagerDashboard.aspx" />
@@ -384,12 +385,19 @@
     <Compile Include="Admin\AdminM.Master.designer.cs">
       <DependentUpon>AdminM.Master</DependentUpon>
     </Compile>
-    <Compile Include="Project_Manager\AddLeave.aspx.cs">
-      <DependentUpon>AddLeave.aspx</DependentUpon>
+    <Compile Include="Logout.aspx.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Project_Manager\AddLeave.aspx.designer.cs">
-      <DependentUpon>AddLeave.aspx</DependentUpon>
+    <Compile Include="Logout.aspx.designer.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Project_Manager\RequestLeave.aspx.cs">
+      <DependentUpon>RequestLeave.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Project_Manager\RequestLeave.aspx.designer.cs">
+      <DependentUpon>RequestLeave.aspx</DependentUpon>
     </Compile>
     <Compile Include="Project_Manager\LeaveList.aspx.cs">
       <DependentUpon>LeaveList.aspx</DependentUpon>

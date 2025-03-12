@@ -8,7 +8,6 @@
         
         body {
             background-color: #f4f7f8;
-            font-family: 'Poppins', sans-serif;
         }
 
         

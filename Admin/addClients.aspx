@@ -2,10 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-
+       
         .container {
             display: flex;
             width: 80%;

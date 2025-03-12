@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Add Leave" Language="C#" MasterPageFile="~/Project_Manager/P_Manager.Master" AutoEventWireup="true" CodeBehind="AddLeave.aspx.cs" Inherits="WorkNest.Project_Manager.AddLeave" %>
+﻿<%@ Page Title="Add Leave" Language="C#" MasterPageFile="~/Project_Manager/P_Manager.Master" AutoEventWireup="true" CodeBehind="RequestLeave.aspx.cs" Inherits="WorkNest.Project_Manager.AddLeave" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Manager_Head" runat="server">
     <style>
