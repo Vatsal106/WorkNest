@@ -3,7 +3,7 @@ using System.Data.SqlClient;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace WorkNest.Admin
+namespace WorkNest.Project_Manager
 {
     public partial class AddTask : System.Web.UI.Page
     {
@@ -77,18 +77,21 @@ namespace WorkNest.Admin
         {
             try
             {
+                string loggedInManagerId = Session["EmployeeID"]?.ToString();
+
                 dbConn.dbConnect();
                 string query = @"
-    SELECT E.EMPLOYEE_ID, E.FULL_NAME 
-    FROM EMPLOYEE E
-    JOIN EMPLOYEE_ROLES ER ON E.EMPLOYEE_ID = ER.EMPLOYEE_ID
-    JOIN ROLES R ON ER.ROLE_ID = R.ROLE_ID
-    WHERE (R.ROLE_NAME = 'Project_Member' OR R.ROLE_NAME = 'Project_Manager')
-    AND E.DEPARTMENT_ID = @DepartmentID";
-
+                SELECT E.EMPLOYEE_ID, E.FULL_NAME 
+                FROM EMPLOYEE E
+                JOIN EMPLOYEE_ROLES ER ON E.EMPLOYEE_ID = ER.EMPLOYEE_ID
+                JOIN ROLES R ON ER.ROLE_ID = R.ROLE_ID
+                WHERE (R.ROLE_NAME = 'Project_Member' OR R.ROLE_NAME = 'Project_Manager')
+                AND E.DEPARTMENT_ID = @DepartmentID
+                AND E.EMPLOYEE_ID <> @LoggedInManagerID";  // Exclude the logged-in Project Manager
 
                 SqlCommand cmd = new SqlCommand(query, dbConn.con);
                 cmd.Parameters.AddWithValue("@DepartmentID", departmentId);
+                cmd.Parameters.AddWithValue("@LoggedInManagerID", loggedInManagerId);
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 ddlAssignTo.Items.Clear();
@@ -146,7 +149,6 @@ namespace WorkNest.Admin
 
                 cmd.ExecuteNonQuery();
                 Response.Write("<script>alert('Task added successfully!'); window.location='AllTasks.aspx';</script>");
-                Response.Redirect("AllTasks.aspx");
             }
             catch (Exception ex)
             {

@@ -216,10 +216,12 @@
     <Content Include="Images\Untitled design %283%29.png" />
     <Content Include="login.aspx" />
     <Content Include="Project_Manager\AddLeave.aspx" />
+    <Content Include="Project_Manager\AddTask.aspx" />
     <Content Include="Project_Manager\LeaveList.aspx" />
     <Content Include="Project_Manager\Projects.aspx" />
     <Content Include="Project_Manager\P_ManagerDashboard.aspx" />
     <Content Include="Project_Manager\P_ManagerHome.aspx" />
+    <Content Include="Project_Manager\Tasks.aspx" />
     <Content Include="P_Member\MemberDashboard.aspx" />
     <Content Include="P_Member\MemberHome.aspx" />
     <Content Include="Admin\SubmitReportOfTask.aspx" />
@@ -391,6 +393,13 @@
     <Compile Include="Project_Manager\AddLeave.aspx.designer.cs">
       <DependentUpon>AddLeave.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Project_Manager\AddTask.aspx.cs">
+      <DependentUpon>AddTask.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Project_Manager\AddTask.aspx.designer.cs">
+      <DependentUpon>AddTask.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Project_Manager\LeaveList.aspx.cs">
       <DependentUpon>LeaveList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -425,6 +434,13 @@
     </Compile>
     <Compile Include="Project_Manager\P_ManagerHome.aspx.designer.cs">
       <DependentUpon>P_ManagerHome.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Project_Manager\Tasks.aspx.cs">
+      <DependentUpon>Tasks.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Project_Manager\Tasks.aspx.designer.cs">
+      <DependentUpon>Tasks.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="P_Member\MemberDashboard.aspx.cs">
