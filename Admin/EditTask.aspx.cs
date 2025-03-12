@@ -18,8 +18,8 @@ namespace WorkNest.Admin
                     if (Request.QueryString["TaskID"] != null)
                     {
                         hfTaskID.Value = Request.QueryString["TaskID"];
-                        LoadTaskDetails(hfTaskID.Value);
-                        LoadEmployees();
+                        string assignedEmployeeId = LoadTaskDetails(hfTaskID.Value);
+                        LoadEmployees(assignedEmployeeId);  // Pass assigned employee ID to retain selection
                     }
                     else
                     {
@@ -33,9 +33,10 @@ namespace WorkNest.Admin
             }
         }
 
-        private void LoadTaskDetails(string taskId)
+        private string LoadTaskDetails(string taskId)
         {
             dbConn.dbConnect();
+            string assignedEmployeeId = "";
             try
             {
                 string query = "SELECT TASK_NAME, DESCRIPTION, DUE_DATE, STATUS, ASSIGN_TO FROM TASK WHERE TASK_ID = @TaskID";
@@ -49,7 +50,8 @@ namespace WorkNest.Admin
                     txtTaskDesc.Text = reader["DESCRIPTION"].ToString();
                     txtDueDate.Text = Convert.ToDateTime(reader["DUE_DATE"]).ToString("yyyy-MM-dd");
                     ddlStatus.SelectedValue = reader["STATUS"].ToString();
-                    ddlAssignedTo.SelectedValue = reader["ASSIGN_TO"].ToString();
+
+                    assignedEmployeeId = reader["ASSIGN_TO"].ToString();
                 }
                 reader.Close();
                 cmd.Dispose();
@@ -58,18 +60,20 @@ namespace WorkNest.Admin
             {
                 Response.Write("<script>alert('Error loading task details: " + ex.Message + "');</script>");
             }
+
+            return assignedEmployeeId;
         }
 
-        private void LoadEmployees()
+        private void LoadEmployees(string assignedEmployeeId)
         {
             dbConn.dbConnect(); // Ensure connection is open
             try
             {
                 string query = @"
-        SELECT DISTINCT e.EMPLOYEE_ID, e.FULL_NAME
-        FROM EMPLOYEE e
-        JOIN EMPLOYEE_ROLES er ON e.EMPLOYEE_ID = er.EMPLOYEE_ID
-        WHERE er.ROLE_ID <> @AdminRoleID";
+                SELECT DISTINCT e.EMPLOYEE_ID, e.FULL_NAME
+                FROM EMPLOYEE e
+                JOIN EMPLOYEE_ROLES er ON e.EMPLOYEE_ID = er.EMPLOYEE_ID
+                WHERE er.ROLE_ID <> @AdminRoleID";
 
                 SqlCommand cmd = new SqlCommand(query, dbConn.con);
                 cmd.Parameters.AddWithValue("@AdminRoleID", 1);  // Exclude ROLE_ID = 1
@@ -84,13 +88,18 @@ namespace WorkNest.Admin
                 ddlAssignedTo.DataBind();
 
                 ddlAssignedTo.Items.Insert(0, new ListItem("-- Select Employee --", ""));
+
+                // Retain previously assigned employee
+                if (!string.IsNullOrEmpty(assignedEmployeeId))
+                {
+                    ddlAssignedTo.SelectedValue = assignedEmployeeId;
+                }
             }
             catch (Exception ex)
             {
                 Response.Write("<script>alert('Error loading employees: " + ex.Message + "');</script>");
             }
         }
-
 
         protected void btnUpdate_Click(object sender, EventArgs e)
         {
@@ -132,7 +141,8 @@ namespace WorkNest.Admin
 
                 if (rowsAffected > 0)
                 {
-                    Response.Redirect("AllTasks.aspx");
+                    // Show success alert and redirect after confirmation
+                    Response.Write("<script>alert('Task updated successfully!'); window.location='AllTasks.aspx';</script>");
                 }
                 else
                 {
