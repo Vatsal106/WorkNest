@@ -2,7 +2,6 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace WorkNest.Project_Manager
 {
@@ -44,7 +43,7 @@ namespace WorkNest.Project_Manager
             FROM TASK T
             JOIN PROJECT P ON T.PROJECT_ID = P.PROJECT_ID
             JOIN EMPLOYEE E ON T.ASSIGN_TO = E.EMPLOYEE_ID
-            WHERE T.ASSIGN_TO = @ManagerId";
+            WHERE P.PROJECT_MANAGER_ID = @ManagerId";
 
             SqlCommand cmd = new SqlCommand(query, dbConn.con);
             cmd.Parameters.AddWithValue("@ManagerId", managerId);

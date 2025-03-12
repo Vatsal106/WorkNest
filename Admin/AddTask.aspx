@@ -5,12 +5,11 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="Head" runat="server">
     <style>
-        
         body {
             background-color: #f4f7f8;
         }
 
-        
+
         .form-container {
             max-width: 600px;
             margin: 0px auto;
@@ -21,11 +20,11 @@
             transition: transform 0.3s ease-in-out;
         }
 
-        .form-container:hover {
-            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
-        }
+            .form-container:hover {
+                box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
+            }
 
-        
+
         label {
             font-weight: 600;
             color: #333;
@@ -33,7 +32,7 @@
             display: block;
         }
 
-        
+
         .form-control {
             width: 100%;
             padding: 10px;
@@ -44,18 +43,18 @@
             transition: border 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .form-control:focus {
-            border-color: #007bff;
-            box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
-            outline: none;
-        }
+            .form-control:focus {
+                border-color: #007bff;
+                box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+                outline: none;
+            }
 
-        
-        .form-control select {
-            cursor: pointer;
-        }
 
-        
+            .form-control select {
+                cursor: pointer;
+            }
+
+
         .btn-primary {
             background: linear-gradient(to right, #007bff, #0056b3);
             border: none;
@@ -69,12 +68,12 @@
             width: 100%;
         }
 
-        .btn-primary:hover {
-            background: linear-gradient(to right, #0056b3, #003c7e);
-            transform: scale(1.05);
-        }
+            .btn-primary:hover {
+                background: linear-gradient(to right, #0056b3, #003c7e);
+                transform: scale(1.05);
+            }
 
-        
+
         @media screen and (max-width: 425px) {
             .form-container {
                 max-width: 90%;
@@ -131,9 +130,11 @@
             <div class="mb-3">
                 <label for="ddlStatus">Status:</label>
                 <asp:DropDownList ID="ddlStatus" runat="server" CssClass="form-control">
-                    <asp:ListItem Text="Pending" Value="Pending"></asp:ListItem>
-                    <asp:ListItem Text="In Progress" Value="In Progress"></asp:ListItem>
-                    <asp:ListItem Text="Completed" Value="Completed"></asp:ListItem>
+                    <asp:ListItem Text="Select Status" Value="" />
+                    <asp:ListItem Text="Completed" Value="COMPLETED" />
+                    <asp:ListItem Text="In Progress" Value="IN PROGRESS" />
+                    <asp:ListItem Text="Not Started" Value="NOT STARTED" />
+                    <asp:ListItem Text="On Hold" Value="ON HOLD" />
                 </asp:DropDownList>
             </div>
 

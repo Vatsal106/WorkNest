@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Data.SqlClient;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace WorkNest.Project_Manager
@@ -54,9 +53,11 @@ namespace WorkNest.Project_Manager
         {
             try
             {
+
                 dbConn.dbConnect();
-                string query = "SELECT PROJECT_ID, PROJECT_NAME FROM PROJECT";
+                string query = "SELECT PROJECT_ID, PROJECT_NAME FROM PROJECT where PROJECT_MANAGER_ID= @empID";
                 SqlCommand cmd = new SqlCommand(query, dbConn.con);
+                cmd.Parameters.AddWithValue("@empID", Session["EmployeeID"].ToString());
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 ddlProject.DataSource = reader;
@@ -77,7 +78,7 @@ namespace WorkNest.Project_Manager
         {
             try
             {
-                string loggedInManagerId = Session["EmployeeID"]?.ToString();
+
 
                 dbConn.dbConnect();
                 string query = @"
@@ -85,18 +86,17 @@ namespace WorkNest.Project_Manager
                 FROM EMPLOYEE E
                 JOIN EMPLOYEE_ROLES ER ON E.EMPLOYEE_ID = ER.EMPLOYEE_ID
                 JOIN ROLES R ON ER.ROLE_ID = R.ROLE_ID
-                WHERE (R.ROLE_NAME = 'Project_Member' OR R.ROLE_NAME = 'Project_Manager')
-                AND E.DEPARTMENT_ID = @DepartmentID
-                AND E.EMPLOYEE_ID <> @LoggedInManagerID";  // Exclude the logged-in Project Manager
+                WHERE R.ROLE_NAME = 'Project_Member' 
+                AND E.DEPARTMENT_ID = @DepartmentID";  // Exclude the logged-in Project Manager
 
                 SqlCommand cmd = new SqlCommand(query, dbConn.con);
                 cmd.Parameters.AddWithValue("@DepartmentID", departmentId);
-                cmd.Parameters.AddWithValue("@LoggedInManagerID", loggedInManagerId);
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 ddlAssignTo.Items.Clear();
                 ddlAssignTo.Items.Add(new ListItem("-- Select Employee --", "0"));
-
+                ddlAssignTo.Items.Add(new ListItem("Unassigned", "0"));
+                ddlAssignTo.Items.Add(new ListItem("Youer Self", Session["EmployeeID"].ToString()));
                 while (reader.Read())
                 {
                     ddlAssignTo.Items.Add(new ListItem(reader["FULL_NAME"].ToString(), reader["EMPLOYEE_ID"].ToString()));
