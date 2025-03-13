@@ -4,12 +4,12 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="Manager_Head" runat="server">
     <style>
         .task-container {
-            max-width: 1000px;
-            margin: auto;
+            
+            margin: 30px;
             background: #F7F9FB;
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
         }
 
         .page-title {
@@ -91,7 +91,7 @@
                 <asp:GridView ID="gvTaskReports" runat="server" AutoGenerateColumns="false" CssClass="styled-table">
                     <Columns>
                         <asp:BoundField DataField="TASK_NAME" HeaderText="Task Name" />
-                        <asp:BoundField DataField="TASK_DESC" HeaderText="Task Description" />
+                        <asp:BoundField DataField="TASK_DESC" HeaderText="Task Description" ControlStyle-Width="200px" />
 <%--                        <asp:BoundField DataField="START_DATE" HeaderText="Start Date" DataFormatString="{0:dd-MMM-yyyy}" />--%>
                         <asp:BoundField DataField="DUE_DATE" HeaderText="Due Date" DataFormatString="{0:dd-MMM-yyyy}" />
                         <asp:BoundField DataField="STATUS" HeaderText="Status" />

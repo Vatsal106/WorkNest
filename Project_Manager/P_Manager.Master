@@ -389,7 +389,7 @@
             </div>
             
             <div id="tasksMenu" class="submenu">
-                <a href="Tasks.aspx">📋 Task List</a>
+                <a href="AllTasks.aspx">📋 Task List</a>
                 <a href="AddTask.aspx">➕ Add Task</a>
                 <a href="TaskReports.aspx">📊 Task Reports</a>
             </div>
