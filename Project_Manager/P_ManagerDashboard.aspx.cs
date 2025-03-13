@@ -117,7 +117,8 @@ namespace WorkNest.Project_Manager
             cmd.Parameters.AddWithValue("@EmployeeID", employeeId);
             cmd.Parameters.AddWithValue("@StartTime", startTime);
             cmd.ExecuteNonQuery();
-            dbConn.con.Close();
+            
+            LoadTimeLogs();
 
             ScriptManager.RegisterStartupScript(this, GetType(), "StartWorkTimer", "startWorkTimer();", true);
             btnClockIn.CssClass = "btn btn-success d-none";
@@ -138,7 +139,7 @@ namespace WorkNest.Project_Manager
             cmd.Parameters.AddWithValue("@EmployeeID", employeeId);
             cmd.Parameters.AddWithValue("@BreakStart", breakStart);
             cmd.ExecuteNonQuery();
-            dbConn.con.Close();
+            LoadTimeLogs();
 
             ScriptManager.RegisterStartupScript(this, GetType(), "StartBreakTimer", "stopWorkTimer(); startBreakTimer();", true);
             btnBreakTime.CssClass = "btn btn-warning d-none";
@@ -158,7 +159,7 @@ namespace WorkNest.Project_Manager
             cmd.Parameters.AddWithValue("@EmployeeID", employeeId);
             cmd.Parameters.AddWithValue("@BreakEnd", breakEnd);
             cmd.ExecuteNonQuery();
-            dbConn.con.Close();
+            LoadTimeLogs();
 
             ScriptManager.RegisterStartupScript(this, GetType(), "StopBreakTimer", "stopBreakTimer(); startWorkTimer();", true);
             btnStopBreak.CssClass = "btn btn-danger d-none";
@@ -184,7 +185,7 @@ namespace WorkNest.Project_Manager
             cmd.Parameters.AddWithValue("@EmployeeID", employeeId);
             cmd.Parameters.AddWithValue("@EndTime", endTime);
             cmd.ExecuteNonQuery();
-            dbConn.con.Close();
+            LoadTimeLogs();
 
             ScriptManager.RegisterStartupScript(this, GetType(), "StopAllTimers", "resetTimers();", true);
             btnClockIn.CssClass = "btn btn-success";
