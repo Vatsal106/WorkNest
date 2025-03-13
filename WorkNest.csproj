@@ -217,6 +217,7 @@
     <Content Include="login.aspx" />
     <Content Include="Logout.aspx" />
     <Content Include="Project_Manager\AddTask.aspx" />
+    <Content Include="Project_Manager\EmployeesUnderYou.aspx" />
     <Content Include="Project_Manager\ManagerTasks.aspx" />
     <Content Include="Project_Manager\AllTasks.aspx" />
     <Content Include="Project_Manager\EditTask.aspx" />
@@ -229,7 +230,6 @@
     <Content Include="Project_Manager\Tasks.aspx" />
     <Content Include="P_Member\MemberDashboard.aspx" />
     <Content Include="P_Member\MemberHome.aspx" />
-    <Content Include="Admin\SubmitReportOfTask.aspx" />
     <Content Include="P_Member\RequestLeave.aspx" />
     <Content Include="P_Member\SubmitReportOfTask.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -407,6 +407,13 @@
     <Compile Include="Project_Manager\AddTask.aspx.designer.cs">
       <DependentUpon>AddTask.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Project_Manager\EmployeesUnderYou.aspx.cs">
+      <DependentUpon>EmployeesUnderYou.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Project_Manager\EmployeesUnderYou.aspx.designer.cs">
+      <DependentUpon>EmployeesUnderYou.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Project_Manager\ManagerTasks.aspx.cs">
       <DependentUpon>ManagerTasks.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -505,13 +512,6 @@
     </Compile>
     <Compile Include="P_Member\MemberM.Master.designer.cs">
       <DependentUpon>MemberM.Master</DependentUpon>
-    </Compile>
-    <Compile Include="Admin\SubmitReportOfTask.aspx.cs">
-      <DependentUpon>SubmitReportOfTask.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\SubmitReportOfTask.aspx.designer.cs">
-      <DependentUpon>SubmitReportOfTask.aspx</DependentUpon>
     </Compile>
     <Compile Include="P_Member\RequestLeave.aspx.cs">
       <DependentUpon>RequestLeave.aspx</DependentUpon>
