@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Web.Script.Serialization;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace WorkNest.Project_Manager
 {
@@ -18,24 +19,28 @@ namespace WorkNest.Project_Manager
             }
             if (!IsPostBack)
             {
+                if (Session["TimeLogs"] == null) 
+                {
+                    LoadTimeLogs();
+                }
                 LoadEmployeeDetails();
-                LoadTimeLogs();
             }
         }
+
         public void LoadTimeLogs()
         {
             int employeeId = Convert.ToInt32(Session["EmployeeID"]);
             dbConn.dbConnect();
 
             string query = @"
-                SELECT 
-                    FORMAT(CONVERT(DATE, START_TIME), 'dd-MM-yyyy') AS LogDate, 
-                    SUM(TOTAL_WORK_HOURS) AS TotalWorkHours, 
-                    SUM(TOTAL_BREAK_HOURS) AS TotalBreakHours
-                FROM TIME_TRACKING
-                WHERE EMPLOYEE_ID = @EmployeeID AND START_TIME >= DATEADD(DAY, -6, GETDATE())
-                GROUP BY CONVERT(DATE, START_TIME)
-                ORDER BY LogDate";
+        SELECT 
+            FORMAT(CONVERT(DATE, START_TIME), 'dd-MM-yyyy') AS LogDate, 
+            SUM(TOTAL_WORK_HOURS) AS TotalWorkHours, 
+            SUM(TOTAL_BREAK_HOURS) AS TotalBreakHours
+        FROM TIME_TRACKING
+        WHERE EMPLOYEE_ID = @EmployeeID AND START_TIME >= DATEADD(DAY, -6, GETDATE())
+        GROUP BY CONVERT(DATE, START_TIME)
+        ORDER BY LogDate";
 
             SqlCommand cmd = new SqlCommand(query, dbConn.con);
             cmd.Parameters.AddWithValue("@EmployeeID", employeeId);
@@ -44,6 +49,9 @@ namespace WorkNest.Project_Manager
             DataTable dt = new DataTable();
             da.Fill(dt);
             dbConn.con.Close();
+            Session["TimeLogs"] = dt;
+
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
             List<Dictionary<string, object>> rows = new List<Dictionary<string, object>>();
 
             foreach (DataRow row in dt.Rows)
@@ -56,11 +64,13 @@ namespace WorkNest.Project_Manager
                 rows.Add(rowData);
             }
 
-            JavaScriptSerializer serializer = new JavaScriptSerializer();
             string jsonData = serializer.Serialize(rows);
-
-            Response.Write("<script>console.log(" + jsonData + ");</script>");
             ScriptManager.RegisterStartupScript(this, GetType(), "LoadChart", "loadChart(" + jsonData + ");", true);
+        }
+
+        protected void AttendanceCalendar_VisibleMonthChanged(object sender, MonthChangedEventArgs e)
+        {
+            LoadTimeLogs(); 
         }
 
         public void LoadEmployeeDetails()
@@ -86,7 +96,6 @@ namespace WorkNest.Project_Manager
                     lblEmployeeName.Text = fullName;
                     lblEmployeeRole.Text = reader["ROLE_NAME"].ToString();
 
-                    // Generate initials from the full name
                     string[] nameParts = fullName.Split(' ');
                     string initials = nameParts[0][0].ToString().ToUpper();
                     if (nameParts.Length > 1)
@@ -104,21 +113,73 @@ namespace WorkNest.Project_Manager
            
         
         }
+        protected void AttendanceCalendar_DayRender(object sender, DayRenderEventArgs e)
+        {
+            if (e.Day.IsOtherMonth) return; 
+
+            int employeeId = Convert.ToInt32(Session["EmployeeID"]);
+            DateTime date = e.Day.Date;
+            string formattedDate = date.ToString("yyyy-MM-dd");
+
+            dbConn.dbConnect();
+
+            string query = "SELECT STATUS FROM ATTENDANCE WHERE EMPLOYEE_ID = @EmployeeID AND ATTENDANCE_DATE = @AttendanceDate";
+            SqlCommand cmd = new SqlCommand(query, dbConn.con);
+            cmd.Parameters.AddWithValue("@EmployeeID", employeeId);
+            cmd.Parameters.AddWithValue("@AttendanceDate", formattedDate);
+
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            string status = "Absent"; 
+            string statusClass = "absent-dot"; 
+            string tooltipText = "Absent";
+
+            if (reader.Read())
+            {
+                status = reader["STATUS"].ToString();
+                if (status == "Present")
+                {
+                    statusClass = "present-dot"; 
+                    tooltipText = "Present";
+                }
+            }
+
+            reader.Close();
+            dbConn.con.Close();
+
+            e.Cell.Controls.Add(new LiteralControl($"<div class='{statusClass}' title='{tooltipText}'></div>"));
+        }
+
+
+
+
         protected void btnClockIn_Click(object sender, EventArgs e)
         {
             int employeeId = Convert.ToInt32(Session["EmployeeID"]);
             DateTime startTime = DateTime.Now;
+            string currentDate = startTime.ToString("yyyy-MM-dd");
 
             string query = "INSERT INTO TIME_TRACKING (EMPLOYEE_ID, START_TIME) VALUES (@EmployeeID, @StartTime)";
             
             dbConn.dbConnect();
+            LoadTimeLogs();
 
             SqlCommand cmd = new SqlCommand(query, dbConn.con);
             cmd.Parameters.AddWithValue("@EmployeeID", employeeId);
             cmd.Parameters.AddWithValue("@StartTime", startTime);
             cmd.ExecuteNonQuery();
-            
-            LoadTimeLogs();
+
+            string attendanceQuery = @"
+        IF NOT EXISTS (SELECT 1 FROM ATTENDANCE WHERE EMPLOYEE_ID = @EmployeeID AND ATTENDANCE_DATE = @AttendanceDate)
+        BEGIN
+            INSERT INTO ATTENDANCE (EMPLOYEE_ID, ATTENDANCE_DATE, STATUS) 
+            VALUES (@EmployeeID, @AttendanceDate, 'Present')
+        END";
+
+            SqlCommand attendanceCmd = new SqlCommand(attendanceQuery, dbConn.con);
+            attendanceCmd.Parameters.AddWithValue("@EmployeeID", employeeId);
+            attendanceCmd.Parameters.AddWithValue("@AttendanceDate", currentDate);
+            attendanceCmd.ExecuteNonQuery();
 
             ScriptManager.RegisterStartupScript(this, GetType(), "StartWorkTimer", "startWorkTimer();", true);
             btnClockIn.CssClass = "btn btn-success d-none";

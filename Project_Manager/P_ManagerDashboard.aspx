@@ -69,7 +69,7 @@ function startBreakTimer() {
         function loadChart(chartData) {
             let ctx = document.getElementById('timelogChart').getContext('2d');
 
-            let labels = chartData.map(item => item.LogDate); // Now LogDate is already formatted
+            let labels = chartData.map(item => item.LogDate); 
 
             let workHours = chartData.map(item => Math.round(item.TotalWorkHours));
             let breakHours = chartData.map(item => Math.round(item.TotalBreakHours));
@@ -143,7 +143,7 @@ function startBreakTimer() {
     </script>
     <style>
         #timelogChart {
-    max-height: 450px !important; /* Adjust height to make the chart smaller */
+    max-height: 450px !important; 
     max-width: 100%;
 }
         .time-tracker {
@@ -181,6 +181,45 @@ function startBreakTimer() {
 .btn {
     border-radius: 5px;
 }
+.custom-calendar {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+}
+
+.custom-calendar td {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    font-size: 14px;
+    position: relative;
+}
+
+.present-dot, .absent-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+.present-dot {
+    background-color: #4CAF50;
+}
+
+
+.absent-dot {
+    background-color: #F44336;
+}
+/*.custom-calendar a {
+    text-decoration: none !important;
+    color: inherit !important; 
+    cursor: default; 
+    pointer-events: none; 
+}*/
 
         </style>
 </asp:Content>
@@ -192,7 +231,6 @@ function startBreakTimer() {
 <asp:Content ID="Content3" ContentPlaceHolderID="Manager_Content" runat="server">
     <div class="container mt-4">
         <div class="row">
-            <!-- Left Content -->
             <div class="col-lg-8">
                 <div class="card p-3">
                     <h4>Notice Board (0)</h4>
@@ -208,7 +246,6 @@ function startBreakTimer() {
                 </div>
             </div>
 
-            <!-- Right Sidebar (Time Tracker) -->
             <div class="col-lg-4">
                 <div class="card p-3 time-tracker">
                     <div class="text-center">
@@ -244,10 +281,14 @@ function startBreakTimer() {
                     </div>
                 </div>
 
-                <div class="card p-3 mt-4">
-                    <h6>Attendance Calendar - Dec 2024</h6>
-                    <!-- Attendance Calendar -->
-                </div>
+              <div class="card p-3 mt-4">
+    <h6>Attendance Calendar</h6>
+    <asp:Calendar ID="AttendanceCalendar" runat="server" 
+        OnVisibleMonthChanged="AttendanceCalendar_VisibleMonthChanged" 
+    OnDayRender="AttendanceCalendar_DayRender" 
+    CssClass="custom-calendar">
+</asp:Calendar>
+</div>
             </div>
         </div>
     </div>
