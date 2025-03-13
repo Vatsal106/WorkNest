@@ -3,262 +3,440 @@
 <!DOCTYPE html>
 <html>
 <head runat="server">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <title>Project Manager Panel</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 
-    <title>Admin Panel</title>
-       <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-        }
+     <style>
+     html, body {
+         overflow: auto; 
+         height: 100%;
+     }
 
-        .sidebar {
-            width: 250px;
-            background-color: #0d0d30;
-            color: #333333;
-            height: 100vh;
-            padding-top: 20px;
-            position: fixed;
-            text-align: left;
-            transition: left 0.3s ease; /* Smooth transition for sliding */
-            padding-left: 20px;
-            left: 0; /* Sidebar is visible by default on larger screens */
-        }
+     body {
+         font-family: Arial, sans-serif;
+         margin: 0;
+         padding: 0;
+         display: flex;
+         flex-direction: column;
+     }
 
-      
+     
+     .sidebar {
+         width: 250px;
+         background-color: #0d0d30;
+         color: #E4F1F9;
+         height: 100vh;
+         padding-top: 20px;
+         position: fixed;
+         text-align: left;
+         transition: left 0.3s ease-in-out;
+         padding-left: 20px;
+         left: 0;
+         overflow-y: auto;
+         scrollbar-width: none;
+     }
+
+         .sidebar::-webkit-scrollbar {
+             display: none;
+         }
+
+         
+         .sidebar .logo {
+             text-align: center;
+             margin-bottom: 20px;
+         }
+
+             .sidebar .logo img {
+                 width: 180px;
+                 height: auto;
+             }
+
+        
+         .sidebar h3 {
+             color: #FF8C00;
+             font-size: 22px;
+             font-weight: bold;
+             padding-bottom: 15px;
+             text-align: center;
+         }
+
+        
+         .sidebar .menu {
+             display: flex;
+             align-items: center;
+             color: #E4F1F9;
+             padding: 12px 15px;
+             text-decoration: none;
+             font-size: 16px;
+             font-weight: 500;
+             transition: background 0.3s ease-in-out;
+             border-radius: 5px 0 0 5px;
+             cursor: pointer;
+         }
+
+             .sidebar .menu:hover {
+                 background-color: #4A6D85;
+                 color: white;
+             }
+
+         
+         .sidebar .has-submenu {
+             cursor: pointer;
+             display: flex;
+             justify-content: space-between;
+             align-items: center;
+         }
+
+     .submenu {
+         display: none;
+         padding-left: 20px;
+     }
+
+         .submenu a {
+             display: block;
+             padding: 10px;
+             color: #E4F1F9;
+             text-decoration: none;
+             font-size: 14px;
+             transition: background 0.3s ease-in-out;
+             border-radius: 5px;
+         }
+
+             .submenu a:hover {
+                 background-color: #4A6D85;
+             }
+
+         
+         .submenu.active {
+             display: block;
+         }
+
+     
+     @media (max-width: 768px) {
+         .sidebar {
+             left: -250px;
+         }
+
+             .sidebar.open {
+                 left: 0;
+                 z-index: 2000;
+             }
+
+         .menu-button {
+             display: block;
+             position: absolute;
+             top: 20px;
+             left: 15px;
+             font-size: 24px;
+             background: none;
+             border: none;
+             color: #FF8C00;
+             cursor: pointer;
+         }
+     }
 
 
-        .sidebar .logo {
-            text-align: center;
-            margin-bottom: 20px;
-        }
+     .header {
+         width: calc(100% - 250px);
+         transition: width 0.3s ease;
+         background-color: #F7F9FB;
+         color: #333333;
+         padding: 15px 40px;
+         text-align: right;
+         position: fixed;
+         left: 250px;
+         top: 0;
+         display: flex;
+         align-items: center;
+         justify-content: space-between;
+         box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+         z-index: 1000;
+     }
 
-            .sidebar .logo img {
-                width: 180px;
-                height: auto;
-            }
+     .HeaderTitle {
+         color: black;
+         font-size: 20px;
+         margin-left: 0px;
+         text-align: center;
+     }
 
-        .sidebar h3 {
-            color: #FF8C00;
-            font-size: 24px;
-            font-weight: bold;
-            padding-bottom: 20px;
-        }
+     .Right-Header {
+         display: flex;
+         align-items: center;
+         justify-content: space-between;
+     }
 
-        .sidebar .menu {
-            display: flex;
-            align-items: center;
-            color: #E4F1F9;
-            padding: 15px;
-            text-decoration: none;
-            font-size: 18px;
-            transition: background 0.3s;
-        }
+     .notification {
+         position: relative;
+         display: inline-block;
+         margin-left: 15px;
+         padding-inline: 10px;
+     }
 
-            .sidebar .menu:hover {
-                background-color: #4A6D85;
-                color: white;
-            }
+     .notification-icon {
+         text-decoration: none;
+         font-size: 18px;
+         position: relative;
+     }
 
-        .header {
-            width: calc(100% - 250px);
-            background-color: #F7F9FB;
-            color: #333333;
-            padding: 15px 40px;
-            text-align: right;
-            position: fixed;
-            left: 250px;
-            top: 0;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
-        }
+     .badge {
+         position: absolute;
+         top: -5px;
+         right: -10px;
+         background-color: red;
+         color: white;
+         border-radius: 50%;
+         padding: 3px 7px;
+         font-size: 12px;
+     }
 
-        .Right-Header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
+     
+     .ddlAdd {
+         position: relative;
+         display: inline-block;
+         margin-right: 10px;
+     }
 
-        .ddlAdd {
-            position: relative;
-            display: inline-block;
-            margin-right: 10px;
-        }
+         .ddlAdd button {
+             background-color: #FF8C00;
+             color: white;
+             padding: 10px 20px;
+             border: none;
+             cursor: pointer;
+             border-radius: 5px;
+             font-size: 16px;
+             position: relative;
+             z-index: 10;
+         }
 
-            .ddlAdd button {
-                background-color: #FF8C00;
-                color: white;
-                padding: 10px 20px;
-                border: none;
-                cursor: pointer;
-                border-radius: 5px;
-                font-size: 16px;
-            }
+             .ddlAdd button:hover {
+                 background-color: #e07b00;
+             }
 
-                .ddlAdd button:hover {
-                    background-color: #e07b00;
-                }
+     
+     .dropdown-content {
+         display: none;
+         position: absolute;
+         top: 100%; 
+         left: 0;
+         background-color: #F7F9FB;
+         min-width: 160px;
+         box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+         border-radius: 5px;
+         z-index: 2000; 
+     }
 
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #F7F9FB;
-            min-width: 160px;
-            box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
-            z-index: 1;
-            border-radius: 5px;
-        }
+         .dropdown-content a {
+             color: #333333;
+             padding: 10px;
+             text-decoration: none;
+             display: block;
+         }
 
-            .dropdown-content a {
-                color: #333333;
-                padding: 10px;
-                text-decoration: none;
-                display: block;
-            }
+             .dropdown-content a:hover {
+                 background-color: #E4F1F9;
+             }
 
-                .dropdown-content a:hover {
-                    background-color: #E4F1F9;
-                }
+     
+     .ddlAdd:hover .dropdown-content {
+         display: block;
+     }
 
-        .ddlAdd:hover .dropdown-content {
-            display: block;
-        }
+     .profile {
+         display: flex;
+         align-items: center;
+         margin-right: 3px;
+     }
 
-        .profile {
-            display: flex;
-            align-items: center;
-            margin-right: 3px;
-        }
+         .profile img {
+             width: 40px;
+             height: 40px;
+             border-radius: 50%;
+         }
 
-            .profile img {
-                width: 40px;
-                height: 40px;
-                border-radius: 50%;
-                margin-left: 10px;
-            }
+     
+     .content {
+         margin-left: 250px;
+         padding: 20px;
+         margin-top: 100px;
+         position: relative;
+         z-index: 1;
+         overflow-y: auto; 
+         min-height: 100vh; 
+         height: auto;
+         transition: margin-left 0.3s ease;
+     }
 
-        .content {
-            margin-left: 250px;
-            padding: 20px;
-            margin-top: 80px;
-        }
+     
+     .menu-button {
+         display: none;
+         height: 40px;
+         width: 40px;
+     }
 
-        .menu-button {
-            display: none;
-            height: 40px;
-            width: 40px;
-        }
-          @media (max-width: 768px) { /* Mobile (Smaller screens) */
-      .sidebar {
-          left: -250px; /* Sidebar is hidden off-screen by default */
-      }
+     
+     @media (max-width: 768px) {
+         .sidebar {
+             left: -250px;
+         }
 
-          .sidebar.open {
-              left: 0; /* Sidebar is visible when the 'open' class is added */
-          }
+             .sidebar.open {
+                 top: 74px;
+                 z-index: 2000;
+                 left: 0;
+             }
 
-      .menu-button {
-          display: block; /* Show the menu button on smaller screens */
-          position: absolute;
-          top: 20px;
-          left: 20px;
-          font-size: 30px;
-          background: none;
-          border: none;
-          color: #FF8C00;
-          cursor: pointer;
-      }
+         .menu-button {
+             display: block;
+             position: absolute;
+             top: 20px;
+             left: 15px;
+             font-size: 30px;
+             background: none;
+             border: none;
+             color: #FF8C00;
+             cursor: pointer;
+         }
 
-      .header {
-          width: 100%;
-          left: 0px;
-      }
+         .header {
+             width: 100%;
+             left: 0;
+             padding-left: 60px;
+         }
 
-      .content {
-          margin-left: 0px;
-      }
-  }
-    </style>
-    <script>
-        function toggleSidebar() {
-            var sidebar = document.querySelector('.sidebar');
-            sidebar.classList.toggle('open'); // Toggle the 'open' class to show/hide the sidebar
-        }
+         .Left-Header {
+             display: flex;
+             align-items: center;
+             justify-content: space-between;
+             padding-left: 50px;
+         }
 
-        // Close sidebar when clicking outside of it (on smaller screens)
-        window.onclick = function (event) {
-            var sidebar = document.querySelector('.sidebar');
-            var menuButton = document.querySelector('.menu-button');
+             .Left-Header h2 {
+                 font-size: 16px;
+                 white-space: nowrap;
+                 overflow: hidden;
+                 text-overflow: ellipsis;
+                 max-width: calc(100% - 60px);
+             }
 
-            // Close sidebar if clicked outside
-            if (!sidebar.contains(event.target) && !menuButton.contains(event.target)) {
-                sidebar.classList.remove('open');
-            }
+         .content {
+             margin-left: 0px;
+             margin-top: 60px;
+         }
+     }
+ </style>
+ <script>
+     function toggleSidebar() {
+         document.querySelector('.sidebar').classList.toggle('open');
+     }
 
-            // Close dropdown when clicking outside
-            var dropdown = document.getElementById('dropdown-content');
-            var ddlAdd = document.getElementById('ddlAdd');
+     function toggleDropdown() {
+         var dropdown = document.getElementById('dropdown-content');
+         dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+     }
 
-            if (!ddlAdd.contains(event.target)) {
-                dropdown.style.display = 'none';
-            }
-        };
+     function toggleSubmenu(id) {
+         document.querySelectorAll('.submenu').forEach(function (submenu) {
+             if (submenu.id !== id) {
+                 submenu.classList.remove("active");
+             }
+         });
 
-        // Dropdown toggle
-        function toggleDropdown() {
-            var dropdown = document.getElementById('dropdown-content');
-            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-        }
-    </script>
-    <div>
-        <asp:ContentPlaceHolder ID="MemberHead" runat="server"></asp:ContentPlaceHolder>
-    </div>
+         document.getElementById(id).classList.toggle("active");
+     }
+ </script>
+    
+        <asp:ContentPlaceHolder ID="Manager_Head" runat="server"></asp:ContentPlaceHolder>
+    
 </head>
 <body>
-    <form id="MemberForm" runat="server">
-        <!-- Sidebar -->
-        <div class="sidebar">
+    <form id="Managerform" runat="server">
+               <div class="sidebar">
             <div class="logo">
-                <a href="MemberHome.aspx">
+                <a href="AdminHome.aspx">
                     <img src="../Images/Logo Light Blue Transparent.png" alt="Logo">
                 </a>
             </div>
             <h3>Admin Panel</h3>
-            <a class="menu" href="MemberDashboard.aspx">📊 Dashboard</a>
-            <a class="menu" href="Users.aspx">👥 Users</a>
+
+            <div class="menu has-submenu" onclick="toggleSubmenu('dashboardMenu')">
+                📊 Dashboard ▼
+            </div>
+            <div id="dashboardMenu" class="submenu">
+                <a href="MemberDashboard.aspx">📈 Overview</a>
+            </div>
+
+            <div class="menu has-submenu" onclick="toggleSubmenu('employeesMenu')">
+                👥 Employees ▼
+            </div>
+            <div id="employeesMenu" class="submenu">
+                <a href="Employees.aspx">📝 Employee List</a>
+            </div>
+
+            <div class="menu has-submenu" onclick="toggleSubmenu('projectsMenu')">
+                📁 Projects ▼
+            </div>
+            <div id="projectsMenu" class="submenu">
+                <a href="Projects.aspx">📂 All Projects</a>
+
+            </div>
+            <div class="menu has-submenu" onclick="toggleSubmenu('tasksMenu')">
+                ✅ Tasks ▼
+   
+            </div>
+            
+            <div id="tasksMenu" class="submenu">
+                <a href="AllTasks.aspx">📋 Task List</a>
+                <a href="TaskReports.aspx">📊 Task Reports</a>
+            </div>
+                        <div class="menu has-submenu" onclick="toggleSubmenu('leavesMenu')">
+    🍃 Leaves ▼
+</div>
+<div id="leavesMenu" class="submenu">
+    <a href="RequestLeave.aspx">✅ Add Leave</a>
+</div>
             <a class="menu" href="Settings.aspx">⚙️ Settings</a>
             <a class="menu" href="Logout.aspx">🚪 Logout</a>
         </div>
 
 
+
+
         <div class="header">
             <div class="Left-Header">
-                 <button class="menu-button" onclick="toggleSidebar()">☰</button>
-                <asp:ContentPlaceHolder ID="Member_Header_Title" runat="server"></asp:ContentPlaceHolder>
+
+                <button type="button" class="menu-button" onclick="toggleSidebar(event)">☰</button>
+                <div class="HeaderTitle">
+                    <asp:ContentPlaceHolder ID="Manager_Header_Title" runat="server"></asp:ContentPlaceHolder>
+                </div>
             </div>
             <div class="Right-Header">
+
+
+                <div class="notification">
+                    <a href="Notifications.aspx" class="notification-icon">🔔 <span id="notificationBadge" runat="server" class="badge">3</span>
+                    </a>
+                </div>
                 <div id="ddlAdd" class="ddlAdd">
                     <button type="button" onclick="toggleDropdown()">Add</button>
                     <div id="dropdown-content" class="dropdown-content">
-                        <a href="registration.aspx">Add Employee</a>
-                        <a href="addProject.aspx">Add Project</a>
-                        <a href="ChangeRole.aspx">Change in Role</a>
+                        <a href="AddEmployee.aspx">Add Employee</a>
+                        <a href="addProjects.aspx">Add Project</a>
+                        <a href="addClients.aspx">Add Client</a>
+                        <a href="changeRoles.aspx">Change in Role</a>
                     </div>
                 </div>
                 <div class="profile">
+
                     <asp:Label ID="lblFullName" runat="server" Text="*"></asp:Label>
                     <asp:Image ID="profilePhoto" runat="server" Width="40" Height="40" CssClass="profile-image" />
                 </div>
             </div>
         </div>
-        <!-- Main Content -->
+
+        
         <div class="content">
-            <asp:ContentPlaceHolder ID="MemberContent" runat="server"></asp:ContentPlaceHolder>
+            <asp:ContentPlaceHolder ID="Manager_Content" runat="server"></asp:ContentPlaceHolder>
         </div>
     </form>
 </body>

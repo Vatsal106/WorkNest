@@ -15,31 +15,40 @@ namespace WorkNest.P_Member
     {
 
         /// <summary>
-        /// MemberHead control.
+        /// Manager_Head control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder MemberHead;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder Manager_Head;
 
         /// <summary>
-        /// MemberForm control.
+        /// Managerform control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm MemberForm;
+        protected global::System.Web.UI.HtmlControls.HtmlForm Managerform;
 
         /// <summary>
-        /// Member_Header_Title control.
+        /// Manager_Header_Title control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder Member_Header_Title;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder Manager_Header_Title;
+
+        /// <summary>
+        /// notificationBadge control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl notificationBadge;
 
         /// <summary>
         /// lblFullName control.
@@ -60,12 +69,12 @@ namespace WorkNest.P_Member
         protected global::System.Web.UI.WebControls.Image profilePhoto;
 
         /// <summary>
-        /// MemberContent control.
+        /// Manager_Content control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder MemberContent;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder Manager_Content;
     }
 }

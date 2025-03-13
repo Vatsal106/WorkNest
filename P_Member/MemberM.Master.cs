@@ -7,7 +7,7 @@ namespace WorkNest.P_Member
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //if (Session["UserRole"] == null || Session["UserRole"].ToString() != "Project_Member")
+            //if (Session["UserRole"] == null || Session["UserRole"].ToString() != "Project_Manager")
             //{
             //    Response.Redirect("~/AccessDenied.aspx");
             //}
@@ -60,5 +60,7 @@ namespace WorkNest.P_Member
                 reader.Close();
             }
         }
+
+
     }
 }
