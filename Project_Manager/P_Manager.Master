@@ -425,10 +425,8 @@
                 <div id="ddlAdd" class="ddlAdd">
                     <button type="button" onclick="toggleDropdown()">Add</button>
                     <div id="dropdown-content" class="dropdown-content">
-                        <a href="AddEmployee.aspx">Add Employee</a>
-                        <a href="addProjects.aspx">Add Project</a>
-                        <a href="addClients.aspx">Add Client</a>
-                        <a href="changeRoles.aspx">Change in Role</a>
+                        <a href="AddTask.aspx">Add Task</a>
+                        <a href="LeaveList.aspx">Approve Leave</a>
                     </div>
                 </div>
                 <div class="profile">
