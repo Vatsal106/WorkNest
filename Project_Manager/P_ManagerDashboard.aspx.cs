@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
+using System.Web.Script.Serialization;
 using System.Web.UI;
 
 namespace WorkNest.Project_Manager
@@ -16,8 +19,48 @@ namespace WorkNest.Project_Manager
             if (!IsPostBack)
             {
                 LoadEmployeeDetails();
-                
+                LoadTimeLogs();
             }
+        }
+        public void LoadTimeLogs()
+        {
+            int employeeId = Convert.ToInt32(Session["EmployeeID"]);
+            dbConn.dbConnect();
+
+            string query = @"
+                SELECT 
+                    FORMAT(CONVERT(DATE, START_TIME), 'dd-MM-yyyy') AS LogDate, 
+                    SUM(TOTAL_WORK_HOURS) AS TotalWorkHours, 
+                    SUM(TOTAL_BREAK_HOURS) AS TotalBreakHours
+                FROM TIME_TRACKING
+                WHERE EMPLOYEE_ID = @EmployeeID AND START_TIME >= DATEADD(DAY, -6, GETDATE())
+                GROUP BY CONVERT(DATE, START_TIME)
+                ORDER BY LogDate";
+
+            SqlCommand cmd = new SqlCommand(query, dbConn.con);
+            cmd.Parameters.AddWithValue("@EmployeeID", employeeId);
+
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            dbConn.con.Close();
+            List<Dictionary<string, object>> rows = new List<Dictionary<string, object>>();
+
+            foreach (DataRow row in dt.Rows)
+            {
+                Dictionary<string, object> rowData = new Dictionary<string, object>();
+                foreach (DataColumn col in dt.Columns)
+                {
+                    rowData[col.ColumnName] = row[col];
+                }
+                rows.Add(rowData);
+            }
+
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            string jsonData = serializer.Serialize(rows);
+
+            Response.Write("<script>console.log(" + jsonData + ");</script>");
+            ScriptManager.RegisterStartupScript(this, GetType(), "LoadChart", "loadChart(" + jsonData + ");", true);
         }
 
         public void LoadEmployeeDetails()

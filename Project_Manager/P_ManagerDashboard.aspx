@@ -2,6 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Manager_Head" runat="server">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         var workTimer, breakTimer;
         var workSeconds = sessionStorage.getItem("workSeconds") ? parseInt(sessionStorage.getItem("workSeconds")) : 0;
@@ -65,8 +66,86 @@ function startBreakTimer() {
 
 
         }
+        function loadChart(chartData) {
+            let ctx = document.getElementById('timelogChart').getContext('2d');
+
+            let labels = chartData.map(item => item.LogDate); // Now LogDate is already formatted
+
+            let workHours = chartData.map(item => Math.round(item.TotalWorkHours));
+            let breakHours = chartData.map(item => Math.round(item.TotalBreakHours));
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: "Work Hours",
+                            data: workHours,
+                            backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                            borderWidth: 0
+                        },
+                        {
+                            label: "Break Hours",
+                            data: breakHours,
+                            backgroundColor: 'rgba(255, 99, 132, 0.6)',
+                            borderWidth: 0
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                display: false 
+                            },
+                            ticks: {
+                                stepSize: 1 ,
+                                 padding: 15
+                            },
+                            title: {
+                                display: true,
+                                text: 'Hours',
+                                padding: {
+                                    top: 10, 
+                                    bottom: 10 
+                                }
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false 
+                            },
+                            title: {
+                                display: true,
+                                text: 'Days',
+                                padding: {
+                                    top: 10,
+                                    bottom: 10 
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                padding: 20 
+                            }
+                        }
+                    }
+                }
+            });
+        }
     </script>
     <style>
+        #timelogChart {
+    max-height: 450px !important; /* Adjust height to make the chart smaller */
+    max-width: 100%;
+}
         .time-tracker {
     background: #fff;
     border-radius: 10px;
@@ -124,8 +203,8 @@ function startBreakTimer() {
                 </div>
 
                 <div class="card p-3 mt-4">
-                    <h4>My Timelogs - Dec 2024</h4>
-                    <!-- Your Timelogs Chart -->
+                    <h4>My Timelogs - Last 7 Days</h4>
+                    <canvas id="timelogChart" width="500" height="400"></canvas>
                 </div>
             </div>
 
