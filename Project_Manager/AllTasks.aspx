@@ -47,6 +47,7 @@
                 padding: 10px;
                 border: 1px solid #ddd;
                 text-align: left;
+                max-width: 250px;
             }
 
             .styled-table th {

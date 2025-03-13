@@ -187,7 +187,7 @@
                     <asp:TemplateField HeaderText="Attachment">
                         <ItemTemplate>
                             <asp:HyperLink ID="lnkDownload" runat="server"
-                                NavigateUrl='<%# "~/Admin/DownloadReport.aspx?LeaveID=" + Eval("LEAVE_ID") %>'
+                                NavigateUrl='<%# "~/DownloadReport.aspx?LeaveID=" + Eval("LEAVE_ID") %>'
                                 CssClass="btn-download">
                                 <i class="icon">📥</i> Download
                             </asp:HyperLink>

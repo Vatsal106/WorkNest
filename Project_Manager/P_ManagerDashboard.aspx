@@ -11,31 +11,31 @@
         document.addEventListener("DOMContentLoaded", function () {
             if (workSeconds > 0) {
                 document.getElementById("<%= lblClockInTime.ClientID %>").innerText = formatTime(workSeconds);
-    }
-    if (breakSeconds > 0) {
-        document.getElementById("<%= lblBreakTime.ClientID %>").innerText = formatTime(breakSeconds);
-    }
-});
+            }
+            if (breakSeconds > 0) {
+                document.getElementById("<%= lblBreakTime.ClientID %>").innerText = formatTime(breakSeconds);
+            }
+        });
 
-function startWorkTimer() {
-    clearInterval(workTimer);
-    workTimer = setInterval(function () {
-        workSeconds++;
-        sessionStorage.setItem("workSeconds", workSeconds);
-        document.getElementById("<%= lblClockInTime.ClientID %>").innerText = formatTime(workSeconds);
+        function startWorkTimer() {
+            clearInterval(workTimer);
+            workTimer = setInterval(function () {
+                workSeconds++;
+                sessionStorage.setItem("workSeconds", workSeconds);
+                document.getElementById("<%= lblClockInTime.ClientID %>").innerText = formatTime(workSeconds);
     }, 1000);
-}
+        }
 
-function stopWorkTimer() {
-    clearInterval(workTimer);
-}
+        function stopWorkTimer() {
+            clearInterval(workTimer);
+        }
 
-function startBreakTimer() {
-    clearInterval(breakTimer);
-    breakTimer = setInterval(function () {
-        breakSeconds++;
-        sessionStorage.setItem("breakSeconds", breakSeconds);
-        document.getElementById("<%= lblBreakTime.ClientID %>").innerText = formatTime(breakSeconds);
+        function startBreakTimer() {
+            clearInterval(breakTimer);
+            breakTimer = setInterval(function () {
+                breakSeconds++;
+                sessionStorage.setItem("breakSeconds", breakSeconds);
+                document.getElementById("<%= lblBreakTime.ClientID %>").innerText = formatTime(breakSeconds);
     }, 1000);
         }
 
@@ -69,7 +69,7 @@ function startBreakTimer() {
         function loadChart(chartData) {
             let ctx = document.getElementById('timelogChart').getContext('2d');
 
-            let labels = chartData.map(item => item.LogDate); 
+            let labels = chartData.map(item => item.LogDate);
 
             let workHours = chartData.map(item => Math.round(item.TotalWorkHours));
             let breakHours = chartData.map(item => Math.round(item.TotalBreakHours));
@@ -100,31 +100,31 @@ function startBreakTimer() {
                         y: {
                             beginAtZero: true,
                             grid: {
-                                display: false 
+                                display: false
                             },
                             ticks: {
-                                stepSize: 1 ,
-                                 padding: 15
+                                stepSize: 1,
+                                padding: 15
                             },
                             title: {
                                 display: true,
                                 text: 'Hours',
                                 padding: {
-                                    top: 10, 
-                                    bottom: 10 
+                                    top: 10,
+                                    bottom: 10
                                 }
                             }
                         },
                         x: {
                             grid: {
-                                display: false 
+                                display: false
                             },
                             title: {
                                 display: true,
                                 text: 'Days',
                                 padding: {
                                     top: 10,
-                                    bottom: 10 
+                                    bottom: 10
                                 }
                             }
                         }
@@ -133,7 +133,7 @@ function startBreakTimer() {
                         legend: {
                             position: 'top',
                             labels: {
-                                padding: 20 
+                                padding: 20
                             }
                         }
                     }
@@ -143,85 +143,86 @@ function startBreakTimer() {
     </script>
     <style>
         #timelogChart {
-    max-height: 450px !important; 
-    max-width: 100%;
-}
+            max-height: 450px !important;
+            max-width: 100%;
+        }
+
         .time-tracker {
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
 
-.profile-circle {
-    width: 60px;
-    height: 60px;
-    background: #007bff;
-    color: #fff;
-    font-size: 24px;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    margin: auto;
-}
+        .profile-circle {
+            width: 60px;
+            height: 60px;
+            background: #007bff;
+            color: #fff;
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin: auto;
+        }
 
-.timing-box {
-    background: #f8f9fa;
-    padding: 10px;
-    border-radius: 5px;
-}
+        .timing-box {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+        }
 
-.time-label {
-    font-size: 18px;
-    font-weight: bold;
-    display: block;
-}
+        .time-label {
+            font-size: 18px;
+            font-weight: bold;
+            display: block;
+        }
 
-.btn {
-    border-radius: 5px;
-}
-.custom-calendar {
-    width: 100%;
-    border-collapse: collapse;
-    font-family: Arial, sans-serif;
-}
+        .btn {
+            border-radius: 5px;
+        }
 
-.custom-calendar td {
-    width: 40px;
-    height: 40px;
-    text-align: center;
-    font-size: 14px;
-    position: relative;
-}
+        .custom-calendar {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: Arial, sans-serif;
+        }
 
-.present-dot, .absent-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    position: absolute;
-    bottom: 5px;
-    left: 50%;
-    transform: translateX(-50%);
-}
+            .custom-calendar td {
+                width: 40px;
+                height: 40px;
+                text-align: center;
+                font-size: 14px;
+                position: relative;
+            }
 
-
-.present-dot {
-    background-color: #4CAF50;
-}
+        .present-dot, .absent-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
 
 
-.absent-dot {
-    background-color: #F44336;
-}
-/*.custom-calendar a {
+        .present-dot {
+            background-color: #4CAF50;
+        }
+
+
+        .absent-dot {
+            background-color: #F44336;
+        }
+        /*.custom-calendar a {
     text-decoration: none !important;
     color: inherit !important; 
     cursor: default; 
     pointer-events: none; 
 }*/
-
-        </style>
+    </style>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="Manager_Header_Title" runat="server">
@@ -249,16 +250,16 @@ function startBreakTimer() {
             <div class="col-lg-4">
                 <div class="card p-3 time-tracker">
                     <div class="text-center">
-    <div class="profile-circle">
-        <asp:Label ID="lblInitials" runat="server"></asp:Label>
-    </div>
-    <h5>
-        <asp:Label ID="lblEmployeeName" runat="server" Text="Loading..." />
-    </h5>
-    <p class="text-muted">
-        <asp:Label ID="lblEmployeeRole" runat="server" Text="Loading..." />
-    </p>
-</div>
+                        <div class="profile-circle">
+                            <asp:Label ID="lblInitials" runat="server"></asp:Label>
+                        </div>
+                        <h5>
+                            <asp:Label ID="lblEmployeeName" runat="server" Text="Loading..." />
+                        </h5>
+                        <p class="text-muted">
+                            <asp:Label ID="lblEmployeeRole" runat="server" Text="Loading..." />
+                        </p>
+                    </div>
 
 
                     <h6 class="mt-3">My Timing</h6>
@@ -281,14 +282,13 @@ function startBreakTimer() {
                     </div>
                 </div>
 
-              <div class="card p-3 mt-4">
-    <h6>Attendance Calendar</h6>
-    <asp:Calendar ID="AttendanceCalendar" runat="server" 
-        OnVisibleMonthChanged="AttendanceCalendar_VisibleMonthChanged" 
-    OnDayRender="AttendanceCalendar_DayRender" 
-    CssClass="custom-calendar">
-</asp:Calendar>
-</div>
+                <div class="card p-3 mt-4">
+                    <h6>Attendance Calendar</h6>
+                    <asp:Calendar ID="AttendanceCalendar" runat="server"
+                        OnVisibleMonthChanged="AttendanceCalendar_VisibleMonthChanged"
+                        OnDayRender="AttendanceCalendar_DayRender"
+                        CssClass="custom-calendar"></asp:Calendar>
+                </div>
             </div>
         </div>
     </div>

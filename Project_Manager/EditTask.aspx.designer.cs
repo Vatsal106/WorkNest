@@ -7,74 +7,74 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WorkNest.P_Member
+namespace WorkNest.Project_Manager
 {
 
 
-    public partial class MemberM
+    public partial class EditTask
     {
 
         /// <summary>
-        /// Member_Head control.
+        /// hfTaskID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder Member_Head;
+        protected global::System.Web.UI.WebControls.HiddenField hfTaskID;
 
         /// <summary>
-        /// Managerform control.
+        /// txtTaskName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm Managerform;
+        protected global::System.Web.UI.WebControls.TextBox txtTaskName;
 
         /// <summary>
-        /// Member_Head_Title control.
+        /// txtTaskDesc control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder Member_Head_Title;
+        protected global::System.Web.UI.WebControls.TextBox txtTaskDesc;
 
         /// <summary>
-        /// notificationBadge control.
+        /// txtDueDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl notificationBadge;
+        protected global::System.Web.UI.WebControls.TextBox txtDueDate;
 
         /// <summary>
-        /// lblFullName control.
+        /// ddlStatus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblFullName;
+        protected global::System.Web.UI.WebControls.DropDownList ddlStatus;
 
         /// <summary>
-        /// profilePhoto control.
+        /// ddlAssignedTo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image profilePhoto;
+        protected global::System.Web.UI.WebControls.DropDownList ddlAssignedTo;
 
         /// <summary>
-        /// Member_Content control.
+        /// btnUpdate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder Member_Content;
+        protected global::System.Web.UI.WebControls.Button btnUpdate;
     }
 }

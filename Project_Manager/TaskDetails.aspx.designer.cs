@@ -7,74 +7,101 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WorkNest.P_Member
+namespace WorkNest.Project_Manager
 {
 
 
-    public partial class MemberM
+    public partial class TaskDetails
     {
 
         /// <summary>
-        /// Member_Head control.
+        /// lblProjectName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder Member_Head;
+        protected global::System.Web.UI.WebControls.Label lblProjectName;
 
         /// <summary>
-        /// Managerform control.
+        /// lblTaskName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm Managerform;
+        protected global::System.Web.UI.WebControls.Label lblTaskName;
 
         /// <summary>
-        /// Member_Head_Title control.
+        /// lblStatus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder Member_Head_Title;
+        protected global::System.Web.UI.WebControls.Label lblStatus;
 
         /// <summary>
-        /// notificationBadge control.
+        /// lblAssignedTo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl notificationBadge;
+        protected global::System.Web.UI.WebControls.Label lblAssignedTo;
 
         /// <summary>
-        /// lblFullName control.
+        /// lblDueDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblFullName;
+        protected global::System.Web.UI.WebControls.Label lblDueDate;
 
         /// <summary>
-        /// profilePhoto control.
+        /// lblDescription control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image profilePhoto;
+        protected global::System.Web.UI.WebControls.Label lblDescription;
 
         /// <summary>
-        /// Member_Content control.
+        /// lblReportDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder Member_Content;
+        protected global::System.Web.UI.WebControls.Label lblReportDate;
+
+        /// <summary>
+        /// lblReportDescription control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblReportDescription;
+
+        /// <summary>
+        /// lnkLatestReport control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink lnkLatestReport;
+
+        /// <summary>
+        /// gvTaskReportHistory control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvTaskReportHistory;
     }
 }

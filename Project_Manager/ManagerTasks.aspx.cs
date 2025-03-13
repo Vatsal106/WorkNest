@@ -6,7 +6,7 @@ using System.Web.UI.WebControls;
 
 namespace WorkNest.Project_Manager
 {
-    public partial class AllTasks : System.Web.UI.Page
+    public partial class ManagerTasks : System.Web.UI.Page
     {
         dbConnection dbConn = new dbConnection();
 
@@ -51,20 +51,7 @@ namespace WorkNest.Project_Manager
                 rptProjects.DataSource = dtProjects;
                 rptProjects.DataBind();
 
-                string noTaskProjectQuery = @"
-            SELECT PROJECT_NAME FROM PROJECT 
-            WHERE PROJECT_ID NOT IN (SELECT DISTINCT PROJECT_ID FROM TASK)
-            AND PROJECT_MANAGER_ID = @ManagerID";
 
-                SqlDataAdapter daNoTasks = new SqlDataAdapter(noTaskProjectQuery, dbConn.con);
-                daNoTasks.SelectCommand.Parameters.AddWithValue("@ManagerID", managerID);
-
-                DataTable dtNoTasks = new DataTable();
-                daNoTasks.Fill(dtNoTasks);
-
-                lblNoProjectTasks.Text = dtNoTasks.Rows.Count > 0
-                    ? string.Join(", ", dtNoTasks.AsEnumerable().Select(row => row["PROJECT_NAME"].ToString()))
-                    : "All assigned projects have tasks.";
             }
             catch (Exception ex)
             {
@@ -91,18 +78,25 @@ namespace WorkNest.Project_Manager
                         return;
                     }
 
-                    string taskQuery = @"SELECT T.TASK_ID, T.TASK_NAME, T.DESCRIPTION AS TASK_DESC, 
-                               T.START_DATE, T.DUE_DATE, T.STATUS, 
-                               E.FULL_NAME AS ASSIGNED_TO, 
-                               ISNULL(TR.LAST_UPDATE, T.START_DATE) AS LAST_UPDATE
-                        FROM TASK T
-                        LEFT JOIN TASK_REPORT TR ON T.TASK_ID = TR.TASK_ID
-                        INNER JOIN EMPLOYEE E ON T.ASSIGN_TO = E.EMPLOYEE_ID
-                        WHERE T.PROJECT_ID = @ProjectID";
+                    string taskQuery = @"
+                SELECT 
+                    T.TASK_ID, 
+                    T.TASK_NAME, 
+                    T.DESCRIPTION AS TASK_DESC, 
+                    T.START_DATE, 
+                    T.DUE_DATE, 
+                    T.STATUS, 
+                    E.FULL_NAME AS ASSIGNED_TO, 
+                    ISNULL(TR.LAST_UPDATE, T.START_DATE) AS LAST_UPDATE
+                FROM TASK T
+                LEFT JOIN TASK_REPORT TR ON T.TASK_ID = TR.TASK_ID
+                INNER JOIN EMPLOYEE E ON T.ASSIGN_TO = E.EMPLOYEE_ID
+                WHERE T.ASSIGN_TO = @ManagerID 
+                  AND T.PROJECT_ID = @ProjectID";
 
                     SqlDataAdapter da = new SqlDataAdapter(taskQuery, dbConn.con);
                     da.SelectCommand.Parameters.AddWithValue("@ProjectID", projectId);
-                    //da.SelectCommand.Parameters.AddWithValue("@ManagerID", managerID);
+                    da.SelectCommand.Parameters.AddWithValue("@ManagerID", managerID);
 
                     DataTable dtTasks = new DataTable();
                     da.Fill(dtTasks);

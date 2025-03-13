@@ -346,7 +346,7 @@
      }
  </script>
     
-        <asp:ContentPlaceHolder ID="Manager_Head" runat="server"></asp:ContentPlaceHolder>
+        <asp:ContentPlaceHolder ID="Member_Head" runat="server"></asp:ContentPlaceHolder>
     
 </head>
 <body>
@@ -407,7 +407,7 @@
 
                 <button type="button" class="menu-button" onclick="toggleSidebar(event)">☰</button>
                 <div class="HeaderTitle">
-                    <asp:ContentPlaceHolder ID="Manager_Header_Title" runat="server"></asp:ContentPlaceHolder>
+                    <asp:ContentPlaceHolder ID="Member_Head_Title" runat="server"></asp:ContentPlaceHolder>
                 </div>
             </div>
             <div class="Right-Header">
@@ -436,7 +436,7 @@
 
         
         <div class="content">
-            <asp:ContentPlaceHolder ID="Manager_Content" runat="server"></asp:ContentPlaceHolder>
+            <asp:ContentPlaceHolder ID="Member_Content" runat="server"></asp:ContentPlaceHolder>
         </div>
     </form>
 </body>

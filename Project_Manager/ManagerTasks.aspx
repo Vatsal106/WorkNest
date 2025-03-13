@@ -1,9 +1,7 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/AdminM.Master" AutoEventWireup="true" CodeBehind="AllTasks.aspx.cs" Inherits="WorkNest.Admin.AllTasks" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Project_Manager/P_Manager.Master" AutoEventWireup="true" CodeBehind="ManagerTasks.aspx.cs" Inherits="WorkNest.Project_Manager.ManagerTasks" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
-</asp:Content>
 
-<asp:Content ID="Content2" ContentPlaceHolderID="Head" runat="server">
+<asp:Content ID="Content2" ContentPlaceHolderID="Manager_Head" runat="server">
     <style>
         .task-container {
             
@@ -11,7 +9,7 @@
             background: #F7F9FB;
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
         }
 
         .page-title {
@@ -49,7 +47,7 @@
                 padding: 10px;
                 border: 1px solid #ddd;
                 text-align: left;
-                max-width:250px ;
+                max-width: 250px;
             }
 
             .styled-table th {
@@ -77,9 +75,9 @@
     </style>
 </asp:Content>
 
-<asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+<asp:Content ID="Content3" ContentPlaceHolderID="Manager_Content" runat="server">
     <div class="task-container">
-        <h1 class="page-title">📋 All Tasks</h1>
+        <h1 class="page-title">📋 Your Tasks</h1>
 
         <div class="search-container">
             <asp:TextBox ID="txtSearch" runat="server" CssClass="search-box" placeholder="Search by Project or Task..." AutoPostBack="true" OnTextChanged="txtSearch_TextChanged"></asp:TextBox>
@@ -94,7 +92,7 @@
                 <asp:GridView ID="gvTaskReports" runat="server" AutoGenerateColumns="false" CssClass="styled-table">
                     <Columns>
                         <asp:BoundField DataField="TASK_NAME" HeaderText="Task Name" />
-                        <asp:BoundField DataField="TASK_DESC" HeaderText="Task Description" />
+                        <asp:BoundField DataField="TASK_DESC" HeaderText="Task Description" ControlStyle-Width="200px" />
 <%--                        <asp:BoundField DataField="START_DATE" HeaderText="Start Date" DataFormatString="{0:dd-MMM-yyyy}" />--%>
                         <asp:BoundField DataField="DUE_DATE" HeaderText="Due Date" DataFormatString="{0:dd-MMM-yyyy}" />
                         <asp:BoundField DataField="STATUS" HeaderText="Status" />

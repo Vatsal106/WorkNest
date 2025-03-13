@@ -10,7 +10,7 @@ namespace WorkNest.Project_Manager
 {
     public partial class P_ManagerDashboard : Page
     {
-    dbConnection dbConn = new dbConnection();
+        dbConnection dbConn = new dbConnection();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["EmployeeID"] == null)
@@ -19,7 +19,7 @@ namespace WorkNest.Project_Manager
             }
             if (!IsPostBack)
             {
-                if (Session["TimeLogs"] == null) 
+                if (Session["TimeLogs"] == null)
                 {
                     LoadTimeLogs();
                 }
@@ -70,7 +70,7 @@ namespace WorkNest.Project_Manager
 
         protected void AttendanceCalendar_VisibleMonthChanged(object sender, MonthChangedEventArgs e)
         {
-            LoadTimeLogs(); 
+            LoadTimeLogs();
         }
 
         public void LoadEmployeeDetails()
@@ -87,7 +87,7 @@ namespace WorkNest.Project_Manager
             {
                 cmd.Parameters.AddWithValue("@EmployeeID", Session["EmployeeID"]);
 
-                
+
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 if (reader.Read())
@@ -110,12 +110,12 @@ namespace WorkNest.Project_Manager
                 lblEmployeeName.Text = "Error loading data";
                 lblEmployeeRole.Text = "";
             }
-           
-        
+
+
         }
         protected void AttendanceCalendar_DayRender(object sender, DayRenderEventArgs e)
         {
-            if (e.Day.IsOtherMonth) return; 
+            if (e.Day.IsOtherMonth) return;
 
             int employeeId = Convert.ToInt32(Session["EmployeeID"]);
             DateTime date = e.Day.Date;
@@ -130,8 +130,8 @@ namespace WorkNest.Project_Manager
 
             SqlDataReader reader = cmd.ExecuteReader();
 
-            string status = "Absent"; 
-            string statusClass = "absent-dot"; 
+            string status = "Absent";
+            string statusClass = "absent-dot";
             string tooltipText = "Absent";
 
             if (reader.Read())
@@ -139,7 +139,7 @@ namespace WorkNest.Project_Manager
                 status = reader["STATUS"].ToString();
                 if (status == "Present")
                 {
-                    statusClass = "present-dot"; 
+                    statusClass = "present-dot";
                     tooltipText = "Present";
                 }
             }
@@ -159,33 +159,55 @@ namespace WorkNest.Project_Manager
             DateTime startTime = DateTime.Now;
             string currentDate = startTime.ToString("yyyy-MM-dd");
 
-            string query = "INSERT INTO TIME_TRACKING (EMPLOYEE_ID, START_TIME) VALUES (@EmployeeID, @StartTime)";
-            
-            dbConn.dbConnect();
-            LoadTimeLogs();
+            try
+            {
+                dbConn.dbConnect(); // Ensure connection is open
 
-            SqlCommand cmd = new SqlCommand(query, dbConn.con);
-            cmd.Parameters.AddWithValue("@EmployeeID", employeeId);
-            cmd.Parameters.AddWithValue("@StartTime", startTime);
-            cmd.ExecuteNonQuery();
+                if (dbConn.con.State == ConnectionState.Closed)
+                {
+                    dbConn.con.Open();
+                }
 
-            string attendanceQuery = @"
+                // Insert Time Tracking Entry
+                string query = "INSERT INTO TIME_TRACKING (EMPLOYEE_ID, START_TIME) VALUES (@EmployeeID, @StartTime)";
+                SqlCommand cmd = new SqlCommand(query, dbConn.con);
+                cmd.Parameters.AddWithValue("@EmployeeID", employeeId);
+                cmd.Parameters.AddWithValue("@StartTime", startTime);
+                cmd.ExecuteNonQuery();
+
+                // Insert Attendance Entry if not exists
+                string attendanceQuery = @"
         IF NOT EXISTS (SELECT 1 FROM ATTENDANCE WHERE EMPLOYEE_ID = @EmployeeID AND ATTENDANCE_DATE = @AttendanceDate)
         BEGIN
             INSERT INTO ATTENDANCE (EMPLOYEE_ID, ATTENDANCE_DATE, STATUS) 
             VALUES (@EmployeeID, @AttendanceDate, 'Present')
         END";
 
-            SqlCommand attendanceCmd = new SqlCommand(attendanceQuery, dbConn.con);
-            attendanceCmd.Parameters.AddWithValue("@EmployeeID", employeeId);
-            attendanceCmd.Parameters.AddWithValue("@AttendanceDate", currentDate);
-            attendanceCmd.ExecuteNonQuery();
+                SqlCommand attendanceCmd = new SqlCommand(attendanceQuery, dbConn.con);
+                attendanceCmd.Parameters.AddWithValue("@EmployeeID", employeeId);
+                attendanceCmd.Parameters.AddWithValue("@AttendanceDate", currentDate);
+                attendanceCmd.ExecuteNonQuery();
 
-            ScriptManager.RegisterStartupScript(this, GetType(), "StartWorkTimer", "startWorkTimer();", true);
-            btnClockIn.CssClass = "btn btn-success d-none";
-            btnBreakTime.CssClass = "btn btn-warning";
-            btnClockOut.CssClass = "btn btn-danger";
+                // Update UI and reload logs
+                LoadTimeLogs();
+                ScriptManager.RegisterStartupScript(this, GetType(), "StartWorkTimer", "startWorkTimer();", true);
+                btnClockIn.CssClass = "btn btn-success d-none";
+                btnBreakTime.CssClass = "btn btn-warning";
+                btnClockOut.CssClass = "btn btn-danger";
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+            }
+            finally
+            {
+                if (dbConn.con.State == ConnectionState.Open)
+                {
+                    dbConn.con.Close(); // Always close connection after execution
+                }
+            }
         }
+
 
         protected void btnBreakTime_Click(object sender, EventArgs e)
         {
@@ -193,7 +215,7 @@ namespace WorkNest.Project_Manager
             DateTime breakStart = DateTime.Now;
 
             string query = "UPDATE TIME_TRACKING SET BREAK_START = @BreakStart WHERE EMPLOYEE_ID = @EmployeeID AND END_TIME IS NULL";
-           
+
             dbConn.dbConnect();
 
             SqlCommand cmd = new SqlCommand(query, dbConn.con);
@@ -213,7 +235,7 @@ namespace WorkNest.Project_Manager
             DateTime breakEnd = DateTime.Now;
 
             string query = "UPDATE TIME_TRACKING SET BREAK_END = @BreakEnd WHERE EMPLOYEE_ID = @EmployeeID AND BREAK_END IS NULL";
-           
+
             dbConn.dbConnect();
 
             SqlCommand cmd = new SqlCommand(query, dbConn.con);
@@ -239,7 +261,7 @@ namespace WorkNest.Project_Manager
                     TOTAL_BREAK_HOURS = DATEDIFF(SECOND, BREAK_START, BREAK_END) / 3600.0 
                 WHERE EMPLOYEE_ID = @EmployeeID AND END_TIME IS NULL";
 
-            
+
             dbConn.dbConnect();
 
             SqlCommand cmd = new SqlCommand(query, dbConn.con);
@@ -255,6 +277,6 @@ namespace WorkNest.Project_Manager
             btnClockOut.CssClass = "btn btn-danger d-none";
         }
 
-       
+
     }
 }

@@ -73,17 +73,23 @@ namespace WorkNest.Project_Manager
                 fileName = Path.GetFileName(fileAttachment.FileName);
                 fileExtension = Path.GetExtension(fileAttachment.FileName).ToLower();
                 string[] allowedExtensions = { ".jpg", ".png", ".pdf", ".doc", ".docx" };
+                int maxFileSize = 5 * 1024 * 1024; // 5MB
 
-                if (Array.Exists(allowedExtensions, ext => ext == fileExtension))
-                {
-                    FILE = fileAttachment.FileBytes;
-                }
-                else
+                if (!Array.Exists(allowedExtensions, ext => ext == fileExtension))
                 {
                     lblMessage.Text = "Invalid file type. Only JPG, PNG, PDF, DOC, DOCX allowed.";
                     lblMessage.ForeColor = System.Drawing.Color.Red;
                     return;
                 }
+
+                if (fileAttachment.FileContent.Length > maxFileSize)
+                {
+                    lblMessage.Text = "File size exceeds the 5MB limit.";
+                    lblMessage.ForeColor = System.Drawing.Color.Red;
+                    return;
+                }
+
+                FILE = fileAttachment.FileBytes;
             }
 
             try

@@ -100,27 +100,34 @@
         <div class="form-container">
             <div class="mb-3">
                 <label for="txtTaskName">Task Name:</label>
-                <asp:TextBox ID="txtTaskName" runat="server" CssClass="form-control" required></asp:TextBox>
+                <asp:TextBox ID="txtTaskName" runat="server" CssClass="form-control"></asp:TextBox>
+                <span id="taskNameError" class="text-danger"></span>
             </div>
 
             <div class="mb-3">
                 <label for="ddlProject">Project:</label>
-                <asp:DropDownList ID="ddlProject" runat="server" CssClass="form-control"></asp:DropDownList>
+                <asp:DropDownList ID="ddlProject" runat="server" CssClass="form-control">
+                    <asp:ListItem Text="Select Project" Value="" />
+                </asp:DropDownList>
+                <span id="projectError" class="text-danger"></span>
             </div>
 
             <div class="mb-3">
                 <label for="txtDescription">Description:</label>
                 <asp:TextBox ID="txtDescription" runat="server" CssClass="form-control" TextMode="MultiLine"></asp:TextBox>
+                <span id="descriptionError" class="text-danger"></span>
             </div>
 
             <div class="mb-3">
                 <label for="txtStartDate">Start Date:</label>
                 <asp:TextBox ID="txtStartDate" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
+                <span id="startDateError" class="text-danger"></span>
             </div>
 
             <div class="mb-3">
                 <label for="txtDueDate">Due Date:</label>
                 <asp:TextBox ID="txtDueDate" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
+                <span id="dueDateError" class="text-danger"></span>
             </div>
 
             <div class="mb-3">
@@ -132,6 +139,7 @@
                     <asp:ListItem Text="Not Started" Value="NOT STARTED" />
                     <asp:ListItem Text="On Hold" Value="ON HOLD" />
                 </asp:DropDownList>
+                <span id="statusError" class="text-danger"></span>
             </div>
 
             <div class="mb-3">
@@ -139,16 +147,97 @@
                 <asp:DropDownList ID="ddlDepartment" runat="server" CssClass="form-control" AutoPostBack="true"
                     OnSelectedIndexChanged="ddlDepartment_SelectedIndexChanged">
                 </asp:DropDownList>
+                <span id="departmentError" class="text-danger"></span>
             </div>
 
             <div class="mb-3">
                 <label for="ddlAssignTo">Assign To:</label>
                 <asp:DropDownList ID="ddlAssignTo" runat="server" CssClass="form-control"></asp:DropDownList>
+                <span id="assignToError" class="text-danger"></span>
             </div>
 
             <div class="text-center">
-                <asp:Button ID="btnSubmit" runat="server" CssClass="btn btn-primary" Text="Add Task" OnClick="btnSubmit_Click" />
+                <asp:Button ID="btnSubmit" runat="server" CssClass="btn btn-primary" Text="Add Task"
+                    OnClientClick="return validateForm();" />
             </div>
         </div>
     </div>
+
+    <script>
+        function validateForm() {
+            let isValid = true;
+
+            // Get input values
+            let taskName = document.getElementById('<%= txtTaskName.ClientID %>').value.trim();
+            let project = document.getElementById('<%= ddlProject.ClientID %>').value;
+            let description = document.getElementById('<%= txtDescription.ClientID %>').value.trim();
+            let startDate = document.getElementById('<%= txtStartDate.ClientID %>').value;
+            let dueDate = document.getElementById('<%= txtDueDate.ClientID %>').value;
+            let status = document.getElementById('<%= ddlStatus.ClientID %>').value;
+            let department = document.getElementById('<%= ddlDepartment.ClientID %>').value;
+            let assignTo = document.getElementById('<%= ddlAssignTo.ClientID %>').value;
+
+            // Clear previous errors
+            document.getElementById("taskNameError").innerText = "";
+            document.getElementById("projectError").innerText = "";
+            document.getElementById("descriptionError").innerText = "";
+            document.getElementById("startDateError").innerText = "";
+            document.getElementById("dueDateError").innerText = "";
+            document.getElementById("statusError").innerText = "";
+            document.getElementById("departmentError").innerText = "";
+            document.getElementById("assignToError").innerText = "";
+
+            // Validate fields
+            if (taskName === "") {
+                document.getElementById("taskNameError").innerText = "Task Name is required.";
+                isValid = false;
+            }
+
+            if (project === "") {
+                document.getElementById("projectError").innerText = "Please select a project.";
+                isValid = false;
+            }
+
+            if (description === "") {
+                document.getElementById("descriptionError").innerText = "Description is required.";
+                isValid = false;
+            }
+
+            if (startDate === "") {
+                document.getElementById("startDateError").innerText = "Start Date is required.";
+                isValid = false;
+            }
+
+            if (dueDate === "") {
+                document.getElementById("dueDateError").innerText = "Due Date is required.";
+                isValid = false;
+            }
+
+            if (startDate !== "" && dueDate !== "") {
+                let start = new Date(startDate);
+                let due = new Date(dueDate);
+                if (due <= start) {
+                    document.getElementById("dueDateError").innerText = "Due Date must be after Start Date.";
+                    isValid = false;
+                }
+            }
+
+            if (status === "") {
+                document.getElementById("statusError").innerText = "Please select a status.";
+                isValid = false;
+            }
+
+            if (department === "") {
+                document.getElementById("departmentError").innerText = "Please select a department.";
+                isValid = false;
+            }
+
+            if (assignTo === "") {
+                document.getElementById("assignToError").innerText = "Please select an assignee.";
+                isValid = false;
+            }
+
+            return isValid;
+        }
+    </script>
 </asp:Content>

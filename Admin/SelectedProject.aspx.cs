@@ -99,7 +99,7 @@ namespace WorkNest.Admin
                 {
                     if (row["TASK_FILE"] != DBNull.Value)
                     {
-                        row["DownloadLink"] = "DownloadReport.aspx?TaskID=" + row["TASK_ID"].ToString();
+                        row["DownloadLink"] = "../DownloadReport.aspx?TaskID=" + row["TASK_ID"].ToString();
                     }
                 }
 

@@ -25,7 +25,7 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="Manager_Header_Title" runat="server">
-    Add Leave
+    Request Leave
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="Manager_Content" runat="server">

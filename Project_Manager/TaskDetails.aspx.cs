@@ -3,7 +3,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Web.UI.WebControls;
 
-namespace WorkNest.Admin
+namespace WorkNest.Project_Manager
 {
     public partial class TaskDetails : System.Web.UI.Page
     {

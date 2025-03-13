@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/P_Member/MemberM.Master" AutoEventWireup="true" CodeBehind="RequestLeave.aspx.cs" Inherits="WorkNest.P_Member.RequestLeave" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="MemberHead" runat="server">
+<asp:Content ID="Content1" ContentPlaceHolderID="Member_Head" runat="server">
         <style>
         .leave-container {
             max-width: 800px;
@@ -24,10 +24,10 @@
 
 
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="Member_Header_Title" runat="server">
+<asp:Content ID="Content2" ContentPlaceHolderID="Member_Head_Title" runat="server">
     Add Leave
 </asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="MemberContent" runat="server">
+<asp:Content ID="Content3" ContentPlaceHolderID="Member_Content" runat="server">
      <div class="leave-container">
      <h2>Request Leave</h2>
 
