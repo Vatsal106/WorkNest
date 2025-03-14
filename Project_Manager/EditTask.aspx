@@ -47,9 +47,9 @@
             width: 100%;
         }
 
-        .btn-submit:hover {
-            background: #3A5C74;
-        }
+            .btn-submit:hover {
+                background: #3A5C74;
+            }
     </style>
 </asp:Content>
 
@@ -77,9 +77,11 @@
         <div class="form-group">
             <label class="form-label">Status:</label>
             <asp:DropDownList ID="ddlStatus" runat="server" CssClass="form-input">
-                <asp:ListItem Text="Pending" Value="Pending"></asp:ListItem>
-                <asp:ListItem Text="In Progress" Value="In Progress"></asp:ListItem>
-                <asp:ListItem Text="Completed" Value="Completed"></asp:ListItem>
+                <asp:ListItem Text="Select Status" Value="" />
+                <asp:ListItem Text="NOT STARTED" Value="NOT STARTED" />
+                <asp:ListItem Text="IN PROGRESS" Value="IN PROGRESS" />
+                <asp:ListItem Text="ON HOLD" Value="ON HOLD" />
+                <asp:ListItem Text="COMPLETED" Value="COMPLETED" />
             </asp:DropDownList>
         </div>
 

@@ -28,7 +28,7 @@ namespace WorkNest.P_Member
 
         private void LoadTasks()
         {
-            string employeeID = Session["EmployeeID"]?.ToString(); // Ensure employee ID is stored in session
+            string employeeID = Session["EmployeeID"]?.ToString();
             if (string.IsNullOrEmpty(employeeID)) return;
 
             dbConn.dbConnect();
@@ -41,7 +41,7 @@ namespace WorkNest.P_Member
             DataTable dt = new DataTable();
             da.Fill(dt);
 
-            dbConn.con.Close(); // Close connection after use
+            dbConn.con.Close();
 
             ddlTasks.DataSource = dt;
             ddlTasks.DataTextField = "TASK_NAME";
@@ -66,7 +66,7 @@ namespace WorkNest.P_Member
                 ddlStatus.SelectedValue = dr["STATUS"].ToString();
             }
             dr.Close();
-            dbConn.con.Close(); // Ensure connection is closed
+            dbConn.con.Close();
         }
 
         protected void ddlTasks_SelectedIndexChanged(object sender, EventArgs e)
@@ -96,7 +96,7 @@ namespace WorkNest.P_Member
                 lblLastUpdate.Text = "Never Updated";
             }
             dr.Close();
-            dbConn.con.Close(); // Ensure connection is closed
+            dbConn.con.Close();
         }
 
         public void btnSubmit_Click(object sender, EventArgs e)
@@ -179,8 +179,8 @@ namespace WorkNest.P_Member
                 }
 
                 transaction.Commit();
-                dbConn.con.Close(); // Close connection
-                btnClear_Click(sender, e); // Clear form after successful submission
+                dbConn.con.Close();
+                btnClear_Click(sender, e);
                 loadLastUpdate(hfTaskID.Value);
                 lblMessage.Text = "Report submitted successfully!";
                 lblMessage.ForeColor = Color.Green;
@@ -188,7 +188,7 @@ namespace WorkNest.P_Member
             catch (Exception ex)
             {
                 transaction.Rollback();
-                dbConn.con.Close(); // Ensure connection is closed on error
+                dbConn.con.Close();
                 lblMessage.Text = "Error submitting report: " + ex.Message;
                 lblMessage.ForeColor = Color.Red;
             }
