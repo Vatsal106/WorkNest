@@ -184,28 +184,71 @@
             </div>
         </div>
 
-        <!-- Recent Projects Table -->
+        <!-- Project Overview Section -->
         <div class="table-container">
-            <div class="table-title">Recent Projects</div>
-            <asp:GridView ID="gvRecentProjects" runat="server" CssClass="table table-bordered table-striped text-center" AutoGenerateColumns="False">
+            <div class="table-title">Project Overview</div>
+            <asp:GridView ID="gvProjectOverview" runat="server" CssClass="table table-bordered table-striped text-center" AutoGenerateColumns="False">
                 <Columns>
                     <asp:BoundField DataField="PROJECT_NAME" HeaderText="Project Name" />
-                    <asp:BoundField DataField="DESCRIPTION" HeaderText="Description" />
+                    <asp:BoundField DataField="CLIENT_NAME" HeaderText="Client Name" />
                     <asp:BoundField DataField="START_DATE" HeaderText="Start Date" DataFormatString="{0:yyyy-MM-dd}" />
                     <asp:BoundField DataField="END_DATE" HeaderText="End Date" DataFormatString="{0:yyyy-MM-dd}" />
+                    <asp:BoundField DataField="STATUS" HeaderText="Status" />
+                    <asp:BoundField DataField="EMPLOYEE_COUNT" HeaderText="Assigned Employees" />
                 </Columns>
             </asp:GridView>
         </div>
 
-        <!-- Upcoming Leaves Table -->
+        <!-- Task Management Panel -->
         <div class="table-container">
-            <div class="table-title">Upcoming Leaves</div>
-            <asp:GridView ID="gvUpcomingLeaves" runat="server" CssClass="table table-bordered table-striped text-center" AutoGenerateColumns="False">
+            <div class="table-title">Task Management</div>
+            <asp:GridView ID="gvTaskManagement" runat="server" CssClass="table table-bordered table-striped text-center" AutoGenerateColumns="False">
                 <Columns>
-                    <asp:BoundField DataField="FULL_NAME" HeaderText="Employee Name" />
-                    <asp:BoundField DataField="LEAVE_TYPE" HeaderText="Leave Type" />
+                    <asp:BoundField DataField="TASK_NAME" HeaderText="Task Name" />
+                    <asp:BoundField DataField="START_DATE" HeaderText="Start Date" DataFormatString="{0:yyyy-MM-dd}" />
+                    <asp:BoundField DataField="DUE_DATE" HeaderText="Due Date" DataFormatString="{0:yyyy-MM-dd}" />
+                    <asp:BoundField DataField="STATUS" HeaderText="Status" />
+                    <asp:BoundField DataField="ASSIGNED_EMPLOYEE" HeaderText="Assigned Employee" />
+                </Columns>
+            </asp:GridView>
+        </div>
+
+        <!-- Team Members & Workload Section -->
+        <div class="table-container">
+            <div class="table-title">Team Members & Workload</div>
+            <asp:GridView ID="gvTeamMembers" runat="server" CssClass="table table-bordered table-striped text-center" AutoGenerateColumns="False">
+                <Columns>
+                    <asp:BoundField DataField="FULL_NAME" HeaderText="Full Name" />
+                    <asp:BoundField DataField="EMAIL" HeaderText="Email" />
+                    <asp:BoundField DataField="ROLE" HeaderText="Role" />
+                    <asp:BoundField DataField="ASSIGNED_TASK_COUNT" HeaderText="Assigned Tasks" />
+                </Columns>
+            </asp:GridView>
+        </div>
+
+        <!-- Leave Requests Management -->
+        <div class="table-container">
+            <div class="table-title">Leave Requests Management</div>
+            <asp:GridView ID="gvLeaveRequests" runat="server" CssClass="table table-bordered table-striped text-center" AutoGenerateColumns="False">
+                <Columns>
+                    <asp:BoundField DataField="EMPLOYEE_NAME" HeaderText="Employee Name" />
                     <asp:BoundField DataField="START_DATE" HeaderText="Start Date" DataFormatString="{0:yyyy-MM-dd}" />
                     <asp:BoundField DataField="END_DATE" HeaderText="End Date" DataFormatString="{0:yyyy-MM-dd}" />
+                    <asp:BoundField DataField="REASON" HeaderText="Reason" />
+                    <asp:BoundField DataField="STATUS" HeaderText="Status" />
+                </Columns>
+            </asp:GridView>
+        </div>
+
+        <!-- Activity Log & Task Report History -->
+        <div class="table-container">
+            <div class="table-title">Activity Log & Task Report History</div>
+            <asp:GridView ID="gvActivityLog" runat="server" CssClass="table table-bordered table-striped text-center" AutoGenerateColumns="False">
+                <Columns>
+                    <asp:BoundField DataField="TASK_NAME" HeaderText="Task Name" />
+                    <asp:BoundField DataField="UPDATE_TIME" HeaderText="Update Time" DataFormatString="{0:yyyy-MM-dd HH:mm:ss}" />
+                    <asp:BoundField DataField="DESCRIPTION" HeaderText="Description" />
+                    <asp:BoundField DataField="FILE_ATTACHMENT" HeaderText="File Attachment" />
                 </Columns>
             </asp:GridView>
         </div>
