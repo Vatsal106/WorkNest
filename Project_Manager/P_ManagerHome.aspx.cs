@@ -1,20 +1,24 @@
-﻿using System;
+﻿using System.Data.SqlClient;
 using System.Data;
-using System.Data.SqlClient;
-using System.Configuration;
+using System.Web.UI.WebControls;
+using System;
 
 namespace WorkNest.Project_Manager
 {
     public partial class P_ManagerHome : System.Web.UI.Page
     {
         dbConnection dbConn = new dbConnection();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 LoadDashboardStats();
-                LoadRecentProjects();
-                LoadUpcomingLeaves();
+                LoadProjectOverview();
+                LoadTaskManagement();
+                LoadTeamMembers();
+                LoadLeaveRequests();
+                LoadActivityLog();
             }
         }
 
@@ -24,60 +28,111 @@ namespace WorkNest.Project_Manager
 
             try
             {
-                
+                SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM EMPLOYEE", dbConn.con);
+                lblTotalEmployees.Text = cmd.ExecuteScalar().ToString();
 
-                lblTotalEmployees.Text = new SqlCommand("SELECT COUNT(*) FROM EMPLOYEE", dbConn.con).ExecuteScalar().ToString();
-                lblTotalProjects.Text = new SqlCommand("SELECT COUNT(*) FROM PROJECT WHERE STATUS = 'Active'", dbConn.con).ExecuteScalar().ToString();
-                lblTotalTasks.Text = new SqlCommand("SELECT COUNT(*) FROM TASK WHERE DUE_DATE > GETDATE()", dbConn.con).ExecuteScalar().ToString();
-                lblPendingLeaves.Text = new SqlCommand("SELECT COUNT(*) FROM LEAVES WHERE LEAVE_TYPE = 'Pending'", dbConn.con).ExecuteScalar().ToString();
+                cmd.CommandText = "SELECT COUNT(*) FROM PROJECT WHERE STATUS = 'Active' AND PROJECT_MANAGER_ID = @ManagerId";
+                cmd.Parameters.AddWithValue("@ManagerId", Session["EmployeeID"]);
+                lblTotalProjects.Text = cmd.ExecuteScalar().ToString();
+
+                cmd.CommandText = "SELECT COUNT(*) FROM TASK WHERE DUE_DATE > GETDATE() AND PROJECT_ID IN (SELECT PROJECT_ID FROM PROJECT WHERE PROJECT_MANAGER_ID = @ManagerId)";
+                lblTotalTasks.Text = cmd.ExecuteScalar().ToString();
+
+                cmd.CommandText = "SELECT COUNT(*) FROM LEAVES WHERE STATUS = 'Pending' AND EMPLOYEE_ID IN (SELECT EMPLOYEE_ID FROM EMPLOYEE WHERE EMPLOYEE_ID IN (SELECT EMPLOYEE_ID FROM PROJECT WHERE PROJECT_MANAGER_ID = @ManagerId))";
+                lblPendingLeaves.Text = cmd.ExecuteScalar().ToString();
             }
             catch (Exception ex)
             {
-                // Log the error and display a friendly message
                 lblTotalEmployees.Text = "Error";
                 lblTotalProjects.Text = "Error";
                 lblTotalTasks.Text = "Error";
                 lblPendingLeaves.Text = "Error";
-                // Log error to a file or database (optional)
                 System.Diagnostics.Debug.WriteLine("Error in LoadDashboardStats: " + ex.Message);
             }
-
         }
 
-        private void LoadRecentProjects()
+        private void LoadProjectOverview()
         {
-            string query = "SELECT TOP 5 PROJECT_NAME, DESCRIPTION, START_DATE, END_DATE FROM PROJECT ORDER BY START_DATE DESC";
-            LoadDataIntoGrid(query, gvRecentProjects);
+            string query = @"SELECT p.PROJECT_NAME, c.CLIENT_NAME, p.START_DATE, p.END_DATE, p.STATUS, 
+                             (SELECT COUNT(*) FROM EMPLOYEE e WHERE e.EMPLOYEE_ID IN (SELECT t.ASSIGN_TO FROM TASK t WHERE t.PROJECT_ID = p.PROJECT_ID)) AS EMPLOYEE_COUNT
+                             FROM PROJECT p
+                             INNER JOIN CLIENTS c ON p.CLIENT_ID = c.CLIENT_ID
+                             WHERE p.PROJECT_MANAGER_ID = @ManagerId";
+            SqlCommand cmd = new SqlCommand(query, dbConn.con);
+            cmd.Parameters.AddWithValue("@ManagerId", Session["EmployeeID"]);
+
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            sda.Fill(dt);
+            gvProjectOverview.DataSource = dt;
+            gvProjectOverview.DataBind();
         }
 
-        private void LoadUpcomingLeaves()
+        private void LoadTaskManagement()
         {
-            string query = "SELECT TOP 5 EMPLOYEE.FULL_NAME, LEAVES.LEAVE_TYPE, LEAVES.START_DATE, LEAVES.END_DATE " +
-                           "FROM LEAVES INNER JOIN EMPLOYEE ON LEAVES.EMPLOYEE_ID = EMPLOYEE.EMPLOYEE_ID " +
-                           "WHERE LEAVES.START_DATE >= GETDATE() ORDER BY LEAVES.START_DATE ASC";
-            LoadDataIntoGrid(query, gvUpcomingLeaves);
+            string query = @"SELECT t.TASK_NAME, t.START_DATE, t.DUE_DATE, t.STATUS, e.FULL_NAME AS ASSIGNED_EMPLOYEE
+                             FROM TASK t
+                             INNER JOIN EMPLOYEE e ON t.ASSIGN_TO = e.EMPLOYEE_ID
+                             WHERE t.PROJECT_ID IN (SELECT p.PROJECT_ID FROM PROJECT p WHERE p.PROJECT_MANAGER_ID = @ManagerId)";
+            SqlCommand cmd = new SqlCommand(query, dbConn.con);
+            cmd.Parameters.AddWithValue("@ManagerId", Session["EmployeeID"]);
+
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            sda.Fill(dt);
+            gvTaskManagement.DataSource = dt;
+            gvTaskManagement.DataBind();
         }
 
-        private void LoadDataIntoGrid(string query, System.Web.UI.WebControls.GridView grid)
+        private void LoadTeamMembers()
         {
-            dbConn.dbConnect();
+            string query = @"SELECT e.FULL_NAME, e.EMAIL, r.ROLE_NAME AS ROLE, 
+                             (SELECT COUNT(*) FROM TASK t WHERE t.ASSIGN_TO = e.EMPLOYEE_ID) AS ASSIGNED_TASK_COUNT
+                             FROM EMPLOYEE e
+                             INNER JOIN EMPLOYEE_ROLES er ON e.EMPLOYEE_ID = er.EMPLOYEE_ID
+                             INNER JOIN ROLES r ON er.ROLE_ID = r.ROLE_ID
+                             WHERE e.EMPLOYEE_ID IN (SELECT p.PROJECT_MANAGER_ID FROM PROJECT p WHERE p.PROJECT_MANAGER_ID = @ManagerId)";
+            SqlCommand cmd = new SqlCommand(query, dbConn.con);
+            cmd.Parameters.AddWithValue("@ManagerId", Session["EmployeeID"]);
 
-            try
-            {
-                
-                SqlDataAdapter adapter = new SqlDataAdapter(query, dbConn.con);
-                DataTable dt = new DataTable();
-                adapter.Fill(dt);
-                grid.DataSource = dt;
-                grid.DataBind();
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine("Error in LoadDataIntoGrid: " + ex.Message);
-                grid.DataSource = null;
-                grid.DataBind();
-            }
-
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            sda.Fill(dt);
+            gvTeamMembers.DataSource = dt;
+            gvTeamMembers.DataBind();
         }
+
+        private void LoadLeaveRequests()
+        {
+            string query = @"SELECT e.FULL_NAME AS EMPLOYEE_NAME, l.START_DATE, l.END_DATE, l.REASON, l.STATUS 
+                             FROM LEAVES l
+                             INNER JOIN EMPLOYEE e ON l.EMPLOYEE_ID = e.EMPLOYEE_ID
+                             WHERE l.STATUS = 'Pending' AND e.EMPLOYEE_ID IN (SELECT p.PROJECT_MANAGER_ID FROM PROJECT p WHERE p.PROJECT_MANAGER_ID = @ManagerId)";
+            SqlCommand cmd = new SqlCommand(query, dbConn.con);
+            cmd.Parameters.AddWithValue("@ManagerId", Session["EmployeeID"]);
+
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            sda.Fill(dt);
+            gvLeaveRequests.DataSource = dt;
+            gvLeaveRequests.DataBind();
+        }
+
+        private void LoadActivityLog()
+        {
+            //string query = @"SELECT t.TASK_NAME, trh.UPDATED_AT AS UPDATE_TIME, trh.DESCRIPTION, trh.TASK_FILE 
+            //         FROM TASK_REPORT_HISTORY trh
+            //         INNER JOIN TASK t ON trh.TASK_ID = t.TASK_ID
+            //         WHERE t.PROJECT_ID IN (SELECT p.PROJECT_ID FROM PROJECT p WHERE p.PROJECT_MANAGER_ID = @ManagerId)";
+            //SqlCommand cmd = new SqlCommand(query, dbConn.con);
+            //cmd.Parameters.AddWithValue("@ManagerId", Session["EmployeeID"]);
+
+            //SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            //DataTable dt = new DataTable();
+            //sda.Fill(dt);
+            //gvActivityLog.DataSource = dt;
+            //gvActivityLog.DataBind();
+        }
+
     }
 }

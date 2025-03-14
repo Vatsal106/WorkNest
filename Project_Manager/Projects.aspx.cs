@@ -17,7 +17,14 @@ namespace WorkNest.Project_Manager
                 LoadProjects("");
             }
         }
-
+        protected void ViewProjectDetails(object sender, CommandEventArgs e)
+        {
+            if (e.CommandArgument != null)
+            {
+                string projectId = e.CommandArgument.ToString();
+                Response.Redirect("ProjectDetails.aspx?projectId=" + projectId);
+            }
+        }
         public void LoadProjects(string searchKeyword)
         {
             dbConn.dbConnect();

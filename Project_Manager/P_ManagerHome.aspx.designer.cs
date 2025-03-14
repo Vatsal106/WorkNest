@@ -51,21 +51,48 @@ namespace WorkNest.Project_Manager
         protected global::System.Web.UI.WebControls.Label lblPendingLeaves;
 
         /// <summary>
-        /// gvRecentProjects control.
+        /// gvProjectOverview control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvRecentProjects;
+        protected global::System.Web.UI.WebControls.GridView gvProjectOverview;
 
         /// <summary>
-        /// gvUpcomingLeaves control.
+        /// gvTaskManagement control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvUpcomingLeaves;
+        protected global::System.Web.UI.WebControls.GridView gvTaskManagement;
+
+        /// <summary>
+        /// gvTeamMembers control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvTeamMembers;
+
+        /// <summary>
+        /// gvLeaveRequests control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvLeaveRequests;
+
+        /// <summary>
+        /// gvActivityLog control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvActivityLog;
     }
 }
