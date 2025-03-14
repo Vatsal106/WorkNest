@@ -29,6 +29,7 @@ namespace WorkNest.Project_Manager
             dbConn.dbConnect();
             try
             {
+                int manager_id = Convert.ToInt32(Session["EmployeeID"]);
                 string query = @"
                     SELECT 
                     e.EMPLOYEE_ID,
@@ -44,7 +45,7 @@ namespace WorkNest.Project_Manager
                     JOIN DEPARTMENT d ON e.DEPARTMENT_ID = d.DEPARTMENT_ID
                     JOIN EMPLOYEE_ROLES ER ON E.EMPLOYEE_ID = ER.EMPLOYEE_ID
                     JOIN ROLES R ON ER.ROLE_ID = R.ROLE_ID
-                    WHERE r.ROLE_ID <> 1";
+                    WHERE r.ROLE_ID <> 1 AND e.MANAGER_ID = @ManagerId""";
 
                 if (!string.IsNullOrEmpty(searchQuery))
                 {
@@ -52,6 +53,7 @@ namespace WorkNest.Project_Manager
                 }
 
                 SqlCommand cmd = new SqlCommand(query, dbConn.con);
+                cmd.Parameters.AddWithValue("@ManagerId", manager_id);
                 if (!string.IsNullOrEmpty(searchQuery))
                 {
                     cmd.Parameters.AddWithValue("@Search", "%" + searchQuery + "%");
