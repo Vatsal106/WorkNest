@@ -99,7 +99,7 @@
                         <asp:TemplateField HeaderText="Details">
                             <ItemTemplate>
                                 <asp:HyperLink ID="lnkTaskDetails" runat="server"
-                                    NavigateUrl='<%# "TaskDetails.aspx?TaskID=" + Eval("TASK_ID") %>'
+                                    NavigateUrl='<%# "MemberTaskDetails.aspx?TaskID=" + Eval("TASK_ID") %>'
                                     CssClass="details-link"
                                     Text="View Details">
                                 </asp:HyperLink>

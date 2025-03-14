@@ -238,6 +238,7 @@
     <Content Include="Project_Manager\UpdateProjects.aspx" />
     <Content Include="P_Member\MemberHome.aspx" />
     <Content Include="P_Member\MemberProfile.aspx" />
+    <Content Include="P_Member\MemberTaskDetails.aspx" />
     <Content Include="P_Member\MemberTasks.aspx" />
     <Content Include="P_Member\ProjectsOfMember.aspx" />
     <Content Include="P_Member\RequestLeave.aspx" />
@@ -566,6 +567,13 @@
     </Compile>
     <Compile Include="P_Member\MemberProfile.aspx.designer.cs">
       <DependentUpon>MemberProfile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="P_Member\MemberTaskDetails.aspx.cs">
+      <DependentUpon>MemberTaskDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="P_Member\MemberTaskDetails.aspx.designer.cs">
+      <DependentUpon>MemberTaskDetails.aspx</DependentUpon>
     </Compile>
     <Compile Include="P_Member\MemberTasks.aspx.cs">
       <DependentUpon>MemberTasks.aspx</DependentUpon>
