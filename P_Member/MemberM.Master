@@ -471,7 +471,7 @@
                 📊 Dashboard ▼
             </div>
             <div id="dashboardMenu" class="submenu">
-                <a href="MemberDashboard.aspx">📈 Overview</a>
+                <a href="MemberHome.aspx">📈 Overview</a>
             </div>
 
 
