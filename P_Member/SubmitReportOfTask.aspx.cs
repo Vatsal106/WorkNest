@@ -72,10 +72,10 @@ namespace WorkNest.P_Member
 
                 if (fuReport.HasFile)
                 {
-                    int maxFileSize = 10 * 1024 * 1024;
+                    int maxFileSize = 7 * 1024 * 1024;
                     if (fuReport.FileContent.Length > maxFileSize)
                     {
-                        lblMessage.Text = "File size must be less than 10MB.";
+                        lblMessage.Text = "File size must be less than 7MB.";
                         lblMessage.ForeColor = Color.Red;
                         return;
                     }

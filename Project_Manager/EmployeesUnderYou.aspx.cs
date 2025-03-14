@@ -31,22 +31,24 @@ namespace WorkNest.Project_Manager
             {
                 int manager_id = Convert.ToInt32(Session["EmployeeID"]);
                 string query = @"
-                   SELECT DISTINCT
-    e.EMPLOYEE_ID,
-    e.FULL_NAME, 
-    e.EMAIL, 
-    e.PHONE_NUMBER, 
-    e.HIRE_DATE, 
-    e.IMAGE, 
-    d.DEPARTMENT_NAME,
-    r.ROLE_NAME,
-    r.ROLE_ID
-FROM EMPLOYEE e
-JOIN DEPARTMENT d ON e.DEPARTMENT_ID = d.DEPARTMENT_ID
-JOIN EMPLOYEE_ROLES er ON e.EMPLOYEE_ID = er.EMPLOYEE_ID
-JOIN ROLES r ON er.ROLE_ID = r.ROLE_ID
-JOIN PROJECT p ON e.EMPLOYEE_ID = p.PROJECT_MANAGER_ID OR p.PROJECT_MANAGER_ID = @ManagerId
-WHERE r.ROLE_ID <> 1;";
+            SELECT DISTINCT
+                e.EMPLOYEE_ID,
+                e.FULL_NAME, 
+                e.EMAIL, 
+                e.PHONE_NUMBER, 
+                e.HIRE_DATE, 
+                e.IMAGE, 
+                d.DEPARTMENT_NAME,
+                r.ROLE_NAME,
+                r.ROLE_ID
+            FROM EMPLOYEE e
+            JOIN DEPARTMENT d ON e.DEPARTMENT_ID = d.DEPARTMENT_ID
+            JOIN EMPLOYEE_ROLES er ON e.EMPLOYEE_ID = er.EMPLOYEE_ID
+            JOIN ROLES r ON er.ROLE_ID = r.ROLE_ID
+            JOIN TASK t ON e.EMPLOYEE_ID = t.ASSIGN_TO
+            JOIN PROJECT p ON t.PROJECT_ID = p.PROJECT_ID
+            WHERE p.PROJECT_MANAGER_ID = @ManagerId
+            AND r.ROLE_ID <> 1";
 
                 if (!string.IsNullOrEmpty(searchQuery))
                 {
@@ -91,6 +93,7 @@ WHERE r.ROLE_ID <> 1;";
                 Response.Write("<script>alert('Error loading employees: " + ex.Message + "');</script>");
             }
         }
+
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
@@ -138,20 +141,20 @@ WHERE r.ROLE_ID <> 1;";
                 SqlTransaction transaction = dbConn.con.BeginTransaction();
                 try
                 {
-                    string updateProjectQuery = "UPDATE PROJECT SET PROJECT_MANAGER_ID = NULL WHERE PROJECT_MANAGER_ID = @EmployeeId";
-                    SqlCommand cmd = new SqlCommand(updateProjectQuery, dbConn.con, transaction);
+                    // Set assigned tasks to NULL instead of deleting them
+                    string updateTaskQuery = "UPDATE TASK SET ASSIGN_TO = NULL WHERE ASSIGN_TO = @EmployeeId";
+                    SqlCommand cmd = new SqlCommand(updateTaskQuery, dbConn.con, transaction);
                     cmd.Parameters.AddWithValue("@EmployeeId", employeeId);
                     cmd.ExecuteNonQuery();
                     cmd.Dispose();
 
                     string[] queries = {
-                        "DELETE FROM TASK WHERE ASSIGN_TO = @EmployeeId",
-                        "DELETE FROM LEAVES WHERE EMPLOYEE_ID = @EmployeeId",
-                        "DELETE FROM USER_CREDENTIALS WHERE EMPLOYEE_ID = @EmployeeId",
-                        "DELETE FROM EMPLOYEE_ROLES WHERE EMPLOYEE_ID = @EmployeeId",
-                        "DELETE FROM ATTENDANCE WHERE EMPLOYEE_ID = @EmployeeId",
-                        "DELETE FROM EMPLOYEE WHERE EMPLOYEE_ID = @EmployeeId"
-                    };
+                "DELETE FROM LEAVES WHERE EMPLOYEE_ID = @EmployeeId",
+                "DELETE FROM USER_CREDENTIALS WHERE EMPLOYEE_ID = @EmployeeId",
+                "DELETE FROM EMPLOYEE_ROLES WHERE EMPLOYEE_ID = @EmployeeId",
+                "DELETE FROM ATTENDANCE WHERE EMPLOYEE_ID = @EmployeeId",
+                "DELETE FROM EMPLOYEE WHERE EMPLOYEE_ID = @EmployeeId"
+            };
 
                     cmd = new SqlCommand();
                     cmd.Connection = dbConn.con;
@@ -167,7 +170,7 @@ WHERE r.ROLE_ID <> 1;";
 
                     cmd.Dispose();
                     transaction.Commit();
-                    Response.Write("<script>alert('Employee deleted successfully'); window.location='Employees.aspx';</script>");
+                    Response.Write("<script>alert('Employee deleted successfully'); window.location='EmployeesUnderYou.aspx';</script>");
                 }
                 catch (Exception ex)
                 {
@@ -180,5 +183,6 @@ WHERE r.ROLE_ID <> 1;";
                 Response.Write("<script>alert('Error deleting employee: " + ex.Message + "');</script>");
             }
         }
+
     }
 }
