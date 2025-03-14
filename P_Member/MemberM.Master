@@ -475,7 +475,7 @@
             </div>
 
 
-            <a href="ProjectsOfMember.aspx">📂 All Projects</a>
+            <a class="menu" href="ProjectsOfMember.aspx">📂 All Projects</a>
 
 
             <div class="menu has-submenu" onclick="toggleSubmenu('tasksMenu')">
