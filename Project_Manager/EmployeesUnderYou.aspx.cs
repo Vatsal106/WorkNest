@@ -45,7 +45,8 @@ namespace WorkNest.Project_Manager
                     JOIN DEPARTMENT d ON e.DEPARTMENT_ID = d.DEPARTMENT_ID
                     JOIN EMPLOYEE_ROLES ER ON E.EMPLOYEE_ID = ER.EMPLOYEE_ID
                     JOIN ROLES R ON ER.ROLE_ID = R.ROLE_ID
-                    WHERE r.ROLE_ID <> 1 AND e.MANAGER_ID = @ManagerId""";
+                    JOIN PROJECT P ON e.EMPLOYEE_ID = P.PROJECT_MANAGER_ID
+                    WHERE r.ROLE_ID <> 1 AND e.PROJECT_MANAGER_ID = @ManagerId""";
 
                 if (!string.IsNullOrEmpty(searchQuery))
                 {
