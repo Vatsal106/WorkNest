@@ -31,22 +31,22 @@ namespace WorkNest.Project_Manager
             {
                 int manager_id = Convert.ToInt32(Session["EmployeeID"]);
                 string query = @"
-                    SELECT 
-                    e.EMPLOYEE_ID,
-                    e.FULL_NAME, 
-                    e.EMAIL, 
-                    e.PHONE_NUMBER, 
-                    e.HIRE_DATE, 
-                    e.IMAGE, 
-                    d.DEPARTMENT_NAME,
-                    r.ROLE_NAME,
-                    r.ROLE_ID
-                    FROM EMPLOYEE e
-                    JOIN DEPARTMENT d ON e.DEPARTMENT_ID = d.DEPARTMENT_ID
-                    JOIN EMPLOYEE_ROLES ER ON E.EMPLOYEE_ID = ER.EMPLOYEE_ID
-                    JOIN ROLES R ON ER.ROLE_ID = R.ROLE_ID
-                    JOIN PROJECT P ON e.EMPLOYEE_ID = P.PROJECT_MANAGER_ID
-                    WHERE r.ROLE_ID <> 1 AND e.PROJECT_MANAGER_ID = @ManagerId""";
+                   SELECT DISTINCT
+    e.EMPLOYEE_ID,
+    e.FULL_NAME, 
+    e.EMAIL, 
+    e.PHONE_NUMBER, 
+    e.HIRE_DATE, 
+    e.IMAGE, 
+    d.DEPARTMENT_NAME,
+    r.ROLE_NAME,
+    r.ROLE_ID
+FROM EMPLOYEE e
+JOIN DEPARTMENT d ON e.DEPARTMENT_ID = d.DEPARTMENT_ID
+JOIN EMPLOYEE_ROLES er ON e.EMPLOYEE_ID = er.EMPLOYEE_ID
+JOIN ROLES r ON er.ROLE_ID = r.ROLE_ID
+JOIN PROJECT p ON e.EMPLOYEE_ID = p.PROJECT_MANAGER_ID OR p.PROJECT_MANAGER_ID = @ManagerId
+WHERE r.ROLE_ID <> 1;";
 
                 if (!string.IsNullOrEmpty(searchQuery))
                 {
