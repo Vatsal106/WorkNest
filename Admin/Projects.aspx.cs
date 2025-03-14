@@ -101,6 +101,20 @@ namespace WorkNest.Admin
             dbConn.dbConnect();
             try
             {
+
+                string deleteTaskReportHistoryQuery = "DELETE FROM TASK_REPORT_HISTORY WHERE TASK_ID IN (SELECT TASK_ID FROM TASK WHERE PROJECT_ID = @ProjectId)";
+                SqlCommand cmdDeleteTaskReportHistory = new SqlCommand(deleteTaskReportHistoryQuery, dbConn.con);
+                cmdDeleteTaskReportHistory.Parameters.AddWithValue("@ProjectId", projectId);
+                cmdDeleteTaskReportHistory.ExecuteNonQuery();
+                cmdDeleteTaskReportHistory.Dispose();
+
+
+                string deleteTaskReportQuery = "DELETE FROM TASK_REPORT WHERE TASK_ID IN (SELECT TASK_ID FROM TASK WHERE PROJECT_ID = @ProjectId)";
+                SqlCommand cmdDeleteTaskReport = new SqlCommand(deleteTaskReportQuery, dbConn.con);
+                cmdDeleteTaskReport.Parameters.AddWithValue("@ProjectId", projectId);
+                cmdDeleteTaskReport.ExecuteNonQuery();
+                cmdDeleteTaskReport.Dispose();
+
                 string deleteTasksQuery = "DELETE FROM TASK WHERE PROJECT_ID = @ProjectId";
                 SqlCommand cmdDeleteTasks = new SqlCommand(deleteTasksQuery, dbConn.con);
                 cmdDeleteTasks.Parameters.AddWithValue("@ProjectId", projectId);
