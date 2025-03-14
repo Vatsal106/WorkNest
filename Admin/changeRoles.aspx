@@ -164,7 +164,7 @@
     <div class="container">
         
         <div class="image-section">
-            <img src='<%= ResolveUrl("~/Images/Placeholder.png") %>' alt="Placeholder Image" />
+            <img src='<%= ResolveUrl("~/Images/changeInRole.jpg") %>' alt="Placeholder Image" />
         </div>
 
         <div class="form-section">

@@ -13,7 +13,7 @@
 
         /* Hero Section */
         .hero-section {
-            background: url('../Images/ClientPagePhoto.png') center/cover no-repeat;
+            background: url('../Images/ADMIN HOME PAGE (2).jpg') center/cover no-repeat;
             padding: 120px 20px;
             text-align: center;
             color: darkgray;
@@ -21,7 +21,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-         
+            color:white;
         }
 
         .hero-text {
