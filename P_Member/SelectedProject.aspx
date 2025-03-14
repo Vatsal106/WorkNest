@@ -122,7 +122,7 @@
                     <asp:BoundField DataField="DUE_DATE" HeaderText="Due Date" DataFormatString="{0:yyyy-MM-dd}" />
 
                    
-                    <asp:TemplateField HeaderText="Report File">
+                   <%-- <asp:TemplateField HeaderText="Report File">
                         <ItemTemplate>
                             <asp:HyperLink ID="lnkDownloadReport" runat="server"
                                 NavigateUrl='<%# Eval("DownloadLink") %>'
@@ -139,7 +139,7 @@
                                 Text="View Details">
                             </asp:HyperLink>
                         </ItemTemplate>
-                    </asp:TemplateField>
+                    </asp:TemplateField>--%>
                 </Columns>
             </asp:GridView>
 

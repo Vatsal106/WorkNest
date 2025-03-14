@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head runat="server">
-    <title>Project Manager Panel</title>
+    <title> Member Panel</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 
     <style>
@@ -465,7 +465,7 @@
                     <img src="../Images/Logo Light Blue Transparent.png" alt="Logo">
                 </a>
             </div>
-            <h3>Admin Panel</h3>
+            <h3>Member Panel</h3>
 
             <div class="menu has-submenu" onclick="toggleSubmenu('dashboardMenu')">
                 📊 Dashboard ▼
@@ -484,7 +484,7 @@
             </div>
 
             <div id="tasksMenu" class="submenu">
-                <a href="AllTasks.aspx">📋 Task List</a>
+                <a href="MemberTasks.aspx">📋 Your Task List</a>
                 <a href="TaskReports.aspx">📊 Task Reports</a>
             </div>
             <div class="menu has-submenu" onclick="toggleSubmenu('leavesMenu')">
