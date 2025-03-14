@@ -75,10 +75,10 @@
   </asp:DropDownList>
 
   <label>Project Manager:</label>
-  <asp:DropDownList ID="ddlProjectManager" runat="server" CssClass="form-control"></asp:DropDownList>
+  <asp:DropDownList ID="ddlProjectManager" runat="server" CssClass="form-control" Enabled="false"></asp:DropDownList>
 
   <label>Client:</label>
-  <asp:DropDownList ID="ddlClient" runat="server" CssClass="form-control"></asp:DropDownList>
+  <asp:DropDownList ID="ddlClient" runat="server" CssClass="form-control" Enabled="false"></asp:DropDownList>
 
   <br />
   <asp:Label ID="lblError" Text="" runat="server" />

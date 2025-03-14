@@ -10,65 +10,58 @@ namespace WorkNest.P_Member
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["EmployeeID"] == null)
+            {
+                Response.Redirect("~/Login.aspx");
+                return;
+            }
+
             if (!IsPostBack)
             {
                 LoadProjects("");
             }
         }
 
-        public void LoadProjects(string searchKeyword)
+        private void LoadProjects(string searchKeyword)
         {
             dbConn.dbConnect();
-
-            if (Session["EmployeeID"] == null)
-            {
-                Response.Write("<script>alert('Session Expired. Please log in again.');</script>");
-                return;
-            }
 
             try
             {
                 int employeeId = Convert.ToInt32(Session["EmployeeID"]);
-
                 string query = @"
-                    SELECT DISTINCT P.PROJECT_ID, P.PROJECT_NAME, P.DESCRIPTION, P.START_DATE, P.END_DATE, P.STATUS, C.CLIENT_NAME 
+                    SELECT DISTINCT P.PROJECT_ID, P.PROJECT_NAME, P.DESCRIPTION, P.START_DATE, P.END_DATE, 
+                                    P.STATUS, C.CLIENT_NAME, E.FULL_NAME AS PROJECT_MANAGER
                     FROM PROJECT P
                     JOIN CLIENTS C ON P.CLIENT_ID = C.CLIENT_ID
                     JOIN TASK T ON P.PROJECT_ID = T.PROJECT_ID
-                    WHERE T.ASSIGNED_TO = @EmployeeID
+                    JOIN EMPLOYEE E ON P.PROJECT_MANAGER_ID = E.EMPLOYEE_ID
+                    WHERE T.ASSIGN_TO = @EmployeeID
                     AND (P.PROJECT_NAME LIKE @Search OR C.CLIENT_NAME LIKE @Search)";
 
-                SqlCommand cmd = new SqlCommand(query, dbConn.con);
-                cmd.Parameters.AddWithValue("@EmployeeID", employeeId);
-                cmd.Parameters.AddWithValue("@Search", "%" + searchKeyword + "%");
+                using (SqlCommand cmd = new SqlCommand(query, dbConn.con))
+                {
+                    cmd.Parameters.AddWithValue("@EmployeeID", employeeId);
+                    cmd.Parameters.AddWithValue("@Search", "%" + searchKeyword + "%");
 
-                SqlDataAdapter adpt = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                adpt.Fill(dt);
-
-                rptProjects.DataSource = dt;
-                rptProjects.DataBind();
-
-                cmd.Dispose();
-                adpt.Dispose();
+                    using (SqlDataAdapter adpt = new SqlDataAdapter(cmd))
+                    {
+                        DataTable dt = new DataTable();
+                        adpt.Fill(dt);
+                        rptProjects.DataSource = dt;
+                        rptProjects.DataBind();
+                    }
+                }
             }
             catch (Exception ex)
             {
-                Response.Write("<script>alert('Error loading projects: " + ex.Message + "');</script>");
+                lblError.Text = "Error loading projects: " + ex.Message;  // Assuming you have a Label control for error messages
             }
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
-            try
-            {
-                string searchText = txtSearch.Text.Trim();
-                LoadProjects(searchText);
-            }
-            catch (Exception ex)
-            {
-                Response.Write("<script>alert('Error searching projects: " + ex.Message + "');</script>");
-            }
+            LoadProjects(txtSearch.Text.Trim());
         }
 
         protected string GetStatuscss(string status)
@@ -89,3 +82,4 @@ namespace WorkNest.P_Member
         }
     }
 }
+
