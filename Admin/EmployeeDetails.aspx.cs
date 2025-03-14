@@ -120,7 +120,8 @@ namespace WorkNest.Admin
             FROM PROJECT
             WHERE PROJECT_ID IN (
                 SELECT DISTINCT PROJECT_ID FROM TASK WHERE ASSIGN_TO = @EmployeeID
-            )";
+            ) 
+            OR PROJECT_MANAGER_ID = @EmployeeID";
 
                 SqlCommand cmd = new SqlCommand(query, dbConn.con);
                 cmd.Parameters.AddWithValue("@EmployeeID", employeeId);
@@ -131,6 +132,7 @@ namespace WorkNest.Admin
                 gvProjects.DataSource = dtProjects;
                 gvProjects.DataBind();
 
+
                 LoadEmployeeTasks(employeeId);
             }
             catch (Exception ex)
@@ -138,6 +140,7 @@ namespace WorkNest.Admin
                 Response.Write("<script>alert('Error: " + ex.Message + "');</script>");
             }
         }
+
 
     }
 }
