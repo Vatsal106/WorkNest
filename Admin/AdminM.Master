@@ -515,7 +515,7 @@
             <div id="leavesMenu" class="submenu">
                 <a href="ApproveLeaves.aspx">✅ Approve Leaves </a>
             </div>
-            <a class="menu" href="Settings.aspx">⚙️ Settings</a>
+            <a class="menu" href="AdminProfile.aspx">⚙️ Profile</a>
             <a class="menu" href="#" onclick="showLogoutPopup()">🚪 Logout</a>
 
         </div>

@@ -171,6 +171,7 @@
     <Content Include="Admin\AddTask.aspx" />
     <Content Include="Admin\AdminDashboard.aspx" />
     <Content Include="Admin\AdminHome.aspx" />
+    <Content Include="Admin\AdminProfile.aspx" />
     <Content Include="Admin\AllTasks.aspx" />
     <Content Include="Admin\ApproveLeaves.aspx" />
     <Content Include="Admin\changeRoles.aspx" />
@@ -219,6 +220,7 @@
     <Content Include="Project_Manager\AddTask.aspx" />
     <Content Include="Project_Manager\EmployeeDetails.aspx" />
     <Content Include="Project_Manager\EmployeesUnderYou.aspx" />
+    <Content Include="Project_Manager\ManagerProfile.aspx" />
     <Content Include="Project_Manager\ManagerTasks.aspx" />
     <Content Include="Project_Manager\AllTasks.aspx" />
     <Content Include="Project_Manager\EditTask.aspx" />
@@ -284,6 +286,13 @@
     </Compile>
     <Compile Include="Admin\AdminHome.aspx.designer.cs">
       <DependentUpon>AdminHome.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\AdminProfile.aspx.cs">
+      <DependentUpon>AdminProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\AdminProfile.aspx.designer.cs">
+      <DependentUpon>AdminProfile.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\AllTasks.aspx.cs">
       <DependentUpon>AllTasks.aspx</DependentUpon>
@@ -421,6 +430,13 @@
     </Compile>
     <Compile Include="Project_Manager\EmployeesUnderYou.aspx.designer.cs">
       <DependentUpon>EmployeesUnderYou.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Project_Manager\ManagerProfile.aspx.cs">
+      <DependentUpon>ManagerProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Project_Manager\ManagerProfile.aspx.designer.cs">
+      <DependentUpon>ManagerProfile.aspx</DependentUpon>
     </Compile>
     <Compile Include="Project_Manager\ManagerTasks.aspx.cs">
       <DependentUpon>ManagerTasks.aspx</DependentUpon>
