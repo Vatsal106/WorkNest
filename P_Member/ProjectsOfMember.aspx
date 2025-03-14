@@ -158,7 +158,7 @@
     </div>
 
     <div class="project-container">
-        <asp:Repeater ID="rptProjects" runat="server" OnItemCommand="rptProjects_ItemCommand">
+        <asp:Repeater ID="rptProjects" runat="server" >
             <ItemTemplate>
                 <div class="project-card">
                     <h3 class="project-header"><%# Eval("PROJECT_NAME") %></h3>
