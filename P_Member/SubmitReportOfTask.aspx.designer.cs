@@ -24,6 +24,15 @@ namespace WorkNest.P_Member
         protected global::System.Web.UI.WebControls.HiddenField hfTaskID;
 
         /// <summary>
+        /// ddlTasks control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlTasks;
+
+        /// <summary>
         /// Label1 control.
         /// </summary>
         /// <remarks>

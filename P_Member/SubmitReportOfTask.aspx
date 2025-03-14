@@ -10,6 +10,11 @@
         <div class="card p-4 shadow-sm">
             <asp:HiddenField ID="hfTaskID" runat="server" />
             <div class="mb-3">
+                <label for="ddlTasks" class="form-label">Select Task:</label>
+                <asp:DropDownList ID="ddlTasks" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlTasks_SelectedIndexChanged">
+                </asp:DropDownList>
+            </div>
+            <div class="mb-3">
                 <asp:Label ID="Label1" runat="server" Text="Task Name: "></asp:Label>
                 <asp:Label ID="txtTaskName" runat="server" class="form-label"></asp:Label>
             </div>
@@ -39,7 +44,7 @@
             </div>
             <div class="text-center">
                 <asp:Button ID="btnSubmit" runat="server" Text="Submit" CssClass="btn btn-primary" OnClick="btnSubmit_Click" />
-                <asp:Button ID="btnClear" runat="server" Text="Clear" CssClass="btn btn-primary" OnClick="btnClear_Click"  />
+                <asp:Button ID="btnClear" runat="server" Text="Clear" CssClass="btn btn-primary" OnClick="btnClear_Click" />
             </div>
             <div class="mt-3 text-center">
                 <asp:Label ID="lblMessage" runat="server" CssClass="text-success" />

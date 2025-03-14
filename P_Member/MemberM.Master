@@ -485,7 +485,7 @@
 
             <div id="tasksMenu" class="submenu">
                 <a href="MemberTasks.aspx">📋 Your Task List</a>
-                <a href="TaskReports.aspx">📊 Task Reports</a>
+                <a href="SubmitReportOfTask.aspx">📊 Task Reports</a>
             </div>
             <div class="menu has-submenu" onclick="toggleSubmenu('leavesMenu')">
                 🍃 Leaves ▼

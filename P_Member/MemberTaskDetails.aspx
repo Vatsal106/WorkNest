@@ -59,7 +59,7 @@
             }
 
 
-     
+
 
         /* Table Styling */
         .table-container {
@@ -109,7 +109,7 @@
     </style>
 </asp:Content>
 
-<asp:Content ID="Content3" ContentPlaceHolderID="Member_Head_Title" runat="server"> Task Details </asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="Member_Head_Title" runat="server">Task Details </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="Member_Content" runat="server">
 
@@ -119,20 +119,37 @@
         <div class="card">
             <div class="card-header"><i class="fas fa-tasks"></i>Task Details</div>
             <div class="card-body">
-                <p><strong><i class="fas fa-project-diagram"></i>Project Name:</strong>
-                    <asp:Label ID="lblProjectName" runat="server" /></p>
-                <p><strong><i class="fas fa-tasks"></i>Task Name:</strong>
-                    <asp:Label ID="lblTaskName" runat="server" /></p>
-                <p><strong><i class="fas fa-chart-line"></i>Status:</strong>
-                    <asp:Label ID="lblStatus" runat="server"  BackColor="Yellow"/></p>
-                <p><strong><i class="fas fa-user"></i>Assigned To:</strong>
-                    <asp:Label ID="lblAssignedTo" runat="server" /></p>
-                <p><strong><i class="fas fa-calendar-alt"></i>Due Date:</strong>
-                    <asp:Label ID="lblDueDate" runat="server" /></p>
-                <p><strong><i class="fas fa-align-left"></i>Description:</strong>
-                    <asp:Label ID="lblDescription" runat="server" /></p>
+                <p>
+                    <strong><i class="fas fa-project-diagram"></i>Project Name:</strong>
+                    <asp:Label ID="lblProjectName" runat="server" />
+                </p>
+                <p>
+                    <strong><i class="fas fa-tasks"></i>Task Name:</strong>
+                    <asp:Label ID="lblTaskName" runat="server" />
+                </p>
+                <p>
+                    <strong><i class="fas fa-chart-line"></i>Status:</strong>
+                    <asp:Label ID="lblStatus" runat="server" BackColor="Yellow" />
+                </p>
+                <p>
+                    <strong><i class="fas fa-user"></i>Assigned To:</strong>
+                    <asp:Label ID="lblAssignedTo" runat="server" />
+                </p>
+                <p>
+                    <strong><i class="fas fa-calendar-alt"></i>Due Date:</strong>
+                    <asp:Label ID="lblDueDate" runat="server" />
+                </p>
+                <p>
+                    <strong><i class="fas fa-align-left"></i>Description:</strong>
+                    <asp:Label ID="lblDescription" runat="server" />
+                </p>
 
 
+            </div>
+            <div class="text-center" style="margin-bottom: 20px;">
+                <asp:Button ID="btnSubmitReport" runat="server" Text="📝 Submit Report"
+                    CssClass="btn btn-success"
+                    OnClick="btnSubmitReport_Click" />
             </div>
         </div>
 
@@ -140,10 +157,14 @@
         <div class="card">
             <div class="card-header"><i class="fas fa-file-alt"></i>Latest Task Report</div>
             <div class="card-body">
-                <p><strong><i class="fas fa-calendar"></i>Report Date:</strong>
-                    <asp:Label ID="lblReportDate" runat="server" /></p>
-                <p><strong><i class="fas fa-align-left"></i>Report Description:</strong>
-                    <asp:Label ID="lblReportDescription" runat="server" /></p>
+                <p>
+                    <strong><i class="fas fa-calendar"></i>Report Date:</strong>
+                    <asp:Label ID="lblReportDate" runat="server" />
+                </p>
+                <p>
+                    <strong><i class="fas fa-align-left"></i>Report Description:</strong>
+                    <asp:Label ID="lblReportDescription" runat="server" />
+                </p>
 
                 <asp:HyperLink ID="lnkLatestReport" runat="server" Text="📥 Download Report" Visible="false" CssClass="btn btn-primary" />
             </div>

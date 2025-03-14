@@ -135,6 +135,19 @@ namespace WorkNest.P_Member
                 Response.Write("<script>alert('Error loading latest task report: " + ex.Message + "');</script>");
             }
         }
+        protected void btnSubmitReport_Click(object sender, EventArgs e)
+        {
+            string taskId = Request.QueryString["TaskID"];
+
+            if (!string.IsNullOrEmpty(taskId))
+            {
+                Response.Redirect("SubmitReportOfTask.aspx?TaskID=" + taskId);
+            }
+            else
+            {
+                Response.Write("<script>alert('Invalid Task ID.');</script>");
+            }
+        }
 
         private void LoadTaskHistory(string taskId)
         {
