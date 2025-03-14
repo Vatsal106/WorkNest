@@ -273,6 +273,102 @@
             height: 40px;
             width: 40px;
         }
+                .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            width: 350px;
+            transform: scale(0.8);
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+            .modal-overlay.active .modal-content {
+                transform: scale(1);
+            }
+
+        .modal-header h2 {
+            font-size: 22px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .modal-body p {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 12px 16px;
+            border: none;
+            cursor: pointer;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s;
+            flex: 1;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            color: white;
+        }
+
+            .btn-danger:hover {
+                background-color: #c82333;
+            }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+        }
+
+            .btn-secondary:hover {
+                background-color: #5a6268;
+            }
+
+        /* Close Button */
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 22px;
+            color: #333;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+            .close-btn:hover {
+                color: #dc3545;
+            }
+
 
 
         @media (max-width: 768px) {
@@ -344,6 +440,18 @@
 
             document.getElementById(id).classList.toggle("active");
         }
+
+        function showLogoutPopup() {
+            document.getElementById("logoutModal").classList.add("active");
+        }
+
+        function closeLogoutPopup() {
+            document.getElementById("logoutModal").classList.remove("active");
+        }
+
+        function confirmLogout() {
+            window.location.href = "../Logout.aspx"; // Redirect to Logout page
+        }
     </script>
 
     <asp:ContentPlaceHolder ID="Manager_Head" runat="server"></asp:ContentPlaceHolder>
@@ -399,9 +507,10 @@
             <div id="leavesMenu" class="submenu">
                 <a href="Leavelist.aspx">✅ Approve Leaves Of Employee</a>
                 <a href="RequestLeave.aspx">✅ Request Leave</a>
+                <a href="StatusOfYourLeave.aspx">✅ Check Status</a>
             </div>
-            
-            <a class="menu" href="../Logout.aspx">🚪 Logout</a>
+            <a class="menu" href="ManagerProfile.aspx">⚙️ Profile</a>
+            <a class="menu" href="#">🚪 Logout</a>
         </div>
 
 
@@ -427,6 +536,7 @@
                     <div id="dropdown-content" class="dropdown-content">
                         <a href="AddTask.aspx">Add Task</a>
                         <a href="LeaveList.aspx">Approve Leave</a>
+                        <a href="RequestLeave.aspx">Request Leave</a>
                     </div>
                 </div>
                 <div class="profile">
@@ -441,6 +551,24 @@
         <div class="content">
             <asp:ContentPlaceHolder ID="Manager_Content" runat="server"></asp:ContentPlaceHolder>
         </div>
+          <div id="logoutModal" class="modal-overlay" onclick="closeLogoutPopup(event)">
+      <div class="modal-content" onclick="event.stopPropagation();">
+          <div class="modal-header">
+              <h2><i class="fas fa-sign-out-alt mr-1"></i>Confirm Logout</h2>
+          </div>
+          <div class="modal-body">
+              <p>Are you sure you want to log out? Your session will be ended.</p>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-danger" onclick="confirmLogout()">
+                  <i class="fas fa-power-off"></i>Yes, Logout
+              </button>
+              <button type="button" class="btn btn-secondary" onclick="closeLogoutPopup()">
+                  <i class="fas fa-times"></i>Cancel
+              </button>
+          </div>
+      </div>
+  </div>
     </form>
 </body>
 </html>
