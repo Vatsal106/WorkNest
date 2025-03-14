@@ -507,9 +507,10 @@
             <div id="leavesMenu" class="submenu">
                 <a href="Leavelist.aspx">✅ Approve Leaves Of Employee</a>
                 <a href="RequestLeave.aspx">✅ Request Leave</a>
+                <a href="StatusOfYourLeave.aspx">✅ Check Status</a>
             </div>
-             <a class="menu" href="ManagerProfile.aspx">🚪 Profile</a>
-            <a class="menu" href="../Logout.aspx">🚪 Logout</a>
+            <a class="menu" href="ManagerProfile.aspx">⚙️ Profile</a>
+            <a class="menu" href="#">🚪 Logout</a>
         </div>
 
 

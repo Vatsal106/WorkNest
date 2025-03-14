@@ -230,12 +230,16 @@
     <Content Include="Project_Manager\P_ManagerDashboard.aspx" />
     <Content Include="Project_Manager\P_ManagerHome.aspx" />
     <Content Include="Project_Manager\SelectedProject.aspx" />
+    <Content Include="Project_Manager\StatusOfYourLeave.aspx" />
     <Content Include="Project_Manager\TaskDetails.aspx" />
     <Content Include="Project_Manager\Tasks.aspx" />
     <Content Include="Project_Manager\UpdateProjects.aspx" />
     <Content Include="P_Member\MemberDashboard.aspx" />
     <Content Include="P_Member\MemberHome.aspx" />
+    <Content Include="P_Member\MemberProfile.aspx" />
+    <Content Include="P_Member\ProjectsOfMember.aspx" />
     <Content Include="P_Member\RequestLeave.aspx" />
+    <Content Include="P_Member\StatusOfLeave.aspx" />
     <Content Include="P_Member\SubmitReportOfTask.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -510,6 +514,13 @@
     <Compile Include="Project_Manager\SelectedProject.aspx.designer.cs">
       <DependentUpon>SelectedProject.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Project_Manager\StatusOfYourLeave.aspx.cs">
+      <DependentUpon>StatusOfYourLeave.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Project_Manager\StatusOfYourLeave.aspx.designer.cs">
+      <DependentUpon>StatusOfYourLeave.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Project_Manager\TaskDetails.aspx.cs">
       <DependentUpon>TaskDetails.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -553,12 +564,33 @@
     <Compile Include="P_Member\MemberM.Master.designer.cs">
       <DependentUpon>MemberM.Master</DependentUpon>
     </Compile>
+    <Compile Include="P_Member\MemberProfile.aspx.cs">
+      <DependentUpon>MemberProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="P_Member\MemberProfile.aspx.designer.cs">
+      <DependentUpon>MemberProfile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="P_Member\ProjectsOfMember.aspx.cs">
+      <DependentUpon>ProjectsOfMember.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="P_Member\ProjectsOfMember.aspx.designer.cs">
+      <DependentUpon>ProjectsOfMember.aspx</DependentUpon>
+    </Compile>
     <Compile Include="P_Member\RequestLeave.aspx.cs">
       <DependentUpon>RequestLeave.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="P_Member\RequestLeave.aspx.designer.cs">
       <DependentUpon>RequestLeave.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="P_Member\StatusOfLeave.aspx.cs">
+      <DependentUpon>StatusOfLeave.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="P_Member\StatusOfLeave.aspx.designer.cs">
+      <DependentUpon>StatusOfLeave.aspx</DependentUpon>
     </Compile>
     <Compile Include="P_Member\SubmitReportOfTask.aspx.cs">
       <DependentUpon>SubmitReportOfTask.aspx</DependentUpon>
