@@ -467,13 +467,13 @@
             </div>
             <h3>Manager Panel</h3>
 
-            <a class="menu" href="P_ManagerHome.aspx">🏠 Home</a>
+            <a class="menu" href="P_ManagerDashboard.aspx">🏠 Home</a>
 
             <div class="menu has-submenu" onclick="toggleSubmenu('dashboardMenu')">
                 📊 Dashboard ▼
             </div>
             <div id="dashboardMenu" class="submenu">
-                <a href="P_ManagerDashboard.aspx">📈 Overview</a>
+                <a href="P_ManagerHome.aspx">📈 Overview</a>
                 <%--<a href="Reports.aspx">📊 Reports</a>--%>
             </div>
 
