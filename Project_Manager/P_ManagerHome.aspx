@@ -153,7 +153,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="Manager_Content" runat="server">
     <div class="container">
         <!-- Stats Row -->
-        <div class="row mt-4">
+       <%-- <div class="row mt-4">
             <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-3">
                 <div class="stats-card">
                     <i class="fa-solid fa-users stats-icon text-primary"></i>
@@ -182,7 +182,7 @@
                     <div class="stats-label">Pending Leaves</div>
                 </div>
             </div>
-        </div>
+        </div>--%>
 
         <!-- Project Overview Section -->
         <div class="table-container">
