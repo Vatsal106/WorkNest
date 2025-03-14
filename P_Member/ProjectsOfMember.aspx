@@ -182,5 +182,6 @@
                 </div>
             </ItemTemplate>
         </asp:Repeater>
+        <asp:Label ID="lblError" Text="" runat="server" />
     </div>
 </asp:Content>
