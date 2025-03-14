@@ -15,93 +15,75 @@ namespace WorkNest.Project_Manager
     {
 
         /// <summary>
-        /// lblInitials control.
+        /// btnLearnMore control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblInitials;
+        protected global::System.Web.UI.WebControls.Button btnLearnMore;
 
         /// <summary>
-        /// lblEmployeeName control.
+        /// lblReview1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblEmployeeName;
+        protected global::System.Web.UI.WebControls.Label lblReview1;
 
         /// <summary>
-        /// lblEmployeeRole control.
+        /// lblClient1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblEmployeeRole;
+        protected global::System.Web.UI.WebControls.Label lblClient1;
 
         /// <summary>
-        /// lblClockInTime control.
+        /// lblReview2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblClockInTime;
+        protected global::System.Web.UI.WebControls.Label lblReview2;
 
         /// <summary>
-        /// lblBreakTime control.
+        /// lblClient2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblBreakTime;
+        protected global::System.Web.UI.WebControls.Label lblClient2;
 
         /// <summary>
-        /// btnClockIn control.
+        /// lblTotalProject control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnClockIn;
+        protected global::System.Web.UI.WebControls.Label lblTotalProject;
 
         /// <summary>
-        /// btnBreakTime control.
+        /// lblTotalEmployee control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnBreakTime;
+        protected global::System.Web.UI.WebControls.Label lblTotalEmployee;
 
         /// <summary>
-        /// btnStopBreak control.
+        /// lblTotalTask control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnStopBreak;
-
-        /// <summary>
-        /// btnClockOut control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnClockOut;
-
-        /// <summary>
-        /// AttendanceCalendar control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Calendar AttendanceCalendar;
+        protected global::System.Web.UI.WebControls.Label lblTotalTask;
     }
 }
