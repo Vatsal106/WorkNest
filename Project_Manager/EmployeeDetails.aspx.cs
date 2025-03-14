@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web.UI.WebControls;
 
-namespace WorkNest.Admin
+namespace WorkNest.Project_Manager
 {
     public partial class EmployeeDetails : System.Web.UI.Page
     {

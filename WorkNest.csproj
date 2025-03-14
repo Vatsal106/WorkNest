@@ -217,6 +217,7 @@
     <Content Include="login.aspx" />
     <Content Include="Logout.aspx" />
     <Content Include="Project_Manager\AddTask.aspx" />
+    <Content Include="Project_Manager\EmployeeDetails.aspx" />
     <Content Include="Project_Manager\EmployeesUnderYou.aspx" />
     <Content Include="Project_Manager\ManagerTasks.aspx" />
     <Content Include="Project_Manager\AllTasks.aspx" />
@@ -406,6 +407,13 @@
     </Compile>
     <Compile Include="Project_Manager\AddTask.aspx.designer.cs">
       <DependentUpon>AddTask.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Project_Manager\EmployeeDetails.aspx.cs">
+      <DependentUpon>EmployeeDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Project_Manager\EmployeeDetails.aspx.designer.cs">
+      <DependentUpon>EmployeeDetails.aspx</DependentUpon>
     </Compile>
     <Compile Include="Project_Manager\EmployeesUnderYou.aspx.cs">
       <DependentUpon>EmployeesUnderYou.aspx</DependentUpon>
