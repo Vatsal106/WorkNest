@@ -166,6 +166,8 @@
     </span>
 </p>
                      <div class="action-buttons">
+                          <asp:Button ID="btnDetails" runat="server" Text="See Details" CssClass="btn btn-Details"
+     OnClientClick='<%# "window.location.href=\"SelectedProject.aspx?ProjectID=" + Eval("Project_ID") + "\"; return false;" %>' />
                      <asp:Button ID="btnDelete" runat="server" Text="Delete" CssClass="btn btn-delete"
      CommandName="DeleteProject" CommandArgument='<%# Eval("PROJECT_ID") %>'
      OnClientClick="return confirm('Are you sure you want to delete this project?');" />

@@ -227,6 +227,7 @@
     <Content Include="Project_Manager\Projects.aspx" />
     <Content Include="Project_Manager\P_ManagerDashboard.aspx" />
     <Content Include="Project_Manager\P_ManagerHome.aspx" />
+    <Content Include="Project_Manager\SelectedProject.aspx" />
     <Content Include="Project_Manager\TaskDetails.aspx" />
     <Content Include="Project_Manager\Tasks.aspx" />
     <Content Include="P_Member\MemberDashboard.aspx" />
@@ -484,6 +485,13 @@
     </Compile>
     <Compile Include="Project_Manager\P_ManagerHome.aspx.designer.cs">
       <DependentUpon>P_ManagerHome.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Project_Manager\SelectedProject.aspx.cs">
+      <DependentUpon>SelectedProject.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Project_Manager\SelectedProject.aspx.designer.cs">
+      <DependentUpon>SelectedProject.aspx</DependentUpon>
     </Compile>
     <Compile Include="Project_Manager\TaskDetails.aspx.cs">
       <DependentUpon>TaskDetails.aspx</DependentUpon>
