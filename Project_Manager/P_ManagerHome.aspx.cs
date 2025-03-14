@@ -86,12 +86,19 @@ namespace WorkNest.Project_Manager
 
         private void LoadTeamMembers()
         {
-            string query = @"SELECT e.FULL_NAME, e.EMAIL, r.ROLE_NAME AS ROLE, 
-                             (SELECT COUNT(*) FROM TASK t WHERE t.ASSIGN_TO = e.EMPLOYEE_ID) AS ASSIGNED_TASK_COUNT
-                             FROM EMPLOYEE e
-                             INNER JOIN EMPLOYEE_ROLES er ON e.EMPLOYEE_ID = er.EMPLOYEE_ID
-                             INNER JOIN ROLES r ON er.ROLE_ID = r.ROLE_ID
-                             WHERE e.EMPLOYEE_ID IN (SELECT p.PROJECT_MANAGER_ID FROM PROJECT p WHERE p.PROJECT_MANAGER_ID = @ManagerId)";
+            string query = @"
+    SELECT e.FULL_NAME, 
+           e.EMAIL, 
+           r.ROLE_NAME AS ROLE, 
+           (SELECT COUNT(*) FROM TASK t WHERE t.ASSIGN_TO = e.EMPLOYEE_ID) AS ASSIGNED_TASK_COUNT
+    FROM EMPLOYEE e
+    INNER JOIN EMPLOYEE_ROLES er ON e.EMPLOYEE_ID = er.EMPLOYEE_ID
+    INNER JOIN ROLES r ON er.ROLE_ID = r.ROLE_ID
+    WHERE e.EMPLOYEE_ID IN (SELECT DISTINCT t.ASSIGN_TO 
+        FROM TASK t
+        INNER JOIN PROJECT p ON t.PROJECT_ID = p.PROJECT_ID
+        WHERE p.PROJECT_MANAGER_ID = @ManagerId)";
+
             SqlCommand cmd = new SqlCommand(query, dbConn.con);
             cmd.Parameters.AddWithValue("@ManagerId", Session["EmployeeID"]);
 
@@ -104,10 +111,25 @@ namespace WorkNest.Project_Manager
 
         private void LoadLeaveRequests()
         {
-            string query = @"SELECT e.FULL_NAME AS EMPLOYEE_NAME, l.START_DATE, l.END_DATE, l.REASON, l.STATUS 
-                             FROM LEAVES l
-                             INNER JOIN EMPLOYEE e ON l.EMPLOYEE_ID = e.EMPLOYEE_ID
-                             WHERE l.STATUS = 'Pending' AND e.EMPLOYEE_ID IN (SELECT p.PROJECT_MANAGER_ID FROM PROJECT p WHERE p.PROJECT_MANAGER_ID = @ManagerId)";
+            string query = @"
+    SELECT L.LEAVE_ID,  
+           E.FULL_NAME AS EMPLOYEE_NAME, 
+           L.START_DATE, 
+           L.END_DATE, 
+           L.REASON, 
+           L.STATUS 
+    FROM LEAVES L 
+    JOIN EMPLOYEE E ON L.EMPLOYEE_ID = E.EMPLOYEE_ID
+    JOIN EMPLOYEE_ROLES ER ON E.EMPLOYEE_ID = ER.EMPLOYEE_ID
+    JOIN ROLES R ON ER.ROLE_ID = R.ROLE_ID
+    WHERE R.ROLE_NAME = 'Project_Member' 
+          AND E.EMPLOYEE_ID IN (
+              SELECT DISTINCT T.ASSIGN_TO 
+              FROM TASK T
+              INNER JOIN PROJECT P ON T.PROJECT_ID = P.PROJECT_ID
+              WHERE P.PROJECT_MANAGER_ID = @ManagerId
+          )";
+
             SqlCommand cmd = new SqlCommand(query, dbConn.con);
             cmd.Parameters.AddWithValue("@ManagerId", Session["EmployeeID"]);
 
@@ -120,18 +142,18 @@ namespace WorkNest.Project_Manager
 
         private void LoadActivityLog()
         {
-            //string query = @"SELECT t.TASK_NAME, trh.UPDATED_AT AS UPDATE_TIME, trh.DESCRIPTION, trh.TASK_FILE 
-            //         FROM TASK_REPORT_HISTORY trh
-            //         INNER JOIN TASK t ON trh.TASK_ID = t.TASK_ID
-            //         WHERE t.PROJECT_ID IN (SELECT p.PROJECT_ID FROM PROJECT p WHERE p.PROJECT_MANAGER_ID = @ManagerId)";
-            //SqlCommand cmd = new SqlCommand(query, dbConn.con);
-            //cmd.Parameters.AddWithValue("@ManagerId", Session["EmployeeID"]);
+            string query = @"SELECT t.TASK_NAME, trh.UPDATED_AT AS UPDATE_TIME, trh.DESCRIPTION, trh.TASK_FILE AS FILE_ATTACHMENT
+                     FROM TASK_REPORT_HISTORY trh
+                     INNER JOIN TASK t ON trh.TASK_ID = t.TASK_ID
+                     WHERE t.PROJECT_ID IN (SELECT p.PROJECT_ID FROM PROJECT p WHERE p.PROJECT_MANAGER_ID = @ManagerId)";
+            SqlCommand cmd = new SqlCommand(query, dbConn.con);
+            cmd.Parameters.AddWithValue("@ManagerId", Session["EmployeeID"]);
 
-            //SqlDataAdapter sda = new SqlDataAdapter(cmd);
-            //DataTable dt = new DataTable();
-            //sda.Fill(dt);
-            //gvActivityLog.DataSource = dt;
-            //gvActivityLog.DataBind();
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            sda.Fill(dt);
+            gvActivityLog.DataSource = dt;
+            gvActivityLog.DataBind();
         }
 
     }
