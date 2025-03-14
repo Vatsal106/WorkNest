@@ -240,6 +240,7 @@
     <Content Include="P_Member\MemberProfile.aspx" />
     <Content Include="P_Member\ProjectsOfMember.aspx" />
     <Content Include="P_Member\RequestLeave.aspx" />
+    <Content Include="P_Member\SelectedProject.aspx" />
     <Content Include="P_Member\StatusOfLeave.aspx" />
     <Content Include="P_Member\SubmitReportOfTask.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -578,6 +579,13 @@
     </Compile>
     <Compile Include="P_Member\RequestLeave.aspx.designer.cs">
       <DependentUpon>RequestLeave.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="P_Member\SelectedProject.aspx.cs">
+      <DependentUpon>SelectedProject.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="P_Member\SelectedProject.aspx.designer.cs">
+      <DependentUpon>SelectedProject.aspx</DependentUpon>
     </Compile>
     <Compile Include="P_Member\StatusOfLeave.aspx.cs">
       <DependentUpon>StatusOfLeave.aspx</DependentUpon>
