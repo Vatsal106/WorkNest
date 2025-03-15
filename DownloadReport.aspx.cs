@@ -30,20 +30,7 @@ namespace WorkNest.Admin
                 else if (Request.QueryString["TaskHistoryID"] != null)
                 {
                     string taskHistoryId = Request.QueryString["TaskHistoryID"];
-                    if (Session["UserRole"].ToString() == "Project_Member")
-                    {
-
-                        if (IsUserAssignedToTask(loggedInEmployeeId, taskHistoryId))
-                            DownloadHistoryReport(taskHistoryId);
-                        else
-                            Response.Redirect("AccessDenied.aspx");
-                    }
-                    else
-                    {
-
-                        DownloadHistoryReport(taskHistoryId);
-                    }
-
+                    DownloadHistoryReport(taskHistoryId);
                 }
                 else if (Request.QueryString["LeaveID"] != null)
                 {
