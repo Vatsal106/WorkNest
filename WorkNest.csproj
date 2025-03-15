@@ -229,8 +229,8 @@
     <Content Include="Project_Manager\RequestLeave.aspx" />
     <Content Include="Project_Manager\LeaveList.aspx" />
     <Content Include="Project_Manager\Projects.aspx" />
-    <Content Include="Project_Manager\P_ManagerDashboard.aspx" />
-    <Content Include="Project_Manager\P_ManagerHome.aspx" />
+    <Content Include="Project_Manager\Manager_Home.aspx" />
+    <Content Include="Project_Manager\ManagerDashboard.aspx" />
     <Content Include="Project_Manager\SelectedProject.aspx" />
     <Content Include="Project_Manager\StatusOfYourLeave.aspx" />
     <Content Include="Project_Manager\SubmitReport.aspx" />
@@ -498,19 +498,19 @@
     <Compile Include="Project_Manager\P_Manager.Master.designer.cs">
       <DependentUpon>P_Manager.Master</DependentUpon>
     </Compile>
-    <Compile Include="Project_Manager\P_ManagerDashboard.aspx.cs">
-      <DependentUpon>P_ManagerDashboard.aspx</DependentUpon>
+    <Compile Include="Project_Manager\Manager_Home.aspx.cs">
+      <DependentUpon>Manager_Home.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Project_Manager\P_ManagerDashboard.aspx.designer.cs">
-      <DependentUpon>P_ManagerDashboard.aspx</DependentUpon>
+    <Compile Include="Project_Manager\Manager_Home.aspx.designer.cs">
+      <DependentUpon>Manager_Home.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Project_Manager\P_ManagerHome.aspx.cs">
-      <DependentUpon>P_ManagerHome.aspx</DependentUpon>
+    <Compile Include="Project_Manager\ManagerDashboard.aspx.cs">
+      <DependentUpon>ManagerDashboard.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Project_Manager\P_ManagerHome.aspx.designer.cs">
-      <DependentUpon>P_ManagerHome.aspx</DependentUpon>
+    <Compile Include="Project_Manager\ManagerDashboard.aspx.designer.cs">
+      <DependentUpon>ManagerDashboard.aspx</DependentUpon>
     </Compile>
     <Compile Include="Project_Manager\SelectedProject.aspx.cs">
       <DependentUpon>SelectedProject.aspx</DependentUpon>

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Project_Manager/P_Manager.Master" AutoEventWireup="true" CodeBehind="P_ManagerDashboard.aspx.cs" Inherits="WorkNest.Project_Manager.P_ManagerDashboard" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Project_Manager/P_Manager.Master" AutoEventWireup="true" CodeBehind="Manager_Home.aspx.cs" Inherits="WorkNest.Project_Manager.P_ManagerDashboard" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Manager_Head" runat="server">
     <style>
@@ -179,7 +179,7 @@
  <div class="hero-section">
      <div class="hero-text">Welcome to WorkNest</div>
      <div class="sub-text">Your trusted partner in project and employee management.</div>
-     <asp:Button ID="btnLearnMore" runat="server" Text="Learn More" CssClass="btn-learn-more" PostBackUrl="~/Admin/AdminDashboard.aspx" />
+     <asp:Button ID="btnLearnMore" runat="server" Text="Learn More" CssClass="btn-learn-more" PostBackUrl="ManagerDashboard.aspx" />
  </div>
 
  <!-- About Us -->

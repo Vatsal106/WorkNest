@@ -1,7 +1,6 @@
-﻿using System.Data.SqlClient;
+﻿using System;
 using System.Data;
-using System.Web.UI.WebControls;
-using System;
+using System.Data.SqlClient;
 
 namespace WorkNest.Project_Manager
 {
@@ -62,6 +61,7 @@ namespace WorkNest.Project_Manager
             cmd.Parameters.AddWithValue("@ManagerId", Session["EmployeeID"]);
 
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
+
             DataTable dt = new DataTable();
             sda.Fill(dt);
             gvProjectOverview.DataSource = dt;
