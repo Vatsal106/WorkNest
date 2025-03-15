@@ -53,7 +53,7 @@ namespace WorkNest
 
                 string roleName = roleObj.ToString();
 
-                
+
 
                 Session["Username"] = username;
                 Session["EmployeeID"] = empId;
@@ -65,7 +65,7 @@ namespace WorkNest
                 }
                 else if (roleName == "Project_Manager")
                 {
-                    Response.Redirect("Project_Manager/P_ManagerDashboard.aspx");
+                    Response.Redirect("Project_Manager/ManagerDashboard.aspx");
                 }
                 else
                 {
