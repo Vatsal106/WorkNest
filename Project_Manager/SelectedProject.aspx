@@ -32,23 +32,23 @@
           background: #fff;
           border-radius: 5px;
       }
-        .floating-btn {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: #FF8C00;
-    color: white;
-    padding: 12px 15px;
-    border-radius: 50%;
-    font-size: 18px;
-    text-decoration: none;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-    transition: background 0.3s ease-in-out;
-}
+         .floating-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #FF8C00;
+      color: white;
+      padding: 12px 15px;
+      border-radius: 50%;
+      font-size: 18px;
+      text-decoration: none;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+      transition: background 0.3s ease-in-out;
+  }
 
-.floating-btn:hover {
-    background: #e67e00;
-}
+      .floating-btn:hover {
+          background: #e67e00;
+      }
   </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Manager_Header_Title" runat="server">
@@ -140,5 +140,5 @@
 
     </div>
 </div>
-        <a href="Projects.aspx" class="floating-btn" title="Back to Tasks"><i class="fas fa-arrow-left"></i></a>
+        <a href="Projects.aspx" class="floating-btn" title="Back to Projects"><i class="fas fa-arrow-left"></i></a>
 </asp:Content>
