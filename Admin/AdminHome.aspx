@@ -264,10 +264,5 @@
     </div>
 
 
-    <!-- Call to Action -->
-    <div class="cta-section">
-        <h2>Ready to Get Started?</h2>
-        <asp:Button ID="btnLogin" runat="server" Text="Log In" CssClass="cta-btn" PostBackUrl="~/Login.aspx" />
-    </div>
-
+    
 </asp:Content>
