@@ -110,6 +110,9 @@
             .submenu.active {
                 display: block;
             }
+            #lblFullName{
+                margin-right:10px;
+            }
 
 
         @media (max-width: 768px) {
@@ -467,14 +470,10 @@
             </div>
             <h3>Member Panel</h3>
 
-            <div class="menu has-submenu" onclick="toggleSubmenu('dashboardMenu')">
-                📊 Dashboard ▼
+            <div class="menu" href="MemberHome.aspx">
+                📊 Dashboard
             </div>
-            <div id="dashboardMenu" class="submenu">
-                <a href="MemberHome.aspx">📈 Overview</a>
-            </div>
-
-
+           
             <a class="menu" href="ProjectsOfMember.aspx">📂 All Projects</a>
 
 
@@ -512,10 +511,10 @@
             <div class="Right-Header">
 
 
-                <div class="notification">
+                <%--<div class="notification">
                     <a href="Notifications.aspx" class="notification-icon">🔔 <span id="notificationBadge" runat="server" class="badge">3</span>
                     </a>
-                </div>
+                </div>--%>
 
                 <div class="profile">
 

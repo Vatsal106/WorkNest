@@ -38,6 +38,9 @@
             overflow-y: auto;
             scrollbar-width: none;
         }
+        #lblFullName{
+            margin-right:10px;
+        }
 
             .sidebar::-webkit-scrollbar {
                 display: none;
@@ -534,10 +537,10 @@
             <div class="Right-Header">
 
 
-                <div class="notification">
+             <%--   <div class="notification">
                     <a href="Notifications.aspx" class="notification-icon">🔔 <span id="notificationBadge" runat="server" class="badge">3</span>
                     </a>
-                </div>
+                </div>--%>
                 <div id="ddlAdd" class="ddlAdd">
                     <button type="button" onclick="toggleDropdown()">Add</button>
                     <div id="dropdown-content" class="dropdown-content">
