@@ -1,165 +1,267 @@
-﻿<%@ Page Title="Member Home" Language="C#" MasterPageFile="~/P_Member/MemberM.Master" AutoEventWireup="true" CodeBehind="MemberHome.aspx.cs" Inherits="WorkNest.P_Member.MemberHome" %>
-
-<asp:Content ID="Content1" ContentPlaceHolderID="Member_Head" runat="server">
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/P_Member/MemberM.Master" AutoEventWireup="true" CodeBehind="MemberHome.aspx.cs" Inherits="WorkNest.P_Member.MemberHome1" %>
+<asp:content ID="Content1" ContentPlaceHolderID="Member_Head" runat="server">
     <style>
-        :root {
-            --primary-color: #007bff;
-            --secondary-color: #f8f9fa;
-            --text-color: #333;
-            --card-bg: #fff;
-            --border-radius: 12px;
-            --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
+        /* General Styles */
         body {
-            font-family: 'Poppins', sans-serif;
-            background: #eef1f7;
-            color: var(--text-color);
+            background: #F7F9FB;
+            color: #333;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
         }
 
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 20px;
+        /* Hero Section */
+        .hero-section {
+            background: url('../Images/ADMIN HOME PAGE (2).jpg') center/cover no-repeat;
+            padding: 120px 20px;
+            text-align: center;
+            color: darkgray;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color:white;
         }
 
-        .profile-card {
-            background: var(--card-bg);
-            padding: 25px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            text-align: left;
-            margin-bottom: 40px;
-        }
-
-        .profile-card h2 {
-            font-size: 26px;
-            font-weight: 700;
-            margin-bottom: 5px;
-            font-family: 'Roboto', sans-serif;
-        }
-
-        .section {
-            background: var(--card-bg);
-            padding: 20px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            margin-bottom: 40px;
-        }
-
-        .section h2 {
-            font-size: 24px;
-            color: var(--primary-color);
+        .hero-text {
+            font-size: 36px;
             font-weight: bold;
-            border-bottom: 3px solid var(--primary-color);
-            padding-bottom: 10px;
-            font-family: 'Roboto', sans-serif;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
         }
 
-        /* Table Styling */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
+        .sub-text {
+            font-size: 20px;
+            max-width: 600px;
+            line-height: 1.5;
+            margin-bottom: 25px;
         }
 
-        table, th, td {
-            border: 1px solid #ddd;
-        }
-
-        th, td {
-            padding: 12px;
-            text-align: left;
-        }
-
-        th {
-            background: var(--primary-color);
+        .btn-learn-more {
+            background: #FF8C00;
             color: white;
+            padding: 14px 24px;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            border-radius: 6px;
+            transition: 0.3s ease-in-out;
+        }
+
+            .btn-learn-more:hover {
+                background: #e67e00;
+            }
+
+        /* Sections */
+        .section {
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+            .section h2 {
+                font-size: 30px;
+                margin-bottom: 20px;
+                color: #4A6D85;
+                text-transform: uppercase;
+            }
+
+            .section p {
+                font-size: 18px;
+                color: #555;
+                max-width: 800px;
+                margin: 0 auto;
+                line-height: 1.6;
+            }
+
+        /* Cards */
+        .features,
+        .client-reviews,
+        .achievements,
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            width: 320px;
+            text-align: left;
+            transition: transform 0.3s ease-in-out;
+        }
+
+            .card:hover {
+                transform: translateY(-5px);
+            }
+
+        .card-title {
             font-weight: bold;
+            color: #4A6D85;
+            margin-top: 12px;
         }
 
-        tr:nth-child(even) {
-            background: #f2f2f2;
+        .stats-card {
+            font-size: 26px;
+            font-weight: bold;
+            background: #4A6D85;
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            width: 220px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
 
-        /* Responsive */
+        /* Call to Action */
+        .cta-section {
+            text-align: center;
+            padding: 50px 20px;
+            background: #4A6D85;
+            color: white;
+        }
+
+        .cta-btn {
+            background: #FF8C00;
+            color: white;
+            padding: 16px 28px;
+            border: none;
+            font-size: 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s ease-in-out;
+        }
+
+            .cta-btn:hover {
+                background: #e67e00;
+            }
+
+        /* Responsive Design */
         @media (max-width: 768px) {
-            table {
-                display: block;
-                overflow-x: auto;
+            .hero-text {
+                font-size: 28px;
+            }
+
+            .sub-text {
+                font-size: 16px;
+            }
+
+            .btn-learn-more {
+                font-size: 16px;
+                padding: 12px 20px;
+            }
+
+            .stats-card {
+                width: 180px;
+                font-size: 22px;
+            }
+
+            .card {
+                width: 100%;
+                max-width: 350px;
             }
         }
     </style>
-</asp:Content>
-
+</asp:content>
+    <asp:Content ID="Title" ContentPlaceHolderID="Member_Head_Title" runat="server">
+        Welcome to WorkNest
+    </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Member_Content" runat="server">
-    <div class="container">
-        <div class="profile-card">
-            <h2 id="lblFullName" runat="server"></h2>
-            <p>Email: <span id="lblEmail" runat="server"></span></p>
-            <p>Phone: <span id="lblPhone" runat="server"></span></p>
-        </div>
 
-        <div class="section">
-            <h2>Project Details</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Project Name</th>
-                        <th>Description</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody id="projectDetails" runat="server"></tbody>
-            </table>
-        </div>
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="hero-text">Welcome to WorkNest</div>
+        <div class="sub-text">Your trusted partner in project and employee management.</div>
+        <asp:Button ID="btnLearnMore" runat="server" Text="Learn More" CssClass="btn-learn-more" PostBackUrl="~/Admin/AdminDashboard.aspx" />
+    </div>
 
-        <div class="section">
-            <h2>Leave History</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Start Date</th>
-                        <th>End Date</th>
-                        <th>Leave Type</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody id="leaveHistory" runat="server"></tbody>
-            </table>
-        </div>
+    <!-- About Us -->
+    <div class="section">
+        <h2>About WorkNest</h2>
+        <p>WorkNest is a powerful platform designed to streamline project and employee management for companies. We provide a seamless workflow, enhanced collaboration, and efficiency-driven solutions.</p>
+    </div>
 
-        <div class="section">
-            <h2>My Tasks</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Task Name</th>
-                        <th>Description</th>
-                        <th>Start Date</th>
-                        <th>Due Date</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody id="tasksList" runat="server"></tbody>
-            </table>
-        </div>
-
-        <div class="section">
-            <h2>Activity Log</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Task</th>
-                        <th>Activity</th>
-                        <th>Updated At</th>
-                    </tr>
-                </thead>
-                <tbody id="activityLog" runat="server"></tbody>
-            </table>
+    <!-- Key Features -->
+    <div class="section">
+        <h2>Core Features</h2>
+        <div class="features">
+            <div class="card">
+                <p>📂 <b>Project Tracking</b> - Manage projects efficiently.</p>
+            </div>
+            <div class="card">
+                <p>👨‍💻 <b>Employee Management</b> - Keep track of workforce.</p>
+            </div>
+            <div class="card">
+                <p>📊 <b>Task Reporting</b> - Generate reports for insights.</p>
+            </div>
         </div>
     </div>
+
+    <!-- Client Reviews -->
+    <div class="section">
+        <h2>What Our Clients Say</h2>
+        <div class="client-reviews">
+            <div class="card">
+                <p>
+                    <asp:Label ID="lblReview1" runat="server" Text="Loading..."></asp:Label>
+                </p>
+                <span class="card-title">
+                    <asp:Label ID="lblClient1" runat="server" Text=""></asp:Label>
+                </span>
+            </div>
+            <div class="card">
+                <p>
+                    <asp:Label ID="lblReview2" runat="server" Text="Loading..."></asp:Label>
+                </p>
+                <span class="card-title">
+                    <asp:Label ID="lblClient2" runat="server" Text=""></asp:Label>
+                </span>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Company Achievements -->
+    <div class="section">
+        <h2>Our Achievements</h2>
+        <div class="achievements">
+            <div class="card">
+                <p>🏆 Best Project Management Platform 2024</p>
+                <span class="card-title">Awarded by TechReview</span>
+            </div>
+            <div class="card">
+                <p>🚀 10,000+ Projects Managed</p>
+                <span class="card-title">Trusted by industry leaders</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Statistics -->
+    <div class="section">
+        <h2>WorkNest in Numbers</h2>
+        <div class="stats">
+            <div class="stats-card">
+                💼
+                <asp:Label ID="lblTotalProject" runat="server" Text="0"></asp:Label><br />
+                Projects
+            </div>
+            <div class="stats-card">
+                👨‍💻
+                <asp:Label ID="lblTotalEmployee" runat="server" Text="0"></asp:Label><br />
+                Employees
+            </div>
+            <div class="stats-card">
+                📊
+                <asp:Label ID="lblTotalTask" runat="server" Text="0"></asp:Label><br />
+                Tasks Completed
+            </div>
+        </div>
+    </div>
+
+
+    
 </asp:Content>

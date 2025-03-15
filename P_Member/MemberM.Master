@@ -469,10 +469,10 @@
                 </a>
             </div>
             <h3>Member Panel</h3>
-
-            <div class="menu" href="MemberHome.aspx">
+            <a class="menu" href="MemberHome.aspx">🏠 Home</a>           
+            <a class="menu" href="MemberDashboard.aspx">
                 📊 Dashboard
-            </div>
+            </a>
 
             <a class="menu" href="ProjectsOfMember.aspx">📂 All Projects</a>
 
