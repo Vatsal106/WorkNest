@@ -524,6 +524,7 @@
                         <a href="AddTask.aspx">Add Task</a>
                         <a href="LeaveList.aspx">Approve Leave</a>
                         <a href="RequestLeave.aspx">Request Leave</a>
+                         <a href="SubmitReport.aspx">Submit Report</a>
                     </div>
                 </div>
                 <div class="profile">
