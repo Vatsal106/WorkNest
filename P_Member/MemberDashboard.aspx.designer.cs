@@ -11,79 +11,70 @@ namespace WorkNest.P_Member
 {
 
 
-    public partial class MemberHome1
+    public partial class MemberHome
     {
 
         /// <summary>
-        /// btnLearnMore control.
+        /// lblFullName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnLearnMore;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblFullName;
 
         /// <summary>
-        /// lblReview1 control.
+        /// lblEmail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblReview1;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblEmail;
 
         /// <summary>
-        /// lblClient1 control.
+        /// lblPhone control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblClient1;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblPhone;
 
         /// <summary>
-        /// lblReview2 control.
+        /// projectDetails control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblReview2;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl projectDetails;
 
         /// <summary>
-        /// lblClient2 control.
+        /// leaveHistory control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblClient2;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl leaveHistory;
 
         /// <summary>
-        /// lblTotalProject control.
+        /// tasksList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTotalProject;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl tasksList;
 
         /// <summary>
-        /// lblTotalEmployee control.
+        /// activityLog control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTotalEmployee;
-
-        /// <summary>
-        /// lblTotalTask control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTotalTask;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl activityLog;
     }
 }
