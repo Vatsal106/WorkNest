@@ -1,6 +1,71 @@
 ﻿<%@ Page Title="Add Task" Language="C#" MasterPageFile="~/Admin/AdminM.Master" AutoEventWireup="true" CodeBehind="AddTask.aspx.cs" Inherits="WorkNest.Admin.AddTask" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("<%= btnSubmit.ClientID %>");
+
+        form.addEventListener("click", function (event) {
+            event.preventDefault();
+            if (validateForm()) {
+                document.forms[0].submit();
+            }
+        });
+    });
+
+    function validateForm() {
+        let isValid = true;
+
+        const taskName = document.getElementById("<%= txtTaskName.ClientID %>");
+        const project = document.getElementById("<%= ddlProject.ClientID %>");
+        const description = document.getElementById("<%= txtDescription.ClientID %>");
+        const startDate = document.getElementById("<%= txtStartDate.ClientID %>");
+        const dueDate = document.getElementById("<%= txtDueDate.ClientID %>");
+        const status = document.getElementById("<%= ddlStatus.ClientID %>");
+        const department = document.getElementById("<%= ddlDepartment.ClientID %>");
+        const assignTo = document.getElementById("<%= ddlAssignTo.ClientID %>");
+
+        if (taskName.value.trim() === "") {
+            alert("Task Name is required.");
+            taskName.focus();
+            isValid = false;
+        } else if (project.value === "") {
+            alert("Please select a project.");
+            project.focus();
+            isValid = false;
+        } else if (description.value.trim() === "") {
+            alert("Description is required.");
+            description.focus();
+            isValid = false;
+        } else if (startDate.value === "") {
+            alert("Start Date is required.");
+            startDate.focus();
+            isValid = false;
+        } else if (dueDate.value === "") {
+            alert("Due Date is required.");
+            dueDate.focus();
+            isValid = false;
+        } else if (new Date(startDate.value) > new Date(dueDate.value)) {
+            alert("Start Date cannot be after Due Date.");
+            startDate.focus();
+            isValid = false;
+        } else if (status.value === "") {
+            alert("Please select a task status.");
+            status.focus();
+            isValid = false;
+        } else if (department.value === "") {
+            alert("Please select a department.");
+            department.focus();
+            isValid = false;
+        } else if (assignTo.value === "") {
+            alert("Please select an assignee.");
+            assignTo.focus();
+            isValid = false;
+        }
+
+        return isValid;
+    }
+</script>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="Head" runat="server">

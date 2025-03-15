@@ -1,9 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Project_Manager/P_Manager.Master" AutoEventWireup="true" CodeBehind="AddTask.aspx.cs" Inherits="WorkNest.Project_Manager.AddTask" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Manager_Head" runat="server">
-</asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="Manager_Header_Title" runat="server">
-    <style>
+   
+        <style>
         body {
             background-color: #f4f7f8;
             font-family: 'Poppins', sans-serif;
@@ -109,6 +108,9 @@
             }
         }
     </style>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="Manager_Header_Title" runat="server">
+   Add Task
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="Manager_Content" runat="server">
     <h2 class="text-center">Add New Task</h2>
