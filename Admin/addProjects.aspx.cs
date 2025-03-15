@@ -83,7 +83,7 @@ namespace WorkNest.Admin
                 string desc = txtDesc.Text;
                 string sDate = dateStart.Text;
                 string eDate = dateEnd.Text;
-                string status = ddlStatus.SelectedItem.Text;
+                string status = ddlStatus.SelectedItem.Value;
                 int pId = Convert.ToInt32(ddlProjectManager.SelectedValue);
                 int cId = Convert.ToInt32(ddlClient.SelectedValue);
 

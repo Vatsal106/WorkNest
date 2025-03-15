@@ -15,17 +15,17 @@ namespace WorkNest.Admin
                 if (Request.QueryString["TaskID"] != null)
                 {
                     string taskId = Request.QueryString["TaskID"];
-                    if (Session["UserRole"].ToString() == "Project_Member")
-                    {
-                        if (IsUserAssignedToTask(loggedInEmployeeId, taskId))
-                            DownloadTaskReport(taskId);
-                        else
-                            Response.Redirect("AccessDenied.aspx");
-                    }
-                    else
-                    {
-                        DownloadTaskReport(taskId);
-                    }
+                    //if (Session["UserRole"].ToString() == "Project_Member")
+                    //{
+                    //    if (IsUserAssignedToTask(loggedInEmployeeId, taskId))
+                    DownloadTaskReport(taskId);
+                    //else
+                    //    Response.Redirect("AccessDenied.aspx");
+                    //}
+                    //else
+                    //{
+                    //    DownloadTaskReport(taskId);
+                    //}
                 }
                 else if (Request.QueryString["TaskHistoryID"] != null)
                 {
@@ -47,16 +47,16 @@ namespace WorkNest.Admin
                 Response.Write("Error processing request: " + ex.Message);
             }
         }
-        private bool IsUserAssignedToTask(int employeeId, string taskId)
-        {
-            dbConn.dbConnect();
-            string query = "SELECT COUNT(*) FROM TASK WHERE TASK_ID = @TaskID AND ASSIGN_TO = @EmployeeID";
-            SqlCommand cmd = new SqlCommand(query, dbConn.con);
-            cmd.Parameters.AddWithValue("@TaskID", taskId);
-            cmd.Parameters.AddWithValue("@EmployeeID", employeeId);
-            int count = Convert.ToInt32(cmd.ExecuteScalar());
-            return count > 0;
-        }
+        //private bool IsUserAssignedToTask(int employeeId, string taskId)
+        //{
+        //    dbConn.dbConnect();
+        //    string query = "SELECT COUNT(*) FROM TASK WHERE TASK_ID = @TaskID AND ASSIGN_TO = @EmployeeID";
+        //    SqlCommand cmd = new SqlCommand(query, dbConn.con);
+        //    cmd.Parameters.AddWithValue("@TaskID", taskId);
+        //    cmd.Parameters.AddWithValue("@EmployeeID", employeeId);
+        //    int count = Convert.ToInt32(cmd.ExecuteScalar());
+        //    return count > 0;
+        //}
 
         private void DownloadTaskReport(string taskId)
         {

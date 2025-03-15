@@ -27,6 +27,9 @@
             isEmailEmpty(email);
             if (!validate) isValid = false;
 
+            validateEmail(email);
+            if (!validate) isValid = false;
+
             PhoneSize(phoneInput);
             if (!validate) isValid = false;
 
@@ -82,38 +85,39 @@
         function validateEmail(input) {
             var email = input.value;
             var lblEemail = document.getElementById('<%= lblEemail.ClientID %>');
-            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+           var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-            if (!emailRegex.test(email)) {
-                lblEemail.textContent = "Please enter a valid email address.";
-                lblEemail.style.color = "red";
-                validate = false;
-            } else {
-                lblEemail.textContent = "";
-            }
-        }
+           if (!emailRegex.test(email)) {
+               lblEemail.textContent = "Please enter a valid email address.";
+               lblEemail.style.color = "red";
+               validate = false;
+           } else {
+               lblEemail.textContent = "";
+           }
+       }
 
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Head" runat="server">
     <style>
-                .floating-btn {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: #FF8C00;
-    color: white;
-    padding: 12px 15px;
-    border-radius: 50%;
-    font-size: 18px;
-    text-decoration: none;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-    transition: background 0.3s ease-in-out;
-}
+        .floating-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #FF8C00;
+            color: white;
+            padding: 12px 15px;
+            border-radius: 50%;
+            font-size: 18px;
+            text-decoration: none;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s ease-in-out;
+        }
 
-    .floating-btn:hover {
-        background: #e67e00;
-    }
+        .floating-btn:hover {
+            background: #e67e00;
+        }
+
         .form-container {
             max-width: 600px;
             background: white;

@@ -2,59 +2,77 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
     <style>
+        body {
+            background-color: #F7F9FB;
+        }
         .card {
-            border-radius: 10px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-            background-color: #fff;
-            padding: 20px;
-            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
+            background-color: white;
+            padding: 25px;
+            margin-bottom: 25px;
+            transition: transform 0.2s ease-in-out;
         }
 
-            .card h4 {
-                color: #4A6D85;
-                border-bottom: 2px solid #8B9EB2;
-                padding-bottom: 8px;
-            }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h4 {
+            color: #4A6D85;
+            border-bottom: 3px solid #8B9EB2;
+            padding-bottom: 10px;
+            font-weight: bold;
+        }
 
         .label-title {
-            font-weight: bold;
+            font-weight: 600;
             color: #333;
             margin-top: 10px;
         }
 
         .detail-box {
-            background: #F7F9FB;
-            padding: 8px;
-            border-radius: 5px;
-            margin-bottom: 10px;
+            background: #E4F1F9;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            font-weight: 500;
         }
 
         .table {
-            background: #fff;
-            border-radius: 5px;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
         }
-          .floating-btn {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #FF8C00;
-      color: white;
-      padding: 12px 15px;
-      border-radius: 50%;
-      font-size: 18px;
-      text-decoration: none;
-      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-      transition: background 0.3s ease-in-out;
-  }
 
-  .floating-btn:hover {
-      background: #e67e00;
-  }
+        .table thead {
+            background: #8B9EB2;
+            color: white;
+            font-weight: bold;
+        }
+
+        .floating-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #FF8C00;
+            color: white;
+            padding: 15px 18px;
+            border-radius: 50%;
+            font-size: 20px;
+            text-decoration: none;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+            transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+        }
+
+        .floating-btn:hover {
+            background: #e67e00;
+            transform: scale(1.1);
+        }
     </style>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="Head" runat="server">
-
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="Header_Title" runat="server">
@@ -113,7 +131,6 @@
             </div>
         </div>
 
-       
         <div class="card">
             <h4>Project Tasks</h4>
             <asp:GridView ID="gvTasks" runat="server" AutoGenerateColumns="False" CssClass="table table-striped table-hover table-bordered">
@@ -123,7 +140,6 @@
                     <asp:BoundField DataField="ASSIGN_TO" HeaderText="Assigned To" />
                     <asp:BoundField DataField="DUE_DATE" HeaderText="Due Date" DataFormatString="{0:yyyy-MM-dd}" />
 
-                   
                     <asp:TemplateField HeaderText="Report File">
                         <ItemTemplate>
                             <asp:HyperLink ID="lnkDownloadReport" runat="server"
@@ -133,7 +149,6 @@
                         </ItemTemplate>
                     </asp:TemplateField>
 
-                    
                     <asp:TemplateField HeaderText="Details">
                         <ItemTemplate>
                             <asp:HyperLink ID="lnkTaskDetails" runat="server"
@@ -144,9 +159,8 @@
                     </asp:TemplateField>
                 </Columns>
             </asp:GridView>
-
         </div>
     </div>
-            <a href="Projects.aspx" class="floating-btn" title="Back to Tasks"><i class="fas fa-arrow-left"></i></a>
 
+    <a href="Projects.aspx" class="floating-btn" title="Back to Tasks"><i class="fas fa-arrow-left"></i></a>
 </asp:Content>
