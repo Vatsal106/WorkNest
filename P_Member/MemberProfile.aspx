@@ -126,7 +126,7 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Member_Head_Title" runat="server">
-    Mamber Profile
+    Member Profile
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="Member_Content" runat="server">
       <asp:Panel ID="pnlProfile" runat="server" CssClass="profile-container">
