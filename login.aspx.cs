@@ -65,7 +65,7 @@ namespace WorkNest
                 }
                 else if (roleName == "Project_Manager")
                 {
-                    Response.Redirect("Project_Manager/ManagerDashboard.aspx");
+                    Response.Redirect("Project_Manager/Manager_Home.aspx");
                 }
                 else
                 {

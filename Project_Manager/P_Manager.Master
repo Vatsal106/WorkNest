@@ -253,7 +253,9 @@
                 height: 40px;
                 border-radius: 50%;
             }
-
+        #lblFullName{
+            margin-right:10px;
+        }
 
         .content {
             margin-left: 250px;
@@ -468,30 +470,14 @@
             </div>
             <h3>Manager Panel</h3>
 
-            <a class="menu" href="Manager_Home.aspx">🏠 Home</a>
-
-            <div class="menu has-submenu" onclick="toggleSubmenu('dashboardMenu')">
-                📊 Dashboard ▼
-            </div>
-            <div id="dashboardMenu" class="submenu">
-                <a href="ManagerDashboard.aspx">📈 Overview</a>
+            <a class="menu" href="Manager_Home.aspx">🏠 Home</a>           
+                <a class="menu" href="ManagerDashboard.aspx">📈 Dashboard</a>
                 <%--<a href="Reports.aspx">📊 Reports</a>--%>
-            </div>
+            
 
-            <div class="menu has-submenu" onclick="toggleSubmenu('employeesMenu')">
-                👥 Employees ▼
-            </div>
-            <div id="employeesMenu" class="submenu">
-                <a href="EmployeesUnderYou.aspx">📋 Employee List</a>
-            </div>
+            <a class="menu" href="EmployeesUnderYou.aspx">👥 Employees</a>
 
-            <div class="menu has-submenu" onclick="toggleSubmenu('projectsMenu')">
-                📂 Projects ▼
-            </div>
-            <div id="projectsMenu" class="submenu">
-                <a href="Projects.aspx">📁 All Projects</a>
-            </div>
-
+            <a class="menu" href="Projects.aspx">📂 Projects</a>
             <div class="menu has-submenu" onclick="toggleSubmenu('tasksMenu')">
                 ✅ Tasks ▼
             </div>
@@ -528,10 +514,10 @@
             <div class="Right-Header">
 
 
-                <div class="notification">
+               <%-- <div class="notification">
                     <a href="Notifications.aspx" class="notification-icon">🔔 <span id="notificationBadge" runat="server" class="badge">3</span>
                     </a>
-                </div>
+                </div>--%>
                 <div id="ddlAdd" class="ddlAdd">
                     <button type="button" onclick="toggleDropdown()">Add</button>
                     <div id="dropdown-content" class="dropdown-content">
