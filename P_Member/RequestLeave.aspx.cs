@@ -108,7 +108,7 @@ namespace WorkNest.P_Member
 
                 lblMessage.Text = "Leave request submitted successfully!";
                 lblMessage.ForeColor = System.Drawing.Color.Green;
-                //Response.Redirect("LeaveList.aspx");
+                Response.Redirect("StatusOfLeave.aspx");
             }
             catch (Exception ex)
             {
