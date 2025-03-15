@@ -94,6 +94,7 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="Member_Head_Title" runat="server">
     <title>Member Dashboard</title>
+    </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Member_Content" runat="server">
     <div class="container">
         <div class="profile-card">
