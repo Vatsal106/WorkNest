@@ -4,9 +4,9 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 
-namespace WorkNest.P_Member
+namespace WorkNest.Project_Manager
 {
-    public partial class SubmitReportOfTask : System.Web.UI.Page
+    public partial class SubmitReport : System.Web.UI.Page
     {
         dbConnection dbConn = new dbConnection();
 
@@ -200,7 +200,7 @@ namespace WorkNest.P_Member
             txttaskDescription.Text = "";
             txtDescription.Text = "";
             fuReport.Attributes.Clear();
-            lblLastUpdate.Text = "Never Updated!";
+            //lblLastUpdate.Text = "Never Updated!";
             lblMessage.Text = "";
             txtTaskName.Text = "";
         }

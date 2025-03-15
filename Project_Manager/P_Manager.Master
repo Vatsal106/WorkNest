@@ -273,7 +273,8 @@
             height: 40px;
             width: 40px;
         }
-                .modal-overlay {
+
+        .modal-overlay {
             display: none;
             position: fixed;
             top: 0;
@@ -481,38 +482,38 @@
                 👥 Employees ▼
             </div>
             <div id="employeesMenu" class="submenu">
-                <a href="EmployeesUnderYou.aspx">📝 Employee List</a>
+                <a href="EmployeesUnderYou.aspx">📋 Employee List</a>
             </div>
 
             <div class="menu has-submenu" onclick="toggleSubmenu('projectsMenu')">
-                📁 Projects ▼
+                📂 Projects ▼
             </div>
             <div id="projectsMenu" class="submenu">
-                <a href="Projects.aspx">📂 All Projects</a>
-
+                <a href="Projects.aspx">📁 All Projects</a>
             </div>
+
             <div class="menu has-submenu" onclick="toggleSubmenu('tasksMenu')">
                 ✅ Tasks ▼
-   
+            </div>
+            <div id="tasksMenu" class="submenu">
+                <a href="AllTasks.aspx">📝 Task List</a>
+                <a href="AddTask.aspx">➕ Add Task</a>
+                <a href="ManagerTasks.aspx">📌 Your Tasks</a>
+                <a href="SubmitReport.aspx">📑 Report Your Tasks</a>
             </div>
 
-            <div id="tasksMenu" class="submenu">
-                <a href="AllTasks.aspx">📋 Task List</a>
-                <a href="AddTask.aspx">➕ Add Task</a>
-                <a href="ManagerTasks.aspx">📊 Your Tasks</a>
-            </div>
             <div class="menu has-submenu" onclick="toggleSubmenu('leavesMenu')">
-                🍃 Leaves ▼
+                🌿 Leaves ▼
             </div>
             <div id="leavesMenu" class="submenu">
-                <a href="Leavelist.aspx">✅ Approve Leaves Of Employee</a>
-                <a href="RequestLeave.aspx">✅ Request Leave</a>
-                <a href="StatusOfYourLeave.aspx">✅ Check Status</a>
+                <a href="Leavelist.aspx">✔ Approve Employee Leaves</a>
+                <a href="RequestLeave.aspx">🗒 Request Leave</a>
+                <a href="StatusOfYourLeave.aspx">📊 Check Status</a>
             </div>
-            <a class="menu" href="ManagerProfile.aspx">⚙️ Profile</a>
+
+            <a class="menu" href="ManagerProfile.aspx">⚙ Profile</a>
             <a class="menu" href="#" onclick="showLogoutPopup()">🚪 Logout</a>
         </div>
-
 
 
 
@@ -551,24 +552,24 @@
         <div class="content">
             <asp:ContentPlaceHolder ID="Manager_Content" runat="server"></asp:ContentPlaceHolder>
         </div>
-          <div id="logoutModal" class="modal-overlay" onclick="closeLogoutPopup(event)">
-      <div class="modal-content" onclick="event.stopPropagation();">
-          <div class="modal-header">
-              <h2><i class="fas fa-sign-out-alt mr-1"></i>Confirm Logout</h2>
-          </div>
-          <div class="modal-body">
-              <p>Are you sure you want to log out? Your session will be ended.</p>
-          </div>
-          <div class="modal-footer">
-              <button type="button" class="btn btn-danger" onclick="confirmLogout()">
-                  <i class="fas fa-power-off"></i>Yes, Logout
-              </button>
-              <button type="button" class="btn btn-secondary" onclick="closeLogoutPopup()">
-                  <i class="fas fa-times"></i>Cancel
-              </button>
-          </div>
-      </div>
-  </div>
+        <div id="logoutModal" class="modal-overlay" onclick="closeLogoutPopup(event)">
+            <div class="modal-content" onclick="event.stopPropagation();">
+                <div class="modal-header">
+                    <h2><i class="fas fa-sign-out-alt mr-1"></i>Confirm Logout</h2>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to log out? Your session will be ended.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" onclick="confirmLogout()">
+                        <i class="fas fa-power-off"></i>Yes, Logout
+                    </button>
+                    <button type="button" class="btn btn-secondary" onclick="closeLogoutPopup()">
+                        <i class="fas fa-times"></i>Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
     </form>
 </body>
 </html>

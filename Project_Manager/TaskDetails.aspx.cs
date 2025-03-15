@@ -59,10 +59,17 @@ namespace WorkNest.Project_Manager
 
                 SqlCommand cmd = new SqlCommand(query, dbConn.con);
                 cmd.Parameters.AddWithValue("@TaskID", taskId);
-                SqlDataReader reader = cmd.ExecuteReader();
 
+
+                SqlCommand managerCmd = new SqlCommand("SELECT FULL_NAME FROM EMPLOYEE WHERE EMPLOYEE_ID= " + Session["EmployeeID"].ToString(), dbConn.con);
+                string pmanager = managerCmd.ExecuteScalar()?.ToString();
+                SqlDataReader reader = cmd.ExecuteReader();
                 if (reader.Read())
                 {
+                    if (reader["ASSIGN_TO"].ToString() == pmanager)
+                    {
+                        btnSubmitReport.Visible = true;
+                    }
                     lblTaskName.Text = reader["TASK_NAME"].ToString();
                     lblStatus.Text = reader["STATUS"].ToString();
                     lblAssignedTo.Text = reader["ASSIGN_TO"].ToString();
@@ -80,26 +87,31 @@ namespace WorkNest.Project_Manager
                         lnkLatestReport.Visible = false;
                     }
 
-                    if (reader["LAST_UPDATE"] != DBNull.Value)
-                    {
-                        lblReportDate.Text = Convert.ToDateTime(reader["LAST_UPDATE"]).ToString("yyyy-MM-dd HH:mm:ss");
-                    }
-                    else
-                    {
-                        lblReportDate.Text = "N/A";
-                    }
-
+                    lblReportDate.Text = reader["LAST_UPDATE"] != DBNull.Value ? Convert.ToDateTime(reader["LAST_UPDATE"]).ToString("yyyy-MM-dd HH:mm:ss") : "N/A";
                     lblReportDescription.Text = reader["REPORT_DESCRIPTION"] != DBNull.Value ? reader["REPORT_DESCRIPTION"].ToString() : "No description available.";
                 }
                 reader.Close();
                 cmd.Dispose();
+                managerCmd.Dispose();
             }
             catch (Exception ex)
             {
                 Response.Write("<script>alert('Error loading task details: " + ex.Message + "');</script>");
             }
         }
+        protected void btnSubmitReport_Click(object sender, EventArgs e)
+        {
+            string taskId = Request.QueryString["TaskID"];
 
+            if (!string.IsNullOrEmpty(taskId))
+            {
+                Response.Redirect("SubmitReport.aspx?TaskID=" + taskId);
+            }
+            else
+            {
+                Response.Write("<script>alert('Invalid Task ID.');</script>");
+            }
+        }
         private void LoadLatestTaskReport(string taskId)
         {
             dbConn.dbConnect();

@@ -48,7 +48,7 @@ namespace WorkNest.Project_Manager
             JOIN TASK t ON e.EMPLOYEE_ID = t.ASSIGN_TO
             JOIN PROJECT p ON t.PROJECT_ID = p.PROJECT_ID
             WHERE p.PROJECT_MANAGER_ID = @ManagerId
-            AND r.ROLE_ID <> 1";
+            AND r.ROLE_ID <> 1 and r.ROLE_ID <> 2";
 
                 if (!string.IsNullOrEmpty(searchQuery))
                 {

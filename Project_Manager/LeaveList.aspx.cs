@@ -23,18 +23,17 @@ namespace WorkNest.Project_Manager
             dbConn.dbConnect();
             string statusFilter = ddlStatusFilter.SelectedValue;
             string query = @"
-        SELECT L.LEAVE_ID, 
-       E.FULL_NAME AS EMPLOYEE_NAME, 
-     
-       L.START_DATE, 
-       L.END_DATE, 
-       L.REASON, 
-       L.STATUS 
-        FROM LEAVES L 
+        SELECT DISTINCT L.LEAVE_ID, 
+                        E.FULL_NAME AS EMPLOYEE_NAME, 
+                        L.START_DATE, 
+                        L.END_DATE, 
+                        L.REASON, 
+                        L.STATUS 
+        FROM LEAVES L
         JOIN EMPLOYEE E ON L.EMPLOYEE_ID = E.EMPLOYEE_ID
-        JOIN EMPLOYEE_ROLES ER ON E.EMPLOYEE_ID = ER.EMPLOYEE_ID
-        JOIN ROLES R ON ER.ROLE_ID = R.ROLE_ID
-        WHERE R.ROLE_NAME = 'Project_Member'";
+        JOIN TASK T ON E.EMPLOYEE_ID = T.ASSIGN_TO
+        JOIN PROJECT P ON T.PROJECT_ID = P.PROJECT_ID
+        WHERE P.PROJECT_MANAGER_ID = @ProjectManagerID and E.EMPLOYEE_ID <> @ProjectManagerID";
 
             if (statusFilter != "All")
             {
@@ -49,6 +48,7 @@ namespace WorkNest.Project_Manager
             }
 
             SqlDataAdapter da = new SqlDataAdapter(cmd);
+            da.SelectCommand.Parameters.AddWithValue("@ProjectManagerID", Session["EmployeeID"].ToString());
             DataTable dt = new DataTable();
             da.Fill(dt);
 

@@ -233,6 +233,7 @@
     <Content Include="Project_Manager\P_ManagerHome.aspx" />
     <Content Include="Project_Manager\SelectedProject.aspx" />
     <Content Include="Project_Manager\StatusOfYourLeave.aspx" />
+    <Content Include="Project_Manager\SubmitReport.aspx" />
     <Content Include="Project_Manager\TaskDetails.aspx" />
     <Content Include="Project_Manager\Tasks.aspx" />
     <Content Include="Project_Manager\UpdateProjects.aspx" />
@@ -524,6 +525,13 @@
     </Compile>
     <Compile Include="Project_Manager\StatusOfYourLeave.aspx.designer.cs">
       <DependentUpon>StatusOfYourLeave.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Project_Manager\SubmitReport.aspx.cs">
+      <DependentUpon>SubmitReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Project_Manager\SubmitReport.aspx.designer.cs">
+      <DependentUpon>SubmitReport.aspx</DependentUpon>
     </Compile>
     <Compile Include="Project_Manager\TaskDetails.aspx.cs">
       <DependentUpon>TaskDetails.aspx</DependentUpon>
