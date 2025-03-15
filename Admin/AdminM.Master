@@ -476,14 +476,9 @@
             <h3>Admin Panel</h3>
 
             <a class="menu" href="AdminHome.aspx">🏠 Home</a>
+            <a class="menu" href="AdminDashboard.aspx">📊 Dashboard</a>
 
-            <div class="menu has-submenu" onclick="toggleSubmenu('dashboardMenu')">
-                📊 Dashboard ▼
-            </div>
-            <div id="dashboardMenu" class="submenu">
-                <a href="AdminDashboard.aspx">📈 Overview</a>
-                <a href="Reports.aspx">📊 Reports</a>
-            </div>
+            
 
             <div class="menu has-submenu" onclick="toggleSubmenu('employeesMenu')">
                 👥 Employees ▼
@@ -510,7 +505,7 @@
             <div id="tasksMenu" class="submenu">
                 <a href="AllTasks.aspx">📋 Task List</a>
                 <a href="AddTask.aspx">➕ Add Task</a>
-                <a href="TaskReports.aspx">📊 Task Reports</a>
+               <%-- <a href="TaskReports.aspx">📊 Task Reports</a>--%>
             </div>
             <div class="menu has-submenu" onclick="toggleSubmenu('leavesMenu')">
                 🍃 Leaves ▼
