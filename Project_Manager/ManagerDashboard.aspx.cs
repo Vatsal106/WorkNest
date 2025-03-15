@@ -25,29 +25,29 @@ namespace WorkNest.Project_Manager
         {
             dbConn.dbConnect();
 
-            //    try
-            //    {
-            //        SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM EMPLOYEE", dbConn.con);
-            //        lblTotalEmployees.Text = cmd.ExecuteScalar().ToString();
+            try
+            {
+                SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM EMPLOYEE", dbConn.con);
+                lblTotalEmployees.Text = cmd.ExecuteScalar().ToString();
 
-            //        cmd.CommandText = "SELECT COUNT(*) FROM PROJECT WHERE STATUS = 'Active' AND PROJECT_MANAGER_ID = @ManagerId";
-            //        cmd.Parameters.AddWithValue("@ManagerId", Session["EmployeeID"]);
-            //        lblTotalProjects.Text = cmd.ExecuteScalar().ToString();
+                cmd.CommandText = "SELECT COUNT(*) FROM PROJECT WHERE STATUS <> 'COMPLETED' AND PROJECT_MANAGER_ID = @ManagerId";
+                cmd.Parameters.AddWithValue("@ManagerId", Session["EmployeeID"]);
+                lblTotalProjects.Text = cmd.ExecuteScalar().ToString();
 
-            //        cmd.CommandText = "SELECT COUNT(*) FROM TASK WHERE DUE_DATE > GETDATE() AND PROJECT_ID IN (SELECT PROJECT_ID FROM PROJECT WHERE PROJECT_MANAGER_ID = @ManagerId)";
-            //        lblTotalTasks.Text = cmd.ExecuteScalar().ToString();
+                cmd.CommandText = "SELECT COUNT(*) FROM TASK WHERE DUE_DATE > GETDATE() AND PROJECT_ID IN (SELECT PROJECT_ID FROM PROJECT WHERE PROJECT_MANAGER_ID = @ManagerId)";
+                lblTotalTasks.Text = cmd.ExecuteScalar().ToString();
 
-            //        cmd.CommandText = "SELECT COUNT(*) FROM LEAVES WHERE STATUS = 'Pending' AND EMPLOYEE_ID IN (SELECT EMPLOYEE_ID FROM EMPLOYEE WHERE EMPLOYEE_ID IN (SELECT EMPLOYEE_ID FROM PROJECT WHERE PROJECT_MANAGER_ID = @ManagerId))";
-            //        lblPendingLeaves.Text = cmd.ExecuteScalar().ToString();
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        lblTotalEmployees.Text = "Error";
-            //        lblTotalProjects.Text = "Error";
-            //        lblTotalTasks.Text = "Error";
-            //        lblPendingLeaves.Text = "Error";
-            //        System.Diagnostics.Debug.WriteLine("Error in LoadDashboardStats: " + ex.Message);
-            //    }
+                cmd.CommandText = "SELECT COUNT(*) FROM LEAVES WHERE STATUS = 'Pending' AND EMPLOYEE_ID IN (SELECT EMPLOYEE_ID FROM EMPLOYEE WHERE EMPLOYEE_ID IN (SELECT EMPLOYEE_ID FROM PROJECT WHERE PROJECT_MANAGER_ID = @ManagerId))";
+                lblPendingLeaves.Text = cmd.ExecuteScalar().ToString();
+            }
+            catch (Exception ex)
+            {
+                lblTotalEmployees.Text = "Error";
+                lblTotalProjects.Text = "Error";
+                lblTotalTasks.Text = "Error";
+                lblPendingLeaves.Text = "Error";
+                System.Diagnostics.Debug.WriteLine("Error in LoadDashboardStats: " + ex.Message);
+            }
         }
 
         private void LoadProjectOverview()

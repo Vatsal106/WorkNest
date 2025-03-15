@@ -464,16 +464,14 @@
     <form id="Managerform" runat="server">
         <div class="sidebar">
             <div class="logo">
-                <a href="AdminHome.aspx">
+                <a href="Member_Home.aspx">
                     <img src="../Images/Logo Light Blue Transparent.png" alt="Logo">
                 </a>
             </div>
             <h3>Manager Panel</h3>
 
             <a class="menu" href="Manager_Home.aspx">🏠 Home</a>           
-                <a class="menu" href="ManagerDashboard.aspx">📈 Dashboard</a>
-                <%--<a href="Reports.aspx">📊 Reports</a>--%>
-            
+            <a class="menu" href="ManagerDashboard.aspx">📈 Dashboard</a>
 
             <a class="menu" href="EmployeesUnderYou.aspx">👥 Employees</a>
 
