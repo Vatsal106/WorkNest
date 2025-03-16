@@ -51,14 +51,6 @@ namespace WorkNest
                     return;
                 }
 
-                //for Time Tracking
-                SqlCommand insertCmd = new SqlCommand(@"
-            INSERT INTO TIME_TRACKING (EMPLOYEE_ID, LOGIN_TIME, WORK_DATE) 
-            VALUES (@empId, GETDATE(), CAST(GETDATE() AS DATE))", dbConn.con);
-
-                insertCmd.Parameters.AddWithValue("@empId", empId);
-                insertCmd.ExecuteNonQuery();
-
                 string roleName = roleObj.ToString();
                 Session["Username"] = username;
                 Session["EmployeeID"] = empId;
@@ -70,10 +62,28 @@ namespace WorkNest
                 }
                 else if (roleName == "Project_Manager")
                 {
+
+                    //for Time Tracking
+                    SqlCommand insertCmd = new SqlCommand(@"
+            INSERT INTO TIME_TRACKING (EMPLOYEE_ID, LOGIN_TIME, WORK_DATE) 
+            VALUES (@empId, GETDATE(), CAST(GETDATE() AS DATE))", dbConn.con);
+
+                    insertCmd.Parameters.AddWithValue("@empId", empId);
+                    insertCmd.ExecuteNonQuery();
+
                     Response.Redirect("Project_Manager/Manager_Home.aspx");
                 }
                 else
                 {
+
+                    //for Time Tracking
+                    SqlCommand insertCmd = new SqlCommand(@"
+            INSERT INTO TIME_TRACKING (EMPLOYEE_ID, LOGIN_TIME, WORK_DATE) 
+            VALUES (@empId, GETDATE(), CAST(GETDATE() AS DATE))", dbConn.con);
+
+                    insertCmd.Parameters.AddWithValue("@empId", empId);
+                    insertCmd.ExecuteNonQuery();
+
                     Response.Redirect("P_Member/MemberHome.aspx");
                 }
             }

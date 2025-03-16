@@ -487,6 +487,7 @@
                 <a href="Employees.aspx">📝 Employee List</a>
                 <a href="AddEmployee.aspx">➕ Add Employee</a>
                 <a href="changeRoles.aspx">🔄 Change Role</a>
+                <a href="AttendanceTracking.aspx"> Attendance</a>
             </div>
 
             <div class="menu has-submenu" onclick="toggleSubmenu('projectsMenu')">
