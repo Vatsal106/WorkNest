@@ -54,7 +54,7 @@ namespace WorkNest.Admin
                         MAX(LOGOUT_TIME) AS LOGOUT_TIME,
                         SUM(DATEDIFF(MINUTE, LOGIN_TIME, LOGOUT_TIME)) / 60.0 AS TOTAL_HOURS
                     FROM TIME_TRACKING
-                    WHERE WORK_DATE = @WorkDate
+                    WHERE WORK_DATE = @WorkDate 
                     GROUP BY EMPLOYEE_ID
                 )
                 SELECT 
@@ -70,7 +70,7 @@ namespace WorkNest.Admin
                 FROM EMPLOYEE E
                 LEFT JOIN DEPARTMENT D ON E.DEPARTMENT_ID = D.DEPARTMENT_ID
                 LEFT JOIN AttendanceCTE A ON E.EMPLOYEE_ID = A.EMPLOYEE_ID
-                WHERE (@DeptId IS NULL OR E.DEPARTMENT_ID = @DeptId)
+                WHERE (@DeptId IS NULL OR E.DEPARTMENT_ID = @DeptId) and E.EMPLOYEE_ID != 11
                 ORDER BY D.DEPARTMENT_NAME, E.FULL_NAME";
 
             SqlCommand cmd = new SqlCommand(query, dbConn.con);
