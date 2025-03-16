@@ -39,6 +39,11 @@ namespace WorkNest.Admin
 
         protected void LoadAttendance(DateTime selectedDate, int? departmentId)
         {
+            if (selectedDate < new DateTime(1753, 1, 1))
+            {
+                throw new ArgumentOutOfRangeException(nameof(selectedDate), "Selected date must be between 1/1/1753 and 12/31/9999.");
+            }
+
             dbConn.dbConnect();
 
             string query = @"
@@ -91,7 +96,16 @@ namespace WorkNest.Admin
         protected void ddlDepartment_SelectedIndexChanged(object sender, EventArgs e)
         {
             int? departmentId = ddlDepartment.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlDepartment.SelectedValue);
-            LoadAttendance(Calendar1.SelectedDate, departmentId);
+            DateTime selectedDate = Calendar1.SelectedDate;
+
+            if (selectedDate < new DateTime(1753, 1, 1) || selectedDate > new DateTime(9999, 12, 31))
+            {
+                // Handle the invalid date scenario, e.g., show an error message to the user
+                lblError.Text = "Please select a valid date.";
+                return;
+            }
+
+            LoadAttendance(selectedDate, departmentId);
         }
     }
 }
