@@ -175,7 +175,7 @@
             </div>
 
             <div class="text-center">
-                <asp:Button ID="btnSubmit" runat="server" CssClass="btn btn-primary" Text="Add Task"
+                <asp:Button ID="btnSubmit" runat="server" CssClass="btn btn-primary" Text="Add Task" OnClick="btnSubmit_Click"
                     OnClientClick="return validateForm();" />
             </div>
         </div>
