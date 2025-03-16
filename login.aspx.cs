@@ -51,10 +51,15 @@ namespace WorkNest
                     return;
                 }
 
+                //for Time Tracking
+                SqlCommand insertCmd = new SqlCommand(@"
+            INSERT INTO TIME_TRACKING (EMPLOYEE_ID, LOGIN_TIME, WORK_DATE) 
+            VALUES (@empId, GETDATE(), CAST(GETDATE() AS DATE))", dbConn.con);
+
+                insertCmd.Parameters.AddWithValue("@empId", empId);
+                insertCmd.ExecuteNonQuery();
+
                 string roleName = roleObj.ToString();
-
-
-
                 Session["Username"] = username;
                 Session["EmployeeID"] = empId;
                 Session["UserRole"] = roleName;
