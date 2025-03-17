@@ -38,60 +38,61 @@
             overflow-y: auto;
             scrollbar-width: none;
         }
-        #lblFullName{
-            margin-right:10px;
+
+        #lblFullName {
+            margin-right: 10px;
         }
 
-            .sidebar::-webkit-scrollbar {
-                display: none;
+        .sidebar::-webkit-scrollbar {
+            display: none;
+        }
+
+
+        .sidebar .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+            .sidebar .logo img {
+                width: 180px;
+                height: auto;
             }
 
 
-            .sidebar .logo {
-                text-align: center;
-                margin-bottom: 20px;
+        .sidebar h3 {
+            color: #FF8C00;
+            font-size: 22px;
+            font-weight: bold;
+            padding-bottom: 15px;
+            text-align: center;
+        }
+
+
+        .sidebar .menu {
+            display: flex;
+            align-items: center;
+            color: #E4F1F9;
+            padding: 12px 15px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            transition: background 0.3s ease-in-out;
+            border-radius: 5px 0 0 5px;
+            cursor: pointer;
+        }
+
+            .sidebar .menu:hover {
+                background-color: #4A6D85;
+                color: white;
             }
 
-                .sidebar .logo img {
-                    width: 180px;
-                    height: auto;
-                }
 
-
-            .sidebar h3 {
-                color: #FF8C00;
-                font-size: 22px;
-                font-weight: bold;
-                padding-bottom: 15px;
-                text-align: center;
-            }
-
-
-            .sidebar .menu {
-                display: flex;
-                align-items: center;
-                color: #E4F1F9;
-                padding: 12px 15px;
-                text-decoration: none;
-                font-size: 16px;
-                font-weight: 500;
-                transition: background 0.3s ease-in-out;
-                border-radius: 5px 0 0 5px;
-                cursor: pointer;
-            }
-
-                .sidebar .menu:hover {
-                    background-color: #4A6D85;
-                    color: white;
-                }
-
-
-            .sidebar .has-submenu {
-                cursor: pointer;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-            }
+        .sidebar .has-submenu {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
         .submenu {
             display: none;
@@ -478,7 +479,7 @@
             <a class="menu" href="AdminHome.aspx">🏠 Home</a>
             <a class="menu" href="AdminDashboard.aspx">📊 Dashboard</a>
 
-            
+
 
             <div class="menu has-submenu" onclick="toggleSubmenu('employeesMenu')">
                 👥 Employees ▼
@@ -487,9 +488,8 @@
                 <a href="Employees.aspx">📝 Employee List</a>
                 <a href="AddEmployee.aspx">➕ Add Employee</a>
                 <a href="changeRoles.aspx">🔄 Change Role</a>
-                <a href="AttendanceTracking.aspx"> Attendance</a>
+                <a href="AttendanceTracking.aspx">📅 Attendance</a>
             </div>
-
             <div class="menu has-submenu" onclick="toggleSubmenu('projectsMenu')">
                 📁 Projects ▼
             </div>
@@ -506,7 +506,7 @@
             <div id="tasksMenu" class="submenu">
                 <a href="AllTasks.aspx">📋 Task List</a>
                 <a href="AddTask.aspx">➕ Add Task</a>
-               <%-- <a href="TaskReports.aspx">📊 Task Reports</a>--%>
+                <%-- <a href="TaskReports.aspx">📊 Task Reports</a>--%>
             </div>
             <div class="menu has-submenu" onclick="toggleSubmenu('leavesMenu')">
                 🍃 Leaves ▼
@@ -533,7 +533,7 @@
             <div class="Right-Header">
 
 
-             <%--   <div class="notification">
+                <%--   <div class="notification">
                     <a href="Notifications.aspx" class="notification-icon">🔔 <span id="notificationBadge" runat="server" class="badge">3</span>
                     </a>
                 </div>--%>
