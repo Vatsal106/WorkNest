@@ -129,16 +129,18 @@
     Manager Profile
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="Manager_Content" runat="server">
-      <asp:Panel ID="pnlProfile" runat="server" CssClass="profile-container">
+       <asp:Panel ID="pnlProfile" runat="server" CssClass="profile-container">
       <table class="profile-table">
           <tr>
               <td><strong>Profile Image:</strong></td>
               <td>
                   <asp:Image ID="imgProfile" runat="server" Width="100px" Height="100px" CssClass="profile-image" />
                   <br />
-                  <asp:Button ID="btnEditImage" runat="server" Text="Edit" CssClass="btn-edit" OnClick="btnEditImage_Click" />
+                  <asp:Button ID="btnEditImage" runat="server" Text="✏️" CssClass="btn" OnClick="btnEditImage_Click" />
                   <asp:FileUpload ID="fuProfileImage" runat="server" CssClass="file-upload" Visible="false" />
-                  <asp:Button ID="btnUploadImage" runat="server" Text="Upload" CssClass="btn-upload" OnClick="btnUploadImage_Click" Visible="false" />
+                  <asp:Button ID="btnUploadImage" runat="server" Text="⬆️" CssClass="btn" OnClick="btnUploadImage_Click" Visible="false" />
+                  <asp:Button ID="btnCancelImage" runat="server" Text="❌" CssClass="btn" OnClick="btnCancelImage_Click" CommandArgument="Image" Visible="false" />
+
               </td>
           </tr>
           <tr>
@@ -150,47 +152,45 @@
               <td><strong>Username:</strong></td>
               <td>
                   <asp:Label ID="lblUsername" runat="server"></asp:Label>
-                  <asp:TextBox ID="txtUsername" runat="server" CssClass="input-field" OnTextChanged="checkUser" Visible="false"></asp:TextBox>
-                  <asp:Button ID="btnEditUsername" runat="server" Text="Edit" CssClass="btn-edit" OnClick="btnEditUsername_Click" />
-                  <asp:Button ID="btnSaveUsername" runat="server" Text="Save" CssClass="btn-save" OnClick="btnSaveUsername_Click" Visible="false" />
+                  <asp:TextBox ID="txtUsername" runat="server" CssClass="input-field" Visible="false" OnTextChanged="checkUser"></asp:TextBox>
+                  <asp:Button ID="btnEditUsername" runat="server" Text="✏️" CssClass="btn" OnClick="btnEditUsername_Click" />
+                  <asp:Button ID="btnSaveUsername" runat="server" Text="💾" CssClass="btn" OnClick="btnSaveUsername_Click" Visible="false" />
+                  <asp:Button ID="btnCancelUsername" runat="server" Text="❌" CssClass="btn" OnClick="btnCancelUsername_Click" CommandArgument="Username" Visible="false" />
+
               </td>
           </tr>
-
           <tr>
               <td><strong>Password:</strong></td>
               <td>
                   <asp:Label ID="lblPassword" runat="server" Text="********"></asp:Label>
-                  <asp:Button ID="btnShowPassword" runat="server" Text="Show" CssClass="btn-toggle" OnClick="btnShowPassword_Click" />
+                  <asp:Button ID="btnShowPassword" runat="server" Text="👁️" CssClass="btn" OnClick="btnShowPassword_Click" />
               </td>
           </tr>
-
-
-
           <tr>
               <td><strong>Full Name:</strong></td>
               <td>
                   <asp:Label ID="lblFullName" runat="server"></asp:Label>
-                  <asp:TextBox ID="txtFullName" runat="server" CssClass="input-field" Visible="false" oninput="checkName(this)"></asp:TextBox>
-                  <asp:Button ID="btnEditFullName" runat="server" Text="Edit" CssClass="btn-edit" OnClick="btnEditFullName_Click" />
-                  <asp:Button ID="btnSaveFullName" runat="server" Text="Save" CssClass="btn-save" OnClick="btnSaveFullName_Click" Visible="false" />
+                  <asp:TextBox ID="txtFullName" runat="server" CssClass="input-field" Visible="false"></asp:TextBox>
+                  <asp:Button ID="btnEditFullName" runat="server" Text="✏️" CssClass="btn" OnClick="btnEditFullName_Click" />
+                  <asp:Button ID="btnSaveFullName" runat="server" Text="💾" CssClass="btn" OnClick="btnSaveFullName_Click" Visible="false" />
+                  <asp:Button ID="btnCancelFullName" runat="server" Text="❌" CssClass="btn" OnClick="btnCancelFullName_Click" Visible="false" />
                   <asp:Label ID="lblEname" runat="server" CssClass="error-message"></asp:Label>
               </td>
           </tr>
-
           <tr>
               <td><strong>Email:</strong></td>
               <td>
-                  <asp:Label ID="lblEmail" runat="server"></asp:Label>
-              </td>
+                  <asp:Label ID="lblEmail" runat="server"></asp:Label></td>
           </tr>
-
           <tr>
               <td><strong>Phone:</strong></td>
               <td>
                   <asp:Label ID="lblPhone" runat="server"></asp:Label>
                   <asp:TextBox ID="txtPhone" runat="server" CssClass="input-field" Visible="false"></asp:TextBox>
-                  <asp:Button ID="btnEditPhone" runat="server" Text="Edit" CssClass="btn-edit" OnClick="btnEditPhone_Click" />
-                  <asp:Button ID="btnSavePhone" runat="server" Text="Save" CssClass="btn-save" OnClick="btnSavePhone_Click" Visible="false" />
+                  <asp:Button ID="btnEditPhone" runat="server" Text="✏️" CssClass="btn" OnClick="btnEditPhone_Click" />
+                  <asp:Button ID="btnSavePhone" runat="server" Text="💾" CssClass="btn" OnClick="btnSavePhone_Click" Visible="false" />
+                  <asp:Button ID="btnCancelPhone" runat="server" Text="❌" CssClass="btn" OnClick="btnCancelPhone_Click" Visible="false" />
+
               </td>
           </tr>
           <tr>
@@ -208,7 +208,10 @@
               <td>
                   <asp:Label ID="lblRole" runat="server"></asp:Label></td>
           </tr>
+          <tr>
+              <asp:Label ID="lblError" runat="server" CssClass="error-message" ForeColor="Red" Visible="false"></asp:Label>
+
+          </tr>
       </table>
-      <asp:Label ID="lblError" runat="server" CssClass="error-message" ForeColor="Red" Visible="false"></asp:Label>
   </asp:Panel>
 </asp:Content>
