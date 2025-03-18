@@ -60,6 +60,15 @@ namespace WorkNest.Admin
         protected global::System.Web.UI.WebControls.Button btnUploadImage;
 
         /// <summary>
+        /// btnCancelImage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancelImage;
+
+        /// <summary>
         /// lblEmpID control.
         /// </summary>
         /// <remarks>
@@ -103,6 +112,15 @@ namespace WorkNest.Admin
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSaveUsername;
+
+        /// <summary>
+        /// btnCancelUsername control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancelUsername;
 
         /// <summary>
         /// lblPassword control.
@@ -159,6 +177,15 @@ namespace WorkNest.Admin
         protected global::System.Web.UI.WebControls.Button btnSaveFullName;
 
         /// <summary>
+        /// btnCancelFullName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancelFullName;
+
+        /// <summary>
         /// lblEname control.
         /// </summary>
         /// <remarks>
@@ -211,6 +238,15 @@ namespace WorkNest.Admin
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSavePhone;
+
+        /// <summary>
+        /// btnCancelPhone control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancelPhone;
 
         /// <summary>
         /// lblHireDate control.
