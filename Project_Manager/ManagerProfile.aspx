@@ -1,114 +1,86 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Project_Manager/P_Manager.Master" AutoEventWireup="true" CodeBehind="ManagerProfile.aspx.cs" Inherits="WorkNest.Project_Manager.ManagerProfile" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="Manager_Head" runat="server">
-     <style>
-     /* ====== General Styling ====== */
-     .profile-container {
-         background: #F7F9FB;
-         padding: 15px;
-         border-radius: 10px;
-         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-         max-width: 550px;
-         margin: 20px auto;
-         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-     }
+   <style>
+    .profile-container {
+        background: #F7F9FB;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        max-width: 550px;
+        margin: 20px auto;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 
-     /* ====== Table Styling ====== */
-     .profile-table {
-         width: 100%;
-         border-collapse: collapse;
-     }
+    .profile-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
 
-         .profile-table tr {
-             display: flex;
-             align-items: center;
-             justify-content: space-between;
-             margin-bottom: 8px;
-         }
+        .profile-table tr {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
 
-         .profile-table td {
-             display: flex;
-             align-items: center;
-             padding: 5px;
-         }
+        .profile-table td {
+            display: flex;
+            align-items: center;
+            padding: 5px;
+        }
 
-             .profile-table td:first-child {
-                 font-weight: bold;
-                 color: #333;
-                 width: 35%;
-                 white-space: nowrap;
-             }
+            .profile-table td:first-child {
+                font-weight: bold;
+                color: #333;
+                width: 35%;
+                white-space: nowrap;
+            }
 
-     /* ====== Input Fields ====== */
-     .input-field {
-         width: 55%;
-         padding: 6px;
-         border: 1px solid #8B9EB2;
-         border-radius: 4px;
-         font-size: 14px;
-     }
+    .input-field {
+        width: 55%;
+        padding: 6px;
+        border: 1px solid #8B9EB2;
+        border-radius: 4px;
+        font-size: 14px;
+    }
 
-         .input-field:focus {
-             border-color: #FF8C00;
-             outline: none;
-         }
+        .input-field:focus {
+            border-color: #FF8C00;
+            outline: none;
+        }
 
-     /* ====== Buttons ====== */
-     .btn-edit, .btn-save, .btn-toggle, .btn-upload {
-         background: #4A6D85;
-         color: white;
-         padding: 5px 10px;
-         border: none;
-         border-radius: 4px;
-         cursor: pointer;
-         font-size: 12px;
-         font-weight: bold;
-         margin-left: 6px;
-         transition: background 0.3s ease-in-out;
-     }
+    .btn {
+        background: #4A6D85;
+        color: white;
+        padding: 5px 10px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: bold;
+        margin-left: 6px;
+        transition: background 0.3s ease-in-out;
+    }
 
-         .btn-edit:hover, .btn-save:hover, .btn-toggle:hover, .btn-upload:hover {
-             background: #FF8C00;
-         }
+        .btn:hover {
+            background: #FF8C00;
+        }
 
-     /* ====== Profile Image Styling ====== */
-     .profile-image {
-         border-radius: 50%;
-         border: 3px solid #8B9EB2;
-         width: 60px;
-         height: 60px;
-     }
+    .profile-image {
+        border-radius: 50%;
+        border: 3px solid #8B9EB2;
+        width: 60px;
+        height: 60px;
+    }
 
-     /* ====== Error Message ====== */
-     .error-message {
-         text-align: center;
-         font-weight: bold;
-         font-size: 12px;
-         color: red;
-         margin-top: 8px;
-     }
-
-     /* ====== Mobile Optimization ====== */
-     @media (max-width: 600px) {
-         .profile-container {
-             width: 95%;
-             padding: 10px;
-         }
-
-         .profile-table tr {
-             flex-direction: column;
-             align-items: flex-start;
-         }
-
-         .input-field {
-             width: 100%;
-         }
-
-         .btn-edit, .btn-save, .btn-toggle, .btn-upload {
-             width: auto;
-             margin-top: 4px;
-         }
-     }
- </style>
+    .error-message {
+        text-align: center;
+        font-weight: bold;
+        font-size: 12px;
+        color: red;
+        margin-top: 8px;
+    }
+</style>
  <script>
      function checkName(input) {
          const name = input.value.trim();
@@ -170,7 +142,7 @@
               <td><strong>Full Name:</strong></td>
               <td>
                   <asp:Label ID="lblFullName" runat="server"></asp:Label>
-                  <asp:TextBox ID="txtFullName" runat="server" CssClass="input-field" Visible="false"></asp:TextBox>
+                  <asp:TextBox ID="txtFullName" runat="server" CssClass="input-field"  Visible="false" oninput="checkName(this)"></asp:TextBox>
                   <asp:Button ID="btnEditFullName" runat="server" Text="✏️" CssClass="btn" OnClick="btnEditFullName_Click" />
                   <asp:Button ID="btnSaveFullName" runat="server" Text="💾" CssClass="btn" OnClick="btnSaveFullName_Click" Visible="false" />
                   <asp:Button ID="btnCancelFullName" runat="server" Text="❌" CssClass="btn" OnClick="btnCancelFullName_Click" Visible="false" />

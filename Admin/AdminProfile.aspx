@@ -84,6 +84,20 @@
             margin-top: 8px;
         }
     </style>
+    <script>
+    function checkName(input) {
+        const name = input.value.trim();
+        const Fname = name.split(' ');
+        const lblE = document.getElementById('<%= lblEname.ClientID %>');
+
+        if (Fname.length < 2 || !isNaN(Fname[1])) {
+            lblE.textContent = "Enter full name!!";
+            lblE.style.color = "red";
+        } else {
+            lblE.textContent = "";
+        }
+    }
+    </script>
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="Header_Title" runat="server">
@@ -132,7 +146,7 @@
                 <td><strong>Full Name:</strong></td>
                 <td>
                     <asp:Label ID="lblFullName" runat="server"></asp:Label>
-                    <asp:TextBox ID="txtFullName" runat="server" CssClass="input-field" Visible="false"></asp:TextBox>
+                    <asp:TextBox ID="txtFullName" runat="server" CssClass="input-field" Visible="false" oninput="checkName(this)"></asp:TextBox>
                     <asp:Button ID="btnEditFullName" runat="server" Text="✏️" CssClass="btn" OnClick="btnEditFullName_Click" />
                     <asp:Button ID="btnSaveFullName" runat="server" Text="💾" CssClass="btn" OnClick="btnSaveFullName_Click" Visible="false" />
                     <asp:Button ID="btnCancelFullName" runat="server" Text="❌" CssClass="btn" OnClick="btnCancelFullName_Click" Visible="false" />

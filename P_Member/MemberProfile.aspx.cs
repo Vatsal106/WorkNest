@@ -8,7 +8,7 @@ namespace WorkNest.P_Member
     public partial class MemberProfile : System.Web.UI.Page
     {
         dbConnection dbconn = new dbConnection();
-
+        bool checkUserduplicate = false;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -88,13 +88,13 @@ namespace WorkNest.P_Member
                     {
                         lblError.Text = "This username is already taken.";
                         lblError.ForeColor = Color.Red;
-                        return;
-                        //checkUserduplicate = false;
+
+                        checkUserduplicate = false;
                     }
                     else
                     {
                         lblError.Text = "";
-                        //checkUserduplicate = true;
+                        checkUserduplicate = true;
                         //txtPassword.Enabled = true;
                     }
                 }
@@ -102,7 +102,6 @@ namespace WorkNest.P_Member
             catch (Exception ex)
             {
                 lblError.Text = "Error: " + ex.Message;
-                lblError.ForeColor = Color.Red;
             }
         }
 
@@ -115,20 +114,54 @@ namespace WorkNest.P_Member
             cmd.Parameters.AddWithValue("@EmployeeID", empID);
             cmd.ExecuteNonQuery();
             dbconn.con.Close();
+            LoadProfile();
         }
 
-        protected void btnEditFullName_Click(object sender, EventArgs e) => ToggleEdit(txtFullName, lblFullName, btnEditFullName, btnSaveFullName);
-        protected void btnSaveFullName_Click(object sender, EventArgs e) => SaveField("EMPLOYEE", "FULL_NAME", txtFullName, lblFullName, btnEditFullName, btnSaveFullName);
+        protected void btnEditFullName_Click(object sender, EventArgs e) => ToggleEdit(txtFullName, lblFullName, btnEditFullName, btnSaveFullName, btnCancelFullName);
+        protected void btnSaveFullName_Click(object sender, EventArgs e) => SaveField("EMPLOYEE", "FULL_NAME", txtFullName, lblFullName, btnEditFullName, btnSaveFullName, btnCancelFullName);
 
-        protected void btnEditPhone_Click(object sender, EventArgs e) => ToggleEdit(txtPhone, lblPhone, btnEditPhone, btnSavePhone);
-        protected void btnSavePhone_Click(object sender, EventArgs e) => SaveField("EMPLOYEE", "PHONE_NUMBER", txtPhone, lblPhone, btnEditPhone, btnSavePhone);
+        protected void btnEditPhone_Click(object sender, EventArgs e) => ToggleEdit(txtPhone, lblPhone, btnEditPhone, btnSavePhone, btnCancelPhone);
+        protected void btnSavePhone_Click(object sender, EventArgs e) => SaveField("EMPLOYEE", "PHONE_NUMBER", txtPhone, lblPhone, btnEditPhone, btnSavePhone, btnCancelPhone);
 
-        protected void btnEditUsername_Click(object sender, EventArgs e) => ToggleEdit(txtUsername, lblUsername, btnEditUsername, btnSaveUsername);
+        protected void btnEditUsername_Click(object sender, EventArgs e) => ToggleEdit(txtUsername, lblUsername, btnEditUsername, btnSaveUsername, btnCancelUsername);
         protected void btnSaveUsername_Click(object sender, EventArgs e)
         {
             checkUser(sender, e);
-            SaveField("USER_CREDENTIALS", "USER_NAME", txtUsername, lblUsername, btnEditUsername, btnSaveUsername);
+            if (checkUserduplicate)
+                SaveField("USER_CREDENTIALS", "USER_NAME", txtUsername, lblUsername, btnEditUsername, btnSaveUsername, btnCancelUsername);
         }
+        protected void btnCancelFullName_Click(object sender, EventArgs e) => CancelEdit(txtFullName, lblFullName, btnEditFullName, btnSaveFullName, btnCancelFullName);
+        protected void btnCancelPhone_Click(object sender, EventArgs e) => CancelEdit(txtPhone, lblPhone, btnEditPhone, btnSavePhone, btnCancelPhone);
+        protected void btnCancelUsername_Click(object sender, EventArgs e) => CancelEdit(txtUsername, lblUsername, btnEditUsername, btnSaveUsername, btnCancelUsername);
+        private void CancelEdit(TextBox txt, Label lbl, Button btnEdit, Button btnSave, Button btnCancel)
+        {
+            txt.Visible = false;
+            lbl.Visible = true;
+            btnEdit.Visible = true;
+            btnSave.Visible = false;
+            btnCancel.Visible = false;
+            lblError.Text = "";
+            lblError.Visible = false;
+        }
+
+        protected void btnEditImage_Click(object sender, EventArgs e)
+        {
+            fuProfileImage.Visible = true;
+            btnUploadImage.Visible = true;
+            btnCancelImage.Visible = true;
+            btnEditImage.Visible = false;
+        }
+
+        protected void btnCancelImage_Click(object sender, EventArgs e)
+        {
+            fuProfileImage.Visible = false;
+            btnUploadImage.Visible = false;
+            btnCancelImage.Visible = false;
+            btnEditImage.Visible = true;
+            lblError.Text = "";
+            lblError.Visible = false;
+        }
+
         protected void btnShowPassword_Click(object sender, EventArgs e)
         {
             if (lblPassword.Text == "********")
@@ -145,26 +178,33 @@ namespace WorkNest.P_Member
 
                 if (password != null)
                 {
-                    lblPassword.Text = password.ToString();  // Show actual password
-                    btnShowPassword.Text = "Hide"; // Change button text to "Hide"
+                    lblPassword.Text = password.ToString();
+                    btnShowPassword.Text = "🙈";
                 }
             }
             else
             {
-                lblPassword.Text = "********"; // Hide password again
-                btnShowPassword.Text = "Show"; // Change button text back to "Show"
+                lblPassword.Text = "********";
+                btnShowPassword.Text = "👁️";
             }
         }
 
-        private void ToggleEdit(TextBox txt, Label lbl, Button btnEdit, Button btnSave)
+
+        private void ToggleEdit(TextBox txt, Label lbl, Button btnEdit, Button btnSave, Button btnCancel)
         {
-            lbl.Visible = false;
-            txt.Visible = true;
-            btnEdit.Visible = false;
-            btnSave.Visible = true;
+            bool isEditing = !txt.Visible;
+
+            txt.Visible = isEditing;
+            lbl.Visible = !isEditing;
+            btnEdit.Visible = !isEditing;
+            btnSave.Visible = isEditing;
+            btnCancel.Visible = isEditing;
+
+            if (isEditing)
+                txt.Text = lbl.Text; // Reset input to original label value
         }
 
-        private void SaveField(string table, string field, TextBox txt, Label lbl, Button btnEdit, Button btnSave)
+        private void SaveField(string table, string field, TextBox txt, Label lbl, Button btnEdit, Button btnSave, Button btnCancel)
         {
             string empID = Session["EmployeeID"]?.ToString();
             UpdateField(table, field, txt.Text, empID);
@@ -173,14 +213,11 @@ namespace WorkNest.P_Member
             txt.Visible = false;
             btnEdit.Visible = true;
             btnSave.Visible = false;
+            btnCancel.Visible = false;
+
         }
 
-        protected void btnEditImage_Click(object sender, EventArgs e)
-        {
-            fuProfileImage.Visible = true;
-            btnUploadImage.Visible = true;
-            btnEditImage.Visible = false;
-        }
+
 
         protected void btnUploadImage_Click(object sender, EventArgs e)
         {
