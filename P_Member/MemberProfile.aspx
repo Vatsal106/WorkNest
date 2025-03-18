@@ -50,7 +50,7 @@
                 outline: none;
             }
 
-        .btn {
+        .td .btn {
             background: #4A6D85;
             color: white;
             padding: 5px 10px;
@@ -63,7 +63,7 @@
             transition: background 0.3s ease-in-out;
         }
 
-            .btn:hover {
+            .td .btn:hover {
                 background: #FF8C00;
             }
 

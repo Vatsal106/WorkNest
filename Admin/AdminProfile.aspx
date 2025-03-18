@@ -52,7 +52,7 @@
                 outline: none;
             }
 
-        .btn {
+        .td .btn {
             background: #4A6D85;
             color: white;
             padding: 5px 10px;
@@ -65,7 +65,7 @@
             transition: background 0.3s ease-in-out;
         }
 
-            .btn:hover {
+            .td .btn:hover {
                 background: #FF8C00;
             }
 
@@ -85,18 +85,18 @@
         }
     </style>
     <script>
-    function checkName(input) {
-        const name = input.value.trim();
-        const Fname = name.split(' ');
-        const lblE = document.getElementById('<%= lblEname.ClientID %>');
+        function checkName(input) {
+            const name = input.value.trim();
+            const Fname = name.split(' ');
+            const lblE = document.getElementById('<%= lblEname.ClientID %>');
 
-        if (Fname.length < 2 || !isNaN(Fname[1])) {
-            lblE.textContent = "Enter full name!!";
-            lblE.style.color = "red";
-        } else {
-            lblE.textContent = "";
+            if (Fname.length < 2 || !isNaN(Fname[1])) {
+                lblE.textContent = "Enter full name!!";
+                lblE.style.color = "red";
+            } else {
+                lblE.textContent = "";
+            }
         }
-    }
     </script>
 </asp:Content>
 
