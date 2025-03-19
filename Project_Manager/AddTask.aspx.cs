@@ -95,7 +95,7 @@ namespace WorkNest.Project_Manager
 
                 ddlAssignTo.Items.Clear();
                 ddlAssignTo.Items.Add(new ListItem("-- Select Employee --", "0"));
-                ddlAssignTo.Items.Add(new ListItem("Youer Self", Session["EmployeeID"].ToString()));
+                ddlAssignTo.Items.Add(new ListItem("Your Self", Session["EmployeeID"].ToString()));
                 while (reader.Read())
                 {
                     ddlAssignTo.Items.Add(new ListItem(reader["FULL_NAME"].ToString(), reader["EMPLOYEE_ID"].ToString()));
