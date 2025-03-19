@@ -81,7 +81,7 @@
             <div class="stats-card text-success">
                 <i class="fa-solid fa-folder-open"></i>
                 <div class="stats-value"><asp:Label ID="lblTotalProjects" runat="server" Text="0"></asp:Label></div>
-                <div>Active Projects</div>
+                <div>Completed Projects</div>
             </div>
             <div class="stats-card text-warning">
                 <i class="fa-solid fa-tasks"></i>

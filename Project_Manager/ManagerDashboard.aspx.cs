@@ -37,7 +37,18 @@ namespace WorkNest.Project_Manager
                 cmd.CommandText = "SELECT COUNT(*) FROM TASK WHERE DUE_DATE > GETDATE() AND PROJECT_ID IN (SELECT PROJECT_ID FROM PROJECT WHERE PROJECT_MANAGER_ID = @ManagerId)";
                 lblTotalTasks.Text = cmd.ExecuteScalar().ToString();
 
-                cmd.CommandText = "SELECT COUNT(*) FROM LEAVES WHERE STATUS = 'Pending' AND EMPLOYEE_ID IN (SELECT EMPLOYEE_ID FROM EMPLOYEE WHERE EMPLOYEE_ID IN (SELECT EMPLOYEE_ID FROM PROJECT WHERE PROJECT_MANAGER_ID = @ManagerId))";
+                cmd.CommandText = @"
+                SELECT COUNT(*) 
+                FROM LEAVES L
+                WHERE L.STATUS = 'Pending' 
+                AND L.EMPLOYEE_ID IN (
+                    SELECT E.EMPLOYEE_ID 
+                    FROM EMPLOYEE E
+                    JOIN TASK T ON E.EMPLOYEE_ID = T.ASSIGN_TO
+                    JOIN PROJECT P ON T.PROJECT_ID = P.PROJECT_ID
+                    WHERE P.PROJECT_MANAGER_ID = @ManagerId
+                )";
+
                 lblPendingLeaves.Text = cmd.ExecuteScalar().ToString();
             }
             catch (Exception ex)
