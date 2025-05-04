@@ -176,7 +176,7 @@
     <div class="hero-section">
         <div class="hero-text">Welcome to WorkNest</div>
         <div class="sub-text">Your trusted partner in project and employee management.</div>
-        <asp:Button ID="btnLearnMore" runat="server" Text="Learn More" CssClass="btn-learn-more" PostBackUrl="~/Admin/AdminDashboard.aspx" />
+        <asp:Button ID="btnLearnMore" runat="server" Text="Learn More" CssClass="btn-learn-more" PostBackUrl="~/P_Member/MemberHome.aspx" />
     </div>
 
     <!-- About Us -->

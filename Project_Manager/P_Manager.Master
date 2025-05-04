@@ -465,7 +465,7 @@
     <form id="Managerform" runat="server">
         <div class="sidebar">
             <div class="logo">
-                <a href="Member_Home.aspx">
+                <a href="Manager_Home.aspx">
                     <img src="../Images/Logo Light Blue Transparent.png" alt="Logo">
                 </a>
             </div>
